@@ -45,21 +45,7 @@ public class GL implements GLEventListener{
     public void display(GLAutoDrawable drawable) {       
         final GL2 gl = drawable.getGL().getGL2();
       
-//        try {
-//            File bg = new File("img/blood.jpg");
-//            Texture t = TextureIO.newTexture(bg, true);
-//        } catch (IOException ex) {
-//            Logger.getLogger(GL.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (GLException ex) {
-//            Logger.getLogger(GL.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        gl.glBegin(GL2.GL_QUADS);
-//        
-//        gl.glTexCoord2f(0f, 0f); gl.glVertex2f(0f, 0f);
-//        gl.glTexCoord2f(0f, 1f); gl.glVertex2f(0f, 1f);
-//        gl.glTexCoord2f(1f, 1f); gl.glVertex2f(1f, 1f);
-//        gl.glTexCoord2f(1f, 0f); gl.glVertex2f(1f, 0f);
-//        gl.glEnd();
+
         
         for(int i =0;i<TAMANHO;i++){
             gl.glBegin(GL2.GL_POINTS);

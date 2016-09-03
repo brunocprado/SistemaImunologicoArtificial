@@ -35,10 +35,5 @@ public class Main{
         fps.start();
         tela2.setVisivel(true);
         
-        
-
-
-
-        
     }
 }
