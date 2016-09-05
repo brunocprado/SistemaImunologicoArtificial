@@ -6,7 +6,17 @@ TODO:
 
  */
 package ufrrj.bruno.ia;
-
+//if(mundo == null){ return; }
+//        JFrame tela = new JFrame("Estatisticas");
+//        Estatisticas e = new Estatisticas(mundo);
+//        tela.setSize(300,600);
+//        e.setSize(tela.getSize());
+//
+//        GraficoPizza grafico = new GraficoPizza(mundo,new Rectangle(50,40,200,200));
+//        //grafico.setSize(200,200);
+//        tela.add(e);
+//        tela.add(grafico);     
+//        tela.setVisible(true);
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;

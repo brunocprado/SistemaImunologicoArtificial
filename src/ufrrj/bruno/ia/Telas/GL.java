@@ -20,24 +20,21 @@ import java.beans.EventHandler;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import ufrrj.bruno.ia.Celula;
-import ufrrj.bruno.ia.Mundo;
+import ufrrj.bruno.ia.celulas.Celula;
 import ufrrj.bruno.ia.Posicao;
+import ufrrj.bruno.ia.SistemaImunologico;
 
 public class GL implements GLEventListener{
     private static final int TAMANHO = 2000;
     private Posicao[] pa = new Posicao[TAMANHO];
     private static Random gerador = new Random();
-    private Mundo mundo;
-    
+    private SistemaImunologico sistema;
     
     public GL(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         System.out.println(screenSize);
         
-        mundo = new Mundo();
+        sistema = new SistemaImunologico();
     }
     @Override
     public void init(GLAutoDrawable drawable) {
@@ -81,7 +78,7 @@ public class GL implements GLEventListener{
         gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        for(Celula celula : mundo.getCelulas()){
+        for(Celula celula : sistema.getCelulas()){
             gl.glBegin(GL2.GL_QUADS);
             
             switch(celula.getClass().getSimpleName()){

@@ -1,14 +1,13 @@
 
 package ufrrj.bruno.ia.celulas;
 
-import ufrrj.bruno.ia.Celula;
-import ufrrj.bruno.ia.Mundo;
+import ufrrj.bruno.ia.SistemaImunologico;
 
 
 public class Linfocito extends Celula{
     
-    public Linfocito(Mundo mundo) {
-        super(mundo,false);
+    public Linfocito(SistemaImunologico sistema) {
+        super(sistema,false);
     }
     
 }

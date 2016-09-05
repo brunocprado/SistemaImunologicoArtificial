@@ -9,13 +9,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import ufrrj.bruno.ia.Celula;
-import ufrrj.bruno.ia.Mundo;
+import ufrrj.bruno.ia.SistemaImunologico;
+import ufrrj.bruno.ia.celulas.Celula;
 
 public class GraficoPizza extends JComponent implements Runnable{
     private ArrayList fatias = new ArrayList<Fatia>();
     private Rectangle area;
-    private Mundo mundo;
+    private SistemaImunologico mundo;
     private Thread t;
     public void paint(Graphics g){
         g.clearRect(0, 0, getWidth(), getHeight());
@@ -74,7 +74,7 @@ public class GraficoPizza extends JComponent implements Runnable{
         t = new Thread(this);
         t.start();
     }
-    public GraficoPizza(Mundo mundo,Rectangle area){
+    public GraficoPizza(SistemaImunologico mundo,Rectangle area){
         this.area = area;
         this.mundo = mundo;
         t = new Thread(this);

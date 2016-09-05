@@ -8,14 +8,14 @@ import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import ufrrj.bruno.ia.Mundo;
+import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.graficos.Fatia;
 import ufrrj.bruno.ia.graficos.GraficoPizza;
 
 public class Estatisticas extends JPanel implements Runnable{
     private Thread t;
-    private Mundo mundo;
-    Estatisticas(Mundo mundo){
+    private SistemaImunologico mundo;
+    Estatisticas(SistemaImunologico mundo){
         this.mundo = mundo;
         t = new Thread(this);
         t.start();

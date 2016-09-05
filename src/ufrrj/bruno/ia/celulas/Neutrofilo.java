@@ -1,13 +1,12 @@
 
 package ufrrj.bruno.ia.celulas;
 
-import ufrrj.bruno.ia.Celula;
-import ufrrj.bruno.ia.Mundo;
+import ufrrj.bruno.ia.SistemaImunologico;
 
 public class Neutrofilo extends Celula{
     
-    public Neutrofilo(Mundo mundo){
-        super(mundo,false);
+    public Neutrofilo(SistemaImunologico sistema){
+        super(sistema,false);
     }
     
 }

@@ -4,14 +4,13 @@ import java.awt.Point;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import ufrrj.bruno.ia.Celula;
-import ufrrj.bruno.ia.Mundo;
+import ufrrj.bruno.ia.SistemaImunologico;
 
 
 public class Invasor extends Celula implements Runnable{
     private Thread t;
-    public Invasor(Mundo mundo) {
-        super(mundo,true);
+    public Invasor(SistemaImunologico sistema) {
+        super(sistema,true);
         setVelMovimento(1);
     }
     
@@ -47,7 +46,7 @@ public class Invasor extends Celula implements Runnable{
     private int nCelulas(){
         int qt = 0;
         try {
-            for(Celula celula : mundo.getCelulas()){
+            for(Celula celula : sistema.getCelulas()){
                 if(celula.getClass().getSimpleName().equals("Comum")){ qt++; }    
             }
         } catch (Exception ex) {

@@ -1,14 +1,12 @@
 package ufrrj.bruno.ia.celulas;
 
 import java.awt.Point;
-import java.util.Iterator;
-import ufrrj.bruno.ia.Celula;
-import ufrrj.bruno.ia.Mundo;
+import ufrrj.bruno.ia.SistemaImunologico;
 
 public class Macrofago extends Celula implements Runnable{
     
-    public Macrofago(Mundo mundo){
-        super(mundo,true);
+    public Macrofago(SistemaImunologico sistema){
+        super(sistema,true);
         setVelMovimento(2);
     }
     

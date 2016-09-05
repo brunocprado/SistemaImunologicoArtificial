@@ -1,6 +1,8 @@
-package ufrrj.bruno.ia;
+package ufrrj.bruno.ia.celulas;
 
 import java.util.Random;
+import ufrrj.bruno.ia.Posicao;
+import ufrrj.bruno.ia.SistemaImunologico;
 
 abstract public class Celula implements Runnable{
     private static int id;
@@ -10,18 +12,18 @@ abstract public class Celula implements Runnable{
     //========|  RUNTIME  |=======//
     private Thread t;
     private Posicao posicao;    
-    public Mundo mundo;
+    public SistemaImunologico sistema;
     public boolean ativa = true;
     
-    public Celula(Mundo mundo,boolean roda){
-        id++; this.mundo = mundo;
+    public Celula(SistemaImunologico sistema,boolean roda){
+        id++; this.sistema = sistema;
         Random gerador = new Random();
         posicao = new Posicao(gerador.nextInt(1312),gerador.nextInt(738),1312,738);
         if(roda){ t = new Thread(this); t.start(); }
     }
     
-    public Celula(Mundo mundo,Posicao pos,boolean roda){
-        id++; this.mundo = mundo;
+    public Celula(SistemaImunologico sistema,Posicao pos,boolean roda){
+        id++; this.sistema = sistema;
         posicao = pos;
         if(roda){ t = new Thread(this); t.start(); }
     }
