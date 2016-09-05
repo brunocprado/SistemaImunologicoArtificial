@@ -1,16 +1,16 @@
 package ufrrj.bruno.ia.celulas;
 
 import java.util.Random;
-import ufrrj.bruno.ia.Posicao;
+import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 
-abstract public class Celula implements Runnable{
+abstract public class Celula implements Comportamento{
     private static int id;
     //=====| CARACTERISTICAS |=====//
     public int tamanhoX,tamanhoY;
     private double velMovimento;
     //========|  RUNTIME  |=======//
-    private Thread t;
+    //private Thread t;
     private Posicao posicao;    
     public SistemaImunologico sistema;
     public boolean ativa = true;
@@ -18,23 +18,25 @@ abstract public class Celula implements Runnable{
     public Celula(SistemaImunologico sistema,boolean roda){
         id++; this.sistema = sistema;
         Random gerador = new Random();
-        posicao = new Posicao(gerador.nextInt(1312),gerador.nextInt(738),1312,738);
-        if(roda){ t = new Thread(this); t.start(); }
+        posicao = new Posicao(
+                gerador.nextInt(Parametros.TAMX),
+                gerador.nextInt(Parametros.TAMY));
+       // if(roda){ t = new Thread(this); t.start(); }
     }
     
     public Celula(SistemaImunologico sistema,Posicao pos,boolean roda){
         id++; this.sistema = sistema;
         posicao = pos;
-        if(roda){ t = new Thread(this); t.start(); }
+        //if(roda){ t = new Thread(this); t.start(); }
     }
 
-    public void pausa(int tempo){
-        try {
-            t.sleep(tempo);
-        } catch (InterruptedException ex) {
-            System.out.println("Erro ao pausar a Thread da Celula");
-        }
-    }     
+//    public void pausa(int tempo){
+//        try {
+//            t.sleep(tempo);
+//        } catch (InterruptedException ex) {
+//            System.out.println("Erro ao pausar a Thread da Celula");
+//        }
+//    }     
     
     public double getVelMovimento() {
         return velMovimento;
@@ -57,8 +59,8 @@ abstract public class Celula implements Runnable{
         posicao.setY(y);
     }
 
-    @Override
-    public void run() {  
-    }
+//    @Override
+//    public void run() {  
+//    }
 
 }

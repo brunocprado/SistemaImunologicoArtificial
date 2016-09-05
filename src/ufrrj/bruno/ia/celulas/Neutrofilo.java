@@ -8,5 +8,10 @@ public class Neutrofilo extends Celula{
     public Neutrofilo(SistemaImunologico sistema){
         super(sistema,false);
     }
+
+    @Override
+    public void loop() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

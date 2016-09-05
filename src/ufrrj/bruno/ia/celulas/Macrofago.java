@@ -31,6 +31,11 @@ public class Macrofago extends Celula implements Runnable{
     }
     
     @Override
+    public void loop(){
+        getPosicao().setPosicao(getPosicao().getX() + 1, getPosicao().getY() + 1);
+    }
+    
+    @Override
     public void run() {
         while(ativa){       
             getPosicao().setPosicao(getPosicao().getX() + 1, getPosicao().getY() + 1);
@@ -51,7 +56,7 @@ public class Macrofago extends Celula implements Runnable{
 //            if(deltaY == 0){ movY = getPosicao().y; }
 //            setPosicao(movX,movY);
 
-            pausa(20);   
+            //pausa(20);   
         }
         //t.interrupt();
     }

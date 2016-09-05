@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 import ufrrj.bruno.ia.celulas.Celula;
-import ufrrj.bruno.ia.Posicao;
+import ufrrj.bruno.ia.celulas.Posicao;
 import ufrrj.bruno.ia.SistemaImunologico;
 
 public class GL implements GLEventListener{
@@ -30,10 +30,7 @@ public class GL implements GLEventListener{
     private static Random gerador = new Random();
     private SistemaImunologico sistema;
     
-    public GL(){
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        System.out.println(screenSize);
-        
+    public GL(){        
         sistema = new SistemaImunologico();
     }
     @Override
@@ -111,12 +108,14 @@ public class GL implements GLEventListener{
     public void zoom(GLAutoDrawable drawable){
         final GL2 gl = drawable.getGL().getGL2();
         gl.glScaled(1.1, 1.1, 1);  
+        gl.glFlush();
     }
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
         final GL2 gl = drawable.getGL().getGL2();
-        gl.glScaled(1.1, 1.1, 1);        //gl.glTranslatef(0.0f, 0.0f, -0.05f);
+        zoom(drawable);
+        //gl.glScaled(1.1, 1.1, 1);        //gl.glTranslatef(0.0f, 0.0f, -0.05f);
         //gl.glScalef(0f, 0f, 1f);
     }
     
