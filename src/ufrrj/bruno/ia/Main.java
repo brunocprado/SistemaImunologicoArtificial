@@ -15,6 +15,7 @@ import ufrrj.bruno.ia.Telas.GL;
 import ufrrj.bruno.ia.Telas.Janela;
 
 public class Main{
+
     public static void main(String[] args) {
 
         //====| Config OpenGL |====//
@@ -24,12 +25,12 @@ public class Main{
         cap.setHardwareAccelerated(true);
         
         GLCanvas canvas = new GLCanvas(cap);
-        FPSAnimator fps = new FPSAnimator(canvas,60);
+        FPSAnimator fps = new FPSAnimator(canvas,Parametros.LIMITE_FPS);
         GL gl = new GL();
         canvas.addGLEventListener(gl);
         //==========================//
         
-        Janela tela2 = new Janela("SIA",fps,1312,738);
+        Janela tela2 = new Janela("SIA",fps,738,738);
         tela2.setOpenGLCanvas(canvas);
         
         fps.start();

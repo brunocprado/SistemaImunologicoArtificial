@@ -1,8 +1,6 @@
 package ufrrj.bruno.ia;
 
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 abstract public class Celula implements Runnable{
     private static int id;
@@ -35,7 +33,6 @@ abstract public class Celula implements Runnable{
             System.out.println("Erro ao pausar a Thread da Celula");
         }
     }     
-
     
     public double getVelMovimento() {
         return velMovimento;
@@ -53,13 +50,13 @@ abstract public class Celula implements Runnable{
         this.posicao = posicao;
     }
 
-    public void setPosicao(double x,double y) {
-        //posicao.setLocation(x,y);
+    public void setPosicao(int x,int y) {
+        posicao.setX(x);
+        posicao.setY(y);
     }
 
     @Override
-    public void run() {
-        
+    public void run() {  
     }
 
 }

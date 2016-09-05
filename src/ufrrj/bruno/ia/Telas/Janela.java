@@ -4,19 +4,24 @@ import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import sun.applet.Main;
+import ufrrj.bruno.ia.Parametros;
 
 public class Janela extends JFrame{
     
     private JPanel tela;
-    
+    private int tamx,tamy;
     public Janela(String titulo,FPSAnimator fps,int x,int y){
         super(titulo);
+        tamx = x; tamy = y;
         this.setSize(new Dimension(x,y));
         this.setLayout(new BorderLayout());
         this.setLocationRelativeTo(null);
@@ -34,6 +39,14 @@ public class Janela extends JFrame{
                 System.exit(0);
             }
         });
+ 
+       
+//        this.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e){
+//                System.out.println("teste2");
+//            }
+//        });
     }
     
     public void criaMenus(){
