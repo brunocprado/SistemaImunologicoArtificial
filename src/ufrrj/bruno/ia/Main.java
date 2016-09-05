@@ -43,6 +43,8 @@ public class Main{
         Janela tela2 = new Janela("SIA",fps,738,738);
         tela2.setOpenGLCanvas(canvas);
         
+        tela2.setGL(gl);
+        
         fps.start();
         tela2.setVisivel(true);
         

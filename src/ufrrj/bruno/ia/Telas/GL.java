@@ -25,14 +25,14 @@ import ufrrj.bruno.ia.celulas.Posicao;
 import ufrrj.bruno.ia.SistemaImunologico;
 
 public class GL implements GLEventListener{
-    private static final int TAMANHO = 2000;
-    private Posicao[] pa = new Posicao[TAMANHO];
+
     private static Random gerador = new Random();
     private SistemaImunologico sistema;
     
-    public GL(){        
+    public GL(){      
         sistema = new SistemaImunologico();
     }
+    
     @Override
     public void init(GLAutoDrawable drawable) {
         final GL2 gl = drawable.getGL().getGL2();
@@ -117,6 +117,10 @@ public class GL implements GLEventListener{
         zoom(drawable);
         //gl.glScaled(1.1, 1.1, 1);        //gl.glTranslatef(0.0f, 0.0f, -0.05f);
         //gl.glScalef(0f, 0f, 1f);
+    }
+    
+    public SistemaImunologico getSistema(){
+        return sistema;
     }
     
 }

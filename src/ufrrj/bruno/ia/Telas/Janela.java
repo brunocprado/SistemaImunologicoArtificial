@@ -18,10 +18,10 @@ import ufrrj.bruno.ia.Parametros;
 public class Janela extends JFrame{
     
     private JPanel tela;
-    private int tamx,tamy;
+    private GL gl;
+    
     public Janela(String titulo,FPSAnimator fps,int x,int y){
         super(titulo);
-        tamx = x; tamy = y;
         this.setSize(new Dimension(x,y));
         this.setLayout(new BorderLayout());
         this.setLocationRelativeTo(null);
@@ -39,21 +39,15 @@ public class Janela extends JFrame{
                 System.exit(0);
             }
         });
- 
-       
-//        this.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e){
-//                System.out.println("teste2");
-//            }
-//        });
     }
     
     public void criaMenus(){
         JMenuBar menu = new JMenuBar();
         JMenu menu1 = new JMenu();
         JMenu menu2 = new JMenu();
-
+        JMenu menu3 = new JMenu();
+        JMenu menu4 = new JMenu();
+        
         menu1.setText("Novo");
         menu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -62,19 +56,44 @@ public class Janela extends JFrame{
         });
         menu.add(menu1);
 
-        menu2.setText("Sobre");
-        menu.addMouseListener(new java.awt.event.MouseAdapter() {
+        menu2.setText("Pausar");
+        menu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gl.getSistema().pausada = !gl.getSistema().pausada;
+                if(gl.getSistema().pausada){
+                    menu2.setText("Resumir");
+                } else {
+                    menu2.setText("Pausar");
+                }
+            }
+        });
+        menu.add(menu2);
+        
+        menu3.setText("Estatisticas");
+        menu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                System.out.println("novo");
+            }
+        });
+        menu.add(menu3);
+
+        menu4.setText("Sobre");
+        menu4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 //insere(evt);
             }
         });
-        menu.add(menu2);
+        menu.add(menu4);
 
         setJMenuBar(menu);
     }
     
     public void setOpenGLCanvas(GLCanvas canvas){
         tela.add(canvas);
+    }
+    
+    public void setGL(GL gl){
+        this.gl = gl;
     }
     
     public void setVisivel(boolean visivel){

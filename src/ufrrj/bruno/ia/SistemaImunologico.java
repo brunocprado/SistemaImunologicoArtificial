@@ -11,6 +11,7 @@ import ufrrj.bruno.ia.celulas.Neutrofilo;
 public class SistemaImunologico implements Runnable{
     private int nInicial = Parametros.TAM_INICIAL;
     private ArrayList<Celula> celulas = new ArrayList<Celula>();
+    public boolean pausada = false;
     private Thread t;
     
     public SistemaImunologico(){
@@ -35,13 +36,15 @@ public class SistemaImunologico implements Runnable{
         }
         celulas.add(new Patogeno(this));
     }
+    
     public void pausa(int tempo){
         try {
             t.sleep(tempo);
         } catch (InterruptedException ex) {
-            System.out.println("Erro ao pausar a Thread da Celula");
+            System.out.println("Erro ao pausar a Thread principal");
         }
     }  
+    
     public ArrayList<Celula> getCelulas() {
         return celulas;
     }
@@ -61,7 +64,10 @@ public class SistemaImunologico implements Runnable{
     @Override
     public void run() {     
         while(true){
-           for(Celula cel : celulas){
+            while(pausada){
+                pausa(5);
+            }
+            for(Celula cel : celulas){
                cel.loop();
                 //cel.getPosicao().setPosicao(cel.getPosicao().getX() + 1, cel.getPosicao().getY() + 1);
                 
