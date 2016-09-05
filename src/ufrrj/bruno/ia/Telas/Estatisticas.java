@@ -36,7 +36,7 @@ public class Estatisticas extends JPanel implements Runnable{
             try {
                 t.sleep(500);
             } catch (InterruptedException ex) {
-                Logger.getLogger(Visual.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(Visual.class.getName()).log(Level.SEVERE, null, ex);
             }
         }  
     }

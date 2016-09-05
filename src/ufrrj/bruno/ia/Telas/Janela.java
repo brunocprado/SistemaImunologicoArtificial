@@ -49,7 +49,7 @@ public class Janela extends JFrame{
         });
         menu.add(menu1);
 
-        menu2.setText("aaa");
+        menu2.setText("Sobre");
         menu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 //insere(evt);

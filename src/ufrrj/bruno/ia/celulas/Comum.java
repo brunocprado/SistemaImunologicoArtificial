@@ -9,6 +9,7 @@ public class Comum extends Celula{
     
     public Comum(Mundo mundo){
         super(mundo,false);
+        
     }
     
 }

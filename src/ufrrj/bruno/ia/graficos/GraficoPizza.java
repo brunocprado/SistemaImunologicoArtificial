@@ -11,7 +11,6 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import ufrrj.bruno.ia.Celula;
 import ufrrj.bruno.ia.Mundo;
-import ufrrj.bruno.ia.Telas.Visual;
 
 public class GraficoPizza extends JComponent implements Runnable{
     private ArrayList fatias = new ArrayList<Fatia>();
@@ -98,7 +97,7 @@ public class GraficoPizza extends JComponent implements Runnable{
             try {
                 t.sleep(500);
             } catch (InterruptedException ex) {
-                Logger.getLogger(Visual.class.getName()).log(Level.SEVERE, null, ex);
+               // Logger.getLogger(Visual.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

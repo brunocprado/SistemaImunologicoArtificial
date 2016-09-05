@@ -111,7 +111,7 @@ public class Tela extends javax.swing.JFrame {
 //            } 
         }
         
-        mundo = new Mundo(getWidth(),getHeight());
+        //mundo = new Mundo(getWidth(),getHeight());
         
         //====| Config OpenGL |====//
         final GLProfile glp = GLProfile.get(GLProfile.GL4);

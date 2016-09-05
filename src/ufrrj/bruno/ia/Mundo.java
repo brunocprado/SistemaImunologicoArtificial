@@ -12,15 +12,15 @@ import ufrrj.bruno.ia.celulas.*;
 public class Mundo {
     int tamX,tamY;
     private ArrayList<Celula> celulas = new ArrayList<Celula>();
-    private int nInicial = 40;
-    //====| Configurações |====//
+    private int nInicial = 1000;
+    
+    //====| Proporcao real |====//
     private double macrofagos = 0.053;
     private double neutrofilos = 0.65;
     private double linfocitos = 0.26;
     //=========================//
     
-    public Mundo(int x,int y){ 
-        tamX = x; tamY = y;
+    public Mundo(){ 
         geraPrimeiraGeracao();          
     }
 
