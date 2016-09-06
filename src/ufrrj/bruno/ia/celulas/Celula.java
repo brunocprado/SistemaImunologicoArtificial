@@ -37,6 +37,18 @@ abstract public class Celula implements Comportamento{
 //            System.out.println("Erro ao pausar a Thread da Celula");
 //        }
 //    }     
+
+    public void move(Posicao dest){
+            double deltaX = dest.getX() - (getPosicao().getX() - 10);
+            double deltaY = dest.getY() - (posicao.getY() - 10);
+           
+            double angulo = Math.atan2(deltaY,deltaX);    
+            int movX = (int) (posicao.getX() + (getVelMovimento() * Math.cos(angulo)));
+            int movY = (int) (posicao.getY() + (getVelMovimento() * Math.sin(angulo)));
+            if(deltaX == 0){ movX = posicao.getX(); }
+            if(deltaY == 0){ movY = posicao.getY(); }
+            setPosicao(movX,movY);
+    }
     
     public double getVelMovimento() {
         return velMovimento;
@@ -58,7 +70,7 @@ abstract public class Celula implements Comportamento{
         posicao.setX(x);
         posicao.setY(y);
     }
-
+    
 //    @Override
 //    public void run() {  
 //    }

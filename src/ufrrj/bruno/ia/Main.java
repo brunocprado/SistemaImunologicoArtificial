@@ -40,12 +40,12 @@ public class Main{
         canvas.addGLEventListener(gl);
         //==========================//
         
-        Janela tela2 = new Janela("SIA",fps,738,738);
-        tela2.setOpenGLCanvas(canvas);
+        Janela tela2 = new Janela("SIA",fps,Parametros.LARGURA,Parametros.ALTURA);
+        //tela2.setOpenGLCanvas(canvas);
         
         tela2.setGL(gl);
         
-        fps.start();
+        //fps.start();
         tela2.setVisivel(true);
         
     }

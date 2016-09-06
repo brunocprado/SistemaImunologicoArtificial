@@ -1,25 +1,26 @@
 package ufrrj.bruno.ia.Telas;
 
-import com.jogamp.opengl.awt.GLCanvas;
+//import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
 import java.awt.BorderLayout;
+import java.awt.Canvas;
 import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-import sun.applet.Main;
 import ufrrj.bruno.ia.Parametros;
+import ufrrj.bruno.ia.celulas.Celula;
 
 public class Janela extends JFrame{
     
     private JPanel tela;
     private GL gl;
-    
+    Canvas canvass;
     public Janela(String titulo,FPSAnimator fps,int x,int y){
         super(titulo);
         this.setSize(new Dimension(x,y));
@@ -27,6 +28,31 @@ public class Janela extends JFrame{
         this.setLocationRelativeTo(null);
         tela = new JPanel(new BorderLayout());
         this.getContentPane().add(tela,BorderLayout.CENTER);
+        
+        
+        canvass = new Canvas();
+        tela.add(canvass);
+        canvass.setSize(500,500);
+        canvass.createBufferStrategy(2);
+        canvass.setIgnoreRepaint(true);
+        
+        
+        BufferStrategy bs = canvass.getBufferStrategy();
+         ArrayList<Celula> celulas = new ArrayList<Celula>();
+                             java.awt.Graphics2D g = (java.awt.Graphics2D) bs.getDrawGraphics();
+        // celulas.add(new Celula(new SistemaImunologico(),true));
+        while (true) {
+//            do {
+                    //for(int i = 1;i<20;i++){
+                        g.drawOval(20, 10, 10, 20);
+                                                g.drawOval(50, 20, 10, 20);
+
+                    
+                    g.dispose();
+        
+//            }
+        }
+        
         
         criaMenus();    
        
@@ -62,8 +88,10 @@ public class Janela extends JFrame{
                 gl.getSistema().pausada = !gl.getSistema().pausada;
                 if(gl.getSistema().pausada){
                     menu2.setText("Resumir");
+                    setTitle("SIA - Pausado");
                 } else {
                     menu2.setText("Pausar");
+                    setTitle("SIA");
                 }
             }
         });
@@ -87,11 +115,11 @@ public class Janela extends JFrame{
 
         setJMenuBar(menu);
     }
-    
-    public void setOpenGLCanvas(GLCanvas canvas){
-        tela.add(canvas);
-    }
-    
+//    
+//    public void setOpenGLCanvas(GLCanvas canvas){
+//        tela.add(canvas);
+//    }
+//    
     public void setGL(GL gl){
         this.gl = gl;
     }

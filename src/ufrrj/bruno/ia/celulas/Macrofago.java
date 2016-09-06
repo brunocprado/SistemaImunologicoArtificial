@@ -32,7 +32,7 @@ public class Macrofago extends Celula implements Runnable{
     
     @Override
     public void loop(){
-        getPosicao().setPosicao(getPosicao().getX() + 1, getPosicao().getY() + 1);
+        move(new Posicao(600,400));
     }
     
     @Override

@@ -68,9 +68,7 @@ public class SistemaImunologico implements Runnable{
                 pausa(5);
             }
             for(Celula cel : celulas){
-               cel.loop();
-                //cel.getPosicao().setPosicao(cel.getPosicao().getX() + 1, cel.getPosicao().getY() + 1);
-                
+               cel.loop();                
             }
             pausa(20);
         }     
