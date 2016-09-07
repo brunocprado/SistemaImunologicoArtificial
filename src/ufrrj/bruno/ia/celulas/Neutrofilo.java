@@ -7,6 +7,7 @@ public class Neutrofilo extends Celula{
     
     public Neutrofilo(SistemaImunologico sistema){
         super(sistema,false);
+        setTipo(TIPO_CELULA.Neutrofilo);
     }
 
     @Override

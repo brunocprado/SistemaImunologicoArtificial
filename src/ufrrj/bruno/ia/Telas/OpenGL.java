@@ -165,20 +165,20 @@ public class OpenGL implements GLEventListener{
         for(Celula celula : sistema.getCelulas()){
             gl.glBegin(GL2.GL_QUADS);
             
-            switch(celula.getClass().getSimpleName()){
-                case "Comum" :
+            switch(celula.getTipo()){
+                case Comum :
                     gl.glColor3f(1f, 1f, 1f);
                     break;
-                case "Invasor" :
+                case Patogeno :
                     gl.glColor3f(1f, 0, 0);
                     break;
-                case "Linfocito" :
+                case Linfocito :
                     gl.glColor3f(0, 0, 1f);
                     break;
-                case "Macrofago" :
+                case Macrofago :
                     gl.glColor3f(1f, 1f, 0);
                     break;
-                case "Neutrofilo" :
+                case Neutrofilo :
                     gl.glColor3f(1f, 0, 1f);
                     break;
             }

@@ -19,7 +19,7 @@ public class Main{
         
         System.out.println("Renderizando com " + Parametros.RENDERIZAR_COM);
         
-        if(Parametros.RENDERIZAR_COM == "OpenGL"){       
+        if(Parametros.RENDERIZAR_COM == Parametros.RENDER.OpenGL){       
             //====| Config OpenGL |====//
             final GLProfile glp = GLProfile.get(GLProfile.GL2);
             GLCapabilities cap = new GLCapabilities(glp);

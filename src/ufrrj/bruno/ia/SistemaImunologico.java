@@ -9,10 +9,10 @@ import ufrrj.bruno.ia.celulas.Macrofago;
 import ufrrj.bruno.ia.celulas.Neutrofilo;
 
 public class SistemaImunologico implements Runnable{
-    private int nInicial = Parametros.TAM_INICIAL;
-    private ArrayList<Celula> celulas = new ArrayList<Celula>();
+    private final int nInicial = Parametros.TAM_INICIAL;
+    private final ArrayList<Celula> celulas = new ArrayList<>();
     public boolean pausada = false;
-    private Thread t;
+    private final Thread t;
     
     public SistemaImunologico(){
         geraPrimeiraGeracao();    

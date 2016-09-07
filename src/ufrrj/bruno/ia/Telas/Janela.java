@@ -1,6 +1,5 @@
 package ufrrj.bruno.ia.Telas;
 
-//import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
 import java.awt.BorderLayout;
@@ -19,9 +18,11 @@ public class Janela extends JFrame{
     private OpenGL gl;
     private Grafico2D grafico;
     private FPSAnimator fps;
+    private SistemaImunologico sistema;
     
     public Janela(String titulo,SistemaImunologico sistema){
         super(titulo);
+        this.sistema = sistema;
         this.setLayout(new BorderLayout());
         this.setLocationRelativeTo(null);
         tela = new JPanel(new BorderLayout());
@@ -60,8 +61,8 @@ public class Janela extends JFrame{
         menu2.setText("Pausar");
         menu2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                gl.getSistema().pausada = !gl.getSistema().pausada;
-                if(gl.getSistema().pausada){
+                sistema.pausada = !sistema.pausada;
+                if(sistema.pausada){
                     menu2.setText("Resumir");
                     setTitle("SIA - Pausado");
                 } else {

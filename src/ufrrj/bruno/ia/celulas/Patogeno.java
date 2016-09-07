@@ -9,6 +9,7 @@ public class Patogeno extends Celula{
     
     public Patogeno(SistemaImunologico sistema) {
         super(sistema,true);
+        setTipo(TIPO_CELULA.Patogeno);
         setVelMovimento(1);
     }
     

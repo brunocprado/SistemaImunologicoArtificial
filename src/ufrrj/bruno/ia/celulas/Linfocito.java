@@ -8,6 +8,7 @@ public class Linfocito extends Celula{
     
     public Linfocito(SistemaImunologico sistema) {
         super(sistema,false);
+        setTipo(TIPO_CELULA.Linfocito);
     }
 
     @Override

@@ -8,7 +8,7 @@ public class Comum extends Celula {
     
     public Comum(SistemaImunologico sistema){
         super(sistema,false);
-        
+        setTipo(TIPO_CELULA.Comum);
     }
 
     @Override

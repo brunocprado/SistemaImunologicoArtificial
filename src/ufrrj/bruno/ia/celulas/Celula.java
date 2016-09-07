@@ -5,12 +5,14 @@ import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 
 abstract public class Celula implements Comportamento{
+    public enum TIPO_CELULA {Comum,Linfocito,Neutrofilo,Patogeno,Macrofago};
+            
     private static int id;
+    private TIPO_CELULA tipo = TIPO_CELULA.Comum;
     //=====| CARACTERISTICAS |=====//
     public int tamanhoX,tamanhoY;
     private double velMovimento;
     //========|  RUNTIME  |=======//
-    //private Thread t;
     private Posicao posicao;    
     public SistemaImunologico sistema;
     public boolean ativa = true;
@@ -21,23 +23,13 @@ abstract public class Celula implements Comportamento{
         posicao = new Posicao(
                 gerador.nextInt(Parametros.TAMX),
                 gerador.nextInt(Parametros.TAMY));
-       // if(roda){ t = new Thread(this); t.start(); }
     }
     
     public Celula(SistemaImunologico sistema,Posicao pos,boolean roda){
         id++; this.sistema = sistema;
         posicao = pos;
-        //if(roda){ t = new Thread(this); t.start(); }
     }
-
-//    public void pausa(int tempo){
-//        try {
-//            t.sleep(tempo);
-//        } catch (InterruptedException ex) {
-//            System.out.println("Erro ao pausar a Thread da Celula");
-//        }
-//    }     
-
+    
     public void move(Posicao dest){
             double deltaX = dest.getX() - (getPosicao().getX() - 10);
             double deltaY = dest.getY() - (posicao.getY() - 10);
@@ -70,9 +62,13 @@ abstract public class Celula implements Comportamento{
         posicao.setX(x);
         posicao.setY(y);
     }
-    
-//    @Override
-//    public void run() {  
-//    }
 
+    public TIPO_CELULA getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TIPO_CELULA tipo) {
+        this.tipo = tipo;
+    }
+    
 }

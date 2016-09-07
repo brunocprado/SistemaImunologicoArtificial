@@ -7,6 +7,7 @@ public class Macrofago extends Celula implements Runnable{
     
     public Macrofago(SistemaImunologico sistema){
         super(sistema,true);
+        setTipo(TIPO_CELULA.Macrofago);
         setVelMovimento(2);
     }
     

@@ -38,17 +38,17 @@ public class Grafico2D extends JPanel implements Runnable{
         g.drawImage(sangue,0,0,this);
         for(Celula celula : sistema.getCelulas()){  
             Image tmp;
-            switch(celula.getClass().getSimpleName()){
-                case "Macrofago":
+            switch(celula.getTipo()){
+                case Macrofago:
                     tmp = macrofago;
                     break;
-                case "Neutrofilo":
+                case Neutrofilo:
                     tmp = neutrofilo;
                     break;
-                case "Linfocito":
+                case Linfocito:
                     tmp = linfocito;
                     break;
-                case "Invasor":
+                case Patogeno:
                     tmp = virus;
                     break;
                 default:
