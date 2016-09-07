@@ -30,10 +30,12 @@ public class Grafico2D extends JPanel implements Runnable{
     @Override
     public void paint(Graphics gd){
         Graphics2D g = (Graphics2D) gd.create();
-        
         // LIMPA TELA
+        g.scale(3,3);
         g.clearRect(0, 0, getWidth(), getHeight());
         g.setColor(new Color(245,146,146));
+        
+        g.drawImage(sangue,0,0,this);
         for(Celula celula : sistema.getCelulas()){  
             Image tmp;
             switch(celula.getClass().getSimpleName()){

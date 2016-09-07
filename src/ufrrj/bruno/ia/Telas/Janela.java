@@ -4,19 +4,14 @@ package ufrrj.bruno.ia.Telas;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
 import java.awt.BorderLayout;
-import java.awt.Canvas;
-import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
-import ufrrj.bruno.ia.celulas.Celula;
 
 public class Janela extends JFrame{
     
@@ -34,6 +29,8 @@ public class Janela extends JFrame{
      
         criaMenus();    
        
+        setIconImage(Toolkit.getDefaultToolkit().createImage(getClass().getResource("/icone.png")));
+        
         this.addWindowListener(new WindowAdapter(){
             @Override
             public void windowClosing(WindowEvent arg0){
