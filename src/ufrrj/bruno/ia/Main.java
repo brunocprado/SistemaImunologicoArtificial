@@ -1,52 +1,47 @@
-/*
-TODO:
-
-
-
-
- */
 package ufrrj.bruno.ia;
-//if(mundo == null){ return; }
-//        JFrame tela = new JFrame("Estatisticas");
-//        Estatisticas e = new Estatisticas(mundo);
-//        tela.setSize(300,600);
-//        e.setSize(tela.getSize());
-//
-//        GraficoPizza grafico = new GraficoPizza(mundo,new Rectangle(50,40,200,200));
-//        //grafico.setSize(200,200);
-//        tela.add(e);
-//        tela.add(grafico);     
-//        tela.setVisible(true);
+
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
-import ufrrj.bruno.ia.Telas.GL;
+import ufrrj.bruno.ia.Telas.Grafico2D;
+import ufrrj.bruno.ia.Telas.OpenGL;
 import ufrrj.bruno.ia.Telas.Janela;
 
 public class Main{
 
     public static void main(String[] args) {
 
-        //====| Config OpenGL |====//
-        final GLProfile glp = GLProfile.get(GLProfile.GL2);
-        GLCapabilities cap = new GLCapabilities(glp);
-        cap.setDoubleBuffered(true);
-        cap.setHardwareAccelerated(true);
+        SistemaImunologico sistema = new SistemaImunologico();
         
-        GLCanvas canvas = new GLCanvas(cap);
-        FPSAnimator fps = new FPSAnimator(canvas,Parametros.LIMITE_FPS);
-        GL gl = new GL();
-        canvas.addGLEventListener(gl);
-        //==========================//
+        Janela tela = new Janela("SIA",sistema);
+        tela.setSize(Parametros.LARGURA,Parametros.ALTURA);
         
-        Janela tela2 = new Janela("SIA",fps,Parametros.LARGURA,Parametros.ALTURA);
-        //tela2.setOpenGLCanvas(canvas);
+        System.out.println("Renderizando com " + Parametros.RENDERIZAR_COM);
         
-        tela2.setGL(gl);
+        if(Parametros.RENDERIZAR_COM == "OpenGL"){       
+            //====| Config OpenGL |====//
+            final GLProfile glp = GLProfile.get(GLProfile.GL2);
+            GLCapabilities cap = new GLCapabilities(glp);
+            cap.setDoubleBuffered(true);
+            cap.setHardwareAccelerated(true);
+
+            GLCanvas canvas = new GLCanvas(cap);
+            FPSAnimator fps = new FPSAnimator(canvas,Parametros.LIMITE_FPS);
+            OpenGL gl = new OpenGL(sistema);
+            canvas.addGLEventListener(gl);
+            //==========================//
+
+            tela.setOpenGLCanvas(canvas);
+            tela.setGL(gl,fps);
+            
+            fps.start();
+        } else {
+            Grafico2D grafico = new Grafico2D(sistema);
+            tela.getContentPane().add(grafico);
+        }
         
-        //fps.start();
-        tela2.setVisivel(true);
+        tela.setVisivel(true);
         
     }
 }

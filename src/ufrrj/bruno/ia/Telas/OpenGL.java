@@ -50,21 +50,17 @@ import ufrrj.bruno.ia.celulas.Celula;
 import ufrrj.bruno.ia.celulas.Posicao;
 import ufrrj.bruno.ia.SistemaImunologico;
 
-public class GL implements GLEventListener{
+public class OpenGL implements GLEventListener{
 
     private static Random gerador = new Random();
     private SistemaImunologico sistema;
     BufferedImage bufferedImage = null;
 
-    public GL(){      
-        sistema = new SistemaImunologico();
+    public OpenGL(SistemaImunologico sistema){      
+        this.sistema = sistema;
         
-        int w = 0;
-        int h = 0;
         try {
             bufferedImage = ImageIO.read(getClass().getResource("/img/blood.jpg")); //The menu background
-            w = bufferedImage.getWidth();
-            h = bufferedImage.getHeight();
             //w=30;h=30;
         } catch (IOException e) {
             e.printStackTrace();
@@ -108,8 +104,8 @@ public class GL implements GLEventListener{
                         false,
                         null);
 
-        //java.awt.Graphics2D g = img.createGraphics();
-        //g.drawImage(bufferedImage, null, null);
+        java.awt.Graphics2D g = img.createGraphics();
+        g.drawImage(bufferedImage, null, null);
 
         DataBufferByte imgBuf =
                 (DataBufferByte)raster.getDataBuffer();

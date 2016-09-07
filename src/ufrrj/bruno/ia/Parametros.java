@@ -1,7 +1,14 @@
 package ufrrj.bruno.ia;
 
 public class Parametros {
+    
+    //===| Config Visualização |===//
+    public final static String RENDERIZAR_COM = ""; //"OpenGL"
     public final static int LIMITE_FPS = 60;
+    public final static int LARGURA = 1280;
+    public final static int ALTURA  = 720;
+    
+    //====| Config Simulacao |====//
     public final static int TAMX = 1280;
     public final static int TAMY = 720;
     
@@ -16,10 +23,6 @@ public class Parametros {
     public static double LINFOCITOS  = 0.26;
     //=========================//
     //Fonte : Wikipedia - PT
-    
-    //===| Config Visualização |===//
-    public final static int LARGURA = 1280;
-    public final static int ALTURA  = 720;
     
 //     Cores em RGB
 //    public int cMACROFAGOS[] = {};

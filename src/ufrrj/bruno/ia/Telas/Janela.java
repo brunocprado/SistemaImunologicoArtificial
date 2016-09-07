@@ -1,6 +1,7 @@
 package ufrrj.bruno.ia.Telas;
 
 //import com.jogamp.opengl.awt.GLCanvas;
+import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
@@ -14,52 +15,29 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import ufrrj.bruno.ia.Parametros;
+import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.celulas.Celula;
 
 public class Janela extends JFrame{
     
     private JPanel tela;
-    private GL gl;
-    Canvas canvass;
-    public Janela(String titulo,FPSAnimator fps,int x,int y){
+    private OpenGL gl;
+    private Grafico2D grafico;
+    private FPSAnimator fps;
+    
+    public Janela(String titulo,SistemaImunologico sistema){
         super(titulo);
-        this.setSize(new Dimension(x,y));
         this.setLayout(new BorderLayout());
         this.setLocationRelativeTo(null);
         tela = new JPanel(new BorderLayout());
         this.getContentPane().add(tela,BorderLayout.CENTER);
-        
-        
-        canvass = new Canvas();
-        tela.add(canvass);
-        canvass.setSize(500,500);
-        canvass.createBufferStrategy(2);
-        canvass.setIgnoreRepaint(true);
-        
-        
-        BufferStrategy bs = canvass.getBufferStrategy();
-         ArrayList<Celula> celulas = new ArrayList<Celula>();
-                             java.awt.Graphics2D g = (java.awt.Graphics2D) bs.getDrawGraphics();
-        // celulas.add(new Celula(new SistemaImunologico(),true));
-        while (true) {
-//            do {
-                    //for(int i = 1;i<20;i++){
-                        g.drawOval(20, 10, 10, 20);
-                                                g.drawOval(50, 20, 10, 20);
-
-                    
-                    g.dispose();
-        
-//            }
-        }
-        
-        
+     
         criaMenus();    
        
         this.addWindowListener(new WindowAdapter(){
             @Override
             public void windowClosing(WindowEvent arg0){
-                if(fps.isStarted()){
+                if(fps != null && fps.isStarted()){
                     fps.stop();
                 }
                 System.exit(0);
@@ -115,13 +93,14 @@ public class Janela extends JFrame{
 
         setJMenuBar(menu);
     }
-//    
-//    public void setOpenGLCanvas(GLCanvas canvas){
-//        tela.add(canvas);
-//    }
-//    
-    public void setGL(GL gl){
+   
+    public void setOpenGLCanvas(GLCanvas canvas){
+        tela.add(canvas);
+    }
+   
+    public void setGL(OpenGL gl,FPSAnimator fps){
         this.gl = gl;
+        this.fps = fps;
     }
     
     public void setVisivel(boolean visivel){

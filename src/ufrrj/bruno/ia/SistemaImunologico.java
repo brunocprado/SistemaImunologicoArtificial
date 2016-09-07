@@ -15,7 +15,7 @@ public class SistemaImunologico implements Runnable{
     private Thread t;
     
     public SistemaImunologico(){
-        geraPrimeiraGeracao();     
+        geraPrimeiraGeracao();    
         t = new Thread(this,"Sistema Imunologico - IA");
         t.start();
     }
