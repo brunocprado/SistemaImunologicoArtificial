@@ -13,10 +13,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import ufrrj.bruno.ia.SistemaImunologico;
+import ufrrj.bruno.ia.celulas.Patogeno;
 
 public class Janela extends JFrame{
     
-    private JPanel tela;
+    private final JPanel tela;
+    private final JFrame fEstatisticas;
     private OpenGL gl;
     private Grafico2D grafico;
     private FPSAnimator fps;
@@ -30,6 +32,10 @@ public class Janela extends JFrame{
         tela = new JPanel(new BorderLayout());
         this.getContentPane().add(tela,BorderLayout.CENTER);
      
+        fEstatisticas = new JFrame("Estatisticas");
+        fEstatisticas.setSize(100,720);
+        fEstatisticas.getContentPane().add(new Estatisticas(sistema));
+        
         criaMenus();    
        
         setIconImage(Toolkit.getDefaultToolkit().createImage(getClass().getResource("/icone.png")));
@@ -54,14 +60,19 @@ public class Janela extends JFrame{
         
         menu1.setText("Novo");
         menu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                System.out.println("novo");
+                for(int i=0;i<10;i++){
+                    sistema.adicionaCelula(new Patogeno(sistema));
+                }
+                
             }
         });
         menu.add(menu1);
 
         menu2.setText("Pausar");
         menu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sistema.pausada = !sistema.pausada;
                 if(sistema.pausada){
@@ -77,8 +88,10 @@ public class Janela extends JFrame{
         
         menu3.setText("Estatisticas");
         menu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                System.out.println("novo");
+                
+                fEstatisticas.setVisible(true);
             }
         });
         menu.add(menu3);

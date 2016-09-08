@@ -25,11 +25,11 @@ public class Estatisticas extends JPanel implements Runnable{
     public void paint(Graphics g){
         Graphics2D g2d = (Graphics2D) g.create();
         //g2d.scale(3, 3);
-        g2d.drawLine(10, 20, 30, 50);
+//        g2d.drawLine(10, 20, 30, 50);
         
-//        int largura =  (int) g.getFontMetrics().getStringBounds("Distribuição",g).getWidth();
-//        g.drawString("Distribuição",(getWidth()-largura)/2,20);
-//        g.fillRect(0, 260, getWidth(), getHeight());
+        int largura =  (int) g.getFontMetrics().getStringBounds("Distribuição",g).getWidth();
+        g.drawString("Distribuição",(getWidth()-largura)/2,20);
+        g.fillRect(0, 260, getWidth(), getHeight());
     }
     
     @Override

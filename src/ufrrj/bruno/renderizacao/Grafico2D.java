@@ -7,11 +7,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-import javafx.scene.input.KeyCode;
 import javax.swing.JPanel;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
@@ -27,7 +24,6 @@ public class Grafico2D extends JPanel implements Runnable{
     Image linfocito = Toolkit.getDefaultToolkit().createImage(getClass().getResource("/img/Linfocito.png"));
     Image macrofago = Toolkit.getDefaultToolkit().createImage(getClass().getResource("/img/macro.png"));
     Image neutrofilo = Toolkit.getDefaultToolkit().createImage(getClass().getResource("/img/neutrofilo.png"));
-    
     //=========| RUNTIME |=========//
     private int cameraX,cameraY;   
     private double zoom = 1;
@@ -62,6 +58,7 @@ public class Grafico2D extends JPanel implements Runnable{
                 }
             }
         });
+        
         setFocusable(true);
           
         addMouseWheelListener(new MouseAdapter() {
@@ -88,7 +85,7 @@ public class Grafico2D extends JPanel implements Runnable{
         
         g.drawImage(sangue,0,0,this);
         
-        g.scale(zoom * (float) getWidth()/Parametros.TAMX, zoom * (float) getHeight()/Parametros.TAMY);
+        g.scale(zoom * getWidth()/Parametros.TAMX, zoom * getHeight()/Parametros.TAMY);
 
         if(zoom != 1){;
             g.translate(cameraX,cameraY);
@@ -126,21 +123,10 @@ public class Grafico2D extends JPanel implements Runnable{
     }  
 
     @Override
-    public void run() {
+    public void run(){
         while(true){
             repaint();
             pausa(1000/Parametros.LIMITE_FPS);
         }
-    }
-}
-class Adaptador extends JPanel implements KeyListener{
-    public void keyTyped(KeyEvent e) {
-        System.out.println("keyTyped: "+e);
-    }
-    public void keyPressed(KeyEvent e) {
-        System.out.println("keyPressed: "+e);
-    }
-    public void keyReleased(KeyEvent e) {
-        System.out.println("keyReleased: "+e);
     }
 }
