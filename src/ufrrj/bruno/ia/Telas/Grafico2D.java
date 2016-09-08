@@ -29,7 +29,7 @@ public class Grafico2D extends JPanel implements Runnable{
     Image neutrofilo = Toolkit.getDefaultToolkit().createImage(getClass().getResource("/img/neutrofilo.png"));
     
     //=========| RUNTIME |=========//
-    private int cameraX = getWidth()/2 ,cameraY = getHeight()/2;   
+    private int cameraX,cameraY;   
     private double zoom = 1;
     
     public Grafico2D(SistemaImunologico sistema){
@@ -57,72 +57,34 @@ public class Grafico2D extends JPanel implements Runnable{
         setFocusable(true);
           
         addMouseWheelListener(new MouseAdapter() {
-                @Override
-                public void mouseWheelMoved(MouseWheelEvent e) {
-                    if (e.getPreciseWheelRotation() < 0) {
-                        zoom += 0.1;
-                    } else if (zoom > 1){
-                       
-                        zoom -= 0.1;
-                    }
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                if (e.getPreciseWheelRotation() < 0) {
+                    zoom += 0.1;
+                } else if (zoom > 1){
+                    zoom -= 0.1;
                 }
-            });
+            }
+        });
         
         t = new Thread(this,"Sistema Imunologico - Renderizacao (Graphics2D)");
         t.start();
-    }
- 
-    public void temp(Graphics2D g){
-        double zoomWidth = getWidth() * zoom;
-        double zoomHeight = getHeight() * zoom;
-        
-        double anchorx = (getWidth() - zoomWidth) / 2  ;
-        double anchory = (getHeight() - zoomHeight) / 2;
-        
-        AffineTransform at = new AffineTransform();
-        //at.translate(anchorx, anchory);
-        at.translate(anchorx , anchory);
-
-        at.scale(zoom,zoom);
-         g.setTransform(at);
     }
     
     @Override
     public void paint(Graphics gd){
         Graphics2D g = (Graphics2D) gd.create();
-        // LIMPA TELA
-  
-        g.scale(zoom * (float) getWidth()/Parametros.TAMX, zoom * (float) getHeight()/Parametros.TAMY);
- 
+   
         g.clearRect(0, 0, getWidth(), getHeight());
         g.setColor(new Color(245,146,146));
         
         g.drawImage(sangue,0,0,this);
         
-       // at.translate(0,0);
-        //at.tr
-        
-       
-//       zoom =2;
-//       cameraX = getWidth()/4;
-//       cameraY = getHeight()/4;
+        g.scale(zoom * (float) getWidth()/Parametros.TAMX, zoom * (float) getHeight()/Parametros.TAMY);
 
-//       System.out.println(cameraX -(tamX/2));
         if(zoom != 1){;
             g.translate(cameraX,cameraY);
-            //g.translate(cameraX - getWidth()/2 * 0.5 , 0);
         }  
-
-        
-        
-        //2000x1000
-        //1000x500
-        
-        //getWidth()/zoom - cameraX/zoom
-        
-        //2000 - 
-        
-        //500
                 
         for(Celula celula : sistema.getCelulas()){  
             Image tmp;
@@ -143,7 +105,6 @@ public class Grafico2D extends JPanel implements Runnable{
                     tmp = comum;
                     break;
             }
-
             g.drawImage(tmp, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8, this);
         }
     }
