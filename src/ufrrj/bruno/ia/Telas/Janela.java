@@ -1,5 +1,7 @@
 package ufrrj.bruno.ia.Telas;
 
+import ufrrj.bruno.renderizacao.OpenGL;
+import ufrrj.bruno.renderizacao.Grafico2D;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
 import java.awt.BorderLayout;
@@ -84,7 +86,9 @@ public class Janela extends JFrame{
         menu4.setText("Sobre");
         menu4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                //insere(evt);
+                Sobre sobre = new Sobre();
+                sobre.setLocationRelativeTo(null);
+                sobre.setVisible(true);
             }
         });
         menu.add(menu4);

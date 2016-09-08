@@ -4,8 +4,8 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
-import ufrrj.bruno.ia.Telas.Grafico2D;
-import ufrrj.bruno.ia.Telas.OpenGL;
+import ufrrj.bruno.renderizacao.Grafico2D;
+import ufrrj.bruno.renderizacao.OpenGL;
 import ufrrj.bruno.ia.Telas.Janela;
 
 public class Main{

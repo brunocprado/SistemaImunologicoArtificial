@@ -1,4 +1,4 @@
-package ufrrj.bruno.ia.Telas;
+package ufrrj.bruno.renderizacao;
 
 import com.jogamp.common.nio.Buffers;
 import static com.jogamp.opengl.GL.GL_COLOR_BUFFER_BIT;

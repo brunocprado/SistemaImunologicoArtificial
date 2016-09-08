@@ -1,4 +1,4 @@
-package ufrrj.bruno.ia.Telas;
+package ufrrj.bruno.renderizacao;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -11,7 +11,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-import java.awt.geom.AffineTransform;
+import javafx.scene.input.KeyCode;
 import javax.swing.JPanel;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
@@ -39,18 +39,26 @@ public class Grafico2D extends JPanel implements Runnable{
             @Override
             public void keyPressed(KeyEvent e){
                 switch(e.getKeyCode()){
-                    case 39:
+                    case KeyEvent.VK_RIGHT:
                         if(cameraX - getWidth()/zoom > -getWidth()) cameraX -= 5;
                         break;
-                    case 37:
+                    case KeyEvent.VK_LEFT:
                         if(cameraX < 0) cameraX += 5;
                         break;
-                    case 38:
+                    case KeyEvent.VK_UP:
                         if(cameraY < 0) cameraY += 5;
                         break;
-                    case 40:
+                    case KeyEvent.VK_DOWN:
                         if(cameraY - getHeight()/zoom > -getHeight()) cameraY -= 5;
-                        break;         
+                        break;       
+                    case KeyEvent.VK_A:
+                        zoom += 0.1;
+                        break;
+                    case KeyEvent.VK_S:
+                        if (zoom > 1){
+                            zoom -= 0.1;
+                        }
+                        break;
                 }
             }
         });
