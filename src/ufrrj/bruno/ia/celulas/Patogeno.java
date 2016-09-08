@@ -5,7 +5,7 @@ import ufrrj.bruno.ia.SistemaImunologico;
 
 public class Patogeno extends Celula{
     
-    private int chave = 0xFFFFF; 
+    private int codBiologico = 0xFFFFF; 
     
     public Patogeno(SistemaImunologico sistema) {
         super(sistema,true);

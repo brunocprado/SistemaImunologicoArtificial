@@ -14,7 +14,8 @@
         <group>
             <file>file:/Users/bruno/SistemaImunologicoArtificial/src/ufrrj/bruno/renderizacao/Grafico2D.java</file>
             <file>file:/Users/bruno/SistemaImunologicoArtificial/src/ufrrj/bruno/ia/Parametros.java</file>
-            <file>file:/Users/bruno/SistemaImunologicoArtificial/src/ufrrj/bruno/ia/Telas/Janela.java</file>
+            <file>file:/Users/bruno/SistemaImunologicoArtificial/src/ufrrj/bruno/ia/celulas/Patogeno.java</file>
+            <file>file:/Users/bruno/SistemaImunologicoArtificial/src/ufrrj/bruno/ia/SistemaImunologico.java</file>
         </group>
     </open-files>
 </project-private>

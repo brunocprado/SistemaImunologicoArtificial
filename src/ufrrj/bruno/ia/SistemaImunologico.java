@@ -76,5 +76,10 @@ public class SistemaImunologico implements Runnable{
             pausa(20);
         }     
     }
+
+    @Override
+    public String toString() {
+        return "SistemaImunologico{" + "nInicial=" + nInicial + ", celulas=" + celulas + ", pausada=" + pausada + '}';
+    }
     
 }

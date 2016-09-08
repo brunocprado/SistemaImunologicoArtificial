@@ -4,7 +4,7 @@ public class Parametros {
     enum RENDER {OpenGL,Grafico2D};
     //===| Config Visualização |===//
     public final static RENDER RENDERIZAR_COM = RENDER.Grafico2D; 
-    public final static int LIMITE_FPS = 5;
+    public final static int LIMITE_FPS = 60;
     public final static int LARGURA = 1280;
     public final static int ALTURA  = 720;
     
@@ -30,5 +30,5 @@ public class Parametros {
 //    public static float[] cNEUTROFILOS = 0.65;
 //    public static float[] cLINFOCITOS = 0.26;
     
-    public final static int nVer = 14;
+    public final static int nVer = 15;
 }

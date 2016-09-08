@@ -65,7 +65,7 @@ public class Janela extends JFrame{
                 for(int i=0;i<10;i++){
                     sistema.adicionaCelula(new Patogeno(sistema));
                 }
-                
+                //System.out.println(sistema);
             }
         });
         menu.add(menu1);

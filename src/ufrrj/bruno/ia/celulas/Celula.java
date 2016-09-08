@@ -70,5 +70,10 @@ abstract public class Celula implements Comportamento{
     public void setTipo(TIPO_CELULA tipo) {
         this.tipo = tipo;
     }
+
+    @Override
+    public String toString() {
+        return "Celula{" + "tipo=" + tipo + ", tamanhoX=" + tamanhoX + ", tamanhoY=" + tamanhoY + ", velMovimento=" + velMovimento + ", posicao=" + posicao + '}';
+    }
     
 }
