@@ -16,6 +16,7 @@ public class Main{
         
         Janela tela = new Janela("SIA",sistema);
         tela.setSize(Parametros.LARGURA,Parametros.ALTURA);
+        tela.setLocationRelativeTo(null);
         
         System.out.println("Renderizando com " + Parametros.RENDERIZAR_COM);
         

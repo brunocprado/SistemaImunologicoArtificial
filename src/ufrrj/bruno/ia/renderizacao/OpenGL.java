@@ -24,7 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import ufrrj.bruno.ia.celulas.Celula;
-import ufrrj.bruno.ia.celulas.Posicao;
+import ufrrj.bruno.ia.atributos.Posicao;
 import ufrrj.bruno.ia.SistemaImunologico;
 
 public class OpenGL implements GLEventListener{

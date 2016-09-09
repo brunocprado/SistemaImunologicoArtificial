@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Polygon;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -13,6 +14,8 @@ import javax.swing.JPanel;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.celulas.Celula;
+import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.Patogeno;
+import ufrrj.bruno.ia.celulas.Patogeno;
 
 public class Grafico2D extends JPanel implements Runnable{
     private Thread t;
@@ -51,9 +54,7 @@ public class Grafico2D extends JPanel implements Runnable{
                         zoom += 0.1;
                         break;
                     case KeyEvent.VK_S:
-                        if (zoom > 1){
-                            zoom -= 0.1;
-                        }
+                        if (zoom >= 1.1){ zoom -= 0.1; }
                         break;
                 }
             }
@@ -66,7 +67,7 @@ public class Grafico2D extends JPanel implements Runnable{
             public void mouseWheelMoved(MouseWheelEvent e) {
                 if (e.getPreciseWheelRotation() < 0) {
                     zoom += 0.1;
-                } else if (zoom > 1){
+                } else if (zoom >= 1.1){
                     zoom -= 0.1;
                 }
             }
@@ -92,25 +93,23 @@ public class Grafico2D extends JPanel implements Runnable{
         }  
                 
         for(Celula celula : sistema.getCelulas()){  
-            Image tmp;
             switch(celula.getTipo()){
                 case Macrofago:
-                    tmp = macrofago;
+                    g.drawImage(macrofago, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8, this);
                     break;
                 case Neutrofilo:
-                    tmp = neutrofilo;
+                    g.drawImage(neutrofilo, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8, this);
                     break;
                 case Linfocito:
-                    tmp = linfocito;
+                    g.drawImage(linfocito, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8, this);
                     break;
                 case Patogeno:
-                    tmp = virus;
+                    //g.drawPolygon(((Patogeno)celula).getForma());
                     break;
                 default:
-                    tmp = comum;
+                    g.drawImage(comum, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8, this);
                     break;
             }
-            g.drawImage(tmp, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8, this);
         }
     }
     

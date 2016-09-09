@@ -1,4 +1,4 @@
-package ufrrj.bruno.ia.celulas;
+package ufrrj.bruno.ia.atributos;
 
 import ufrrj.bruno.ia.Parametros;
 

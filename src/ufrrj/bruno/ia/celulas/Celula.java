@@ -1,5 +1,6 @@
 package ufrrj.bruno.ia.celulas;
 
+import ufrrj.bruno.ia.atributos.Posicao;
 import java.util.Random;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
@@ -25,7 +26,7 @@ abstract public class Celula implements Comportamento{
     }
     
     public Celula(SistemaImunologico sistema,TIPO_CELULA tipo,Posicao pos){
-        id++; this.sistema = sistema;
+        id++; this.sistema = sistema; this.tipo = tipo;
         posicao = pos;
     }
     

@@ -1,5 +1,6 @@
 package ufrrj.bruno.ia.celulas;
 
+import ufrrj.bruno.ia.atributos.Posicao;
 import java.awt.Point;
 import ufrrj.bruno.ia.SistemaImunologico;
 

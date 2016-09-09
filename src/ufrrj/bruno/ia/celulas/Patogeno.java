@@ -1,15 +1,26 @@
 package ufrrj.bruno.ia.celulas;
 
+import java.awt.Polygon;
+import java.util.Random;
 import ufrrj.bruno.ia.SistemaImunologico;
+import ufrrj.bruno.ia.atributos.Poligono;
 
 
 public class Patogeno extends Celula{
     
     private int codBiologico = 0xFFFFF; 
+//    private int forma;
+    private Poligono forma;
     
     public Patogeno(SistemaImunologico sistema) {
         super(sistema,TIPO_CELULA.Patogeno);
-        setVelMovimento(1);
+        forma = new Poligono((new Random().nextInt(12)) + 2);
+        
+    }
+    
+    public Patogeno(SistemaImunologico sistema,int nLados) {
+        super(sistema,TIPO_CELULA.Patogeno);
+        forma = new Poligono(nLados);
     }
     
     private int verificaMaisProximo(){
@@ -86,9 +97,15 @@ public class Patogeno extends Celula{
 
     @Override
     public void loop() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 
+    public int getCodBiologico() {
+        return codBiologico;
+    }
+
+    public Polygon getForma() {
+        return forma.getPoligono();
+    }
     
 }
