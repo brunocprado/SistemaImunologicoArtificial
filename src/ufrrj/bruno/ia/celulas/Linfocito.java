@@ -1,14 +1,15 @@
-
 package ufrrj.bruno.ia.celulas;
 
 import ufrrj.bruno.ia.SistemaImunologico;
 
-
 public class Linfocito extends Celula{
     
+    public static final int tempoVida = 2; 
+    
+    //DEVE ARMAZENAR PADROES CONHECIDOS
+    
     public Linfocito(SistemaImunologico sistema) {
-        super(sistema,false);
-        setTipo(TIPO_CELULA.Linfocito);
+        super(sistema,TIPO_CELULA.Linfocito);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package ufrrj.bruno.renderizacao;
+package ufrrj.bruno.ia.renderizacao;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -87,7 +87,7 @@ public class Grafico2D extends JPanel implements Runnable{
         
         g.scale(zoom * getWidth()/Parametros.TAMX, zoom * getHeight()/Parametros.TAMY);
 
-        if(zoom != 1){;
+        if(zoom > 1){;
             g.translate(cameraX,cameraY);
         }  
                 

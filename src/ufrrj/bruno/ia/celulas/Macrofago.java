@@ -6,8 +6,7 @@ import ufrrj.bruno.ia.SistemaImunologico;
 public class Macrofago extends Celula implements Runnable{
     
     public Macrofago(SistemaImunologico sistema){
-        super(sistema,true);
-        setTipo(TIPO_CELULA.Macrofago);
+        super(sistema,TIPO_CELULA.Macrofago);
         setVelMovimento(2);
     }
     
@@ -38,8 +37,8 @@ public class Macrofago extends Celula implements Runnable{
     
     @Override
     public void run() {
-        while(ativa){       
-            getPosicao().setPosicao(getPosicao().getX() + 1, getPosicao().getY() + 1);
+//        while(ativa){       
+//            getPosicao().setPosicao(getPosicao().getX() + 1, getPosicao().getY() + 1);
 //            Point pos = verificaMaisProximo();
 //            if(pos == null){ 
 //                pausa(5);               
@@ -58,7 +57,7 @@ public class Macrofago extends Celula implements Runnable{
 //            setPosicao(movX,movY);
 
             //pausa(20);   
-        }
+       // }
         //t.interrupt();
     }
 

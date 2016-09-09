@@ -6,8 +6,7 @@ import ufrrj.bruno.ia.SistemaImunologico;
 public class Neutrofilo extends Celula{
     
     public Neutrofilo(SistemaImunologico sistema){
-        super(sistema,false);
-        setTipo(TIPO_CELULA.Neutrofilo);
+        super(sistema,TIPO_CELULA.Neutrofilo);
     }
 
     @Override

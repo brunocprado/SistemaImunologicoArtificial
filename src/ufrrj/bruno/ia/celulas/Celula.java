@@ -8,24 +8,23 @@ abstract public class Celula implements Comportamento{
     public enum TIPO_CELULA {Comum,Linfocito,Neutrofilo,Patogeno,Macrofago};
             
     private static int id;
-    private TIPO_CELULA tipo = TIPO_CELULA.Comum;
+    private TIPO_CELULA tipo;
     //=====| CARACTERISTICAS |=====//
     public int tamanhoX,tamanhoY;
     private double velMovimento;
     //========|  RUNTIME  |=======//
     private Posicao posicao;    
     public SistemaImunologico sistema;
-    public boolean ativa = true;
     
-    public Celula(SistemaImunologico sistema,boolean roda){
-        id++; this.sistema = sistema;
+    public Celula(SistemaImunologico sistema,TIPO_CELULA tipo){
+        id++; this.sistema = sistema; this.tipo = tipo;
         Random gerador = new Random();
         posicao = new Posicao(
                 gerador.nextInt(Parametros.TAMX),
                 gerador.nextInt(Parametros.TAMY));
     }
     
-    public Celula(SistemaImunologico sistema,Posicao pos,boolean roda){
+    public Celula(SistemaImunologico sistema,TIPO_CELULA tipo,Posicao pos){
         id++; this.sistema = sistema;
         posicao = pos;
     }
@@ -65,10 +64,6 @@ abstract public class Celula implements Comportamento{
 
     public TIPO_CELULA getTipo() {
         return tipo;
-    }
-
-    public void setTipo(TIPO_CELULA tipo) {
-        this.tipo = tipo;
     }
 
     @Override

@@ -8,11 +8,9 @@ public class Patogeno extends Celula{
     private int codBiologico = 0xFFFFF; 
     
     public Patogeno(SistemaImunologico sistema) {
-        super(sistema,true);
-        setTipo(TIPO_CELULA.Patogeno);
+        super(sistema,TIPO_CELULA.Patogeno);
         setVelMovimento(1);
     }
-    
     
     private int verificaMaisProximo(){
         int maisProximo = 0,i = 0;
@@ -50,11 +48,11 @@ public class Patogeno extends Celula{
     
    
     public void run() {
-        while(ativa){    
-            if(nCelulas() == 0){
-                //pausa(20);
-                continue;
-            }
+//        while(ativa){    
+//            if(nCelulas() == 0){
+//                //pausa(20);
+//                continue;
+//            }
 //            Point pos = mundo.getCelulas().get(verificaMaisProximo()).getPosicao();
 //            if(pos == null){ 
 //                pausa(5);               
@@ -85,11 +83,12 @@ public class Patogeno extends Celula{
             //pausa(20);   
         }
         //t.interrupt();
-    }
 
     @Override
     public void loop() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+
     
 }

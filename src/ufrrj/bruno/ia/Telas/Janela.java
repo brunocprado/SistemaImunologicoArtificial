@@ -1,7 +1,7 @@
 package ufrrj.bruno.ia.Telas;
 
-import ufrrj.bruno.renderizacao.OpenGL;
-import ufrrj.bruno.renderizacao.Grafico2D;
+import ufrrj.bruno.ia.renderizacao.OpenGL;
+import ufrrj.bruno.ia.renderizacao.Grafico2D;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
 import java.awt.BorderLayout;
