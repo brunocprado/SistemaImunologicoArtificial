@@ -1,5 +1,6 @@
 package ufrrj.bruno.ia.celulas;
 
+import java.awt.Color;
 import java.awt.Polygon;
 import java.util.Random;
 import ufrrj.bruno.ia.SistemaImunologico;
@@ -9,18 +10,20 @@ import ufrrj.bruno.ia.atributos.Poligono;
 public class Patogeno extends Celula{
     
     private int codBiologico = 0xFFFFF; 
-//    private int forma;
     private Poligono forma;
+    private Color cor;
     
     public Patogeno(SistemaImunologico sistema) {
         super(sistema,TIPO_CELULA.Patogeno);
-        forma = new Poligono((new Random().nextInt(12)) + 2);
-        
+        Random r = new Random();
+        forma = new Poligono(new Random().nextInt(10) + 3,getPosicao());
+        cor = new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255));
     }
     
-    public Patogeno(SistemaImunologico sistema,int nLados) {
+    public Patogeno(SistemaImunologico sistema,int nLados,Color cor) {
         super(sistema,TIPO_CELULA.Patogeno);
-        forma = new Poligono(nLados);
+        forma = new Poligono(nLados,getPosicao());
+        this.cor = cor;
     }
     
     private int verificaMaisProximo(){
@@ -106,6 +109,10 @@ public class Patogeno extends Celula{
 
     public Polygon getForma() {
         return forma.getPoligono();
+    }
+
+    public Color getCor() {
+        return cor;
     }
     
 }

@@ -25,10 +25,5 @@ public class Parametros {
     //=========================//
     //Fonte : Wikipedia - PT
     
-//     Cores em RGB
-//    public int cMACROFAGOS[] = {};
-//    public static float[] cNEUTROFILOS = 0.65;
-//    public static float[] cLINFOCITOS = 0.26;
-    
-    public final static int nVer = 15;
+    public final static int nVer = 21;
 }

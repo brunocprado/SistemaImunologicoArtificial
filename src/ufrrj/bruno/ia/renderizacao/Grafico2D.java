@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Polygon;
+import java.awt.Shape;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -104,7 +105,8 @@ public class Grafico2D extends JPanel implements Runnable{
                     g.drawImage(linfocito, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8, this);
                     break;
                 case Patogeno:
-                    //g.drawPolygon(((Patogeno)celula).getForma());
+                    g.setColor(((Patogeno)celula).getCor());
+                    g.fillPolygon(((Patogeno)celula).getForma());
                     break;
                 default:
                     g.drawImage(comum, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8, this);

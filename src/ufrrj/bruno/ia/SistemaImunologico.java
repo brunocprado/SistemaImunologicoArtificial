@@ -13,11 +13,21 @@ public class SistemaImunologico implements Runnable{
     private int nInicial;
     private final ArrayList<Celula> celulas = new ArrayList<>();
     public boolean pausada = false;
-    private final Thread t;
+    private Thread t;
     
     public SistemaImunologico(){
         nInicial = new Random().nextInt(Parametros.TAM_MEDIO_SUPERIOR - Parametros.TAM_MEDIO_INFERIOR) + Parametros.TAM_MEDIO_INFERIOR;
         geraPrimeiraGeracao();    
+        iniciaThread();
+    }
+    
+    public SistemaImunologico(int nInicial){
+        this.nInicial = nInicial;
+        geraPrimeiraGeracao();    
+        iniciaThread();
+    }
+    
+    private void iniciaThread(){
         t = new Thread(this,"Sistema Imunologico - IA");
         t.start();
     }
