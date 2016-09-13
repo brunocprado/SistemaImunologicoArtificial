@@ -15,7 +15,7 @@ abstract public class Celula implements Comportamento{
     private double velMovimento;
     //========|  RUNTIME  |=======//
     private Posicao posicao;    
-    public SistemaImunologico sistema;
+    private SistemaImunologico sistema;
     
     public Celula(SistemaImunologico sistema,TIPO_CELULA tipo){
         id++; this.sistema = sistema; this.tipo = tipo;
@@ -67,6 +67,10 @@ abstract public class Celula implements Comportamento{
         return tipo;
     }
 
+    public SistemaImunologico getSistema() {
+        return sistema;
+    }
+    
     @Override
     public String toString() {
         return "Celula{" + "tipo=" + tipo + ", tamanhoX=" + tamanhoX + ", tamanhoY=" + tamanhoY + ", velMovimento=" + velMovimento + ", posicao=" + posicao + '}';

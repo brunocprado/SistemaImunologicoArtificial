@@ -5,6 +5,7 @@ import java.awt.Polygon;
 import java.util.Random;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.atributos.Poligono;
+import ufrrj.bruno.ia.atributos.Posicao;
 
 
 public class Patogeno extends Celula{
@@ -22,6 +23,12 @@ public class Patogeno extends Celula{
     
     public Patogeno(SistemaImunologico sistema,int nLados,Color cor) {
         super(sistema,TIPO_CELULA.Patogeno);
+        forma = new Poligono(nLados,getPosicao());
+        this.cor = cor;
+    }
+    
+    public Patogeno(SistemaImunologico sistema,int nLados,Color cor,Posicao pos) {
+        super(sistema,TIPO_CELULA.Patogeno,pos);
         forma = new Poligono(nLados,getPosicao());
         this.cor = cor;
     }
@@ -47,19 +54,22 @@ public class Patogeno extends Celula{
         return maisProximo;
     }
     
-    private int nCelulas(){
-        int qt = 0;
-        try {
-            for(Celula celula : sistema.getCelulas()){
-                if(celula.getClass().getSimpleName().equals("Comum")){ qt++; }    
-            }
-        } catch (Exception ex) {
-            //pausa(2);
-            return nCelulas();
-        }  
-        return qt;
-    }
+//    private int nCelulas(){
+//        int qt = 0;
+//        try {
+//            for(Celula celula : getSistema().getCelulas()){
+//                if(celula.getClass().getSimpleName().equals("Comum")){ qt++; }    
+//            }
+//        } catch (Exception ex) {
+//            //pausa(2);
+//            return nCelulas();
+//        }  
+//        return qt;
+//    }
     
+    public void clona(){
+        getSistema().adicionaCelula(new Patogeno(getSistema(),forma.getnLados(),cor,getPosicao()));
+    }
    
     public void run() {
 //        while(ativa){    

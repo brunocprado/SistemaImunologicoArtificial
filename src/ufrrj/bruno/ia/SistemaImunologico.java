@@ -10,7 +10,7 @@ import ufrrj.bruno.ia.celulas.Macrofago;
 import ufrrj.bruno.ia.celulas.Neutrofilo;
 
 public class SistemaImunologico implements Runnable{
-    private int nInicial;
+    private final int nInicial;
     private final ArrayList<Celula> celulas = new ArrayList<>();
     public boolean pausada = false;
     private Thread t;
@@ -35,9 +35,9 @@ public class SistemaImunologico implements Runnable{
     private void geraPrimeiraGeracao(){
         System.out.println("Gerando sistema com " + nInicial * 10 + " leucócitos por microlitro de sangue");
         int i;
-        for(i=0;i<10;i++){
-            celulas.add(new Comum(this));
-        }
+//        for(i=0;i<10;i++){
+//            celulas.add(new Comum(this));
+//        }
         for(i=0;i<(nInicial*Parametros.NEUTROFILOS);i++){
             celulas.add(new Neutrofilo(this));
         }

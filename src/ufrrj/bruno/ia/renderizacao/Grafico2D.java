@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Polygon;
-import java.awt.Shape;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -21,13 +19,14 @@ import ufrrj.bruno.ia.celulas.Patogeno;
 public class Grafico2D extends JPanel implements Runnable{
     private Thread t;
     private SistemaImunologico sistema = null; 
-    Image sangue = Toolkit.getDefaultToolkit().createImage(getClass().getResource("/img/blood.jpg"));
+    Toolkit tool = Toolkit.getDefaultToolkit();
+    Image sangue = tool.createImage(getClass().getResource("/img/blood.jpg"));
     //=========| CELULAS |==========//
-    Image comum = Toolkit.getDefaultToolkit().createImage(getClass().getResource("/img/celula.png"));
-    Image virus = Toolkit.getDefaultToolkit().createImage(getClass().getResource("/img/virus.png"));
-    Image linfocito = Toolkit.getDefaultToolkit().createImage(getClass().getResource("/img/Linfocito.png"));
-    Image macrofago = Toolkit.getDefaultToolkit().createImage(getClass().getResource("/img/macro.png"));
-    Image neutrofilo = Toolkit.getDefaultToolkit().createImage(getClass().getResource("/img/neutrofilo.png"));
+    Image comum = tool.createImage(getClass().getResource("/img/celula.png"));
+    Image virus = tool.createImage(getClass().getResource("/img/virus.png"));
+    Image linfocito = tool.createImage(getClass().getResource("/img/Linfocito.png"));
+    Image macrofago = tool.createImage(getClass().getResource("/img/macro.png"));
+    Image neutrofilo = tool.createImage(getClass().getResource("/img/neutrofilo.png"));
     //=========| RUNTIME |=========//
     private int cameraX,cameraY;   
     private double zoom = 1;
