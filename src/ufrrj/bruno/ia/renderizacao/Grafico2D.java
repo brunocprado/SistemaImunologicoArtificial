@@ -4,10 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import javax.swing.JPanel;
 import ufrrj.bruno.ia.Parametros;
@@ -39,16 +42,16 @@ public class Grafico2D extends JPanel implements Runnable{
             public void keyPressed(KeyEvent e){
                 switch(e.getKeyCode()){
                     case KeyEvent.VK_RIGHT:
-                        if(cameraX - getWidth()/zoom > -getWidth()) cameraX -= 5;
+                        if(cameraX - getWidth()/zoom > -getWidth()) cameraX -= 10;
                         break;
                     case KeyEvent.VK_LEFT:
-                        if(cameraX < 0) cameraX += 5;
+                        if(cameraX < 0) cameraX += 10;
                         break;
                     case KeyEvent.VK_UP:
-                        if(cameraY < 0) cameraY += 5;
+                        if(cameraY < 0) cameraY += 10;
                         break;
                     case KeyEvent.VK_DOWN:
-                        if(cameraY - getHeight()/zoom > -getHeight()) cameraY -= 5;
+                        if(cameraY - getHeight()/zoom > -getHeight()) cameraY -= 10;
                         break;       
                     case KeyEvent.VK_A:
                         zoom += 0.1;
@@ -61,7 +64,28 @@ public class Grafico2D extends JPanel implements Runnable{
         });
         
         setFocusable(true);
-          
+        
+        addMouseMotionListener(new MouseAdapter() {
+            int antX = getX();
+            int antY = getY();
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                Point pos = e.getPoint();
+                if(pos.x > antX && cameraX < 0){
+                    cameraX += 10/zoom;
+                } else {
+                    cameraX -= 10/zoom;
+                }
+                
+//                if(pos.y > antY){
+//                    cameraY -= 10;
+//                } else {
+//                    cameraY += 10;
+//                }
+                antX = pos.x; antY = pos.y;
+            }
+        });
+        
         addMouseWheelListener(new MouseAdapter() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
@@ -104,8 +128,10 @@ public class Grafico2D extends JPanel implements Runnable{
                     g.drawImage(linfocito, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8, this);
                     break;
                 case Patogeno:
-                    g.setColor(((Patogeno)celula).getCor());
-                    g.fillPolygon(((Patogeno)celula).getForma());
+                    Patogeno tmp = (Patogeno)celula;
+                    g.setColor(tmp.getCor());
+                    g.fillPolygon(tmp.getForma());
+                    tmp = null;
                     break;
                 default:
                     g.drawImage(comum, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8, this);

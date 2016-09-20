@@ -2,6 +2,7 @@ package ufrrj.bruno.ia.celulas;
 
 import ufrrj.bruno.ia.atributos.Posicao;
 import java.util.Random;
+import javafx.animation.PathTransition;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 
@@ -30,16 +31,18 @@ abstract public class Celula implements Comportamento{
         posicao = pos;
     }
     
+//    TODO
+//    Trocar para PathTransition
     public void move(Posicao dest){
-            double deltaX = dest.getX() - (getPosicao().getX() - 10);
-            double deltaY = dest.getY() - (posicao.getY() - 10);
-           
-            double angulo = Math.atan2(deltaY,deltaX);    
-            int movX = (int) (posicao.getX() + (getVelMovimento() * Math.cos(angulo)));
-            int movY = (int) (posicao.getY() + (getVelMovimento() * Math.sin(angulo)));
-            if(deltaX == 0){ movX = posicao.getX(); }
-            if(deltaY == 0){ movY = posicao.getY(); }
-            setPosicao(movX,movY);
+        double deltaX = dest.getX() - (getPosicao().getX() - 10);
+        double deltaY = dest.getY() - (posicao.getY() - 10);
+
+        double angulo = Math.atan2(deltaY,deltaX);    
+        int movX = (int) (posicao.getX() + (getVelMovimento() * Math.cos(angulo)));
+        int movY = (int) (posicao.getY() + (getVelMovimento() * Math.sin(angulo)));
+        if(deltaX == 0){ movX = posicao.getX(); }
+        if(deltaY == 0){ movY = posicao.getY(); }
+        setPosicao(movX,movY);
     }
     
     public double getVelMovimento() {
