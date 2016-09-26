@@ -19,7 +19,7 @@ public class Patogeno extends Celula{
         forma = new Poligono(new Random().nextInt(10) + 3,getPosicao());
         cor = new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255));
         codBiologico = new Random().nextInt(Integer.MAX_VALUE);
-        sistema.imprime("Novo patogeno. Identificador: "  + codBiologico);
+        sistema.imprime("Novo patogeno com identificador: "  + codBiologico);
     }
     
     public Patogeno(SistemaImunologico sistema,int nLados,Color cor) {

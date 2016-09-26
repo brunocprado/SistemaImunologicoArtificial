@@ -8,6 +8,8 @@ import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -49,6 +51,8 @@ public class Janela extends JFrame{
                 System.exit(0);
             }
         });
+        
+        Monitor monitor = new Monitor();
     }
     
     public void criaMenus(){
@@ -121,4 +125,35 @@ public class Janela extends JFrame{
     public void setVisivel(boolean visivel){
         this.setVisible(visivel);
     }
+    
+    private class Monitor implements Runnable{
+        
+        private Thread t;
+        
+        public Monitor(){
+            t = new Thread(this);
+            t.start();
+        }
+        
+        @Override
+        public void run() {
+            while(true){
+                String tmp = "SIA";
+
+                if(sistema.pausada){
+                    tmp += " - Pausado";
+                }
+                tmp += " | Tempo de execução : " + (System.currentTimeMillis() - sistema.getInicio())/1000; 
+                setTitle(tmp);
+
+                try {
+                    t.sleep(100);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+      
+    }
+        
 }

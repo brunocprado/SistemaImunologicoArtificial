@@ -12,9 +12,12 @@ import ufrrj.bruno.ia.celulas.Neutrofilo;
 public class SistemaImunologico implements Runnable{
     private final int nInicial;
     private final ArrayList<Celula> celulas = new ArrayList<>();
+    private Log log = new Log();
+    //======| RUNTIME |======//
+    private final long inicio = System.currentTimeMillis();
     public boolean pausada = false;
     private Thread t;
-    private Log log = new Log();
+    private int biblioteca; //Coleção de 
     
     public SistemaImunologico(){
         nInicial = new Random().nextInt(Parametros.TAM_MEDIO_SUPERIOR - Parametros.TAM_MEDIO_INFERIOR) + Parametros.TAM_MEDIO_INFERIOR;
@@ -89,6 +92,10 @@ public class SistemaImunologico implements Runnable{
         }     
     }
 
+    public long getInicio() {
+        return inicio;
+    }
+    
     @Override
     public String toString() {
         return "SistemaImunologico{" + "nInicial=" + nInicial + ", celulas=" + celulas + ", pausada=" + pausada + '}';

@@ -27,8 +27,7 @@ abstract public class Celula implements Comportamento{
     }
     
     public Celula(SistemaImunologico sistema,TIPO_CELULA tipo,Posicao pos){
-        id++; this.sistema = 
-                sistema; this.tipo = tipo;
+        id++; this.sistema = sistema; this.tipo = tipo;
         posicao = pos;
     }
     
