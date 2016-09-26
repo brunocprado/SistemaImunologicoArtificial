@@ -7,10 +7,9 @@ import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.atributos.Poligono;
 import ufrrj.bruno.ia.atributos.Posicao;
 
-
 public class Patogeno extends Celula{
     
-    private int codBiologico = 0xFFFFF; 
+    private int codBiologico;  //Reconhecimento de padrao
     private Poligono forma;
     private Color cor;
     
@@ -19,18 +18,29 @@ public class Patogeno extends Celula{
         Random r = new Random();
         forma = new Poligono(new Random().nextInt(10) + 3,getPosicao());
         cor = new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255));
+        codBiologico = new Random().nextInt(Integer.MAX_VALUE);
+        sistema.imprime("Novo patogeno com identificador: "  + codBiologico);
     }
     
     public Patogeno(SistemaImunologico sistema,int nLados,Color cor) {
         super(sistema,TIPO_CELULA.Patogeno);
         forma = new Poligono(nLados,getPosicao());
         this.cor = cor;
+        codBiologico = new Random().nextInt(Integer.MAX_VALUE);
     }
     
     public Patogeno(SistemaImunologico sistema,int nLados,Color cor,Posicao pos) {
         super(sistema,TIPO_CELULA.Patogeno,pos);
         forma = new Poligono(nLados,getPosicao());
         this.cor = cor;
+        codBiologico = new Random().nextInt(Integer.MAX_VALUE);
+    }
+    
+    public Patogeno(SistemaImunologico sistema,int nLados,Color cor,Posicao pos,int bio) {
+        super(sistema,TIPO_CELULA.Patogeno,pos);
+        forma = new Poligono(nLados,getPosicao());
+        this.cor = cor;
+        codBiologico = bio;
     }
     
     private int verificaMaisProximo(){

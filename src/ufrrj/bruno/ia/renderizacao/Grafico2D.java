@@ -10,7 +10,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import javax.swing.JPanel;
 import ufrrj.bruno.ia.Parametros;
@@ -73,15 +72,21 @@ public class Grafico2D extends JPanel implements Runnable{
                 Point pos = e.getPoint();
                 if(pos.x > antX && cameraX < 0){
                     cameraX += 10/zoom;
-                } else {
+                } else if(cameraX - getWidth()/zoom > -getWidth()){
                     cameraX -= 10/zoom;
-                }
-                
-//                if(pos.y > antY){
+                }              
+//                if(pos.y < antY && cameraY < 0){
+//                    System.out.println("C");
 //                    cameraY -= 10;
-//                } else {
-//                    cameraY += 10;
+//                } else if(cameraY - getHeight()/zoom > -getHeight()){
+//                    //cameraY += 10;
 //                }
+                
+                if(pos.y < antY && cameraY < 0){
+                    cameraY += 10;
+                } else if(cameraY - getHeight()/zoom > -getHeight()){
+                    cameraY -= 10;
+                }
                 antX = pos.x; antY = pos.y;
             }
         });
@@ -104,7 +109,7 @@ public class Grafico2D extends JPanel implements Runnable{
     @Override
     public void paint(Graphics gd){
         Graphics2D g = (Graphics2D) gd.create();
-   
+
         g.clearRect(0, 0, getWidth(), getHeight());
         g.setColor(new Color(245,146,146));
         

@@ -7,6 +7,7 @@ import com.jogamp.opengl.util.FPSAnimator;
 import ufrrj.bruno.ia.renderizacao.Grafico2D;
 import ufrrj.bruno.ia.renderizacao.OpenGL;
 import ufrrj.bruno.ia.Telas.Janela;
+import ufrrj.bruno.ia.Telas.Log;
 
 public class Main{
 
@@ -18,7 +19,7 @@ public class Main{
         tela.setSize(Parametros.LARGURA,Parametros.ALTURA);
         tela.setLocationRelativeTo(null);
         
-        System.out.println("Renderizando com " + Parametros.RENDERIZAR_COM);
+        sistema.imprime("Renderizando com " + Parametros.RENDERIZAR_COM);
         
         if(Parametros.RENDERIZAR_COM == Parametros.RENDER.OpenGL){       
             //====| Config OpenGL |====//
