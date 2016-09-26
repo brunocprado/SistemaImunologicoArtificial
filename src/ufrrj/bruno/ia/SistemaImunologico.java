@@ -2,8 +2,8 @@ package ufrrj.bruno.ia;
 
 import java.util.ArrayList;
 import java.util.Random;
+import ufrrj.bruno.ia.Telas.Log;
 import ufrrj.bruno.ia.celulas.Celula;
-import ufrrj.bruno.ia.celulas.Comum;
 import ufrrj.bruno.ia.celulas.Patogeno;
 import ufrrj.bruno.ia.celulas.Linfocito;
 import ufrrj.bruno.ia.celulas.Macrofago;
@@ -14,6 +14,7 @@ public class SistemaImunologico implements Runnable{
     private final ArrayList<Celula> celulas = new ArrayList<>();
     public boolean pausada = false;
     private Thread t;
+    private Log log = new Log();
     
     public SistemaImunologico(){
         nInicial = new Random().nextInt(Parametros.TAM_MEDIO_SUPERIOR - Parametros.TAM_MEDIO_INFERIOR) + Parametros.TAM_MEDIO_INFERIOR;
@@ -33,7 +34,7 @@ public class SistemaImunologico implements Runnable{
     }
     
     private void geraPrimeiraGeracao(){
-        System.out.println("Gerando sistema com " + nInicial * 10 + " leucócitos por microlitro de sangue");
+        imprime("Gerando sistema com " + nInicial * 10 + " leucócitos por microlitro de sangue");
         int i;
 //        for(i=0;i<10;i++){
 //            celulas.add(new Comum(this));
@@ -71,7 +72,8 @@ public class SistemaImunologico implements Runnable{
     }
     
     public void imprime(String texto){
-        System.out.print(texto);
+        System.out.println(texto);
+        log.imprime(texto);
     }
     
     @Override

@@ -1,8 +1,8 @@
 package ufrrj.bruno.ia.celulas;
 
+import java.awt.Toolkit;
 import ufrrj.bruno.ia.atributos.Posicao;
 import java.util.Random;
-import javafx.animation.PathTransition;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 
@@ -16,8 +16,8 @@ abstract public class Celula implements Comportamento{
     private double velMovimento;
     //========|  RUNTIME  |=======//
     private Posicao posicao;    
-    private SistemaImunologico sistema;
-    
+    private final SistemaImunologico sistema;
+
     public Celula(SistemaImunologico sistema,TIPO_CELULA tipo){
         id++; this.sistema = sistema; this.tipo = tipo;
         Random gerador = new Random();
@@ -27,7 +27,8 @@ abstract public class Celula implements Comportamento{
     }
     
     public Celula(SistemaImunologico sistema,TIPO_CELULA tipo,Posicao pos){
-        id++; this.sistema = sistema; this.tipo = tipo;
+        id++; this.sistema = 
+                sistema; this.tipo = tipo;
         posicao = pos;
     }
     
