@@ -1,9 +1,6 @@
 package ufrrj.bruno.ia.Telas;
 
-import ufrrj.bruno.ia.renderizacao.OpenGL;
 import ufrrj.bruno.ia.renderizacao.Grafico2D;
-import com.jogamp.opengl.awt.GLCanvas;
-import com.jogamp.opengl.util.FPSAnimator;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
@@ -21,9 +18,7 @@ public class Janela extends JFrame{
     
     private final JPanel tela;
     private final JFrame fEstatisticas;
-    private OpenGL gl;
     private Grafico2D grafico;
-    private FPSAnimator fps;
     private SistemaImunologico sistema;
     
     public Janela(String titulo,SistemaImunologico sistema){
@@ -45,9 +40,6 @@ public class Janela extends JFrame{
         this.addWindowListener(new WindowAdapter(){
             @Override
             public void windowClosing(WindowEvent arg0){
-                if(fps != null && fps.isStarted()){
-                    fps.stop();
-                }
                 System.exit(0);
             }
         });
@@ -111,15 +103,6 @@ public class Janela extends JFrame{
         menu.add(menu4);
 
         setJMenuBar(menu);
-    }
-   
-    public void setOpenGLCanvas(GLCanvas canvas){
-        tela.add(canvas);
-    }
-   
-    public void setGL(OpenGL gl,FPSAnimator fps){
-        this.gl = gl;
-        this.fps = fps;
     }
     
     public void setVisivel(boolean visivel){

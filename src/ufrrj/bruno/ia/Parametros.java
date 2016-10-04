@@ -1,9 +1,7 @@
 package ufrrj.bruno.ia;
 
 public class Parametros {
-    enum RENDER {OpenGL,Grafico2D};
     //===| Config Visualização |===//
-    public final static RENDER RENDERIZAR_COM = RENDER.Grafico2D; 
     public final static int LIMITE_FPS = 60;
     public final static int LARGURA = 1280;
     public final static int ALTURA  = 720;
