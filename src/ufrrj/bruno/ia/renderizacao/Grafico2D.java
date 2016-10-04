@@ -147,7 +147,7 @@ public class Grafico2D extends JPanel implements Runnable{
     
     public void pausa(int tempo){
         try {
-            t.sleep(tempo);
+            Thread.sleep(tempo);
         } catch (InterruptedException ex) {
             System.out.println("Erro ao pausar a Thread Grafica");
         }

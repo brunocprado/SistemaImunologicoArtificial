@@ -10,22 +10,26 @@ import ufrrj.bruno.ia.celulas.Macrofago;
 import ufrrj.bruno.ia.celulas.Neutrofilo;
 
 public class SistemaImunologico implements Runnable{
+    //======| Variaveis |=======//
     private final int nInicial;
     private final ArrayList<Celula> celulas = new ArrayList<>();
+    private final CamadaQuimica camada;
     private Log log = new Log();
-    //======| RUNTIME |======//
+    //======|  RUNTIME  |======//
     private final long inicio = System.currentTimeMillis();
     public boolean pausada = false;
     private Thread t;
-    private int biblioteca; //Coleção de 
+    private int biblioteca;
     
     public SistemaImunologico(){
+        camada = new CamadaQuimica(this);
         nInicial = new Random().nextInt(Parametros.TAM_MEDIO_SUPERIOR - Parametros.TAM_MEDIO_INFERIOR) + Parametros.TAM_MEDIO_INFERIOR;
         geraPrimeiraGeracao();    
         iniciaThread();
     }
     
     public SistemaImunologico(int nInicial){
+        camada = new CamadaQuimica(this);
         this.nInicial = nInicial;
         geraPrimeiraGeracao();    
         iniciaThread();
@@ -56,7 +60,7 @@ public class SistemaImunologico implements Runnable{
     
     public void pausa(int tempo){
         try {
-            t.sleep(tempo);
+            Thread.sleep(tempo);
         } catch (InterruptedException ex) {
             System.out.println("Erro ao pausar a Thread principal");
         }
@@ -94,6 +98,10 @@ public class SistemaImunologico implements Runnable{
 
     public long getInicio() {
         return inicio;
+    }
+
+    public CamadaQuimica getCamada() {
+        return camada;
     }
     
     @Override

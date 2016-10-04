@@ -18,7 +18,6 @@ public class Janela extends JFrame{
     
     private final JPanel tela;
     private final JFrame fEstatisticas;
-    private Grafico2D grafico;
     private SistemaImunologico sistema;
     
     public Janela(String titulo,SistemaImunologico sistema){
@@ -35,14 +34,7 @@ public class Janela extends JFrame{
         
         criaMenus();    
        
-        setIconImage(Toolkit.getDefaultToolkit().createImage(getClass().getResource("/icone.png")));
-        
-        this.addWindowListener(new WindowAdapter(){
-            @Override
-            public void windowClosing(WindowEvent arg0){
-                System.exit(0);
-            }
-        });
+        setIconImage(Toolkit.getDefaultToolkit().createImage(getClass().getResource("/icone.png")));    
         
         Monitor monitor = new Monitor();
     }
