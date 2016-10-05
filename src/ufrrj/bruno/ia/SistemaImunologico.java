@@ -1,5 +1,6 @@
 package ufrrj.bruno.ia;
 
+import ufrrj.bruno.ia.quimica.CamadaQuimica;
 import java.util.ArrayList;
 import java.util.Random;
 import ufrrj.bruno.ia.Telas.Log;

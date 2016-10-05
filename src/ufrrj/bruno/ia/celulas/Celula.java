@@ -1,6 +1,5 @@
 package ufrrj.bruno.ia.celulas;
 
-import java.awt.Toolkit;
 import ufrrj.bruno.ia.atributos.Posicao;
 import java.util.Random;
 import ufrrj.bruno.ia.Parametros;

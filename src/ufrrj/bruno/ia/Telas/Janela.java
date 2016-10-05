@@ -77,8 +77,7 @@ public class Janela extends JFrame{
         menu3.setText("Estatisticas");
         menu3.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                
+            public void mouseClicked(java.awt.event.MouseEvent evt) {    
                 fEstatisticas.setVisible(true);
             }
         });
@@ -86,6 +85,7 @@ public class Janela extends JFrame{
 
         menu4.setText("Sobre");
         menu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sobre sobre = new Sobre();
                 sobre.setLocationRelativeTo(null);
@@ -122,7 +122,7 @@ public class Janela extends JFrame{
                 setTitle(tmp);
 
                 try {
-                    t.sleep(100);
+                    Thread.sleep(100);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
                 }

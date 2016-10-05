@@ -15,21 +15,20 @@ import javax.swing.JPanel;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.celulas.Celula;
-import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.Patogeno;
 import ufrrj.bruno.ia.celulas.Patogeno;
 
 public class Grafico2D extends JPanel implements Runnable{
-    private Thread t;
     private SistemaImunologico sistema = null; 
     Toolkit tool = Toolkit.getDefaultToolkit();
+    //=========| IMAGENS |==========//
     Image sangue = tool.createImage(getClass().getResource("/img/blood.jpg"));
-    //=========| CELULAS |==========//
     Image comum = tool.createImage(getClass().getResource("/img/celula.png"));
     Image virus = tool.createImage(getClass().getResource("/img/virus.png"));
     Image linfocito = tool.createImage(getClass().getResource("/img/Linfocito.png"));
     Image macrofago = tool.createImage(getClass().getResource("/img/macro.png"));
     Image neutrofilo = tool.createImage(getClass().getResource("/img/neutrofilo.png"));
     //=========| RUNTIME |=========//
+    private final Thread t;
     private int cameraX,cameraY;   
     private double zoom = 1;
     
