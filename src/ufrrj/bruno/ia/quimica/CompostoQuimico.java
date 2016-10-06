@@ -11,5 +11,15 @@ public class CompostoQuimico {
         this.tipo = tipo;
         this.quantidade = quantidade;
     }
+
+    public TIPO_COMPOSTO getTipo() {
+        return tipo;
+    }
+
+    public double getQuantidade() {
+        return quantidade;
+    }
+    
+    
     
 }

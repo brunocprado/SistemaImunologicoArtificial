@@ -6,10 +6,13 @@ import java.util.Random;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.atributos.Poligono;
 import ufrrj.bruno.ia.atributos.Posicao;
+import ufrrj.bruno.ia.quimica.CompostoQuimico;
+import ufrrj.bruno.ia.quimica.CompostoQuimico.TIPO_COMPOSTO;
+import static ufrrj.bruno.ia.quimica.CompostoQuimico.TIPO_COMPOSTO.HISTAMINA;
 
 public class Patogeno extends Celula{
     
-    private int codBiologico;  //Reconhecimento de padrao
+    private final int codBiologico;  //Reconhecimento de padrao
     private Poligono forma;
     private Color cor;
     
@@ -41,6 +44,10 @@ public class Patogeno extends Celula{
         forma = new Poligono(nLados,getPosicao());
         this.cor = cor;
         codBiologico = bio;
+    }
+    
+    private void emiteQuimica(){
+        getSistema().getCamada().editaPosicao(getPosicao().getX(), getPosicao().getY(), new CompostoQuimico(HISTAMINA,2));
     }
     
     private int verificaMaisProximo(){

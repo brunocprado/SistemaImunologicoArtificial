@@ -2,7 +2,7 @@ package ufrrj.bruno.ia;
 
 public class Parametros {
     //===| Config Visualização |===//
-    public final static int LIMITE_FPS = 60;
+    public final static int LIMITE_FPS = 30;
     public final static int LARGURA = 1280;
     public final static int ALTURA  = 720;
     

@@ -1,10 +1,7 @@
 package ufrrj.bruno.ia.Telas;
 
-import ufrrj.bruno.ia.renderizacao.Grafico2D;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -18,7 +15,7 @@ public class Janela extends JFrame{
     
     private final JPanel tela;
     private final JFrame fEstatisticas;
-    private SistemaImunologico sistema;
+    private final SistemaImunologico sistema;
     
     public Janela(String titulo,SistemaImunologico sistema){
         super(titulo);
