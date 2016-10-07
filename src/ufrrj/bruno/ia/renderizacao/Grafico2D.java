@@ -19,14 +19,14 @@ import ufrrj.bruno.ia.celulas.Patogeno;
 
 public class Grafico2D extends JPanel implements Runnable{
     private SistemaImunologico sistema = null; 
-    Toolkit tool = Toolkit.getDefaultToolkit();
+    final Toolkit tool = Toolkit.getDefaultToolkit();
     //=========| IMAGENS |==========//
-    Image sangue = tool.createImage(getClass().getResource("/img/blood.jpg"));
-    Image comum = tool.createImage(getClass().getResource("/img/celula.png"));
-    Image virus = tool.createImage(getClass().getResource("/img/virus.png"));
-    Image linfocito = tool.createImage(getClass().getResource("/img/Linfocito.png"));
-    Image macrofago = tool.createImage(getClass().getResource("/img/macro.png"));
-    Image neutrofilo = tool.createImage(getClass().getResource("/img/neutrofilo.png"));
+    final Image sangue = tool.createImage(getClass().getResource("/img/blood.jpg"));
+    final Image comum = tool.createImage(getClass().getResource("/img/celula.png"));
+    final Image virus = tool.createImage(getClass().getResource("/img/virus.png"));
+    final Image linfocito = tool.createImage(getClass().getResource("/img/Linfocito.png"));
+    final Image macrofago = tool.createImage(getClass().getResource("/img/macro.png"));
+    final Image neutrofilo = tool.createImage(getClass().getResource("/img/neutrofilo.png"));
     //=========| RUNTIME |=========//
     private final Thread t;
     private int cameraX,cameraY;   

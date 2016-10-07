@@ -15,7 +15,7 @@ public class SistemaImunologico implements Runnable{
     private final int nInicial;
     private final ArrayList<Celula> celulas = new ArrayList<>();
     private final CamadaQuimica camada;
-    private Log log = new Log();
+    private final Log log = new Log();
     //======|  RUNTIME  |======//
     private final long inicio = System.currentTimeMillis();
     public boolean pausada = false;
@@ -90,8 +90,9 @@ public class SistemaImunologico implements Runnable{
             while(pausada){
                 pausa(5);
             }
-            for(Celula cel : celulas){
-               cel.loop();                
+            int tamanho = celulas.size();
+            for(int i = 0;i < tamanho; i++){
+                celulas.get(i).loop();
             }
             pausa(20);
         }     

@@ -2,8 +2,6 @@ package ufrrj.bruno.ia.Telas;
 
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -26,7 +24,7 @@ public class Janela extends JFrame{
         this.getContentPane().add(tela,BorderLayout.CENTER);
      
         fEstatisticas = new JFrame("Estatisticas");
-        fEstatisticas.setSize(100,720);
+        fEstatisticas.setSize(200,720);
         fEstatisticas.getContentPane().add(new Estatisticas(sistema));
         
         criaMenus();    
@@ -36,42 +34,32 @@ public class Janela extends JFrame{
         Monitor monitor = new Monitor();
     }
     
-    public void criaMenus(){
+    public final void criaMenus(){
         JMenuBar menu = new JMenuBar();
-        JMenu menu1 = new JMenu();
-        JMenu menu2 = new JMenu();
-        JMenu menu3 = new JMenu();
-        JMenu menu4 = new JMenu();
+        JMenu menu1 = new JMenu("Novo");
+        JMenu menu2 = new JMenu("Pausar");
+        JMenu menu3 = new JMenu("Estatisticas");
+        JMenu menu4 = new JMenu("Sobre");
         
-        menu1.setText("Novo");
         menu1.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 for(int i=0;i<10;i++){
+                    //SÓ PRA TESTE MESMO
                     sistema.adicionaCelula(new Patogeno(sistema));
                 }
-                //System.out.println(sistema);
             }
         });
         menu.add(menu1);
 
-        menu2.setText("Pausar");
         menu2.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sistema.pausada = !sistema.pausada;
-                if(sistema.pausada){
-                    menu2.setText("Resumir");
-                    setTitle("SIA - Pausado");
-                } else {
-                    menu2.setText("Pausar");
-                    setTitle("SIA");
-                }
             }
         });
         menu.add(menu2);
-        
-        menu3.setText("Estatisticas");
+
         menu3.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {    
@@ -80,7 +68,6 @@ public class Janela extends JFrame{
         });
         menu.add(menu3);
 
-        menu4.setText("Sobre");
         menu4.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -100,7 +87,7 @@ public class Janela extends JFrame{
     
     private class Monitor implements Runnable{
         
-        private Thread t;
+        private final Thread t;
         
         public Monitor(){
             t = new Thread(this);
@@ -113,15 +100,15 @@ public class Janela extends JFrame{
                 String tmp = "SIA";
 
                 if(sistema.pausada){
-                    tmp += " - Pausado";
+                    tmp += "  -  Pausado";
                 }
-                tmp += " | Tempo de execução : " + (System.currentTimeMillis() - sistema.getInicio())/1000; 
+                tmp += "  |  Tempo de execução : " + (System.currentTimeMillis() - sistema.getInicio())/1000; 
                 setTitle(tmp);
 
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+//                    Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
