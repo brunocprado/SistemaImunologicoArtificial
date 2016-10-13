@@ -17,14 +17,14 @@ import static ufrrj.bruno.ia.quimica.CompostoQuimico.TIPO_COMPOSTO.HISTAMINA;
 public class Estatisticas extends JPanel implements Runnable{
     private Thread t;
     private SistemaImunologico sistema;
-    private CompostoQuimico matriz[][];
+    private int matriz[][];
     private static final int tamX = Parametros.TAMX/8;
     private static final int tamY = Parametros.TAMY/8;
    
     public Estatisticas(SistemaImunologico sistema){
         this.sistema = sistema;
         matriz = sistema.getCamada().getMatriz();
-        matriz[0][1] = new CompostoQuimico(HISTAMINA,2);
+        matriz[2][4] = 5;
         setSize(200,200);
         t = new Thread(this);
         t.start();
@@ -34,12 +34,14 @@ public class Estatisticas extends JPanel implements Runnable{
         //Graphics2D g2d = (Graphics2D) g.create();
 
         g.clearRect(0,0, getWidth(), getHeight());
-        g.setColor(Color.ORANGE);
-        g.fillRect(10, 10, 1000, 1000);
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, 2000, 1000);
+        g.setColor(Color.RED);
         for(int y=0;y<tamY;y++){
             for(int x=0;x<tamX;x++){
-                if(matriz[y][x].getQuantidade() > 0){
-                    g.drawRect(x, y, 10, 10);
+//                System.out.println(x + "|" + y + "|" + matriz[y][x]);
+                if(matriz[y][x] > 0){
+                    g.fillRect(x*8, y*8, 8, 8);
                 }
             }
         }    

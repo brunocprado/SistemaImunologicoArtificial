@@ -30,8 +30,6 @@ abstract public class Celula implements Comportamento{
         posicao = pos;
     }
     
-//    TODO
-//    Trocar para PathTransition
     public void move(Posicao dest){
         double deltaX = dest.getX() - (getPosicao().getX() - 10);
         double deltaY = dest.getY() - (posicao.getY() - 10);

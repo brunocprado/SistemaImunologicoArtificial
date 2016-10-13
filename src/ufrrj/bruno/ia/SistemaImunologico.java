@@ -3,6 +3,8 @@ package ufrrj.bruno.ia;
 import ufrrj.bruno.ia.quimica.CamadaQuimica;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import ufrrj.bruno.ia.Telas.Log;
 import ufrrj.bruno.ia.celulas.Celula;
 import ufrrj.bruno.ia.celulas.Patogeno;
@@ -56,7 +58,7 @@ public class SistemaImunologico implements Runnable{
         for(i=0;i<(nInicial*Parametros.LINFOCITOS);i++){
             celulas.add(new Linfocito(this));
         }
-        celulas.add(new Patogeno(this));
+        //celulas.add(new Patogeno(this));
     }
     
     public void pausa(int tempo){
