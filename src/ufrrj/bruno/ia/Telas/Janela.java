@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -41,7 +42,8 @@ public class Janela extends JFrame{
         JMenu menu1 = new JMenu("Novo");
         JMenu menu2 = new JMenu("Pausar");
         JMenu menu3 = new JMenu("Estatisticas");
-        JMenu menu4 = new JMenu("Sobre");
+        JMenu menu4 = new JMenu("Camada Quimica (N)");
+        JMenu menu5 = new JMenu("Sobre");
         
         menu1.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
@@ -73,12 +75,25 @@ public class Janela extends JFrame{
         menu4.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sistema.setMostraCamada(!sistema.getMostraCamada());
+                if(sistema.getMostraCamada()){
+                    menu4.setText("Camada Quimica (S)");
+                } else {
+                    menu4.setText("Camada Quimica (N)");
+                }
+            }
+        });
+        menu.add(menu4);
+        
+        menu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sobre sobre = new Sobre();
                 sobre.setLocationRelativeTo(null);
                 sobre.setVisible(true);
             }
         });
-        menu.add(menu4);
+        menu.add(menu5);
 
         setJMenuBar(menu);
     }

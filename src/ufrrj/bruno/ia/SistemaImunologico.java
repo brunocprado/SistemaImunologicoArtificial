@@ -20,6 +20,7 @@ public class SistemaImunologico implements Runnable{
     private final Log log = new Log();
     //======|  RUNTIME  |======//
     private final long inicio = System.currentTimeMillis();
+    private boolean mostraCamada = false;
     public boolean pausada = false;
     private Thread t;
     private int biblioteca;
@@ -106,6 +107,14 @@ public class SistemaImunologico implements Runnable{
 
     public CamadaQuimica getCamada() {
         return camada;
+    }
+    
+    public boolean getMostraCamada() {
+        return mostraCamada;
+    }
+
+    public void setMostraCamada(boolean mostraCamada) {
+        this.mostraCamada = mostraCamada;
     }
     
     @Override

@@ -29,12 +29,15 @@ public class Grafico2D extends JPanel implements Runnable{
     final Image neutrofilo = tool.createImage(getClass().getResource("/img/neutrofilo.png"));
     //=========| RUNTIME |=========//
     private final Thread t;
+    private int matriz[][];
     private int cameraX,cameraY;   
     private double zoom = 1;
+    private static final int tamX = Parametros.TAMX/8;
+    private static final int tamY = Parametros.TAMY/8;
     
     public Grafico2D(SistemaImunologico sistema){
         this.sistema = sistema;    
-        
+        matriz = sistema.getCamada().getMatriz();
         addKeyListener(new KeyAdapter(){
             @Override
             public void keyPressed(KeyEvent e){
@@ -142,6 +145,20 @@ public class Grafico2D extends JPanel implements Runnable{
                     break;
             }
         }
+        
+        if(sistema.getMostraCamada()){ desenhaCamadaQuimica(g); }
+        
+    }
+    
+    public void desenhaCamadaQuimica(Graphics2D g){     
+        for(int y=0;y<tamY;y++){
+            for(int x=0;x<tamX;x++){
+                if(matriz[y][x] > 0){
+                    g.setColor(new Color(255, 250 - (matriz[y][x] * 50),0,150));
+                    g.fillRect(x*8, y*8, 8, 8);
+                }
+            }
+        }    
     }
     
     public void pausa(int tempo){

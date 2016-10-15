@@ -24,7 +24,7 @@ public class Estatisticas extends JPanel implements Runnable{
     public Estatisticas(SistemaImunologico sistema){
         this.sistema = sistema;
         matriz = sistema.getCamada().getMatriz();
-        matriz[2][4] = 5;
+        //matriz[2][4] = 5;
         setSize(200,200);
         t = new Thread(this);
         t.start();

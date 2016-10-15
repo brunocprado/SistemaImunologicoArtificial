@@ -23,7 +23,7 @@ public class Patogeno extends Celula{
         cor = new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255));
         codBiologico = new Random().nextInt(Integer.MAX_VALUE);
 //        sistema.getCamada().editaPosicao(getPosicao().getX()/8, getPosicao().getY()/8, new CompostoQuimico(HISTAMINA,5));
-        sistema.getCamada().editaPosicao(getPosicao().getX()/8, getPosicao().getY()/8, 2);
+        sistema.getCamada().editaPosicao(getPosicao().getX()/8, getPosicao().getY()/8, 5);
 
         sistema.imprime("Novo patogeno com identificador: "  + codBiologico);
     }
