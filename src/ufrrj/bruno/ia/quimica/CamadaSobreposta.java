@@ -10,24 +10,23 @@ import ufrrj.bruno.ia.SistemaImunologico;
 public class CamadaSobreposta implements Runnable{
     
     private final SistemaImunologico sistema;
-    private int matriz[][] = new int[Parametros.TAMY/8][Parametros.TAMX/8];
+    private CompostoQuimico matriz[][] = new CompostoQuimico[Parametros.TAMY/8][Parametros.TAMX/8];
     private Thread t;
     private static final int tamX = Parametros.TAMX/8;
     private static final int tamY = Parametros.TAMY/8;
     
     public CamadaSobreposta(SistemaImunologico sistema){
         this.sistema = sistema;
-        matriz = new int[Parametros.TAMY / 8][Parametros.TAMX / 8];
         t = new Thread(this,"Camada Quimica");
         t.start();
 //        matriz = new CompostoQuimico[Parametros.TAMY/8][Parametros.TAMX/8];
     }
     
-    public void editaPosicao(int x,int y,int elemento){
+    public void editaPosicao(int x,int y,CompostoQuimico elemento){
         matriz[y][x] = elemento;
     }
 
-    public int[][] getMatriz() {
+    public CompostoQuimico[][] getMatriz() {
         return matriz;
     }
 
@@ -37,17 +36,17 @@ public class CamadaSobreposta implements Runnable{
         while(true) {
             //INSERIR ALG Incendio florestal]
             
-            long inicio = System.currentTimeMillis();
+            //long inicio = System.currentTimeMillis();
             
             Set<int[]> tmp = new HashSet<int[]>();
             
             for(int y = 0;y<tamY;y++){
                 for(int x = 0;x<tamX;x++){
-                    if(matriz[y][x] > 0){            
+                    if(matriz[y][x] != null && matriz[y][x].getQuantidade() > 0){            
                         int[] a = new int[2];
                         a[0] = y; a[1] = x;
                         tmp.add(a);
-                        matriz[y][x] -= 1;
+                       matriz[y][x].diminuiQuantidade(1);
                     }
                 }
             }
@@ -69,7 +68,7 @@ public class CamadaSobreposta implements Runnable{
             }
             
             
-//            System.out.println(System.currentTimeMillis() - inicio);
+//System.out.println(System.currentTimeMillis() - inicio);
             
 
 

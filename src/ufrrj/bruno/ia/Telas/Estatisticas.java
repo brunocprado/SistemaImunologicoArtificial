@@ -23,7 +23,7 @@ public class Estatisticas extends JPanel implements Runnable{
    
     public Estatisticas(SistemaImunologico sistema){
         this.sistema = sistema;
-        matriz = sistema.getCamada().getMatriz();
+        //matriz = sistema.getCamada().getMatriz();
         //matriz[2][4] = 5;
         setSize(200,200);
         t = new Thread(this);
@@ -33,18 +33,18 @@ public class Estatisticas extends JPanel implements Runnable{
     public void paint(Graphics g){
         //Graphics2D g2d = (Graphics2D) g.create();
 
-        g.clearRect(0,0, getWidth(), getHeight());
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, 2000, 1000);
-        g.setColor(Color.RED);
-        for(int y=0;y<tamY;y++){
-            for(int x=0;x<tamX;x++){
-//                System.out.println(x + "|" + y + "|" + matriz[y][x]);
-                if(matriz[y][x] > 0){
-                    g.fillRect(x*8, y*8, 8, 8);
-                }
-            }
-        }    
+//        g.clearRect(0,0, getWidth(), getHeight());
+//        g.setColor(Color.BLACK);
+//        g.fillRect(0, 0, 2000, 1000);
+//        g.setColor(Color.RED);
+//        for(int y=0;y<tamY;y++){
+//            for(int x=0;x<tamX;x++){
+////                System.out.println(x + "|" + y + "|" + matriz[y][x]);
+//                if(matriz[y][x] > 0){
+//                    g.fillRect(x*8, y*8, 8, 8);
+//                }
+//            }
+//        }    
 //        int largura =  (int) g.getFontMetrics().getStringBounds("Distribuição",g).getWidth();
 //        g.drawString("Distribuição",(getWidth()-largura)/2,20);
         //g.fillRect(0, 260, getWidth(), getHeight());

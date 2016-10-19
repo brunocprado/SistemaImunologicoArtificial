@@ -16,6 +16,7 @@ import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.celulas.Celula;
 import ufrrj.bruno.ia.celulas.Patogeno;
+import ufrrj.bruno.ia.quimica.CompostoQuimico;
 
 public class Grafico2D extends JPanel implements Runnable{
     private SistemaImunologico sistema = null; 
@@ -29,7 +30,7 @@ public class Grafico2D extends JPanel implements Runnable{
     final Image neutrofilo = tool.createImage(getClass().getResource("/img/neutrofilo.png"));
     //=========| RUNTIME |=========//
     private final Thread t;
-    private int matriz[][];
+    private CompostoQuimico matriz[][];
     private int cameraX,cameraY;   
     private double zoom = 1;
     private static final int tamX = Parametros.TAMX/8;
@@ -153,8 +154,8 @@ public class Grafico2D extends JPanel implements Runnable{
     public void desenhaCamadaQuimica(Graphics2D g){     
         for(int y=0;y<tamY;y++){
             for(int x=0;x<tamX;x++){
-                if(matriz[y][x] > 0){
-                    g.setColor(new Color(255, 250 - (matriz[y][x] * 50),0,150));
+                if(matriz[y][x] != null && matriz[y][x].getQuantidade() > 0){
+                    g.setColor(new Color(255, 250 - (matriz[y][x].getQuantidade() * 25),0,120));
                     g.fillRect(x*8, y*8, 8, 8);
                 }
             }

@@ -6,9 +6,9 @@ public class CompostoQuimico {
     
     private TIPO_COMPOSTO tipo;
     private double temperatura; // ?????
-    private double quantidade;
+    private int quantidade = 0;
     
-    public CompostoQuimico(TIPO_COMPOSTO tipo,double quantidade){
+    public CompostoQuimico(TIPO_COMPOSTO tipo,int quantidade){
         this.tipo = tipo;
         this.quantidade = quantidade;
     }
@@ -17,10 +17,12 @@ public class CompostoQuimico {
         return tipo;
     }
 
-    public double getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
     
-    
+    void diminuiQuantidade(int qt) {
+        quantidade -= qt;
+    }
     
 }
