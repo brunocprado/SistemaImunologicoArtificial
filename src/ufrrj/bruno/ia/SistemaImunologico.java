@@ -1,6 +1,6 @@
 package ufrrj.bruno.ia;
 
-import ufrrj.bruno.ia.quimica.CamadaQuimica;
+import ufrrj.bruno.ia.quimica.CamadaSobreposta;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
@@ -16,7 +16,7 @@ public class SistemaImunologico implements Runnable{
     //======| Variaveis |=======//
     private final int nInicial;
     private final ArrayList<Celula> celulas = new ArrayList<>();
-    private final CamadaQuimica camada;
+    private final CamadaSobreposta camada;
     private final Log log = new Log();
     //======|  RUNTIME  |======//
     private final long inicio = System.currentTimeMillis();
@@ -26,14 +26,14 @@ public class SistemaImunologico implements Runnable{
     private int biblioteca;
     
     public SistemaImunologico(){
-        camada = new CamadaQuimica(this);
+        camada = new CamadaSobreposta(this);
         nInicial = new Random().nextInt(Parametros.TAM_MEDIO_SUPERIOR - Parametros.TAM_MEDIO_INFERIOR) + Parametros.TAM_MEDIO_INFERIOR;
         geraPrimeiraGeracao();    
         iniciaThread();
     }
     
     public SistemaImunologico(int nInicial){
-        camada = new CamadaQuimica(this);
+        camada = new CamadaSobreposta(this);
         this.nInicial = nInicial;
         geraPrimeiraGeracao();    
         iniciaThread();
@@ -105,7 +105,7 @@ public class SistemaImunologico implements Runnable{
         return inicio;
     }
 
-    public CamadaQuimica getCamada() {
+    public CamadaSobreposta getCamada() {
         return camada;
     }
     

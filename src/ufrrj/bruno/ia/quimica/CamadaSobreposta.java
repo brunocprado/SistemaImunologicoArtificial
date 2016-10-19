@@ -1,12 +1,13 @@
 package ufrrj.bruno.ia.quimica;
 
 import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 
-public class CamadaQuimica implements Runnable{
+public class CamadaSobreposta implements Runnable{
     
     private final SistemaImunologico sistema;
     private int matriz[][] = new int[Parametros.TAMY/8][Parametros.TAMX/8];
@@ -14,7 +15,7 @@ public class CamadaQuimica implements Runnable{
     private static final int tamX = Parametros.TAMX/8;
     private static final int tamY = Parametros.TAMY/8;
     
-    public CamadaQuimica(SistemaImunologico sistema){
+    public CamadaSobreposta(SistemaImunologico sistema){
         this.sistema = sistema;
         matriz = new int[Parametros.TAMY / 8][Parametros.TAMX / 8];
         t = new Thread(this,"Camada Quimica");
@@ -34,14 +35,76 @@ public class CamadaQuimica implements Runnable{
     @Override
     public void run() {
         while(true) {
-            //INSERIR ALG Incendio florestal
+            //INSERIR ALG Incendio florestal]
+            
+            long inicio = System.currentTimeMillis();
+            
+            Set<int[]> tmp = new HashSet<int[]>();
+            
             for(int y = 0;y<tamY;y++){
-                for(int x = 0;x<tamY;x++){
-                    if(matriz[y][x] > 0){
+                for(int x = 0;x<tamX;x++){
+                    if(matriz[y][x] > 0){            
+                        int[] a = new int[2];
+                        a[0] = y; a[1] = x;
+                        tmp.add(a);
                         matriz[y][x] -= 1;
                     }
                 }
             }
+            
+            for(int [] pos : tmp){
+                if(pos[0] > 0){
+                    if(pos[1] > 0) matriz[pos[0] - 1][pos[1]-1] = matriz[pos[0]][pos[1]];
+                    matriz[pos[0] - 1][pos[1]] = matriz[pos[0]][pos[1]];
+                    if(pos[1] < tamX - 1) matriz[pos[0] - 1][pos[1]+1] = matriz[pos[0]][pos[1]];
+                }
+                if(pos[1] > 0) matriz[pos[0]][pos[1]-1] = matriz[pos[0]][pos[1]];
+                if(pos[1] < tamX - 1) matriz[pos[0]][pos[1]+1] = matriz[pos[0]][pos[1]];
+                if(pos[0] < tamY - 1){
+                    if(pos[1] > 0) matriz[pos[0] + 1][pos[1]-1] = matriz[pos[0]][pos[1]];
+                    matriz[pos[0] + 1][pos[1]] = matriz[pos[0]][pos[1]];
+                    if(pos[1] < tamX - 1) matriz[pos[0] + 1][pos[1]+1] = matriz[pos[0]][pos[1]];
+                }
+//                matriz[pos[0]][pos[1]] += 1;
+            }
+            
+            
+//            System.out.println(System.currentTimeMillis() - inicio);
+            
+
+
+
+
+
+
+//for(int [] pos : tmp){
+//                if(pos[0] > 0){
+//                    if(pos[1] > 0) matriz[pos[0] - 1][pos[1]-1] = matriz[pos[0]][pos[1]] - 1;
+//                    matriz[pos[0] - 1][pos[1]] = matriz[pos[0]][pos[1]] - 1;
+//                    if(pos[1] < tamX - 1) matriz[pos[0] - 1][pos[1]+1] = matriz[pos[0]][pos[1]] - 1;
+//                }
+//                if(pos[1] > 0) matriz[pos[0]][pos[1]-1] = matriz[pos[0]][pos[1]] - 1;
+//                if(pos[1] < tamX - 1) matriz[pos[0]][pos[1]+1] = matriz[pos[0]][pos[1]] - 1;
+//                if(pos[0] < tamY - 1){
+//                    if(pos[1] > 0) matriz[pos[0] + 1][pos[1]-1] = matriz[pos[0]][pos[1]] - 1;
+//                    matriz[pos[0] + 1][pos[1]] = matriz[pos[0]][pos[1]] - 1;
+//                    if(pos[1] < tamX - 1) matriz[pos[0] + 1][pos[1]+1] = matriz[pos[0]][pos[1]] - 1;
+//                }
+//            }
+            
+
+
+
+
+
+
+//            for(int y = 0;y<tamY;y++){
+//                for(int x = 0;x<tamY;x++){
+//                    if(matriz[y][x] > 0){
+//                        matriz[y][x] -= 1;
+//                    }
+//                }
+//            }
 //            for(int y = 0;y<tamY;y++){
 //                for(int x = 0;x<tamY;x++){
 //                    if(matriz[y][x+1] > 0){ //DIREITA
@@ -88,7 +151,7 @@ public class CamadaQuimica implements Runnable{
             try {
                 Thread.sleep(Parametros.TEMPO_PROPAGACAO_QUIMICOS);
             } catch (InterruptedException ex) {
-                Logger.getLogger(CamadaQuimica.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CamadaSobreposta.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
