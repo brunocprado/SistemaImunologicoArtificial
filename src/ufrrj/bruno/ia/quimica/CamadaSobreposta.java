@@ -25,19 +25,31 @@ public class CamadaSobreposta implements Runnable{
     public void editaPosicao(int x,int y,CompostoQuimico elemento){
         matriz[y][x] = elemento;
     }
+    
+    public CompostoQuimico getPosicao(int x,int y){
+        return matriz[y][x];
+    }
 
     public CompostoQuimico[][] getMatriz() {
         return matriz;
     }
 
+    private void pausa(int tempo){
+        try {
+            Thread.sleep(tempo);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CamadaSobreposta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     //implementar pause
     @Override
     public void run() {
         while(true) {
-            //INSERIR ALG Incendio florestal]
-            
-            //long inicio = System.currentTimeMillis();
-            
+            while(sistema.pausada){
+                pausa(5);
+            }            
+            //long inicio = System.currentTimeMillis();           
             Set<int[]> tmp = new HashSet<int[]>();
             
             for(int y = 0;y<tamY;y++){
@@ -46,7 +58,7 @@ public class CamadaSobreposta implements Runnable{
                         int[] a = new int[2];
                         a[0] = y; a[1] = x;
                         tmp.add(a);
-                       matriz[y][x].diminuiQuantidade(1);
+//                        matriz[y][x].diminuiQuantidade(1);
                     }
                 }
             }
@@ -65,93 +77,11 @@ public class CamadaSobreposta implements Runnable{
                     if(pos[1] < tamX - 1) matriz[pos[0] + 1][pos[1]+1] = matriz[pos[0]][pos[1]];
                 }
 //                matriz[pos[0]][pos[1]] += 1;
-            }
+            }          
             
+    //System.out.println(System.currentTimeMillis() - inicio);
             
-//System.out.println(System.currentTimeMillis() - inicio);
-            
-
-
-
-
-
-
-//for(int [] pos : tmp){
-//                if(pos[0] > 0){
-//                    if(pos[1] > 0) matriz[pos[0] - 1][pos[1]-1] = matriz[pos[0]][pos[1]] - 1;
-//                    matriz[pos[0] - 1][pos[1]] = matriz[pos[0]][pos[1]] - 1;
-//                    if(pos[1] < tamX - 1) matriz[pos[0] - 1][pos[1]+1] = matriz[pos[0]][pos[1]] - 1;
-//                }
-//                if(pos[1] > 0) matriz[pos[0]][pos[1]-1] = matriz[pos[0]][pos[1]] - 1;
-//                if(pos[1] < tamX - 1) matriz[pos[0]][pos[1]+1] = matriz[pos[0]][pos[1]] - 1;
-//                if(pos[0] < tamY - 1){
-//                    if(pos[1] > 0) matriz[pos[0] + 1][pos[1]-1] = matriz[pos[0]][pos[1]] - 1;
-//                    matriz[pos[0] + 1][pos[1]] = matriz[pos[0]][pos[1]] - 1;
-//                    if(pos[1] < tamX - 1) matriz[pos[0] + 1][pos[1]+1] = matriz[pos[0]][pos[1]] - 1;
-//                }
-//            }
-            
-
-
-
-
-
-
-//            for(int y = 0;y<tamY;y++){
-//                for(int x = 0;x<tamY;x++){
-//                    if(matriz[y][x] > 0){
-//                        matriz[y][x] -= 1;
-//                    }
-//                }
-//            }
-//            for(int y = 0;y<tamY;y++){
-//                for(int x = 0;x<tamY;x++){
-//                    if(matriz[y][x+1] > 0){ //DIREITA
-//                        matriz[y][x] = matriz[y][x+1];
-//                        break;
-//                    }
-//                    if(x >0 && matriz[y][x-1] > 0 ){ //ESQUERDA
-//                        matriz[y][x] = matriz[y][x-1];
-//                        break;
-//                    }
-//                    if(y > 0 && matriz[y-1][x] > 0){ //CIMA
-//                        matriz[y][x] = matriz[y-1][x];
-//                        break;
-//                    }
-//                    if(y < tamY - 1 && matriz[y+1][x] > 0){ //BAIXO
-//                        matriz[y][x] = matriz[y+1][x];
-//                        break;
-//                    }
-//                }
-//            }
-            
-//             if(matriz[y][x] * 50 > 0) {
-//                        if(y>0 && y<tamY){
-//                            matriz[y-1][x] = matriz[y][x] - 1;
-//                            matriz[y+1][x-1] = matriz[y][x] - 1;
-//                            matriz[y+1][x] = matriz[y][x] - 1;
-//                            matriz[y+1][x+1] = matriz[y][x] - 1;
-//                            if(x>0){
-//                                matriz[y-1][x-1] = matriz[y][x] - 1;
-//                                matriz[y][x-1] = matriz[y][x] - 1;
-//                            }
-//                            if(x<tamX){
-//                                matriz[y-1][x+1] = matriz[y][x] - 1;
-//                                matriz[y][x+1] = matriz[y][x] - 1;
-//                            }
-//                        }
-////                           y++;
-////                           x++;
-//
-//                         matriz[y][x] -= 1;   
-//                        
-//                    }
-            
-            try {
-                Thread.sleep(Parametros.TEMPO_PROPAGACAO_QUIMICOS);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(CamadaSobreposta.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            pausa(Parametros.TEMPO_PROPAGACAO_QUIMICOS);
         }
     }
       

@@ -5,8 +5,8 @@ public class CompostoQuimico {
     public enum TIPO_COMPOSTO {HISTAMINA,PROSTAGLANDINA};
     
     private TIPO_COMPOSTO tipo;
-    private double temperatura; // ?????
-    private int quantidade = 0;
+    private double temperatura = 30.0; // ?????
+    public int quantidade = 0;
     
     public CompostoQuimico(TIPO_COMPOSTO tipo,int quantidade){
         this.tipo = tipo;

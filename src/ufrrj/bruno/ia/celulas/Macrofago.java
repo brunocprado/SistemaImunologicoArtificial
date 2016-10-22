@@ -3,6 +3,8 @@ package ufrrj.bruno.ia.celulas;
 import ufrrj.bruno.ia.atributos.Posicao;
 import java.awt.Point;
 import ufrrj.bruno.ia.SistemaImunologico;
+import ufrrj.bruno.ia.quimica.CamadaSobreposta;
+import ufrrj.bruno.ia.quimica.CompostoQuimico;
 
 public class Macrofago extends Celula implements Runnable{
     
@@ -26,14 +28,37 @@ public class Macrofago extends Celula implements Runnable{
 //            }
 //        } catch (Exception ex) {
 //            pausa(2);
-//            return verificaMaisProximo();
+//            return verificaMaisProximo\
 //        }    
         return maisProximo;
     }
     
     @Override
     public void loop(){
-        move(new Posicao(640,330));
+        //move(new Posicao(640,330));
+        Posicao pos = getPosicao();
+        CamadaSobreposta camada = getSistema().getCamada();
+        CompostoQuimico tmp = camada.getPosicao(pos.getX()/8, pos.getY()/8);
+        if(tmp != null && tmp.getQuantidade() > 0){
+            //QUIMICO DETECTADO
+            //move(new Posicao(640,330));
+            //ESQUERDA
+            if(camada.getPosicao((pos.getX()/8)-1, pos.getY()/8) != null && camada.getPosicao((pos.getX()/8)-1, pos.getY()/8).getQuantidade() > 0) {
+                move(new Posicao(0,pos.getY()));
+            }
+            //DIREITA
+            if(camada.getPosicao((pos.getX()/8)-1, pos.getY()/8) != null && camada.getPosicao((pos.getX()/8)-1, pos.getY()/8).getQuantidade() > 0) {
+                move(new Posicao(Integer.MAX_VALUE,pos.getY()));
+            }
+            //CIMA
+            if(camada.getPosicao((pos.getX()/8)-1, pos.getY()/8) != null && camada.getPosicao((pos.getX()/8)-1, pos.getY()/8).getQuantidade() > 0) {
+                move(new Posicao(pos.getX(),0));
+            }
+            //
+            if(camada.getPosicao((pos.getX()/8)-1, pos.getY()/8) != null && camada.getPosicao((pos.getX()/8)-1, pos.getY()/8).getQuantidade() > 0) {
+                move(new Posicao(pos.getX(),Integer.MAX_VALUE));
+            }
+        }
     }
     
     @Override

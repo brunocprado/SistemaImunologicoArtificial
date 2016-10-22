@@ -155,7 +155,7 @@ public class Grafico2D extends JPanel implements Runnable{
         for(int y=0;y<tamY;y++){
             for(int x=0;x<tamX;x++){
                 if(matriz[y][x] != null && matriz[y][x].getQuantidade() > 0){
-                    g.setColor(new Color(255, 250 - (matriz[y][x].getQuantidade() * 25),0,120));
+                    g.setColor(new Color(255, 250 - (matriz[y][x].getQuantidade() * 25),0,140));
                     g.fillRect(x*8, y*8, 8, 8);
                 }
             }
