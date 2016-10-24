@@ -31,8 +31,8 @@ abstract public class Celula implements Comportamento{
     }
     
     public void move(Posicao dest){
-        double deltaX = dest.getX() - (getPosicao().getX() - 10);
-        double deltaY = dest.getY() - (posicao.getY() - 10);
+        double deltaX = dest.getX() - getPosicao().getX();
+        double deltaY = dest.getY() - posicao.getY();
 
         double angulo = Math.atan2(deltaY,deltaX);    
         int movX = (int) (posicao.getX() + (getVelMovimento() * Math.cos(angulo)));

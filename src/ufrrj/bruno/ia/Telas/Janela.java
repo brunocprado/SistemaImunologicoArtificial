@@ -69,7 +69,7 @@ public class Janela extends JFrame{
         menu1.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                for(int i=0;i<10;i++){
+                for(int i=0;i<1;i++){
                     //SÓ PRA TESTE MESMO
                     sistema.adicionaCelula(new Patogeno(sistema));
                 }

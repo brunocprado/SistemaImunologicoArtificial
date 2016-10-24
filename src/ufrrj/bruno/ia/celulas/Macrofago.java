@@ -2,6 +2,7 @@ package ufrrj.bruno.ia.celulas;
 
 import ufrrj.bruno.ia.atributos.Posicao;
 import java.awt.Point;
+import java.util.Iterator;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.quimica.CamadaSobreposta;
 import ufrrj.bruno.ia.quimica.CompostoQuimico;
@@ -35,30 +36,21 @@ public class Macrofago extends Celula implements Runnable{
     
     @Override
     public void loop(){
-        //move(new Posicao(640,330));
         Posicao pos = getPosicao();
-//        CamadaSobreposta camada = getSistema().getCamada();
-//        CompostoQuimico tmp = camada.getPosicao(pos.getX()/8, pos.getY()/8);
-//        if(tmp != null && tmp.getQuantidade() > 0){
-//            //QUIMICO DETECTADO
-//            //move(new Posicao(640,330));
-//            //ESQUERDA
-//            if(camada.getPosicao((pos.getX()/8)-1, pos.getY()/8) != null && camada.getPosicao((pos.getX()/8)-1, pos.getY()/8).getQuantidade() > 0) {
-//                move(new Posicao(0,pos.getY()));
-//            }
-//            //DIREITA
-//            if(camada.getPosicao((pos.getX()/8)-1, pos.getY()/8) != null && camada.getPosicao((pos.getX()/8)-1, pos.getY()/8).getQuantidade() > 0) {
-//                move(new Posicao(Integer.MAX_VALUE,pos.getY()));
-//            }
-//            //CIMA
-//            if(camada.getPosicao((pos.getX()/8)-1, pos.getY()/8) != null && camada.getPosicao((pos.getX()/8)-1, pos.getY()/8).getQuantidade() > 0) {
-//                move(new Posicao(pos.getX(),0));
-//            }
-//            //
-//            if(camada.getPosicao((pos.getX()/8)-1, pos.getY()/8) != null && camada.getPosicao((pos.getX()/8)-1, pos.getY()/8).getQuantidade() > 0) {
-//                move(new Posicao(pos.getX(),Integer.MAX_VALUE));
-//            }
-//        }
+        
+        for (Iterator<CompostoQuimico> i = getSistema().getCamada().compostos.iterator(); i.hasNext();) {
+            CompostoQuimico composto = i.next();
+            //VERIFICA DISTANCIA EUCLIDIANA
+            double deltaX = (pos.getX() + 4) - (composto.x + 2);
+            double deltaY = (pos.getY() + 4) - (composto.y + 2);
+            
+            if(Math.sqrt(deltaX * deltaX + deltaY*deltaY) <= composto.raio){
+                move(new Posicao(composto.x,composto.y));
+                break;
+            }
+            
+            
+        }
     }
     
     @Override
