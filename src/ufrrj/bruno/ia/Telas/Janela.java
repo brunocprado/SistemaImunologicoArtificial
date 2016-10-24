@@ -8,6 +8,8 @@ import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.UIManager;
+import javax.swing.plaf.DesktopPaneUI;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.celulas.Patogeno;
@@ -97,7 +99,7 @@ public class Janela extends JFrame{
                 if(overlay.isVisible()){
                     overlay.setVisible(false);
                 } else {
-                    overlay.setLocation(getWidth() - 220,20);
+                    overlay.setLocation(getWidth() - 225,20);
                     overlay.setVisible(true);
                 }
             }
@@ -116,14 +118,6 @@ public class Janela extends JFrame{
 
         setJMenuBar(menu);
     }
-    
-    public void setVisivel(boolean visivel){
-        this.setVisible(visivel);
-    }
-    
-//    public void onResize(){
-//        
-//    }
     
     private class Monitor implements Runnable{
         

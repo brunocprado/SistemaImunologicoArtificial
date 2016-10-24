@@ -1,6 +1,7 @@
 package ufrrj.bruno.ia.quimica;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,7 +11,7 @@ import ufrrj.bruno.ia.SistemaImunologico;
 public class CamadaSobreposta implements Runnable{
     
     private final SistemaImunologico sistema;
-    private CompostoQuimico matriz[][] = new CompostoQuimico[Parametros.TAMY/8][Parametros.TAMX/8];
+    public Set<CompostoQuimico> compostos = new HashSet<>();
     private Thread t;
     private static final int tamX = Parametros.TAMX/8;
     private static final int tamY = Parametros.TAMY/8;
@@ -22,18 +23,6 @@ public class CamadaSobreposta implements Runnable{
 //        matriz = new CompostoQuimico[Parametros.TAMY/8][Parametros.TAMX/8];
     }
     
-    public void editaPosicao(int x,int y,CompostoQuimico elemento){
-        matriz[y][x] = elemento;
-    }
-    
-    public CompostoQuimico getPosicao(int x,int y){
-        return matriz[y][x];
-    }
-
-    public CompostoQuimico[][] getMatriz() {
-        return matriz;
-    }
-
     private void pausa(int tempo){
         try {
             Thread.sleep(tempo);
@@ -49,38 +38,18 @@ public class CamadaSobreposta implements Runnable{
             while(sistema.pausada){
                 pausa(5);
             }            
-            //long inicio = System.currentTimeMillis();           
-            Set<int[]> tmp = new HashSet<int[]>();
             
-            for(int y = 0;y<tamY;y++){
-                for(int x = 0;x<tamX;x++){
-                    if(matriz[y][x] != null && matriz[y][x].getQuantidade() > 0){            
-                        int[] a = new int[2];
-                        a[0] = y; a[1] = x;
-                        tmp.add(a);
-//                        matriz[y][x].diminuiQuantidade(1);
-                    }
+            //for(CompostoQuimico composto : compostos){
+            for (Iterator<CompostoQuimico> i = compostos.iterator(); i.hasNext();) {
+                CompostoQuimico composto = i.next();
+                composto.raio += 8;
+                if(composto.getQuantidade() > 1){
+                    composto.diminuiQuantidade(1);
+                } else {
+                    i.remove();
                 }
             }
-            
-            for(int [] pos : tmp){
-                if(pos[0] > 0){
-                    if(pos[1] > 0) matriz[pos[0] - 1][pos[1]-1] = matriz[pos[0]][pos[1]];
-                    matriz[pos[0] - 1][pos[1]] = matriz[pos[0]][pos[1]];
-                    if(pos[1] < tamX - 1) matriz[pos[0] - 1][pos[1]+1] = matriz[pos[0]][pos[1]];
-                }
-                if(pos[1] > 0) matriz[pos[0]][pos[1]-1] = matriz[pos[0]][pos[1]];
-                if(pos[1] < tamX - 1) matriz[pos[0]][pos[1]+1] = matriz[pos[0]][pos[1]];
-                if(pos[0] < tamY - 1){
-                    if(pos[1] > 0) matriz[pos[0] + 1][pos[1]-1] = matriz[pos[0]][pos[1]];
-                    matriz[pos[0] + 1][pos[1]] = matriz[pos[0]][pos[1]];
-                    if(pos[1] < tamX - 1) matriz[pos[0] + 1][pos[1]+1] = matriz[pos[0]][pos[1]];
-                }
-//                matriz[pos[0]][pos[1]] += 1;
-            }          
-            
-    //System.out.println(System.currentTimeMillis() - inicio);
-            
+        
             pausa(Parametros.TEMPO_PROPAGACAO_QUIMICOS);
         }
     }

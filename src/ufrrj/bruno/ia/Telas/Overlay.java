@@ -1,8 +1,14 @@
 package ufrrj.bruno.ia.Telas;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import javafx.scene.layout.Border;
+import javax.swing.BorderFactory;
 import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.UIManager;
 import ufrrj.bruno.ia.SistemaImunologico;
 
 public class Overlay extends JInternalFrame{
@@ -19,6 +25,7 @@ public class Overlay extends JInternalFrame{
         
         //CONSTROI TELA
         
+        
         JRadioButton camadaQuimica = new JRadioButton("Camada Química");
         add(camadaQuimica);
         camadaQuimica.setFocusable(false);
@@ -26,8 +33,8 @@ public class Overlay extends JInternalFrame{
             sistema.setMostraCamada(camadaQuimica.isSelected());
         });
         
-        add(new JRadioButton("Temperatura"));
-         
+        add(new JRadioButton("Temperatura"));   
+        
     }
     
 }
