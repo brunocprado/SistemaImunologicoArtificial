@@ -2,20 +2,21 @@ package ufrrj.bruno.ia.Telas;
 
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Icon;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JPanel;
+import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.celulas.Patogeno;
+import ufrrj.bruno.ia.renderizacao.Grafico2D;
 
 public class Janela extends JFrame{
-    
-    private final JPanel tela;
+        
     private final JFrame fEstatisticas;
+    private final Overlay overlay;
     private final SistemaImunologico sistema;
     
     public Janela(String titulo,SistemaImunologico sistema){
@@ -23,9 +24,18 @@ public class Janela extends JFrame{
         this.sistema = sistema;
         this.setLayout(new BorderLayout());
         this.setLocationRelativeTo(null);
-        tela = new JPanel(new BorderLayout());
-        this.getContentPane().add(tela,BorderLayout.CENTER);
-     
+        this.setSize(Parametros.LARGURA,Parametros.ALTURA);      
+        
+        Grafico2D grafico = new Grafico2D(sistema);
+        overlay = new Overlay(sistema);
+        
+        JDesktopPane fundo = new JDesktopPane();
+                
+        add(fundo,BorderLayout.CENTER);      
+        
+        fundo.add(overlay);
+        fundo.add(grafico);      
+        
         fEstatisticas = new JFrame("Estatisticas");
         fEstatisticas.setSize(200,720);
         fEstatisticas.getContentPane().add(new Estatisticas(sistema));
@@ -35,6 +45,15 @@ public class Janela extends JFrame{
         setIconImage(Toolkit.getDefaultToolkit().createImage(getClass().getResource("/icone.png")));    
         
         Monitor monitor = new Monitor();
+        
+        addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e){
+                grafico.setBounds(0,0,getWidth(),getContentPane().getSize().height);
+            }
+        });
+        
+        grafico.requestFocus();
+        
     }
     
     public final void criaMenus(){
@@ -42,7 +61,7 @@ public class Janela extends JFrame{
         JMenu menu1 = new JMenu("Novo");
         JMenu menu2 = new JMenu("Pausar");
         JMenu menu3 = new JMenu("Estatisticas");
-        JMenu menu4 = new JMenu("Camada Quimica (N)");
+        JMenu menu4 = new JMenu("Opções");
         JMenu menu5 = new JMenu("Sobre");
         
         menu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -75,11 +94,11 @@ public class Janela extends JFrame{
         menu4.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sistema.setMostraCamada(!sistema.getMostraCamada());
-                if(sistema.getMostraCamada()){
-                    menu4.setText("Camada Quimica (S)");
+                if(overlay.isVisible()){
+                    overlay.setVisible(false);
                 } else {
-                    menu4.setText("Camada Quimica (N)");
+                    overlay.setLocation(getWidth() - 220,20);
+                    overlay.setVisible(true);
                 }
             }
         });
@@ -101,6 +120,10 @@ public class Janela extends JFrame{
     public void setVisivel(boolean visivel){
         this.setVisible(visivel);
     }
+    
+//    public void onResize(){
+//        
+//    }
     
     private class Monitor implements Runnable{
         

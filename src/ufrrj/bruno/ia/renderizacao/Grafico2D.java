@@ -39,33 +39,34 @@ public class Grafico2D extends JPanel implements Runnable{
     public Grafico2D(SistemaImunologico sistema){
         this.sistema = sistema;    
         matriz = sistema.getCamada().getMatriz();
+        
+        setFocusable(true);
+        
         addKeyListener(new KeyAdapter(){
             @Override
             public void keyPressed(KeyEvent e){
                 switch(e.getKeyCode()){
-                    case KeyEvent.VK_RIGHT:
-                        if(cameraX - getWidth()/zoom > -getWidth()) cameraX -= 10;
-                        break;
-                    case KeyEvent.VK_LEFT:
-                        if(cameraX < 0) cameraX += 10;
-                        break;
-                    case KeyEvent.VK_UP:
-                        if(cameraY < 0) cameraY += 10;
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        if(cameraY - getHeight()/zoom > -getHeight()) cameraY -= 10;
-                        break;       
-                    case KeyEvent.VK_A:
-                        zoom += 0.1;
-                        break;
-                    case KeyEvent.VK_S:
-                        if (zoom >= 1.1){ zoom -= 0.1; }
-                        break;
-                }
+            case KeyEvent.VK_RIGHT:
+                if(cameraX - getWidth()/zoom > -getWidth()) cameraX -= 10;
+                break;
+            case KeyEvent.VK_LEFT:
+                if(cameraX < 0) cameraX += 10;
+                break;
+            case KeyEvent.VK_UP:
+                if(cameraY < 0) cameraY += 10;
+                break;
+            case KeyEvent.VK_DOWN:
+                if(cameraY - getHeight()/zoom > -getHeight()) cameraY -= 10;
+                break;       
+            case KeyEvent.VK_A:
+                zoom += 0.1;
+                break;
+            case KeyEvent.VK_S:
+                if (zoom >= 1.1){ zoom -= 0.1; }
+                break;
+        }
             }
         });
-        
-        setFocusable(true);
         
         addMouseMotionListener(new MouseAdapter() {
             int antX = getX();
@@ -169,11 +170,35 @@ public class Grafico2D extends JPanel implements Runnable{
             System.out.println("Erro ao pausar a Thread Grafica");
         }
     }  
+    
+    public void keyPressed(KeyEvent e){
+        switch(e.getKeyCode()){
+            case KeyEvent.VK_RIGHT:
+                if(cameraX - getWidth()/zoom > -getWidth()) cameraX -= 10;
+                break;
+            case KeyEvent.VK_LEFT:
+                if(cameraX < 0) cameraX += 10;
+                break;
+            case KeyEvent.VK_UP:
+                if(cameraY < 0) cameraY += 10;
+                break;
+            case KeyEvent.VK_DOWN:
+                if(cameraY - getHeight()/zoom > -getHeight()) cameraY -= 10;
+                break;       
+            case KeyEvent.VK_A:
+                zoom += 0.1;
+                break;
+            case KeyEvent.VK_S:
+                if (zoom >= 1.1){ zoom -= 0.1; }
+                break;
+        }
+    }
 
     @Override
     public void run(){
         while(true){
             repaint();
+            if(!isFocusOwner()) requestFocus();
             pausa(1000/Parametros.LIMITE_FPS);
         }
     }
