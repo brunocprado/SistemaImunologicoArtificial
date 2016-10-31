@@ -42,7 +42,7 @@ public class CamadaSobreposta implements Runnable{
             //for(CompostoQuimico composto : compostos){
             for (Iterator<CompostoQuimico> i = compostos.iterator(); i.hasNext();) {
                 CompostoQuimico composto = i.next();
-                composto.raio += 8;
+                composto.aumentaRaio(8);
                 if(composto.getQuantidade() > 1){
                     composto.diminuiQuantidade(1);
                 } else {

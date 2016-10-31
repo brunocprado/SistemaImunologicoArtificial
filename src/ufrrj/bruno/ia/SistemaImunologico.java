@@ -3,11 +3,8 @@ package ufrrj.bruno.ia;
 import ufrrj.bruno.ia.quimica.CamadaSobreposta;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import ufrrj.bruno.ia.Telas.Log;
 import ufrrj.bruno.ia.celulas.Celula;
-import ufrrj.bruno.ia.celulas.Patogeno;
 import ufrrj.bruno.ia.celulas.Linfocito;
 import ufrrj.bruno.ia.celulas.Macrofago;
 import ufrrj.bruno.ia.celulas.Neutrofilo;
@@ -24,6 +21,7 @@ public class SistemaImunologico implements Runnable{
     public boolean pausada = false;
     private Thread t;
     private int biblioteca;
+    private boolean debug = false;
     
     public SistemaImunologico(){
         camada = new CamadaSobreposta(this);
@@ -85,6 +83,14 @@ public class SistemaImunologico implements Runnable{
     public void imprime(String texto){
         System.out.println(texto);
         log.imprime(texto);
+    }
+
+    public boolean isDebug() {
+        return debug;
+    }
+
+    public void setDebug(boolean debug) {
+        this.debug = debug;
     }
     
     @Override

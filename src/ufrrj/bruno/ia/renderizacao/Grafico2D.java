@@ -11,6 +11,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import javax.swing.JPanel;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
@@ -150,10 +152,18 @@ public class Grafico2D extends JPanel implements Runnable{
         
     }
     
-    public void desenhaCamadaQuimica(Graphics2D g){     
-        for(CompostoQuimico composto : sistema.getCamada().compostos){
+    public void desenhaCamadaQuimica(Graphics2D g){    
+        //TROCAR PRA ITERATOR
+        CompostoQuimico composto;
+         for (Iterator<CompostoQuimico> i = sistema.getCamada().compostos.iterator(); i.hasNext();) {
+            try {
+                composto = i.next();
+            } catch (ConcurrentModificationException ex) {
+                 System.out.println("não era pra dar isso...");
+                 break;
+            }
             g.setColor(new Color(255,150,150,composto.getQuantidade() * 10));
-            g.fillOval(composto.x - composto.raio/2, composto.y - composto.raio/2, composto.raio, composto.raio);
+            g.fillOval(composto.getX() - composto.getRaio()/2, composto.getY() - composto.getRaio()/2, composto.getRaio(), composto.getRaio());
         }
     }
     

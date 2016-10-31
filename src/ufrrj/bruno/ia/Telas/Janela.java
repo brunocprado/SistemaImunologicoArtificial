@@ -27,7 +27,8 @@ public class Janela extends JFrame{
         this.setLayout(new BorderLayout());
         this.setLocationRelativeTo(null);
         this.setSize(Parametros.LARGURA,Parametros.ALTURA);      
-        
+        //setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        //setUndecorated(true);
         Grafico2D grafico = new Grafico2D(sistema);
         overlay = new Overlay(sistema);
         
@@ -69,7 +70,7 @@ public class Janela extends JFrame{
         menu1.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                for(int i=0;i<1;i++){
+                for(int i=0;i<5;i++){
                     //SÓ PRA TESTE MESMO
                     sistema.adicionaCelula(new Patogeno(sistema));
                 }
@@ -99,7 +100,7 @@ public class Janela extends JFrame{
                 if(overlay.isVisible()){
                     overlay.setVisible(false);
                 } else {
-                    overlay.setLocation(getWidth() - 225,20);
+                    overlay.setLocation(getWidth() - 215,20);
                     overlay.setVisible(true);
                 }
             }

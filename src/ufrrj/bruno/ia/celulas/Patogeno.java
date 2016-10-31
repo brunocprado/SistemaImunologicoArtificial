@@ -7,7 +7,6 @@ import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.atributos.Poligono;
 import ufrrj.bruno.ia.atributos.Posicao;
 import ufrrj.bruno.ia.quimica.CompostoQuimico;
-import ufrrj.bruno.ia.quimica.CompostoQuimico.TIPO_COMPOSTO;
 import static ufrrj.bruno.ia.quimica.CompostoQuimico.TIPO_COMPOSTO.HISTAMINA;
 
 public class Patogeno extends Celula{

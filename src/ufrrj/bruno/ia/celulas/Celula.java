@@ -70,6 +70,10 @@ abstract public class Celula implements Comportamento{
     public SistemaImunologico getSistema() {
         return sistema;
     }
+
+    public static int getId() {
+        return id;
+    }
     
     @Override
     public String toString() {

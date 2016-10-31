@@ -38,14 +38,18 @@ public class Macrofago extends Celula implements Runnable{
     public void loop(){
         Posicao pos = getPosicao();
         
+        //TODO:
+        //Armazenar Patogeno detectado (otimização)
+        
         for (Iterator<CompostoQuimico> i = getSistema().getCamada().compostos.iterator(); i.hasNext();) {
             CompostoQuimico composto = i.next();
             //VERIFICA DISTANCIA EUCLIDIANA
-            double deltaX = (pos.getX() + 4) - (composto.x + 2);
-            double deltaY = (pos.getY() + 4) - (composto.y + 2);
+            double deltaX = (pos.getX() + 4) - (composto.getX() + 4);
+            double deltaY = (pos.getY() + 4) - (composto.getY() + 4);
             
-            if(Math.sqrt(deltaX * deltaX + deltaY*deltaY) <= composto.raio){
-                move(new Posicao(composto.x,composto.y));
+            if(Math.abs(deltaX) + Math.abs(deltaY) <= composto.getRaio() - 8){
+                //if(getSistema().isDebug()){ getSistema().imprime("Macrofago (" + getId() + ") identificou Patogeno (" + composto.x + "," + composto.y + ")"); }
+                move(new Posicao(composto.getX(),composto.getY()));
                 break;
             }
             
