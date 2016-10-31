@@ -8,8 +8,6 @@ import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.UIManager;
-import javax.swing.plaf.DesktopPaneUI;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.celulas.Patogeno;

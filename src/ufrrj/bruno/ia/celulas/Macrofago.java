@@ -47,13 +47,11 @@ public class Macrofago extends Celula implements Runnable{
             double deltaX = (pos.getX() + 4) - (composto.getX() + 4);
             double deltaY = (pos.getY() + 4) - (composto.getY() + 4);
             
-            if(Math.abs(deltaX) + Math.abs(deltaY) <= composto.getRaio() - 8){
+            if(Math.abs(deltaX) + Math.abs(deltaY) <= composto.getRaio() - 12){
                 //if(getSistema().isDebug()){ getSistema().imprime("Macrofago (" + getId() + ") identificou Patogeno (" + composto.x + "," + composto.y + ")"); }
                 move(new Posicao(composto.getX(),composto.getY()));
                 break;
             }
-            
-            
         }
     }
     

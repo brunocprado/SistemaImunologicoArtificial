@@ -24,7 +24,7 @@ public class Patogeno extends Celula{
 
         sistema.getCamada().compostos.add(new CompostoQuimico(HISTAMINA, 20,getPosicao().getX(),getPosicao().getY()));
         
-        sistema.imprime("Novo patogeno com identificador: "  + codBiologico);
+        if(sistema.isDebug()) { sistema.imprime("Novo patogeno com identificador: "  + codBiologico); }
     }
     
     public Patogeno(SistemaImunologico sistema,int nLados,Color cor) {

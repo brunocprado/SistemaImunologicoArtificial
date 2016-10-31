@@ -1,7 +1,6 @@
 package ufrrj.bruno.ia.Telas;
 
 import java.awt.FlowLayout;
-import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JRadioButton;
