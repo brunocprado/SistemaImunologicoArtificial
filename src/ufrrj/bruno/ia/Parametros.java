@@ -24,5 +24,5 @@ public class Parametros {
     //=========================//
     //Fonte : Wikipedia - PT
     
-    public final static int nVer = 41;
+    public final static int nVer = 45;
 }

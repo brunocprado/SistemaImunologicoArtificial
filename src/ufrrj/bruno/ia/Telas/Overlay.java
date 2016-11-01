@@ -20,6 +20,8 @@ public class Overlay extends JInternalFrame{
         setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
         this.sistema = sistema;
         
+        //putClientProperty("JInternalFrame.isPalette", Boolean.TRUE);
+ 
         //CONSTROI TELA
         
         JRadioButton camadaQuimica = new JRadioButton("Camada Química");

@@ -8,7 +8,7 @@ public class CompostoQuimico {
     private double temperatura = 30.0; // ?????
     private final int x;
     private final int y;
-    private int raio = 8;
+    private int diametro = 8;
     private int quantidade = 0;
 
     public CompostoQuimico(TIPO_COMPOSTO tipo,int quantidade,int x,int y){
@@ -38,16 +38,16 @@ public class CompostoQuimico {
         return y;
     }
 
-    public int getRaio() {
-        return raio;
+    public int getDiametro() {
+        return diametro;
     }
 
     public void setRaio(int raio) {
-        this.raio = raio;
+        this.diametro = raio;
     }
     
-    public void aumentaRaio(int tam){
-        raio += tam;
+    public void aumentaDiametro(int tam){
+        diametro += tam;
     }
     
 }

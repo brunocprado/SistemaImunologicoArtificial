@@ -163,7 +163,8 @@ public class Grafico2D extends JPanel implements Runnable{
                  break;
             }
             g.setColor(new Color(255,150,150,composto.getQuantidade() * 10));
-            g.fillOval(composto.getX() - composto.getRaio()/2, composto.getY() - composto.getRaio()/2, composto.getRaio(), composto.getRaio());
+            int diametro = composto.getDiametro();
+            g.fillOval(composto.getX() - diametro/2, composto.getY() - diametro/2, diametro, diametro);
         }
     }
     

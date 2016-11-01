@@ -46,8 +46,9 @@ public class Macrofago extends Celula implements Runnable{
             //VERIFICA DISTANCIA EUCLIDIANA
             double deltaX = (pos.getX() + 4) - (composto.getX() + 4);
             double deltaY = (pos.getY() + 4) - (composto.getY() + 4);
-            
-            if(Math.abs(deltaX) + Math.abs(deltaY) <= composto.getRaio() - 12){
+            //double dist = Math.abs(deltaX) + Math.abs(deltaY);
+            double dist = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
+            if(dist <= composto.getDiametro()/2){
                 //if(getSistema().isDebug()){ getSistema().imprime("Macrofago (" + getId() + ") identificou Patogeno (" + composto.x + "," + composto.y + ")"); }
                 move(new Posicao(composto.getX(),composto.getY()));
                 break;
