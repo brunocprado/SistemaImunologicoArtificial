@@ -1,21 +1,21 @@
 package ufrrj.bruno.ia.quimica;
 
+import ufrrj.bruno.ia.atributos.Posicao;
+
 public class CompostoQuimico {   
     
     public enum TIPO_COMPOSTO {HISTAMINA,PROSTAGLANDINA};
     
     private TIPO_COMPOSTO tipo;
     private double temperatura = 30.0; // ?????
-    private final int x;
-    private final int y;
+    private final Posicao pos;
     private int diametro = 8;
     private int quantidade = 0;
 
-    public CompostoQuimico(TIPO_COMPOSTO tipo,int quantidade,int x,int y){
+    public CompostoQuimico(TIPO_COMPOSTO tipo,int quantidade,Posicao pos){
         this.tipo = tipo;
         this.quantidade = quantidade;
-        this.x = x;
-        this.y = y; 
+        this.pos = pos;
     }
     
     public TIPO_COMPOSTO getTipo() {
@@ -30,12 +30,8 @@ public class CompostoQuimico {
         quantidade -= qt;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
+    public Posicao getPos() {
+        return pos;
     }
 
     public int getDiametro() {

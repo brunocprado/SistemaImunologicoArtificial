@@ -2,35 +2,64 @@ package ufrrj.bruno.ia.celulas;
 
 import ufrrj.bruno.ia.atributos.Posicao;
 import java.util.Iterator;
+import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.quimica.CompostoQuimico;
 
 public class Macrofago extends Celula{
+    
+    Posicao pos = getPosicao();
+    //=====| Fagocitacao |======//
+    private Posicao alvo = null;
+    private long inicioFagocitacao;
+    private boolean fagocitando = false;
     
     public Macrofago(SistemaImunologico sistema){
         super(sistema,TIPO_CELULA.Macrofago);
         setVelMovimento(2);
     }
     
+    private double calculaDistancia(Posicao posicaoInicial,Posicao posicaoAlvo){
+        double deltaX = posicaoInicial.getX() - posicaoAlvo.getX();
+        double deltaY = posicaoInicial.getY() - posicaoAlvo.getY();
+        return Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
+    }
+    
     @Override
     public void loop(){
-        Posicao pos = getPosicao();
         
-        //TODO:
-        //Armazenar Patogeno detectado (otimização)
+        if(fagocitando){
+            if(System.currentTimeMillis() - inicioFagocitacao >= Parametros.TEMPO_FAGOCITACAO){
+                //TODO :
+                //TERMINAR DE IMPLEMENTAR ESSA PARTE
+                System.out.println("FAGOCITOU");
+                fagocitando = false;
+                alvo = null;
+            } else {
+                return;
+            }
+        }
+        
+        if(alvo != null){
+            if(calculaDistancia(pos,alvo) <= 4){
+                inicioFagocitacao = System.currentTimeMillis();
+                fagocitando = true;
+            }
+            move(alvo);
+            return;
+        }
         
         for (Iterator<CompostoQuimico> i = getSistema().getCamada().compostos.iterator(); i.hasNext();) {
             CompostoQuimico composto = i.next();
-            //VERIFICA DISTANCIA EUCLIDIANA
-            double deltaX = pos.getX() - composto.getX();
-            double deltaY = pos.getY() - composto.getY();
-            double dist = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
-            if(dist <= 4){
-                //INICIA FAGOCITAÇÃO
-            }
+            double dist = calculaDistancia(pos,composto.getPos());      
             if(dist <= composto.getDiametro()/2 + 4){
                 //if(getSistema().isDebug()){ getSistema().imprime("Macrofago (" + getId() + ") identificou Patogeno (" + composto.x + "," + composto.y + ")"); }
-                move(new Posicao(composto.getX(),composto.getY()));
+                alvo = composto.getPos();
+                if(dist <= 4){
+                    inicioFagocitacao = System.currentTimeMillis();
+                    fagocitando = true;
+                }
+                move(alvo);
                 break;
             }
         }
