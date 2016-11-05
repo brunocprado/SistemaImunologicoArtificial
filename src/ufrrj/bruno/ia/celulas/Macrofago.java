@@ -30,7 +30,7 @@ public class Macrofago extends Celula{
         if(fagocitando){
             if(System.currentTimeMillis() - inicioFagocitacao >= Parametros.TEMPO_FAGOCITACAO){
                 if(alvo.getEmissor() != null){
-                    getSistema().eliminaCelula(alvo.getEmissor());
+                    getSistema().eliminaCelula(alvo.getEmissor()); 
                     alvo.setEmissor(null);
                 }          
                 fagocitando = false;

@@ -1,8 +1,10 @@
 package ufrrj.bruno.ia.quimica;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ufrrj.bruno.ia.Parametros;
@@ -11,7 +13,7 @@ import ufrrj.bruno.ia.SistemaImunologico;
 public class CamadaSobreposta implements Runnable{
     
     private final SistemaImunologico sistema;
-    public Set<CompostoQuimico> compostos = new HashSet<>();
+    public ConcurrentLinkedQueue<CompostoQuimico> compostos = new ConcurrentLinkedQueue<>();
     private Thread t;
     private static final int tamX = Parametros.TAMX/8;
     private static final int tamY = Parametros.TAMY/8;

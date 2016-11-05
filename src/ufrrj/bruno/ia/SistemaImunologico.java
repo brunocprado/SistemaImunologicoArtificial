@@ -2,9 +2,13 @@ package ufrrj.bruno.ia;
 
 import ufrrj.bruno.ia.quimica.CamadaSobreposta;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import ufrrj.bruno.ia.Telas.Log;
 import ufrrj.bruno.ia.celulas.Celula;
 import ufrrj.bruno.ia.celulas.Linfocito;
@@ -13,8 +17,8 @@ import ufrrj.bruno.ia.celulas.Neutrofilo;
 
 public class SistemaImunologico implements Runnable{
     //======| Variaveis |=======//
-    private final int nInicial;
-    private final ArrayList<Celula> celulas = new ArrayList<>();
+    private final int nInicial; //Collections.synchronizedList(new ArrayList())
+    private final ConcurrentLinkedQueue<Celula> celulas = new ConcurrentLinkedQueue<>();
     private final CamadaSobreposta camada;
     private final Log log = new Log();
     //======|  RUNTIME  |======//
@@ -70,16 +74,16 @@ public class SistemaImunologico implements Runnable{
         }
     }  
     
-    public ArrayList<Celula> getCelulas() {
-        return celulas;
+    synchronized public ConcurrentLinkedQueue<Celula> getCelulas() {
+       return celulas;
     }
     
     public void adicionaCelula(Celula celula){
         this.celulas.add(celula);
     }
     
-    public void eliminaCelula(Celula celula){
-        this.celulas.remove(celula);
+    synchronized public void eliminaCelula(Celula celula){
+        this.celulas.remove(celula); 
     }
     
     public void imprime(String texto){
@@ -101,24 +105,16 @@ public class SistemaImunologico implements Runnable{
             while(pausada){
                 pausa(5);
             }
-//            int tamanho = celulas.size();
-//            for(int i = 0;i < tamanho; i++){
-//                celulas.get(i).loop();
-//            }
+            
             Iterator<Celula> i = celulas.iterator();
-            for (i = celulas.iterator(); i.hasNext();) {
-                try {
-                    i.next().loop();
-                } catch (ConcurrentModificationException ex) {
-                     System.out.println("não era pra dar isso...");
-                     break;
-                }
-                
+            while(i.hasNext()){
+                i.next().loop();
             }
+
             pausa(20);
         }     
     }
-
+    
     public long getInicio() {
         return inicio;
     }
