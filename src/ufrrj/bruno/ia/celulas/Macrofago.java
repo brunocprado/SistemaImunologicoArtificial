@@ -10,7 +10,7 @@ public class Macrofago extends Celula{
     
     Posicao pos = getPosicao();
     //=====| Fagocitacao |======//
-    private Posicao alvo = null;
+    private CompostoQuimico alvo = null;
     private long inicioFagocitacao;
     private boolean fagocitando = false;
     
@@ -27,25 +27,26 @@ public class Macrofago extends Celula{
     
     @Override
     public void loop(){
-        
         if(fagocitando){
             if(System.currentTimeMillis() - inicioFagocitacao >= Parametros.TEMPO_FAGOCITACAO){
-                //TODO :
-                //TERMINAR DE IMPLEMENTAR ESSA PARTE
-                System.out.println("FAGOCITOU");
+                if(alvo.getEmissor() != null){
+                    getSistema().eliminaCelula(alvo.getEmissor());
+                    alvo.setEmissor(null);
+                }          
                 fagocitando = false;
                 alvo = null;
+                return;
             } else {
                 return;
             }
         }
         
         if(alvo != null){
-            if(calculaDistancia(pos,alvo) <= 4){
+            if(calculaDistancia(pos,alvo.getPos()) <= 4){
                 inicioFagocitacao = System.currentTimeMillis();
                 fagocitando = true;
             }
-            move(alvo);
+            move(alvo.getPos());
             return;
         }
         
@@ -54,12 +55,12 @@ public class Macrofago extends Celula{
             double dist = calculaDistancia(pos,composto.getPos());      
             if(dist <= composto.getDiametro()/2 + 4){
                 //if(getSistema().isDebug()){ getSistema().imprime("Macrofago (" + getId() + ") identificou Patogeno (" + composto.x + "," + composto.y + ")"); }
-                alvo = composto.getPos();
+                alvo = composto;
                 if(dist <= 4){
                     inicioFagocitacao = System.currentTimeMillis();
                     fagocitando = true;
                 }
-                move(alvo);
+                move(alvo.getPos());
                 break;
             }
         }

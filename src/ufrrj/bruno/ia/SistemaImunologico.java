@@ -2,6 +2,8 @@ package ufrrj.bruno.ia;
 
 import ufrrj.bruno.ia.quimica.CamadaSobreposta;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.Random;
 import ufrrj.bruno.ia.Telas.Log;
 import ufrrj.bruno.ia.celulas.Celula;
@@ -99,9 +101,19 @@ public class SistemaImunologico implements Runnable{
             while(pausada){
                 pausa(5);
             }
-            int tamanho = celulas.size();
-            for(int i = 0;i < tamanho; i++){
-                celulas.get(i).loop();
+//            int tamanho = celulas.size();
+//            for(int i = 0;i < tamanho; i++){
+//                celulas.get(i).loop();
+//            }
+            Iterator<Celula> i = celulas.iterator();
+            for (i = celulas.iterator(); i.hasNext();) {
+                try {
+                    i.next().loop();
+                } catch (ConcurrentModificationException ex) {
+                     System.out.println("não era pra dar isso...");
+                     break;
+                }
+                
             }
             pausa(20);
         }     
