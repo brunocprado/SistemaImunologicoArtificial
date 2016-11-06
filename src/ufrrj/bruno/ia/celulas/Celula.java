@@ -8,7 +8,8 @@ import ufrrj.bruno.ia.SistemaImunologico;
 abstract public class Celula implements Comportamento{
     public enum TIPO_CELULA {Comum,Linfocito,Neutrofilo,Patogeno,Macrofago};
             
-    private static int id;
+    private static int qt = 0;
+    private int id;
     private TIPO_CELULA tipo;
     //=====| CARACTERISTICAS |=====//
     public int tamanhoX,tamanhoY;
@@ -18,7 +19,7 @@ abstract public class Celula implements Comportamento{
     private final SistemaImunologico sistema;
 
     public Celula(SistemaImunologico sistema,TIPO_CELULA tipo){
-        id++; this.sistema = sistema; this.tipo = tipo;
+        qt++; id = qt; this.sistema = sistema; this.tipo = tipo;
         Random gerador = new Random();
         posicao = new Posicao(
                 gerador.nextInt(Parametros.TAMX),
@@ -26,7 +27,7 @@ abstract public class Celula implements Comportamento{
     }
     
     public Celula(SistemaImunologico sistema,TIPO_CELULA tipo,Posicao pos){
-        id++; this.sistema = sistema; this.tipo = tipo;
+        qt++; id = qt; this.sistema = sistema; this.tipo = tipo;
         posicao = pos;
     }
     
@@ -71,7 +72,7 @@ abstract public class Celula implements Comportamento{
         return sistema;
     }
 
-    public static int getId() {
+    public int getId() {
         return id;
     }
     

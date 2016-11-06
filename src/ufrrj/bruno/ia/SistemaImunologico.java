@@ -1,14 +1,9 @@
 package ufrrj.bruno.ia;
 
 import ufrrj.bruno.ia.quimica.CamadaSobreposta;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 import ufrrj.bruno.ia.Telas.Log;
 import ufrrj.bruno.ia.celulas.Celula;
 import ufrrj.bruno.ia.celulas.Linfocito;
@@ -74,7 +69,7 @@ public class SistemaImunologico implements Runnable{
         }
     }  
     
-    synchronized public ConcurrentLinkedQueue<Celula> getCelulas() {
+    public ConcurrentLinkedQueue<Celula> getCelulas() {
        return celulas;
     }
     
@@ -82,7 +77,7 @@ public class SistemaImunologico implements Runnable{
         this.celulas.add(celula);
     }
     
-    synchronized public void eliminaCelula(Celula celula){
+    public void eliminaCelula(Celula celula){
         this.celulas.remove(celula); 
     }
     

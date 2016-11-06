@@ -27,11 +27,21 @@ public class Macrofago extends Celula{
     
     @Override
     public void loop(){
+        
         if(fagocitando){
+//            if(alvo.getEmissor() == null){
+//                fagocitando = false;
+//                alvo = null;
+//                return;
+//            }
             if(System.currentTimeMillis() - inicioFagocitacao >= Parametros.TEMPO_FAGOCITACAO){
                 if(alvo.getEmissor() != null){
-                    getSistema().eliminaCelula(alvo.getEmissor()); 
-                    alvo.setEmissor(null);
+                    Patogeno tmp = (Patogeno) alvo.getEmissor();
+                    getSistema().eliminaCelula(tmp); 
+                    getSistema().imprime("Patogeno " + alvo.getEmissor().getId() 
+                            + " eliminado. {Tempo de detecção : " + (inicioFagocitacao - tmp.getEntrada()) 
+                            + "ms, Tempo até ser eliminado: " + (System.currentTimeMillis() - tmp.getEntrada()) + "ms}");
+                    alvo.setEmissor(null);                 
                 }          
                 fagocitando = false;
                 alvo = null;

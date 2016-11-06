@@ -11,6 +11,7 @@ import static ufrrj.bruno.ia.quimica.CompostoQuimico.TIPO_COMPOSTO.HISTAMINA;
 
 public class Patogeno extends Celula{
     
+    private final long entrada = System.currentTimeMillis();
     private final int codBiologico;  //Reconhecimento de padrao
     private Poligono forma;
     private Color cor;
@@ -140,6 +141,10 @@ public class Patogeno extends Celula{
         return forma.getPoligono();
     }
 
+    public long getEntrada() {
+        return entrada;
+    }
+    
     public Color getCor() {
         return cor;
     }
