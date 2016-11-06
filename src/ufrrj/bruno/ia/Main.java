@@ -3,9 +3,14 @@ package ufrrj.bruno.ia;
 import javax.swing.JFrame;
 import ufrrj.bruno.ia.Telas.Janela;
 
+/**
+ * Sistema Imunológico Artificial <br>
+ * 
+ * @author Bruno Prado
+ */
 public class Main{
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         SistemaImunologico sistema = new SistemaImunologico();
         
         Janela tela = new Janela("SIA",sistema);

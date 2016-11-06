@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -27,6 +29,7 @@ public class Janela extends JFrame{
         this.setSize(Parametros.LARGURA,Parametros.ALTURA);      
         //setExtendedState(JFrame.MAXIMIZED_BOTH); 
         //setUndecorated(true);
+        setFocusable(true);
         Grafico2D grafico = new Grafico2D(sistema);
         overlay = new Overlay(sistema);
         
@@ -53,7 +56,12 @@ public class Janela extends JFrame{
             }
         });
         
-        grafico.requestFocus();
+        addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyPressed(KeyEvent e){
+                grafico.keyPressed(e);
+            }
+        });
         
     }
     
@@ -135,7 +143,7 @@ public class Janela extends JFrame{
                 if(sistema.pausada){
                     tmp += "  -  Pausado";
                 }
-                tmp += "  |  Tempo de execução : " + (System.currentTimeMillis() - sistema.getInicio())/1000; 
+                tmp += "  |  Tempo de execução : " + (System.currentTimeMillis() - sistema.getInicio())/1000 + " segundos"; 
                 setTitle(tmp);
 
                 try {

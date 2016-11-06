@@ -3,16 +3,24 @@ package ufrrj.bruno.ia;
 import ufrrj.bruno.ia.quimica.CamadaSobreposta;
 import java.util.Iterator;
 import java.util.Random;
-import java.util.concurrent.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import ufrrj.bruno.ia.Telas.Log;
 import ufrrj.bruno.ia.celulas.Celula;
 import ufrrj.bruno.ia.celulas.Linfocito;
 import ufrrj.bruno.ia.celulas.Macrofago;
 import ufrrj.bruno.ia.celulas.Neutrofilo;
 
+/**
+ * Classe principal <br>
+ * 
+ * @author Bruno Prado
+ * @param nInicial  Numero de leucocitos a serem gerados
+ * @param camada  Camada sobreposta com os compostos quimicos
+ * @param celulas ArrayList de todas as celulas exibidas
+ */
 public class SistemaImunologico implements Runnable{
     //======| Variaveis |=======//
-    private final int nInicial; //Collections.synchronizedList(new ArrayList())
+    private final int nInicial;
     private final ConcurrentLinkedQueue<Celula> celulas = new ConcurrentLinkedQueue<>();
     private final CamadaSobreposta camada;
     private final Log log = new Log();

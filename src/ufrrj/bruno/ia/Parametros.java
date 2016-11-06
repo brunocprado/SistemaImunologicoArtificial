@@ -1,5 +1,11 @@
 package ufrrj.bruno.ia;
 
+/**
+ * Parametros do sistema. <br>
+ * Trocar para .xml no futuro.
+ * Temporizações serão reajustadas por meio de alg genético.
+ * @author Bruno Prado
+*/
 public class Parametros {
     //===| Config Visualização |===//
     public final static int LIMITE_FPS = 60;

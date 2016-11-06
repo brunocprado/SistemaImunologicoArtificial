@@ -15,7 +15,7 @@ public class Log extends JFrame{
         super("Log");
         setSize(640,480);
         setResizable(false);
-        setLocationRelativeTo(null);
+        //setLocationRelativeTo(null);
         
         JPanel p = new JPanel();      
         p.setSize(600,440);

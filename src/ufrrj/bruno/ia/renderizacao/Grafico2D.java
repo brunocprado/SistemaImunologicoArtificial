@@ -41,33 +41,7 @@ public class Grafico2D extends JPanel implements Runnable{
         this.sistema = sistema;    
         
         setFocusable(true);
-        
-        addKeyListener(new KeyAdapter(){
-            @Override
-            public void keyPressed(KeyEvent e){
-                switch(e.getKeyCode()){
-            case KeyEvent.VK_RIGHT:
-                if(cameraX - getWidth()/zoom > -getWidth()) cameraX -= 10;
-                break;
-            case KeyEvent.VK_LEFT:
-                if(cameraX < 0) cameraX += 10;
-                break;
-            case KeyEvent.VK_UP:
-                if(cameraY < 0) cameraY += 10;
-                break;
-            case KeyEvent.VK_DOWN:
-                if(cameraY - getHeight()/zoom > -getHeight()) cameraY -= 10;
-                break;       
-            case KeyEvent.VK_A:
-                zoom += 0.1;
-                break;
-            case KeyEvent.VK_S:
-                if (zoom >= 1.1){ zoom -= 0.1; }
-                break;
-        }
-            }
-        });
-        
+
         addMouseMotionListener(new MouseAdapter() {
             int antX = getX();
             int antY = getY();
@@ -153,15 +127,9 @@ public class Grafico2D extends JPanel implements Runnable{
     }
     
     public void desenhaCamadaQuimica(Graphics2D g){    
-        //TROCAR PRA ITERATOR
         CompostoQuimico composto;
-         for (Iterator<CompostoQuimico> i = sistema.getCamada().compostos.iterator(); i.hasNext();) {
-            try {
-                composto = i.next();
-            } catch (ConcurrentModificationException ex) {
-                 System.out.println("não era pra dar isso...");
-                 break;
-            }
+        for (Iterator<CompostoQuimico> i = sistema.getCamada().compostos.iterator(); i.hasNext();) {
+            composto = i.next();
             g.setColor(new Color(255,150,150,composto.getQuantidade() * 10));
             int diametro = composto.getDiametro();
             g.fillOval(composto.getPos().getX() - diametro/2, composto.getPos().getY() - diametro/2, diametro, diametro);
@@ -202,8 +170,7 @@ public class Grafico2D extends JPanel implements Runnable{
     @Override
     public void run(){
         while(true){
-            repaint();
-            if(!isFocusOwner()) requestFocus();
+            repaint();      
             pausa(1000/Parametros.LIMITE_FPS);
         }
     }
