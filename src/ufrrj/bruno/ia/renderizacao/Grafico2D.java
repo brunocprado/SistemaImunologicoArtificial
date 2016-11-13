@@ -6,12 +6,10 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import javax.swing.JPanel;
 import ufrrj.bruno.ia.Parametros;
@@ -130,7 +128,7 @@ public class Grafico2D extends JPanel implements Runnable{
         CompostoQuimico composto;
         for (Iterator<CompostoQuimico> i = sistema.getCamada().compostos.iterator(); i.hasNext();) {
             composto = i.next();
-            g.setColor(new Color(255,150,150,composto.getQuantidade() * 10));
+            g.setColor(new Color(255,150,150,composto.getQuantidade() * 4));
             int diametro = composto.getDiametro();
             g.fillOval(composto.getPos().getX() - diametro/2, composto.getPos().getY() - diametro/2, diametro, diametro);
         }

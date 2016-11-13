@@ -52,8 +52,6 @@ public class CompostoQuimico {
     public void setEmissor(Celula emissor) {
         this.emissor = emissor;
     }
-
-    
     
     public double getTemperatura() {
         return temperatura;

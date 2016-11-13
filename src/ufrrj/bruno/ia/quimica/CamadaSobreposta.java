@@ -1,15 +1,17 @@
 package ufrrj.bruno.ia.quimica;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 
+/**
+ * Conjunto de compostos quimicos. <br>
+ * @param compostos compostos quimicos(posicao,tipo,raio,intensidade) atuais.
+ * @author Bruno Prado
+ */
 public class CamadaSobreposta implements Runnable{
     
     private final SistemaImunologico sistema;
@@ -44,7 +46,7 @@ public class CamadaSobreposta implements Runnable{
             //for(CompostoQuimico composto : compostos){
             for (Iterator<CompostoQuimico> i = compostos.iterator(); i.hasNext();) {
                 CompostoQuimico composto = i.next();
-                composto.aumentaDiametro(16);
+                composto.aumentaDiametro(6);
                 if(composto.getQuantidade() > 1){
                     composto.diminuiQuantidade(1);
                 } else {

@@ -64,7 +64,7 @@ public class Macrofago extends Celula{
         for (Iterator<CompostoQuimico> i = getSistema().getCamada().compostos.iterator(); i.hasNext();) {
             CompostoQuimico composto = i.next();
             double dist = calculaDistancia(pos,composto.getPos());      
-            if(dist <= composto.getDiametro()/2 + 4){
+            if(dist <= composto.getDiametro()/2 + 6){
                 //if(getSistema().isDebug()){ getSistema().imprime("Macrofago (" + getId() + ") identificou Patogeno (" + composto.x + "," + composto.y + ")"); }
                 alvo = composto;
                 tempoDetectado = System.currentTimeMillis();
