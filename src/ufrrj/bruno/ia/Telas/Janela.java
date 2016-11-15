@@ -17,7 +17,7 @@ import ufrrj.bruno.ia.renderizacao.Grafico2D;
 
 public class Janela extends JFrame{
         
-    private final JFrame fEstatisticas;
+//    private final JFrame fEstatisticas;
     private final Overlay overlay;
     private final SistemaImunologico sistema;
     
@@ -27,9 +27,8 @@ public class Janela extends JFrame{
         this.setLayout(new BorderLayout());
         this.setLocationRelativeTo(null);
         this.setSize(Parametros.LARGURA,Parametros.ALTURA);      
-        //setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        //setUndecorated(true);
         setFocusable(true);
+        
         Grafico2D grafico = new Grafico2D(sistema);
         overlay = new Overlay(sistema);
         
@@ -40,9 +39,9 @@ public class Janela extends JFrame{
         fundo.add(overlay);
         fundo.add(grafico);      
         
-        fEstatisticas = new JFrame("Estatisticas");
-        fEstatisticas.setSize(200,720);
-        fEstatisticas.getContentPane().add(new Estatisticas(sistema));
+//        fEstatisticas = new JFrame("Estatisticas");
+//        fEstatisticas.setSize(200,720);
+//        fEstatisticas.getContentPane().add(new Estatisticas(sistema));
         
         criaMenus();    
        
@@ -60,6 +59,8 @@ public class Janela extends JFrame{
             @Override
             public void keyPressed(KeyEvent e){
                 grafico.keyPressed(e);
+//                setExtendedState(JFrame.MAXIMIZED_BOTH); 
+//                setUndecorated(true);
             }
         });
         
@@ -95,7 +96,7 @@ public class Janela extends JFrame{
         menu3.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {    
-                fEstatisticas.setVisible(true);
+                //fEstatisticas.setVisible(true);
             }
         });
         menu.add(menu3);
@@ -131,7 +132,7 @@ public class Janela extends JFrame{
         private final Thread t;
         
         public Monitor(){
-            t = new Thread(this);
+            t = new Thread(this,"Monitor");
             t.start();
         }
         

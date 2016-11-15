@@ -7,7 +7,7 @@ public class CompostoQuimico {
     
     public enum TIPO_COMPOSTO {HISTAMINA,PROSTAGLANDINA};
     
-    private TIPO_COMPOSTO tipo;
+    private final TIPO_COMPOSTO tipo;
     private Celula emissor;
     private double temperatura = 30.0; // ?????
     private final Posicao pos;

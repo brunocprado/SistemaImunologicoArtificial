@@ -17,11 +17,11 @@ public class Parametros {
     public final static int TAMY = 720;
     
     public final static int TAM_MEDIO_INFERIOR = 400;
-    public final static int TAM_MEDIO_SUPERIOR = 1100;
+    public final static int TAM_MEDIO_SUPERIOR = 110000;
     //Fonte :In the US this is usually expressed as 4,000–11,000 white blood cells per microliter of blood. 
     //Total leukocytes: 4.00-11.0 x 10 9/L
     //Adult	3.5 3.9 4.1 4.5	  9.0 10.0 10.9 11    - x109/L
-    public final static int TEMPO_PROPAGACAO_QUIMICOS = 120;
+    public final static int TEMPO_PROPAGACAO_QUIMICOS = 100;
     public final static int TEMPO_FAGOCITACAO = 500;
     
     //====| Proporcao real |====//

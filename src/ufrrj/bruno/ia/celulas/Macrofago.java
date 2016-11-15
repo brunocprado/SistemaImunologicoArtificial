@@ -2,6 +2,8 @@ package ufrrj.bruno.ia.celulas;
 
 import ufrrj.bruno.ia.atributos.Posicao;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.quimica.CompostoQuimico;
@@ -11,7 +13,6 @@ public class Macrofago extends Celula{
     Posicao pos = getPosicao();
     //=====| Fagocitacao |======//
     private CompostoQuimico alvo = null;
-    private long inicioFagocitacao;
     private long tempoDetectado;
     private boolean fagocitando = false;
     
@@ -29,33 +30,12 @@ public class Macrofago extends Celula{
     @Override
     public void loop(){
         
-        if(fagocitando){
-//            if(alvo.getEmissor() == null){
-//                fagocitando = false;
-//                alvo = null;
-//                return;
-//            }
-            if(System.currentTimeMillis() - inicioFagocitacao >= Parametros.TEMPO_FAGOCITACAO){
-                if(alvo.getEmissor() != null){
-                    Patogeno tmp = (Patogeno) alvo.getEmissor();
-                    getSistema().eliminaCelula(tmp); 
-                    getSistema().imprime("Patogeno " + alvo.getEmissor().getId() 
-                            + " eliminado. {Tempo de detecção : " + (tempoDetectado - tmp.getEntrada()) 
-                            + "ms, Tempo até ser eliminado: " + (System.currentTimeMillis() - tmp.getEntrada()) + "ms}");
-                    alvo.setEmissor(null);                 
-                }          
-                fagocitando = false;
-                alvo = null;
-                return;
-            } else {
-                return;
-            }
-        }
+        if(fagocitando) return;
         
         if(alvo != null){
             if(calculaDistancia(pos,alvo.getPos()) <= 4){
-                inicioFagocitacao = System.currentTimeMillis();
                 fagocitando = true;
+                Fagocitacao fagocitacao = new Fagocitacao(alvo);
             }
             move(alvo.getPos());
             return;
@@ -65,17 +45,48 @@ public class Macrofago extends Celula{
             CompostoQuimico composto = i.next();
             double dist = calculaDistancia(pos,composto.getPos());      
             if(dist <= composto.getDiametro()/2 + 6){
-                //if(getSistema().isDebug()){ getSistema().imprime("Macrofago (" + getId() + ") identificou Patogeno (" + composto.x + "," + composto.y + ")"); }
                 alvo = composto;
                 tempoDetectado = System.currentTimeMillis();
                 if(dist <= 4){
-                    inicioFagocitacao = System.currentTimeMillis();
                     fagocitando = true;
+                    Fagocitacao fagocitacao = new Fagocitacao(alvo);
                 }
                 move(alvo.getPos());
                 break;
             }
         }
     }
+    
+    public class Fagocitacao implements Runnable{
 
+        private CompostoQuimico alvo;
+        
+        public Fagocitacao(CompostoQuimico alvo){
+            this.alvo = alvo;
+            Thread t = new Thread(this,"Fagocitando");
+            t.start();
+        }
+        
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(Parametros.TEMPO_FAGOCITACAO);
+            } catch (InterruptedException ex) {
+            }
+            if(alvo.getEmissor() != null){
+                Patogeno tmp = (Patogeno) alvo.getEmissor();
+                getSistema().eliminaCelula(tmp); 
+                getSistema().imprime("Patogeno " + alvo.getEmissor().getId() 
+                        + " eliminado. {Tempo de detecção : " + (tempoDetectado - tmp.getEntrada()) 
+                        + "ms, Tempo até ser eliminado: " + (System.currentTimeMillis() - tmp.getEntrada()) + "ms}");
+                alvo.setEmissor(null);                 
+            } else {
+                fagocitando = false;
+                alvo = null;
+            }
+            
+        }
+        
+    }
+    
 }

@@ -29,7 +29,7 @@ public class SistemaImunologico implements Runnable{
     private boolean mostraCamada = false;
     public boolean pausada = false;
     private Thread t;
-    private int biblioteca;
+//    private int biblioteca;
     private boolean debug = false;
     
     public SistemaImunologico(){
