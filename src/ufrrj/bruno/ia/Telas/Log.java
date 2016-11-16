@@ -8,6 +8,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
+/**
+ * Log <br>
+ * 
+ * @author Bruno Prado
+ */
 public class Log extends JFrame{
     
     private JLabel txt;

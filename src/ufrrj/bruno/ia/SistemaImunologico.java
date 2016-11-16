@@ -28,8 +28,6 @@ public class SistemaImunologico implements Runnable{
     private final long inicio = System.currentTimeMillis();
     private boolean mostraCamada = false;
     public boolean pausada = false;
-    private Thread t;
-//    private int biblioteca;
     private boolean debug = false;
     
     public SistemaImunologico(){
@@ -47,7 +45,7 @@ public class SistemaImunologico implements Runnable{
     }
     
     private void iniciaThread(){
-        t = new Thread(this,"Sistema Imunologico - IA");
+        Thread t = new Thread(this,"Sistema Imunologico - IA");
         t.start();
     }
     

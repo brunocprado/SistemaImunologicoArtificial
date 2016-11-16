@@ -53,40 +53,6 @@ public class Patogeno extends Celula{
         //getSistema().getCamada().editaPosicao(getPosicao().getX(), getPosicao().getY(), new CompostoQuimico(HISTAMINA,2));
     }
     
-    private int verificaMaisProximo(){
-        int maisProximo = 0,i = 0;
-        double distMaisProximo = Double.MAX_VALUE;
-//        try {
-//            for (Iterator<Celula> it = mundo.getCelulas().iterator(); it.hasNext();) {
-//                Celula celula = it.next();
-//                if(!celula.getClass().getSimpleName().equals("Comum")){ continue; }         
-//                double dist = Math.abs(getPosicao().x - celula.getPosicao().x)  +  Math.abs(getPosicao().y - celula.getPosicao().y);
-//                if(dist < distMaisProximo && dist != 0){
-//                    distMaisProximo = dist;
-//                    maisProximo = i;
-//                }
-//                i++;
-//            }
-//        } catch (Exception ex) {
-//            pausa(2);
-//            return verificaMaisProximo();
-//        }    
-        return maisProximo;
-    }
-    
-//    private int nCelulas(){
-//        int qt = 0;
-//        try {
-//            for(Celula celula : getSistema().getCelulas()){
-//                if(celula.getClass().getSimpleName().equals("Comum")){ qt++; }    
-//            }
-//        } catch (Exception ex) {
-//            //pausa(2);
-//            return nCelulas();
-//        }  
-//        return qt;
-//    }
-    
     public void clona(){
         getSistema().adicionaCelula(new Patogeno(getSistema(),forma.getnLados(),cor,getPosicao()));
     }

@@ -18,8 +18,14 @@ import ufrrj.bruno.ia.celulas.Celula;
 import ufrrj.bruno.ia.celulas.Patogeno;
 import ufrrj.bruno.ia.quimica.CompostoQuimico;
 
+/**
+ * Renderiza sistema usando awt.Graphics2D. <br>
+ * 
+ * @param Parametros.LIMITE_FPS quantidade de atualizações da tela por segundo.
+ * @author Bruno Prado
+ */
 public class Grafico2D extends JPanel implements Runnable{
-    private SistemaImunologico sistema = null; 
+    private final SistemaImunologico sistema; 
     final Toolkit tool = Toolkit.getDefaultToolkit();
     //=========| IMAGENS |==========//
     final Image sangue = tool.createImage(getClass().getResource("/img/blood.jpg"));
@@ -29,7 +35,6 @@ public class Grafico2D extends JPanel implements Runnable{
     final Image macrofago = tool.createImage(getClass().getResource("/img/macro.png"));
     final Image neutrofilo = tool.createImage(getClass().getResource("/img/neutrofilo.png"));
     //=========| RUNTIME |=========//
-    private final Thread t;
     private int cameraX,cameraY;   
     private double zoom = 1;
     private static final int tamX = Parametros.TAMX/8;
@@ -37,7 +42,6 @@ public class Grafico2D extends JPanel implements Runnable{
     
     public Grafico2D(SistemaImunologico sistema){
         this.sistema = sistema;    
-        
         setFocusable(true);
 
         addMouseMotionListener(new MouseAdapter() {
@@ -50,14 +54,7 @@ public class Grafico2D extends JPanel implements Runnable{
                     cameraX += 10/zoom;
                 } else if(cameraX - getWidth()/zoom > -getWidth()){
                     cameraX -= 10/zoom;
-                }              
-//                if(pos.y < antY && cameraY < 0){
-//                    System.out.println("C");
-//                    cameraY -= 10;
-//                } else if(cameraY - getHeight()/zoom > -getHeight()){
-//                    //cameraY += 10;
-//                }
-                
+                }                         
                 if(pos.y < antY && cameraY < 0){
                     cameraY += 10;
                 } else if(cameraY - getHeight()/zoom > -getHeight()){
@@ -78,7 +75,7 @@ public class Grafico2D extends JPanel implements Runnable{
             }
         });
         
-        t = new Thread(this,"Sistema Imunologico - Renderizacao (Graphics2D)");
+        Thread t = new Thread(this,"Sistema Imunologico - Renderizacao (Graphics2D)");
         t.start();
     }
     

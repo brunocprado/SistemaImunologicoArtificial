@@ -16,15 +16,13 @@ public class CamadaSobreposta implements Runnable{
     
     private final SistemaImunologico sistema;
     public ConcurrentLinkedQueue<CompostoQuimico> compostos = new ConcurrentLinkedQueue<>();
-    private Thread t;
     private static final int tamX = Parametros.TAMX/8;
     private static final int tamY = Parametros.TAMY/8;
     
     public CamadaSobreposta(SistemaImunologico sistema){
         this.sistema = sistema;
-        t = new Thread(this,"Camada Quimica");
+        Thread t = new Thread(this,"Camada Quimica");
         t.start();
-//        matriz = new CompostoQuimico[Parametros.TAMY/8][Parametros.TAMX/8];
     }
     
     private void pausa(int tempo){
@@ -35,15 +33,12 @@ public class CamadaSobreposta implements Runnable{
         }
     }
     
-    //implementar pause
     @Override
     public void run() {
         while(true) {
             while(sistema.pausada){
                 pausa(5);
             }            
-            
-            //for(CompostoQuimico composto : compostos){
             for (Iterator<CompostoQuimico> i = compostos.iterator(); i.hasNext();) {
                 CompostoQuimico composto = i.next();
                 composto.aumentaDiametro(6);
@@ -53,7 +48,6 @@ public class CamadaSobreposta implements Runnable{
                     i.remove();
                 }
             }
-        
             pausa(Parametros.TEMPO_PROPAGACAO_QUIMICOS);
         }
     }

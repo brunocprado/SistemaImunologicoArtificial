@@ -2,8 +2,6 @@ package ufrrj.bruno.ia.celulas;
 
 import ufrrj.bruno.ia.atributos.Posicao;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.quimica.CompostoQuimico;
@@ -35,7 +33,8 @@ public class Macrofago extends Celula{
         if(alvo != null){
             if(calculaDistancia(pos,alvo.getPos()) <= 4){
                 fagocitando = true;
-                Fagocitacao fagocitacao = new Fagocitacao(alvo);
+                Fagocitacao fagocitacao = new Fagocitacao();
+                fagocitacao.iniciaFagocitacao();
             }
             move(alvo.getPos());
             return;
@@ -49,7 +48,8 @@ public class Macrofago extends Celula{
                 tempoDetectado = System.currentTimeMillis();
                 if(dist <= 4){
                     fagocitando = true;
-                    Fagocitacao fagocitacao = new Fagocitacao(alvo);
+                    Fagocitacao fagocitacao = new Fagocitacao();
+                    fagocitacao.iniciaFagocitacao();
                 }
                 move(alvo.getPos());
                 break;
@@ -58,11 +58,8 @@ public class Macrofago extends Celula{
     }
     
     public class Fagocitacao implements Runnable{
-
-        private CompostoQuimico alvo;
         
-        public Fagocitacao(CompostoQuimico alvo){
-            this.alvo = alvo;
+        public void iniciaFagocitacao(){
             Thread t = new Thread(this,"Fagocitando");
             t.start();
         }
@@ -71,8 +68,7 @@ public class Macrofago extends Celula{
         public void run() {
             try {
                 Thread.sleep(Parametros.TEMPO_FAGOCITACAO);
-            } catch (InterruptedException ex) {
-            }
+            } catch (InterruptedException ex) {}
             if(alvo.getEmissor() != null){
                 Patogeno tmp = (Patogeno) alvo.getEmissor();
                 getSistema().eliminaCelula(tmp); 
@@ -83,8 +79,7 @@ public class Macrofago extends Celula{
             } else {
                 fagocitando = false;
                 alvo = null;
-            }
-            
+            } 
         }
         
     }
