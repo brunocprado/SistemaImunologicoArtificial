@@ -10,5 +10,7 @@ SIA - JAVA
 * Macrofagos (70%)
 Resto 0%...
 
-* Camada Química (60%)
+* Camada Química (80%)
+* Log avançado
+* Estatisticas
 

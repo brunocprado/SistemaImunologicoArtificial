@@ -107,7 +107,7 @@ public class Grafico2D extends JPanel implements Runnable{
                     break;
                 case Patogeno:
                     Patogeno tmp = (Patogeno)celula;
-                    g.setColor(tmp.getCor());
+                    g.setColor(tmp.getVirus().getCor());
                     g.fillPolygon(tmp.getForma());
                     tmp = null;
                     break;

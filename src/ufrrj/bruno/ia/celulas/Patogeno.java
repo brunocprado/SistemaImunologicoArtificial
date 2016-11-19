@@ -1,60 +1,50 @@
 package ufrrj.bruno.ia.celulas;
 
-import java.awt.Color;
 import java.awt.Polygon;
-import java.util.Random;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.atributos.Poligono;
 import ufrrj.bruno.ia.atributos.Posicao;
+import ufrrj.bruno.ia.log.Virus;
 import ufrrj.bruno.ia.quimica.CompostoQuimico;
-import static ufrrj.bruno.ia.quimica.CompostoQuimico.TIPO_COMPOSTO.HISTAMINA;
+import ufrrj.bruno.ia.quimica.CompostoQuimico.TIPO_COMPOSTO;
 
 public class Patogeno extends Celula{
     
     private final long entrada = System.currentTimeMillis();
-    private final int codBiologico;  //Reconhecimento de padrao
+    private Virus tipo;
     private Poligono forma;
-    private Color cor;
     
     public Patogeno(SistemaImunologico sistema) {
         super(sistema,TIPO_CELULA.Patogeno);
-        Random r = new Random();
-        forma = new Poligono(new Random().nextInt(10) + 3,getPosicao());
-        cor = new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255));
-        codBiologico = new Random().nextInt(Integer.MAX_VALUE);
-
-        sistema.getCamada().compostos.add(new CompostoQuimico(HISTAMINA, 40,getPosicao(),this));
+        tipo = new Virus();
+        forma = new Poligono(tipo.getnLados(),getPosicao());
         
-        if(sistema.isDebug()) { sistema.imprime("Novo patogeno com identificador: "  + codBiologico); }
+        if(sistema.isDebug()) { sistema.imprime("Novo patogeno com identificador: "  + tipo.getIdentificador()); }
+        emiteQuimica();
     }
     
-    public Patogeno(SistemaImunologico sistema,int nLados,Color cor) {
+    public Patogeno(SistemaImunologico sistema,Virus tipo) {
         super(sistema,TIPO_CELULA.Patogeno);
-        forma = new Poligono(nLados,getPosicao());
-        this.cor = cor;
-        codBiologico = new Random().nextInt(Integer.MAX_VALUE);
+        forma = new Poligono(tipo.getnLados(),getPosicao());
+        this.tipo = tipo;
+        tipo.setQuantidade(tipo.getQuantidade()+1);
+        emiteQuimica();
     }
     
-    public Patogeno(SistemaImunologico sistema,int nLados,Color cor,Posicao pos) {
+    public Patogeno(SistemaImunologico sistema,Virus tipo,Posicao pos) {
         super(sistema,TIPO_CELULA.Patogeno,pos);
-        forma = new Poligono(nLados,getPosicao());
-        this.cor = cor;
-        codBiologico = new Random().nextInt(Integer.MAX_VALUE);
-    }
-    
-    public Patogeno(SistemaImunologico sistema,int nLados,Color cor,Posicao pos,int bio) {
-        super(sistema,TIPO_CELULA.Patogeno,pos);
-        forma = new Poligono(nLados,getPosicao());
-        this.cor = cor;
-        codBiologico = bio;
+        forma = new Poligono(tipo.getnLados(),getPosicao());
+        this.tipo = tipo;
+        tipo.setQuantidade(tipo.getQuantidade()+1);
+        emiteQuimica();
     }
     
     private void emiteQuimica(){
-        //getSistema().getCamada().editaPosicao(getPosicao().getX(), getPosicao().getY(), new CompostoQuimico(HISTAMINA,2));
+        getSistema().getCamada().compostos.add(new CompostoQuimico(TIPO_COMPOSTO.PAMP, 40,getPosicao(),this));
     }
     
     public void clona(){
-        getSistema().adicionaCelula(new Patogeno(getSistema(),forma.getnLados(),cor,getPosicao()));
+        getSistema().adicionaCelula(new Patogeno(getSistema(),tipo,getPosicao()));
     }
    
     public void run() {
@@ -96,11 +86,8 @@ public class Patogeno extends Celula{
 
     @Override
     public void loop() {
+        System.out.println("a");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int getCodBiologico() {
-        return codBiologico;
     }
 
     public Polygon getForma() {
@@ -110,9 +97,9 @@ public class Patogeno extends Celula{
     public long getEntrada() {
         return entrada;
     }
-    
-    public Color getCor() {
-        return cor;
+
+    public Virus getVirus() {
+        return tipo;
     }
     
 }

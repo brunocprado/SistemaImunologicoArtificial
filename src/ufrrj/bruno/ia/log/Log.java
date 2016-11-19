@@ -1,4 +1,4 @@
-package ufrrj.bruno.ia.Telas;
+package ufrrj.bruno.ia.log;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

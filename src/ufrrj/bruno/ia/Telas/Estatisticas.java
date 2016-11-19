@@ -1,4 +1,4 @@
-package ufrrj.bruno.ia.Telas;
+package ufrrj.bruno.ia.telas;
 
 import java.awt.Color;
 import java.awt.Graphics;

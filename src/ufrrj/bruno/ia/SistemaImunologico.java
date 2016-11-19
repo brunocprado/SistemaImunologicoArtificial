@@ -4,11 +4,12 @@ import ufrrj.bruno.ia.quimica.CamadaSobreposta;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import ufrrj.bruno.ia.Telas.Log;
+import ufrrj.bruno.ia.log.Log;
 import ufrrj.bruno.ia.celulas.Celula;
 import ufrrj.bruno.ia.celulas.Linfocito;
 import ufrrj.bruno.ia.celulas.Macrofago;
 import ufrrj.bruno.ia.celulas.Neutrofilo;
+import ufrrj.bruno.ia.log.Virus;
 
 /**
  * Classe principal <br>
@@ -22,6 +23,7 @@ public class SistemaImunologico implements Runnable{
     //======| Variaveis |=======//
     private final int nInicial;
     private final ConcurrentLinkedQueue<Celula> celulas = new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<Virus> virus = new ConcurrentLinkedQueue<>();
     private final CamadaSobreposta camada;
     private final Log log = new Log();
     //======|  RUNTIME  |======//
@@ -128,6 +130,10 @@ public class SistemaImunologico implements Runnable{
         return mostraCamada;
     }
 
+    public ConcurrentLinkedQueue<Virus> getVirus() {
+        return virus;
+    }
+    
     public void setMostraCamada(boolean mostraCamada) {
         this.mostraCamada = mostraCamada;
     }

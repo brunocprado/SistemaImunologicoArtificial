@@ -1,4 +1,4 @@
-package ufrrj.bruno.ia.Telas;
+package ufrrj.bruno.ia.telas;
 
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
@@ -10,6 +10,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.celulas.Patogeno;
@@ -24,9 +25,10 @@ public class Janela extends JFrame{
     public Janela(String titulo,SistemaImunologico sistema){
         super(titulo);
         this.sistema = sistema;
-        this.setLayout(new BorderLayout());
-        this.setLocationRelativeTo(null);
-        this.setSize(Parametros.LARGURA,Parametros.ALTURA);      
+        setLayout(new BorderLayout());
+        setSize(Parametros.LARGURA,Parametros.ALTURA); 
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setFocusable(true);
         
         Grafico2D grafico = new Grafico2D(sistema);
@@ -69,20 +71,18 @@ public class Janela extends JFrame{
     public final void criaMenus(){
         JMenuBar menu = new JMenuBar();
         JMenu menu1 = new JMenu("Novo");
+            JMenuItem submenu1 = new JMenuItem("Patogeno");
         JMenu menu2 = new JMenu("Pausar");
         JMenu menu3 = new JMenu("Estatisticas");
         JMenu menu4 = new JMenu("Opções");
         JMenu menu5 = new JMenu("Sobre");
         
-        menu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                for(int i=0;i<5;i++){
-                    //SÓ PRA TESTE MESMO
-                    sistema.adicionaCelula(new Patogeno(sistema));
-                }
-            }
-        });
+        submenu1.addActionListener(e -> {
+            NovoVirus novoVirus = new NovoVirus(sistema);
+            novoVirus.setLocationRelativeTo(getContentPane());
+            novoVirus.setVisible(true);
+        });      
+        menu1.add(submenu1);
         menu.add(menu1);
 
         menu2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,7 +154,5 @@ public class Janela extends JFrame{
                 }
             }
         }
-      
-    }
-        
+    }      
 }

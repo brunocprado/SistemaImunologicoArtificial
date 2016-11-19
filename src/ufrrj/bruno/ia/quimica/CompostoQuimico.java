@@ -5,7 +5,10 @@ import ufrrj.bruno.ia.celulas.Celula;
 
 public class CompostoQuimico {   
     
-    public enum TIPO_COMPOSTO {HISTAMINA,PROSTAGLANDINA};
+    /**
+     * PAMP - Padrões moleculares associados a patógenos
+    */
+    public static enum TIPO_COMPOSTO {PAMP,HISTAMINA,PROSTAGLANDINA};
     
     private final TIPO_COMPOSTO tipo;
     private Celula emissor;

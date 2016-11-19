@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ufrrj.bruno.ia.Telas;
+package ufrrj.bruno.ia.telas;
 
 import java.awt.Toolkit;
 import java.io.IOException;
