@@ -86,7 +86,7 @@ public class Patogeno extends Celula{
 
     @Override
     public void loop() {
-        System.out.println("a");
+        //System.out.println("a");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

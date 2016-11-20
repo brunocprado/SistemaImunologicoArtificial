@@ -13,14 +13,15 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
-import ufrrj.bruno.ia.celulas.Patogeno;
+import ufrrj.bruno.ia.log.Virus;
+import ufrrj.bruno.ia.log.VisualizaVirus;
 import ufrrj.bruno.ia.renderizacao.Grafico2D;
 
 public class Janela extends JFrame{
         
-//    private final JFrame fEstatisticas;
     private final Overlay overlay;
     private final SistemaImunologico sistema;
+    private final JDesktopPane fundo = new JDesktopPane();
     
     public Janela(String titulo,SistemaImunologico sistema){
         super(titulo);
@@ -34,8 +35,6 @@ public class Janela extends JFrame{
         Grafico2D grafico = new Grafico2D(sistema);
         overlay = new Overlay(sistema);
         
-        JDesktopPane fundo = new JDesktopPane();
-                
         add(fundo,BorderLayout.CENTER);      
         
         fundo.add(overlay);
@@ -48,9 +47,7 @@ public class Janela extends JFrame{
         criaMenus();    
        
         setIconImage(Toolkit.getDefaultToolkit().createImage(getClass().getResource("/icone.png")));    
-        
-        Monitor monitor = new Monitor();
-        
+         
         addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e){
                 grafico.setBounds(0,0,getWidth(),getContentPane().getSize().height);
@@ -64,8 +61,9 @@ public class Janela extends JFrame{
 //                setExtendedState(JFrame.MAXIMIZED_BOTH); 
 //                setUndecorated(true);
             }
-        });
+        });  
         
+        Monitor monitor = new Monitor();
     }
     
     public final void criaMenus(){
@@ -73,13 +71,13 @@ public class Janela extends JFrame{
         JMenu menu1 = new JMenu("Novo");
             JMenuItem submenu1 = new JMenuItem("Patogeno");
         JMenu menu2 = new JMenu("Pausar");
-        JMenu menu3 = new JMenu("Estatisticas");
-        JMenu menu4 = new JMenu("Opções");
-        JMenu menu5 = new JMenu("Sobre");
+        JMenu menu3 = new JMenu("Opções");
+        JMenu menu4 = new JMenu("Sobre");
         
         submenu1.addActionListener(e -> {
-            NovoVirus novoVirus = new NovoVirus(sistema);
+            NovoVirus novoVirus = new NovoVirus(sistema,this);
             novoVirus.setLocationRelativeTo(getContentPane());
+            novoVirus.setIconImage(getIconImage());
             novoVirus.setVisible(true);
         });      
         menu1.add(submenu1);
@@ -95,14 +93,6 @@ public class Janela extends JFrame{
 
         menu3.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {    
-                //fEstatisticas.setVisible(true);
-            }
-        });
-        menu.add(menu3);
-
-        menu4.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if(overlay.isVisible()){
                     overlay.setVisible(false);
@@ -112,9 +102,9 @@ public class Janela extends JFrame{
                 }
             }
         });
-        menu.add(menu4);
+        menu.add(menu3);
         
-        menu5.addMouseListener(new java.awt.event.MouseAdapter() {
+        menu4.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sobre sobre = new Sobre();
@@ -122,9 +112,15 @@ public class Janela extends JFrame{
                 sobre.setVisible(true);
             }
         });
-        menu.add(menu5);
+        menu.add(menu4);
 
         setJMenuBar(menu);
+    }
+    
+    public void visualizaVirus(Virus virus){
+        VisualizaVirus tmp = new VisualizaVirus(virus,sistema);
+        tmp.setVisible(true);
+        fundo.add(tmp,0);
     }
     
     private class Monitor implements Runnable{

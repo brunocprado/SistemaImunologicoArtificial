@@ -10,25 +10,25 @@ import java.util.Random;
 public class Virus {
     
     private int quantidade = 0;
-//    private final SistemaImunologico sistema;
-    private final int identificador;
+    private final String identificador;
     private Color cor;
     private int nLados;
     
-    public Virus(){
+    public Virus(){ 
         Random r = new Random();
         nLados = r.nextInt(10) + 3;
         cor = new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255));
-        identificador = Integer.MAX_VALUE - new Random().nextInt(Integer.MAX_VALUE/10);
+        //nome = "Só pra teste";
+        identificador = "Teste";
     }
     
-    public Virus(Color cor,int nLados,int identificador){
+    public Virus(Color cor,int nLados,String identificador){
         this.cor = cor;
         this.nLados = nLados;
         this.identificador = identificador;
     }
  
-    public int getIdentificador() {
+    public String getIdentificador() {
         return identificador;
     }
 
