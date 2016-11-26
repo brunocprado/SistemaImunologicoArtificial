@@ -6,6 +6,8 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -22,6 +24,7 @@ public class Janela extends JFrame{
     private final Overlay overlay;
     private final SistemaImunologico sistema;
     private final JDesktopPane fundo = new JDesktopPane();
+    private Map<Virus,VisualizaVirus> estatisticas = new HashMap<>();
     
     public Janela(String titulo,SistemaImunologico sistema){
         super(titulo);
@@ -39,10 +42,6 @@ public class Janela extends JFrame{
         
         fundo.add(overlay);
         fundo.add(grafico);      
-        
-//        fEstatisticas = new JFrame("Estatisticas");
-//        fEstatisticas.setSize(200,720);
-//        fEstatisticas.getContentPane().add(new Estatisticas(sistema));
         
         criaMenus();    
        
@@ -118,8 +117,13 @@ public class Janela extends JFrame{
     }
     
     public void visualizaVirus(Virus virus){
-        VisualizaVirus tmp = new VisualizaVirus(virus,sistema);
-        tmp.setVisible(true);
+        VisualizaVirus tmp = estatisticas.get(virus);
+        tmp.setVisible(!tmp.isVisible());
+    }
+    
+    public void novoVirus(Virus virus){
+        VisualizaVirus tmp = new VisualizaVirus(virus,sistema);   
+        estatisticas.put(virus, tmp);
         fundo.add(tmp,0);
     }
     

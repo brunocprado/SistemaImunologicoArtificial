@@ -8,8 +8,6 @@ package ufrrj.bruno.ia.telas;
 import java.awt.Color;
 import javax.swing.JColorChooser;
 import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import ufrrj.bruno.ia.SistemaImunologico;
@@ -227,6 +225,7 @@ public class NovoVirus extends javax.swing.JFrame {
         if(!txtNLados.getText().equals("")){ nLados = Integer.parseInt(txtNLados.getText()); }
         Virus virus = new Virus(painelCor.getBackground(),nLados,txtNome.getText());
         sistema.getVirus().add(virus);
+        janela.novoVirus(virus);
         JMenu menu = new JMenu(txtNome.getText());
         menu.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override

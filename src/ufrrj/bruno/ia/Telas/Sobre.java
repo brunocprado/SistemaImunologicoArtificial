@@ -5,13 +5,6 @@
  */
 package ufrrj.bruno.ia.telas;
 
-import java.awt.Toolkit;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import ufrrj.bruno.ia.Parametros;
 
 /**
