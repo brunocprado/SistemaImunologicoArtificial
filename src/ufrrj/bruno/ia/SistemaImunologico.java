@@ -28,7 +28,7 @@ public class SistemaImunologico implements Runnable{
     private final Log log = new Log();
     //======|  RUNTIME  |======//
     private final long inicio = System.currentTimeMillis();
-    private boolean mostraCamada = false;
+    private boolean mostraCamada = true;
     public boolean pausada = false;
     private boolean debug = false;
     

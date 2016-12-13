@@ -24,7 +24,7 @@ public class Overlay extends JInternalFrame{
  
         //CONSTROI TELA
         
-        JRadioButton camadaQuimica = new JRadioButton("Camada Química");
+        JRadioButton camadaQuimica = new JRadioButton("Camada Química",true);
         camadaQuimica.setFocusable(false);
         camadaQuimica.addChangeListener(l -> {
             sistema.setMostraCamada(camadaQuimica.isSelected());

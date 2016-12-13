@@ -127,12 +127,10 @@ public class Janela extends JFrame{
         fundo.add(tmp,0);
     }
     
-    private class Monitor implements Runnable{
-        
-        private final Thread t;
+    private final class Monitor implements Runnable{
         
         public Monitor(){
-            t = new Thread(this,"Monitor");
+            Thread t = new Thread(this,"Monitor");
             t.start();
         }
         
