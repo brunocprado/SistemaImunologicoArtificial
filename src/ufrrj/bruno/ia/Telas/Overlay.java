@@ -1,10 +1,16 @@
 package ufrrj.bruno.ia.telas;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import ufrrj.bruno.ia.SistemaImunologico;
+import ufrrj.bruno.ia.celulas.Celula;
+import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.*;
 
 public class Overlay extends JInternalFrame{
     
@@ -14,7 +20,7 @@ public class Overlay extends JInternalFrame{
     
     public Overlay(SistemaImunologico sistema){
         super("Opções",false,true);
-        setSize(180,150);
+        setSize(180,280);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setFocusable(false);
         setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
@@ -41,20 +47,37 @@ public class Overlay extends JInternalFrame{
         add(debug);
         
         setFrameIcon(new ImageIcon(ClassLoader.getSystemResource("opcoes.png")));    
+ 
+        JPanel painelExibir = new JPanel();    
+        painelExibir.setBorder(BorderFactory.createTitledBorder("Exibir"));
+        painelExibir.setPreferredSize(new Dimension(150,120));
+        painelExibir.setLayout(new BoxLayout(painelExibir, BoxLayout.PAGE_AXIS)); 
         
-//        JButton telaCheia = new JButton("Tela cheia");
-////        telaCheia.setLayout(null);
-////        telaCheia.setPreferredSize(new Dimension(getWidth() - 30,20));
-//        telaCheia.addActionListener(l -> {;
-//            System.out.println("aaa");
-//        });
-//        add(telaCheia)
-
-//        JPanel painelExibir = new JPanel();
-//        painelExibir.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
-//        painelExibir.add(new JRadioButton("TESTE"));
-//        
-//        add(painelExibir);
+        //CRIA RADIOS
+        JRadioButton c1 = new JRadioButton("Macrofagos",true);
+        JRadioButton c2 = new JRadioButton("Linfocitos",true);
+        JRadioButton c3 = new JRadioButton("Neutrofilos",true);
+        JRadioButton c4 = new JRadioButton("Patogenos",true);
+        
+        painelExibir.add(c1); painelExibir.add(c2); painelExibir.add(c3); painelExibir.add(c4);
+   
+        add(painelExibir);
+        
+        c1.addChangeListener(l -> {
+            sistema.exibir.put(Macrofago,c1.isSelected());
+        });
+        
+        c2.addChangeListener(l -> {
+            sistema.exibir.put(Linfocito,c2.isSelected());
+        });
+        
+        c3.addChangeListener(l -> {
+            sistema.exibir.put(Neutrofilo,c3.isSelected());
+        });
+        
+        c4.addChangeListener(l -> {
+            sistema.exibir.put(Patogeno,c4.isSelected());
+        });
     }
     
 }

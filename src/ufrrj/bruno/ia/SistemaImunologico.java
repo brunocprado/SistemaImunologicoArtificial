@@ -1,11 +1,14 @@
 package ufrrj.bruno.ia;
 
+import java.util.HashMap;
 import ufrrj.bruno.ia.quimica.CamadaSobreposta;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import ufrrj.bruno.ia.log.Log;
 import ufrrj.bruno.ia.celulas.Celula;
+import ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA;
 import ufrrj.bruno.ia.celulas.Linfocito;
 import ufrrj.bruno.ia.celulas.Macrofago;
 import ufrrj.bruno.ia.celulas.Neutrofilo;
@@ -31,11 +34,17 @@ public class SistemaImunologico implements Runnable{
     private boolean mostraCamada = true;
     public boolean pausada = false;
     private boolean debug = false;
+    //======| DISPLAY |======//
+    public Map<TIPO_CELULA,Boolean> exibir = new HashMap<>();
     
     public SistemaImunologico(){
         camada = new CamadaSobreposta(this);
         nInicial = new Random().nextInt(Parametros.TAM_MEDIO_SUPERIOR - Parametros.TAM_MEDIO_INFERIOR) + Parametros.TAM_MEDIO_INFERIOR;
         geraPrimeiraGeracao();    
+        exibir.put(TIPO_CELULA.Macrofago, true);
+        exibir.put(TIPO_CELULA.Linfocito, true);
+        exibir.put(TIPO_CELULA.Neutrofilo, true);
+        exibir.put(TIPO_CELULA.Patogeno, true);
         iniciaThread();
     }
     

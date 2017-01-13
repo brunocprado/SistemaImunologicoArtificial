@@ -16,7 +16,7 @@ public class Parametros {
     public final static int TAMX = 1280;
     public final static int TAMY = 720;
     
-    public final static int TAM_MEDIO_INFERIOR = 400;
+    public final static int TAM_MEDIO_INFERIOR = 1050;
     public final static int TAM_MEDIO_SUPERIOR = 1100;
     //Fonte :In the US this is usually expressed as 4,000–11,000 white blood cells per microliter of blood. 
     //Total leukocytes: 4.00-11.0 x 10 9/L
