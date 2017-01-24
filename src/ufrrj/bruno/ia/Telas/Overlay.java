@@ -9,7 +9,6 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import ufrrj.bruno.ia.SistemaImunologico;
-import ufrrj.bruno.ia.celulas.Celula;
 import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.*;
 
 public class Overlay extends JInternalFrame{
@@ -20,7 +19,7 @@ public class Overlay extends JInternalFrame{
     
     public Overlay(SistemaImunologico sistema){
         super("Opções",false,true);
-        setSize(180,280);
+        setSize(190,280);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setFocusable(false);
         setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));

@@ -48,6 +48,9 @@ public class Patogeno extends Celula{
     }
    
     public void run() {
+        
+//        mov;
+        
 //        while(ativa){    
 //            if(nCelulas() == 0){
 //                //pausa(20);
