@@ -47,7 +47,7 @@ public class Log extends JFrame{
         getContentPane().add(scroll,BorderLayout.CENTER);
         
         JTextField comando = new JTextField();
-        
+                
         getContentPane().add(comando,BorderLayout.SOUTH);
         
         comando.addKeyListener(new KeyAdapter(){
@@ -59,13 +59,16 @@ public class Log extends JFrame{
                 }
             }
         }); 
+        
+
                
         setVisible(true);
     }
     
     public void executaComando(String comando){
         String[] tmp = comando.split(" ");
-        sistema.mudaParametro(tmp[0], Float.parseFloat(tmp[1]));
+        sistema.mudaParametro(tmp[0], Integer.parseInt(tmp[1]));
+        imprime(tmp[0] + " = " + tmp[1]);
     }
     
     public void imprime(String texto){

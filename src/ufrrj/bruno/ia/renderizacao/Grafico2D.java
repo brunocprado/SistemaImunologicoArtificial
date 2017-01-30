@@ -12,7 +12,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.util.Iterator;
 import javax.swing.JPanel;
-import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.celulas.Celula;
 import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.Linfocito;
@@ -39,8 +38,6 @@ public class Grafico2D extends JPanel implements Runnable{
     //=========| RUNTIME |=========//
     private int cameraX,cameraY;   
     private double zoom = 1;
-    private static final int tamX = Parametros.TAMX/8;
-    private static final int tamY = Parametros.TAMY/8;
     
     public Grafico2D(SistemaImunologico sistema){
         this.sistema = sistema;    
@@ -90,7 +87,7 @@ public class Grafico2D extends JPanel implements Runnable{
         
         g.drawImage(sangue,0,0,this);
         
-        g.scale(zoom * getWidth()/Parametros.TAMX, zoom * getHeight()/Parametros.TAMY);
+        g.scale(zoom * getWidth()/sistema.getParametro("TAMX"), zoom * getHeight()/sistema.getParametro("TAMY"));
 
         if(zoom > 1){;
             g.translate(cameraX,cameraY);
@@ -171,7 +168,7 @@ public class Grafico2D extends JPanel implements Runnable{
     public void run(){
         while(true){
             repaint();      
-            pausa(1000/Parametros.LIMITE_FPS);
+            pausa(1000/60);
         }
     }
 }

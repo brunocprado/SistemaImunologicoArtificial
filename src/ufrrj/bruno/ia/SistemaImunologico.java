@@ -20,6 +20,7 @@ import org.xml.sax.SAXException;
 import ufrrj.bruno.ia.log.Log;
 import ufrrj.bruno.ia.celulas.Celula;
 import ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA;
+import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.Comum;
 import ufrrj.bruno.ia.celulas.Linfocito;
 import ufrrj.bruno.ia.celulas.Macrofago;
 import ufrrj.bruno.ia.celulas.Neutrofilo;
@@ -41,7 +42,7 @@ public class SistemaImunologico implements Runnable{
     private final ConcurrentLinkedQueue<Virus> virus = new ConcurrentLinkedQueue<>();
     private final CamadaSobreposta camada;
     private final Log log = new Log(this);
-    private Map<String,Float> parametros = new HashMap<>();
+    private Map<String,Integer> parametros = new HashMap<>();
     //======|  RUNTIME  |======//
     private final long inicio = System.currentTimeMillis();
     private boolean mostraCamada = true;
@@ -51,15 +52,15 @@ public class SistemaImunologico implements Runnable{
     public Map<TIPO_CELULA,Boolean> exibir = new HashMap<>();
     
     public SistemaImunologico(){
+        carregaParametros();
         camada = new CamadaSobreposta(this);
-        nInicial = new Random().nextInt(Parametros.TAM_MEDIO_SUPERIOR - Parametros.TAM_MEDIO_INFERIOR) + Parametros.TAM_MEDIO_INFERIOR;
-        geraPrimeiraGeracao();    
+        nInicial = new Random().nextInt(parametros.get("TAM_MEDIO_SUPERIOR") - parametros.get("TAM_MEDIO_INFERIOR")) + parametros.get("TAM_MEDIO_INFERIOR");
+        geraPrimeiraGeracao();
         exibir.put(TIPO_CELULA.Macrofago, true);
         exibir.put(TIPO_CELULA.Linfocito, true);
         exibir.put(TIPO_CELULA.Neutrofilo, true);
         exibir.put(TIPO_CELULA.Patogeno, true);
         iniciaThread();
-        carregaParametros();
     }
     
     public SistemaImunologico(int nInicial){
@@ -80,16 +81,15 @@ public class SistemaImunologico implements Runnable{
 //        for(i=0;i<10;i++){
 //            celulas.add(new Comum(this));
 //        }
-        for(i=0;i<(nInicial*Parametros.NEUTROFILOS);i++){
+        for(i=0;i<(nInicial*parametros.get("NEUTROFILOS"))/1000;i++){
             celulas.add(new Neutrofilo(this));
         }
-        for(i=0;i<(nInicial*Parametros.MACROFAGOS);i++){
+        for(i=0;i<(nInicial*parametros.get("MACROFAGOS"))/1000;i++){
             celulas.add(new Macrofago(this));
         }
-        for(i=0;i<(nInicial*Parametros.LINFOCITOS);i++){
+        for(i=0;i<(nInicial*parametros.get("LINFOCITOS"))/1000;i++){
             celulas.add(new Linfocito(this));
         }
-        //celulas.add(new Patogeno(this));
     }
     
     public void pausa(int tempo){
@@ -175,8 +175,11 @@ public class SistemaImunologico implements Runnable{
             for (int i = 0; i < childs.getLength(); i++) {
                 child = childs.item(i);
                 if(child.getNodeType() != child.ELEMENT_NODE) continue;
-                parametros.put(child.getNodeName(), Float.parseFloat(child.getTextContent()));
-            }          
+                parametros.put(child.getNodeName(), Integer.parseInt(child.getTextContent()));
+            }     
+            System.out.println(parametros);
+                        
+
         } catch (IOException ex) {
             Logger.getLogger(Patogeno.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParserConfigurationException ex) {
@@ -184,13 +187,14 @@ public class SistemaImunologico implements Runnable{
         } catch (SAXException ex) {
             Logger.getLogger(SistemaImunologico.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
     
-    public float getParametro(String nome){
+    public int getParametro(String nome){
         return parametros.get(nome);
     }
     
-    public void mudaParametro(String nome,float valor){
+    public void mudaParametro(String nome,int valor){
         parametros.put(nome.toUpperCase(), valor);
     }
     

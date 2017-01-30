@@ -2,7 +2,6 @@ package ufrrj.bruno.ia.celulas;
 
 import ufrrj.bruno.ia.atributos.Posicao;
 import java.util.Random;
-import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 
 abstract public class Celula implements Comportamento{
@@ -22,8 +21,8 @@ abstract public class Celula implements Comportamento{
         qt++; id = qt; this.sistema = sistema; this.tipo = tipo;
         Random gerador = new Random();
         posicao = new Posicao(
-                gerador.nextInt(Parametros.TAMX),
-                gerador.nextInt(Parametros.TAMY));
+                gerador.nextInt(sistema.getParametro("TAMX")),
+                gerador.nextInt(sistema.getParametro("TAMY")));
     }
     
     public Celula(SistemaImunologico sistema,TIPO_CELULA tipo,Posicao pos){

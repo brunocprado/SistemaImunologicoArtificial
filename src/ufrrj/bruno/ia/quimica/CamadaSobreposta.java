@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 
 /**
@@ -16,8 +15,8 @@ public class CamadaSobreposta implements Runnable{
     
     private final SistemaImunologico sistema;
     public ConcurrentLinkedQueue<CompostoQuimico> compostos = new ConcurrentLinkedQueue<>();
-    private static final int tamX = Parametros.TAMX/8;
-    private static final int tamY = Parametros.TAMY/8;
+//    private static final int tamX = Parametros.TAMX/8;
+//    private static final int tamY = Parametros.TAMY/8;
     
     public CamadaSobreposta(SistemaImunologico sistema){
         this.sistema = sistema;
@@ -48,7 +47,7 @@ public class CamadaSobreposta implements Runnable{
                     i.remove();
                 }
             }
-            pausa(Parametros.TEMPO_PROPAGACAO_QUIMICOS);
+            pausa(sistema.getParametro("TEMPO_PROPAGACAO_QUIMICOS"));
         }
     }
       

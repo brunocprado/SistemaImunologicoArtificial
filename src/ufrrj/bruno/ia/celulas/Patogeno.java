@@ -1,16 +1,6 @@
 package ufrrj.bruno.ia.celulas;
 
 import java.awt.Polygon;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.atributos.Poligono;
 import ufrrj.bruno.ia.atributos.Posicao;
@@ -63,7 +53,7 @@ public class Patogeno extends Celula{
     @Override
     public void loop() {             
         if((System.currentTimeMillis() - inicio) > getSistema().getParametro("DELAY_PROPAGACAO")){
-            inicio += Parametros.DELAY_PROPAGACAO;
+            inicio += getSistema().getParametro("DELAY_PROPAGACAO");
             emiteQuimica();
         }
         

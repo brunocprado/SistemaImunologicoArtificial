@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    * Parametros do sistema. <br>
+    * Trocar para .xml no futuro.
+    * Temporizações serão reajustadas por meio de alg genético.
+    * @author Bruno Prado
+-->
+
 <parametros>
+    <!-- Visualizacao -->
+    <LIMITE_FPS>60</LIMITE_FPS>
+    <LARGURA>1280</LARGURA>
+    <ALTURA>720</ALTURA>
+    
+    <!-- Simulacao -->
+    <TAMX>1280</TAMX>
+    <TAMY>720</TAMY>
+    <TAM_MEDIO_INFERIOR>400</TAM_MEDIO_INFERIOR>
+    <TAM_MEDIO_SUPERIOR>1100</TAM_MEDIO_SUPERIOR>
+    
+    <!--
+        Fonte :In the US this is usually expressed as 4,000–11,000 white blood cells per microliter of blood. 
+        Total leukocytes: 4.00-11.0 x 10 9/L
+        Adult	3.5 3.9 4.1 4.5	  9.0 10.0 10.9 11    - x109/L
+    -->
+    
+    <!-- Temporizacao -->
+    
     <TEMPO_PROPAGACAO_QUIMICOS>100</TEMPO_PROPAGACAO_QUIMICOS>
     <TEMPO_FAGOCITACAO>500</TEMPO_FAGOCITACAO>
     <DELAY_PROPAGACAO>400</DELAY_PROPAGACAO>
     
-    <MACROFAGOS>0.053</MACROFAGOS>
-    <NEUTROFILOS>0.65</NEUTROFILOS>
-    <LINFOCITOS>0.26</LINFOCITOS>
+    <!-- Proporcoes x1000 -->
+    
+    <MACROFAGOS>53</MACROFAGOS>
+    <NEUTROFILOS>650</NEUTROFILOS>
+    <LINFOCITOS>260</LINFOCITOS>
 </parametros>

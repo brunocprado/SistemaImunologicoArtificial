@@ -13,7 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.log.Virus;
 import ufrrj.bruno.ia.log.VisualizaVirus;
@@ -30,7 +29,7 @@ public class Janela extends JFrame{
         super(titulo);
         this.sistema = sistema;
         setLayout(new BorderLayout());
-        setSize(Parametros.LARGURA,Parametros.ALTURA); 
+        setSize(1280,720); 
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setFocusable(true);

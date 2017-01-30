@@ -2,7 +2,6 @@ package ufrrj.bruno.ia.celulas;
 
 import ufrrj.bruno.ia.atributos.Posicao;
 import java.util.Iterator;
-import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.quimica.CompostoQuimico;
 
@@ -67,7 +66,7 @@ public class Macrofago extends Celula{
         @Override
         public void run() {
             try {
-                Thread.sleep(Parametros.TEMPO_FAGOCITACAO);
+                Thread.sleep(getSistema().getParametro("TEMPO_FAGOCITACAO"));
             } catch (InterruptedException ex) {}
             if(alvo.getEmissor() != null){
                 Patogeno tmp = (Patogeno) alvo.getEmissor();
