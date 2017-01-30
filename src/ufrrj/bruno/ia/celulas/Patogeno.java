@@ -1,6 +1,16 @@
 package ufrrj.bruno.ia.celulas;
 
 import java.awt.Polygon;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+import ufrrj.bruno.ia.Parametros;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.atributos.Poligono;
 import ufrrj.bruno.ia.atributos.Posicao;
@@ -11,8 +21,11 @@ import ufrrj.bruno.ia.quimica.CompostoQuimico.TIPO_COMPOSTO;
 public class Patogeno extends Celula{
     
     private final long entrada = System.currentTimeMillis();
-    private Virus tipo;
+    private final Virus tipo;
     private Poligono forma;
+    
+    //====| RUNTIME |=====//
+    private long inicio = System.currentTimeMillis();
     
     public Patogeno(SistemaImunologico sistema) {
         super(sistema,TIPO_CELULA.Patogeno);
@@ -46,49 +59,18 @@ public class Patogeno extends Celula{
     public void clona(){
         getSistema().adicionaCelula(new Patogeno(getSistema(),tipo,getPosicao()));
     }
-   
-    public void run() {
-        
-//        mov;
-        
-//        while(ativa){    
-//            if(nCelulas() == 0){
-//                //pausa(20);
-//                continue;
-//            }
-//            Point pos = mundo.getCelulas().get(verificaMaisProximo()).getPosicao();
-//            if(pos == null){ 
-//                pausa(5);               
-//                continue;
-//            }
-            //EXECUTA MOVIMENTO
-//            double deltaX = pos.x - getPosicao().x;
-//            double deltaY = pos.y - getPosicao().y;
-//            
-//            if(pos == getPosicao()){continue;}
-//            double dist = Math.abs(getPosicao().x - pos.x)  +  Math.abs(getPosicao().y - pos.y);
-//             
-//            if(dist < 16){
-//                pausa(100);
-//                mundo.eliminaCelula(mundo.getCelulas().get(verificaMaisProximo()));
-//                Invasor tmp = new Invasor(mundo);
-//                tmp.setPosicao(pos);
-//                mundo.adicionaCelula(tmp);
-//            }
-//            
-//            double angulo = Math.atan2(deltaY,deltaX);    
-//            double movX = getPosicao().x + (getVelMovimento() * Math.cos(angulo));
-//            double movY = getPosicao().y + (getVelMovimento() * Math.sin(angulo));
-//            if(deltaX == 0){ movX = getPosicao().x; }
-//            if(deltaY == 0){ movY = getPosicao().y; }
-//            setPosicao(movX,movY);
-
-            //pausa(20);   
-        }
-        //t.interrupt();
 
     @Override
-    public void loop() {
+    public void loop() {             
+        if((System.currentTimeMillis() - inicio) > getSistema().getParametro("DELAY_PROPAGACAO")){
+            inicio += Parametros.DELAY_PROPAGACAO;
+            emiteQuimica();
+        }
+        
+        
+        
+	
+        //move(new Posicao(400,400));
         //System.out.println("a");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

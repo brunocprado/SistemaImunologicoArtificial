@@ -13,7 +13,7 @@ abstract public class Celula implements Comportamento{
     private TIPO_CELULA tipo;
     //=====| CARACTERISTICAS |=====//
     public int tamanhoX,tamanhoY;
-    private double velMovimento;
+    private double velMovimento = 2;
     //========|  RUNTIME  |=======//
     private Posicao posicao;    
     private final SistemaImunologico sistema;

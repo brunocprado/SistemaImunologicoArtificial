@@ -1,17 +1,29 @@
 package ufrrj.bruno.ia;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import ufrrj.bruno.ia.quimica.CamadaSobreposta;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 import ufrrj.bruno.ia.log.Log;
 import ufrrj.bruno.ia.celulas.Celula;
 import ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA;
 import ufrrj.bruno.ia.celulas.Linfocito;
 import ufrrj.bruno.ia.celulas.Macrofago;
 import ufrrj.bruno.ia.celulas.Neutrofilo;
+import ufrrj.bruno.ia.celulas.Patogeno;
 import ufrrj.bruno.ia.log.Virus;
 
 /**
@@ -28,7 +40,8 @@ public class SistemaImunologico implements Runnable{
     private final ConcurrentLinkedQueue<Celula> celulas = new ConcurrentLinkedQueue<>();
     private final ConcurrentLinkedQueue<Virus> virus = new ConcurrentLinkedQueue<>();
     private final CamadaSobreposta camada;
-    private final Log log = new Log();
+    private final Log log = new Log(this);
+    private Map<String,Float> parametros = new HashMap<>();
     //======|  RUNTIME  |======//
     private final long inicio = System.currentTimeMillis();
     private boolean mostraCamada = true;
@@ -46,6 +59,7 @@ public class SistemaImunologico implements Runnable{
         exibir.put(TIPO_CELULA.Neutrofilo, true);
         exibir.put(TIPO_CELULA.Patogeno, true);
         iniciaThread();
+        carregaParametros();
     }
     
     public SistemaImunologico(int nInicial){
@@ -145,6 +159,39 @@ public class SistemaImunologico implements Runnable{
     
     public void setMostraCamada(boolean mostraCamada) {
         this.mostraCamada = mostraCamada;
+    }
+    
+    private void carregaParametros(){
+        try {
+            File arquivo = new File("res/parametros.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder;
+            dBuilder = dbFactory.newDocumentBuilder();
+            Document documento = dBuilder.parse(arquivo);
+            
+            Node user = documento.getDocumentElement();
+            NodeList childs = user.getChildNodes();
+            Node child;
+            for (int i = 0; i < childs.getLength(); i++) {
+                child = childs.item(i);
+                if(child.getNodeType() != child.ELEMENT_NODE) continue;
+                parametros.put(child.getNodeName(), Float.parseFloat(child.getTextContent()));
+            }          
+        } catch (IOException ex) {
+            Logger.getLogger(Patogeno.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(SistemaImunologico.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(SistemaImunologico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public float getParametro(String nome){
+        return parametros.get(nome);
+    }
+    
+    public void mudaParametro(String nome,float valor){
+        parametros.put(nome.toUpperCase(), valor);
     }
     
     @Override

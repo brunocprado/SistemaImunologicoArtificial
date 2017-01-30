@@ -1,12 +1,14 @@
 package ufrrj.bruno.ia;
 
+import java.util.Map;
+
 /**
  * Parametros do sistema. <br>
  * Trocar para .xml no futuro.
  * Temporizações serão reajustadas por meio de alg genético.
  * @author Bruno Prado
 */
-public class Parametros {
+public class Parametros{
     //===| Config Visualização |===//
     public final static int LIMITE_FPS = 60;
     public final static int LARGURA = 1280;
@@ -24,7 +26,7 @@ public class Parametros {
     
     public final static int TEMPO_PROPAGACAO_QUIMICOS = 100;
     public final static int TEMPO_FAGOCITACAO = 500;
-    
+    public static long DELAY_PROPAGACAO = 400;
     //====| Proporcao real |====//
     public static double MACROFAGOS  = 0.053;
     public static double NEUTROFILOS = 0.65;
@@ -33,4 +35,6 @@ public class Parametros {
     //Fonte : Wikipedia - PT
     
     public final static int nVer = 45;
+    
+    
 }
