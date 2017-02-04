@@ -176,10 +176,9 @@ public class SistemaImunologico implements Runnable{
                 child = childs.item(i);
                 if(child.getNodeType() != child.ELEMENT_NODE) continue;
                 parametros.put(child.getNodeName(), Integer.parseInt(child.getTextContent()));
-            }     
+            }    
+//            log.imprime(parametros.toString());
             System.out.println(parametros);
-                        
-
         } catch (IOException ex) {
             Logger.getLogger(Patogeno.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParserConfigurationException ex) {
@@ -192,6 +191,10 @@ public class SistemaImunologico implements Runnable{
     
     public int getParametro(String nome){
         return parametros.get(nome);
+    }
+
+    public Map<String, Integer> getParametros() {
+        return parametros;
     }
     
     public void mudaParametro(String nome,int valor){

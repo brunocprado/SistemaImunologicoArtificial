@@ -2,7 +2,6 @@
 
 <!--
     * Parametros do sistema. <br>
-    * Trocar para .xml no futuro.
     * Temporizações serão reajustadas por meio de alg genético.
     * @author Bruno Prado
 -->
@@ -25,14 +24,12 @@
         Adult	3.5 3.9 4.1 4.5	  9.0 10.0 10.9 11    - x109/L
     -->
     
-    <!-- Temporizacao -->
-    
+    <!-- Temporizacao -->   
     <TEMPO_PROPAGACAO_QUIMICOS>100</TEMPO_PROPAGACAO_QUIMICOS>
     <TEMPO_FAGOCITACAO>500</TEMPO_FAGOCITACAO>
-    <DELAY_PROPAGACAO>400</DELAY_PROPAGACAO>
+    <DELAY_PROPAGACAO>500</DELAY_PROPAGACAO>
     
-    <!-- Proporcoes x1000 -->
-    
+    <!-- Proporcoes x1000 -->  
     <MACROFAGOS>53</MACROFAGOS>
     <NEUTROFILOS>650</NEUTROFILOS>
     <LINFOCITOS>260</LINFOCITOS>

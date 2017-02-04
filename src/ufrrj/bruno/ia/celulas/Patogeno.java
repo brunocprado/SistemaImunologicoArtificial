@@ -19,6 +19,7 @@ public class Patogeno extends Celula{
     
     public Patogeno(SistemaImunologico sistema) {
         super(sistema,TIPO_CELULA.Patogeno);
+        setVelMovimento(1);
         tipo = new Virus();
         forma = new Poligono(tipo.getnLados(),getPosicao());
         
@@ -43,7 +44,8 @@ public class Patogeno extends Celula{
     }
     
     private void emiteQuimica(){
-        getSistema().getCamada().compostos.add(new CompostoQuimico(TIPO_COMPOSTO.PAMP, 40,getPosicao(),this));
+        Posicao tmp = new Posicao(getPosicao().getX(), getPosicao().getY());
+        getSistema().getCamada().compostos.add(new CompostoQuimico(TIPO_COMPOSTO.PAMP, 40,tmp,this));
     }
     
     public void clona(){
@@ -60,7 +62,7 @@ public class Patogeno extends Celula{
         
         
 	
-        //move(new Posicao(400,400));
+        move(new Posicao(400,400));
         //System.out.println("a");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

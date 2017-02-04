@@ -15,7 +15,6 @@ public class Macrofago extends Celula{
     
     public Macrofago(SistemaImunologico sistema){
         super(sistema,TIPO_CELULA.Macrofago);
-        setVelMovimento(2);
     }
     
     private double calculaDistancia(Posicao posicaoInicial,Posicao posicaoAlvo){

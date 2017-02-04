@@ -92,7 +92,9 @@ public class Grafico2D extends JPanel implements Runnable{
         if(zoom > 1){;
             g.translate(cameraX,cameraY);
         }  
-                
+           
+        if(sistema.getMostraCamada()){ desenhaCamadaQuimica(g); }
+        
         for(Celula celula : sistema.getCelulas()){  
             if(!sistema.exibir.get(celula.getTipo())){
                 continue;
@@ -118,9 +120,7 @@ public class Grafico2D extends JPanel implements Runnable{
                     break;
             }
         }
-        
-        if(sistema.getMostraCamada()){ desenhaCamadaQuimica(g); }
-        
+  
     }
     
     public void desenhaCamadaQuimica(Graphics2D g){    

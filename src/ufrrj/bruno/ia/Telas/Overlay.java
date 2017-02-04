@@ -19,7 +19,7 @@ public class Overlay extends JInternalFrame{
     
     public Overlay(SistemaImunologico sistema){
         super("Opções",false,true);
-        setSize(190,280);
+        setSize(180,280);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setFocusable(false);
         setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));

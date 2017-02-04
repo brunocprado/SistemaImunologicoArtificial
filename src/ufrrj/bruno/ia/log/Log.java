@@ -5,11 +5,13 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import ufrrj.bruno.ia.SistemaImunologico;
 
 /**
@@ -27,7 +29,7 @@ public class Log extends JFrame{
     public Log(SistemaImunologico sistema){
         super("Log");
         this.sistema = sistema;
-        setSize(640,480);
+        setSize(650,480);
         setResizable(true);
         
         setIconImage(Toolkit.getDefaultToolkit().createImage(getClass().getResource("/icone.png"))); 
@@ -36,6 +38,7 @@ public class Log extends JFrame{
         p.setBackground(Color.BLACK);
         
         txt = new JLabel();
+        txt.setBackground(Color.red);
         txt.setForeground(Color.green);
         txt.setLocation(10,10);
         txt.setHorizontalTextPosition(JLabel.LEFT);
@@ -46,29 +49,46 @@ public class Log extends JFrame{
 
         getContentPane().add(scroll,BorderLayout.CENTER);
         
+        JPanel p2 = new JPanel(new BorderLayout(2,2));
+        p2.setBorder(new EmptyBorder(5, 5, 5, 5));
+        
         JTextField comando = new JTextField();
-                
-        getContentPane().add(comando,BorderLayout.SOUTH);
+        JButton btnComando = new JButton("OK"); 
+        
+        p2.add(comando,BorderLayout.CENTER);
+        p2.add(btnComando,BorderLayout.EAST);
+        
+        getContentPane().add(p2,BorderLayout.SOUTH);
         
         comando.addKeyListener(new KeyAdapter(){
             @Override
             public void keyPressed(KeyEvent e){
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                if(e.getKeyCode() == KeyEvent.VK_ENTER && !comando.getText().trim().equals("")){
                     executaComando(comando.getText());
                     comando.setText("");
                 }
             }
         }); 
+           
+        btnComando.addActionListener(l -> {
+            if(comando.getText().trim().equals("")) return;
+            executaComando(comando.getText());
+            comando.setText("");
+            comando.requestFocus();
+        });
         
-
-               
         setVisible(true);
     }
     
-    public void executaComando(String comando){
+    public void executaComando(String comando){     
         String[] tmp = comando.split(" ");
+        if(tmp.length < 2) return;
+//        if(!sistema.getParametros().containsKey(tmp[0])){
+//            imprime("Propriedade " + tmp[0] + " não existe");
+//            return;
+//        }
         sistema.mudaParametro(tmp[0], Integer.parseInt(tmp[1]));
-        imprime(tmp[0] + " = " + tmp[1]);
+        imprime(tmp[0] + " alterado para " + tmp[1]);
     }
     
     public void imprime(String texto){
