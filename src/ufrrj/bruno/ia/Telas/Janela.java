@@ -25,8 +25,8 @@ public class Janela extends JFrame{
     private final JDesktopPane fundo = new JDesktopPane();
     private Map<Virus,VisualizaVirus> estatisticas = new HashMap<>();
     
-    public Janela(String titulo,SistemaImunologico sistema){
-        super(titulo);
+    public Janela(SistemaImunologico sistema){
+        super("SIA");
         this.sistema = sistema;
         setLayout(new BorderLayout());
         setSize(1280,720); 
@@ -44,7 +44,7 @@ public class Janela extends JFrame{
         
         criaMenus();    
        
-        setIconImage(Toolkit.getDefaultToolkit().createImage(getClass().getResource("/icone.png")));    
+        setIconImage(Toolkit.getDefaultToolkit().createImage(getClass().getResource("/img/icone.png")));    
          
         addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e){

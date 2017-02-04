@@ -20,7 +20,6 @@ import org.xml.sax.SAXException;
 import ufrrj.bruno.ia.log.Log;
 import ufrrj.bruno.ia.celulas.Celula;
 import ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA;
-import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.Comum;
 import ufrrj.bruno.ia.celulas.Linfocito;
 import ufrrj.bruno.ia.celulas.Macrofago;
 import ufrrj.bruno.ia.celulas.Neutrofilo;
@@ -67,6 +66,10 @@ public class SistemaImunologico implements Runnable{
         camada = new CamadaSobreposta(this);
         this.nInicial = nInicial;
         geraPrimeiraGeracao();    
+        exibir.put(TIPO_CELULA.Macrofago, true);
+        exibir.put(TIPO_CELULA.Linfocito, true);
+        exibir.put(TIPO_CELULA.Neutrofilo, true);
+        exibir.put(TIPO_CELULA.Patogeno, true);
         iniciaThread();
     }
     
@@ -129,7 +132,7 @@ public class SistemaImunologico implements Runnable{
     public void run() {     
         while(true){
             while(pausada){
-                pausa(5);
+                pausa(2);
             }
             
             Iterator<Celula> i = celulas.iterator();
@@ -162,28 +165,26 @@ public class SistemaImunologico implements Runnable{
     }
     
     private void carregaParametros(){
+        
+        imprime("Carregando Parametros");
+        
         try {
             File arquivo = new File("res/parametros.xml");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder;
-            dBuilder = dbFactory.newDocumentBuilder();
-            Document documento = dBuilder.parse(arquivo);
-            
-            Node user = documento.getDocumentElement();
-            NodeList childs = user.getChildNodes();
-            Node child;
-            for (int i = 0; i < childs.getLength(); i++) {
-                child = childs.item(i);
-                if(child.getNodeType() != child.ELEMENT_NODE) continue;
-                parametros.put(child.getNodeName(), Integer.parseInt(child.getTextContent()));
+            DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document documento = parser.parse(arquivo);                  
+            NodeList propriedades = documento.getDocumentElement().getChildNodes();
+           
+            Node tmp;  
+            for (int i = 0; i < propriedades.getLength(); i++) {
+                tmp = propriedades.item(i);
+                if(tmp.getNodeType() != tmp.ELEMENT_NODE) continue;
+                parametros.put(tmp.getNodeName(), Integer.parseInt(tmp.getTextContent()));
+                log.imprime(tmp.getNodeName() + " = " + tmp.getTextContent(), "#ffffff");
             }    
-//            log.imprime(parametros.toString());
             System.out.println(parametros);
         } catch (IOException ex) {
             Logger.getLogger(Patogeno.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(SistemaImunologico.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
+        } catch (ParserConfigurationException | SAXException ex) {
             Logger.getLogger(SistemaImunologico.class.getName()).log(Level.SEVERE, null, ex);
         }
 

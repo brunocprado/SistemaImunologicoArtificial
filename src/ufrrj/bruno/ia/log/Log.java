@@ -31,14 +31,15 @@ public class Log extends JFrame{
         this.sistema = sistema;
         setSize(650,480);
         setResizable(true);
+        setLocation(2, 10);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        setIconImage(Toolkit.getDefaultToolkit().createImage(getClass().getResource("/icone.png"))); 
+        setIconImage(Toolkit.getDefaultToolkit().createImage(getClass().getResource("/img/terminal.png"))); 
         
         JPanel p = new JPanel();      
         p.setBackground(Color.BLACK);
         
         txt = new JLabel();
-        txt.setBackground(Color.red);
         txt.setForeground(Color.green);
         txt.setLocation(10,10);
         txt.setHorizontalTextPosition(JLabel.LEFT);
@@ -49,7 +50,7 @@ public class Log extends JFrame{
 
         getContentPane().add(scroll,BorderLayout.CENTER);
         
-        JPanel p2 = new JPanel(new BorderLayout(2,2));
+        JPanel p2 = new JPanel(new BorderLayout(5,5));
         p2.setBorder(new EmptyBorder(5, 5, 5, 5));
         
         JTextField comando = new JTextField();
@@ -83,16 +84,18 @@ public class Log extends JFrame{
     public void executaComando(String comando){     
         String[] tmp = comando.split(" ");
         if(tmp.length < 2) return;
-//        if(!sistema.getParametros().containsKey(tmp[0])){
-//            imprime("Propriedade " + tmp[0] + " não existe");
-//            return;
-//        }
         sistema.mudaParametro(tmp[0], Integer.parseInt(tmp[1]));
-        imprime(tmp[0] + " alterado para " + tmp[1]);
+        imprime("[ " + tmp[0] + " ] alterado para " + tmp[1],"#ffffff");
     }
     
     public void imprime(String texto){
         log += "<br>" + texto;
+        txt.setText(log + "</html>");
+        scroll.getVerticalScrollBar().setValue(scroll.getVerticalScrollBar().getMaximum());
+    }
+    
+    public void imprime(String texto,String cor){
+        log += "<span style='color:" + cor + ";'><br>" + texto + "</span>";
         txt.setText(log + "</html>");
         scroll.getVerticalScrollBar().setValue(scroll.getVerticalScrollBar().getMaximum());
     }

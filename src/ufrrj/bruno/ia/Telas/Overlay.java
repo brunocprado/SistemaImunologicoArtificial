@@ -45,7 +45,7 @@ public class Overlay extends JInternalFrame{
         });
         add(debug);
         
-        setFrameIcon(new ImageIcon(ClassLoader.getSystemResource("opcoes.png")));    
+        setFrameIcon(new ImageIcon(ClassLoader.getSystemResource("img/opcoes.png")));    
  
         JPanel painelExibir = new JPanel();    
         painelExibir.setBorder(BorderFactory.createTitledBorder("Exibir"));

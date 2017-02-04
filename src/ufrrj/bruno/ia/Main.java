@@ -9,7 +9,7 @@ import ufrrj.bruno.ia.telas.Janela;
  */
 public class Main{
     public static void main(String[] args) {    
-        Janela tela = new Janela("SIA", new SistemaImunologico());      
+        Janela tela = new Janela(new SistemaImunologico());      
         tela.setVisible(true);    
     } 
 }
