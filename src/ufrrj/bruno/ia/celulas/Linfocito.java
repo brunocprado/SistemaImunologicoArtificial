@@ -7,15 +7,15 @@ public class Linfocito extends Celula{
     
     private final int receptor;
     
-    public Linfocito(SistemaImunologico sistema) {
-        super(sistema,TIPO_CELULA.Linfocito);
+    public Linfocito() {
+        super(TIPO_CELULA.Linfocito);
         receptor = new Random().nextInt(Integer.MAX_VALUE);
     }
 
-    public Linfocito(SistemaImunologico sistema,int receptor) {
-        super(sistema,TIPO_CELULA.Linfocito);
-        this.receptor = receptor;
-    }
+//    public Linfocito(SistemaImunologico sistema,int receptor) {
+//        super(sistema,TIPO_CELULA.Linfocito);
+//        this.receptor = receptor;
+//    }
     
     @Override
     public void loop() {

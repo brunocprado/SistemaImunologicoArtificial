@@ -35,12 +35,13 @@ import ufrrj.bruno.ia.log.Virus;
  * @param celulas ArrayList de todas as celulas exibidas
  */
 public class SistemaImunologico implements Runnable{
+    private static SistemaImunologico instancia = new SistemaImunologico();
     //======| Variaveis |=======//
     private final int nInicial;
     private final ConcurrentLinkedQueue<Celula> celulas = new ConcurrentLinkedQueue<>();
     private final ConcurrentLinkedQueue<Virus> virus = new ConcurrentLinkedQueue<>();
     private final CamadaSobreposta camada;
-    private final Log log = new Log(this);
+    private Log log = new Log();;
     private Map<String,Integer> parametros = new HashMap<>();
     //======|  RUNTIME  |======//
     private final long inicio = System.currentTimeMillis();
@@ -50,16 +51,16 @@ public class SistemaImunologico implements Runnable{
     //======| DISPLAY |======//
     public Map<TIPO_CELULA,Boolean> exibir = new HashMap<>();
     
-    public SistemaImunologico(){
+    private SistemaImunologico(){
         carregaParametros();
         camada = new CamadaSobreposta(this);
         nInicial = new Random().nextInt(parametros.get("TAM_MEDIO_SUPERIOR") - parametros.get("TAM_MEDIO_INFERIOR")) + parametros.get("TAM_MEDIO_INFERIOR");
-        geraPrimeiraGeracao();
+        
         exibir.put(TIPO_CELULA.Macrofago, true);
         exibir.put(TIPO_CELULA.Linfocito, true);
         exibir.put(TIPO_CELULA.Neutrofilo, true);
         exibir.put(TIPO_CELULA.Patogeno, true);
-        iniciaThread();
+        
     }
     
     public SistemaImunologico(int nInicial){
@@ -73,25 +74,29 @@ public class SistemaImunologico implements Runnable{
         iniciaThread();
     }
     
-    private void iniciaThread(){
+    public static synchronized SistemaImunologico getInstancia(){
+        return instancia;
+    }
+    
+    void iniciaThread(){
         Thread t = new Thread(this,"Sistema Imunologico - IA");
         t.start();
     }
     
-    private void geraPrimeiraGeracao(){
+    void geraPrimeiraGeracao(){
         imprime("Gerando sistema com " + nInicial * 10 + " leucócitos por microlitro de sangue");
         int i;
 //        for(i=0;i<10;i++){
 //            celulas.add(new Comum(this));
 //        }
         for(i=0;i<(nInicial*parametros.get("NEUTROFILOS"))/1000;i++){
-            celulas.add(new Neutrofilo(this));
+            celulas.add(new Neutrofilo());
         }
         for(i=0;i<(nInicial*parametros.get("MACROFAGOS"))/1000;i++){
-            celulas.add(new Macrofago(this));
+            celulas.add(new Macrofago());
         }
         for(i=0;i<(nInicial*parametros.get("LINFOCITOS"))/1000;i++){
-            celulas.add(new Linfocito(this));
+            celulas.add(new Linfocito());
         }
     }
     
@@ -165,7 +170,7 @@ public class SistemaImunologico implements Runnable{
     }
     
     private void carregaParametros(){
-        
+
         imprime("Carregando Parametros");
         
         try {
@@ -179,7 +184,7 @@ public class SistemaImunologico implements Runnable{
                 tmp = propriedades.item(i);
                 if(tmp.getNodeType() != tmp.ELEMENT_NODE) continue;
                 parametros.put(tmp.getNodeName(), Integer.parseInt(tmp.getTextContent()));
-                log.imprime(tmp.getNodeName() + " = " + tmp.getTextContent(), "#ffffff");
+                log.imprime("[ " + tmp.getNodeName() + " ] = " + tmp.getTextContent(), "#ffffff");
             }    
             System.out.println(parametros);
         } catch (IOException ex) {

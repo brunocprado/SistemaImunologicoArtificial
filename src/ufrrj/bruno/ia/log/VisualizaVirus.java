@@ -14,13 +14,11 @@ import ufrrj.bruno.ia.celulas.Patogeno;
  */
 public class VisualizaVirus extends JInternalFrame{
     
-    private final SistemaImunologico sistema;
     private final Virus virus;
     
-    public VisualizaVirus(Virus virus,SistemaImunologico sistema){
+    public VisualizaVirus(Virus virus){
         super("Estatísticas : " + virus.getIdentificador(),false,true);
         this.virus = virus;
-        this.sistema = sistema;
         setSize(300,200);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setFocusable(false);
@@ -31,7 +29,7 @@ public class VisualizaVirus extends JInternalFrame{
         
         JButton btn = new JButton("Nova entrada");
         btn.addActionListener(e -> {
-            sistema.adicionaCelula(new Patogeno(sistema,virus));
+            SistemaImunologico.getInstancia().adicionaCelula(new Patogeno(virus));
         });
         
         add(qt1);

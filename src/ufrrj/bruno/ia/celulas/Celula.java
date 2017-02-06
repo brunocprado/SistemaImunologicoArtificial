@@ -15,18 +15,19 @@ abstract public class Celula implements Comportamento{
     private double velMovimento = 2;
     //========|  RUNTIME  |=======//
     private Posicao posicao;    
-    private final SistemaImunologico sistema;
+    private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
 
-    public Celula(SistemaImunologico sistema,TIPO_CELULA tipo){
-        qt++; id = qt; this.sistema = sistema; this.tipo = tipo;
+    public Celula(TIPO_CELULA tipo){
+        qt++; id = qt; 
+        this.tipo = tipo;
         Random gerador = new Random();
         posicao = new Posicao(
                 gerador.nextInt(sistema.getParametro("TAMX")),
                 gerador.nextInt(sistema.getParametro("TAMY")));
     }
     
-    public Celula(SistemaImunologico sistema,TIPO_CELULA tipo,Posicao pos){
-        qt++; id = qt; this.sistema = sistema; this.tipo = tipo;
+    public Celula(TIPO_CELULA tipo,Posicao pos){
+        qt++; id = qt; this.tipo = tipo;
         posicao = pos;
     }
     

@@ -1,12 +1,9 @@
-
 package ufrrj.bruno.ia.celulas;
-
-import ufrrj.bruno.ia.SistemaImunologico;
 
 public class Neutrofilo extends Celula{
     
-    public Neutrofilo(SistemaImunologico sistema){
-        super(sistema,TIPO_CELULA.Neutrofilo);
+    public Neutrofilo(){
+        super(TIPO_CELULA.Neutrofilo);
     }
 
     @Override

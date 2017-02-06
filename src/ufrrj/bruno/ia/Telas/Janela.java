@@ -21,20 +21,19 @@ import ufrrj.bruno.ia.renderizacao.Grafico2D;
 public class Janela extends JFrame{
         
     private final Overlay overlay;
-    private final SistemaImunologico sistema;
+    private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
     private final JDesktopPane fundo = new JDesktopPane();
     private Map<Virus,VisualizaVirus> estatisticas = new HashMap<>();
     
-    public Janela(SistemaImunologico sistema){
+    public Janela(){
         super("SIA");
-        this.sistema = sistema;
         setLayout(new BorderLayout());
         setSize(1280,720); 
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setFocusable(true);
         
-        Grafico2D grafico = new Grafico2D(sistema);
+        Grafico2D grafico = new Grafico2D();
         overlay = new Overlay(sistema);
         
         add(fundo,BorderLayout.CENTER);      
@@ -121,7 +120,7 @@ public class Janela extends JFrame{
     }
     
     public void novoVirus(Virus virus){
-        VisualizaVirus tmp = new VisualizaVirus(virus,sistema);   
+        VisualizaVirus tmp = new VisualizaVirus(virus);   
         estatisticas.put(virus, tmp);
         fundo.add(tmp,0);
     }

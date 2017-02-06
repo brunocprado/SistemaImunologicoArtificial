@@ -6,8 +6,8 @@ import ufrrj.bruno.ia.SistemaImunologico;
 
 public class Comum extends Celula {
     
-    public Comum(SistemaImunologico sistema){
-        super(sistema,TIPO_CELULA.Comum);
+    public Comum(){
+        super(TIPO_CELULA.Comum);
     }
 
     @Override

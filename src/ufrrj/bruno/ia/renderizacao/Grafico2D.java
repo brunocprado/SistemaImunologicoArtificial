@@ -26,7 +26,7 @@ import ufrrj.bruno.ia.quimica.CompostoQuimico;
  * @author Bruno Prado
  */
 public class Grafico2D extends JPanel implements Runnable{
-    private final SistemaImunologico sistema; 
+    private final SistemaImunologico sistema = SistemaImunologico.getInstancia(); 
     final Toolkit tool = Toolkit.getDefaultToolkit();
     //=========| IMAGENS |==========//
     final Image sangue = tool.createImage(getClass().getResource("/img/blood.jpg"));
@@ -39,8 +39,7 @@ public class Grafico2D extends JPanel implements Runnable{
     private int cameraX,cameraY;   
     private double zoom = 1;
     
-    public Grafico2D(SistemaImunologico sistema){
-        this.sistema = sistema;    
+    public Grafico2D(){
         setFocusable(true);
 
         addMouseMotionListener(new MouseAdapter() {
@@ -89,9 +88,9 @@ public class Grafico2D extends JPanel implements Runnable{
         
         g.scale(zoom * getWidth()/sistema.getParametro("TAMX"), zoom * getHeight()/sistema.getParametro("TAMY"));
 
-        if(zoom > 1){;
+        if(zoom > 1){
             g.translate(cameraX,cameraY);
-        }  
+        }
            
         if(sistema.getMostraCamada()){ desenhaCamadaQuimica(g); }
         

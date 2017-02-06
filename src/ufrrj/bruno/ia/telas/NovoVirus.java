@@ -237,7 +237,7 @@ public class NovoVirus extends javax.swing.JFrame {
         janela.getJMenuBar().updateUI();
         if(radioInicio.isSelected()){
             for(int i=0;i<10;i++){
-                sistema.adicionaCelula(new Patogeno(sistema,virus));
+                sistema.adicionaCelula(new Patogeno(virus));
             }
         }
         this.setVisible(false);

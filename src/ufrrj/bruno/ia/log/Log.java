@@ -21,19 +21,18 @@ import ufrrj.bruno.ia.SistemaImunologico;
  */
 public class Log extends JFrame{
     
-    private SistemaImunologico sistema;
+    private SistemaImunologico sistema = SistemaImunologico.getInstancia();
     private JLabel txt;
     private String log = "<html>";
     JScrollPane scroll;
     
-    public Log(SistemaImunologico sistema){
+    public Log(){
         super("Log");
-        this.sistema = sistema;
         setSize(650,480);
         setResizable(true);
         setLocation(2, 10);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+       
         setIconImage(Toolkit.getDefaultToolkit().createImage(getClass().getResource("/img/terminal.png"))); 
         
         JPanel p = new JPanel();      
