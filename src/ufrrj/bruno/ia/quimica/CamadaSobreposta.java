@@ -47,7 +47,5 @@ public class CamadaSobreposta implements Runnable{
             }
             pausa(sistema.getParametro("TEMPO_PROPAGACAO_QUIMICOS"));
         }
-    }
-      
-    
+    }   
 }

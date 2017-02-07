@@ -54,7 +54,12 @@ public class Patogeno extends Celula{
     public void clona(){
         getSistema().adicionaCelula(new Patogeno(tipo,getPosicao()));
     }
-
+    
+    public void clona(Posicao p){
+        getSistema().adicionaCelula(new Patogeno(tipo,p));
+        System.out.println(getSistema().getCelulas().size());
+    }
+    
     @Override
     public void loop() {             
         if((System.currentTimeMillis() - inicio) > getSistema().getParametro("DELAY_PROPAGACAO")){
@@ -62,12 +67,27 @@ public class Patogeno extends Celula{
             emiteQuimica();
         }
         
+        //IMPLEMENTACAO BASICA MULTIPLICACAO (EXEMPLO)
         
+        double maisProx = Double.MAX_VALUE;
+        Celula prox = null;
         
-	
-        move(new Posicao(400,400));
-        //System.out.println("a");
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(Celula celula : getSistema().getCelulas()){  
+            if(celula.getTipo() != TIPO_CELULA.Linfocito) continue;
+            
+            double dist = calculaDistancia(celula.getPosicao());
+            if(maisProx > dist) {
+                maisProx = dist;
+                prox = celula;
+            }
+        }
+        
+	if(prox != null && maisProx < 6){
+            clona(prox.getPosicao());
+            getSistema().eliminaCelula(prox);
+            
+        }
+        if(prox != null) move(prox.getPosicao());
     }
 
     public Polygon getForma() {

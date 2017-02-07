@@ -16,19 +16,13 @@ public class Macrofago extends Celula{
         super(TIPO_CELULA.Macrofago);
     }
     
-    private double calculaDistancia(Posicao posicaoInicial,Posicao posicaoAlvo){
-        double deltaX = posicaoInicial.getX() - posicaoAlvo.getX();
-        double deltaY = posicaoInicial.getY() - posicaoAlvo.getY();
-        return Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
-    }
-    
     @Override
     public void loop(){
         
         if(fagocitando) return;
         
         if(alvo != null){
-            if(calculaDistancia(pos,alvo.getPos()) <= 4){
+            if(calculaDistancia(alvo.getPos()) <= 4){
                 fagocitando = true;
                 Fagocitacao fagocitacao = new Fagocitacao();
                 fagocitacao.iniciaFagocitacao();
@@ -39,7 +33,8 @@ public class Macrofago extends Celula{
         
         for (Iterator<CompostoQuimico> i = getSistema().getCamada().compostos.iterator(); i.hasNext();) {
             CompostoQuimico composto = i.next();
-            double dist = calculaDistancia(pos,composto.getPos());      
+            
+            double dist = calculaDistancia(composto.getPos());      
             if(dist <= composto.getDiametro()/2 + 6){
                 alvo = composto;
                 tempoDetectado = System.currentTimeMillis();

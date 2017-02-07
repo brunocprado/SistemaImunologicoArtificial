@@ -23,7 +23,7 @@ public class Log extends JFrame{
     
     private JLabel txt;
     private String log = "<html>";
-    JScrollPane scroll;
+    private final JScrollPane scroll;
     
     public Log(){
         super("Log");

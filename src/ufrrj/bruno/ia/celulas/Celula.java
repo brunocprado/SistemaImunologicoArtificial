@@ -8,8 +8,8 @@ abstract public class Celula implements Comportamento{
     public enum TIPO_CELULA {Comum,Linfocito,Neutrofilo,Patogeno,Macrofago};
             
     private static int qt = 0;
-    private int id;
-    private TIPO_CELULA tipo;
+    private final int id;
+    private final TIPO_CELULA tipo;
     //=====| CARACTERISTICAS |=====//
     public int tamanhoX,tamanhoY;
     private double velMovimento = 2;
@@ -79,6 +79,12 @@ abstract public class Celula implements Comportamento{
     @Override
     public String toString() {
         return "Celula{" + "tipo=" + tipo + ", tamanhoX=" + tamanhoX + ", tamanhoY=" + tamanhoY + ", velMovimento=" + velMovimento + ", posicao=" + posicao + '}';
+    }
+    
+    public double calculaDistancia(Posicao posicaoAlvo){
+        double deltaX = posicao.getX() - posicaoAlvo.getX();
+        double deltaY = posicao.getY() - posicaoAlvo.getY();
+        return Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
     }
     
 }

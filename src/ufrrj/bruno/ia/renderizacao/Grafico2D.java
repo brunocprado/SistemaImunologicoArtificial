@@ -22,7 +22,6 @@ import ufrrj.bruno.ia.quimica.CompostoQuimico;
 /**
  * Renderiza sistema usando awt.Graphics2D. <br>
  * 
- * @param Parametros.LIMITE_FPS quantidade de atualizações da tela por segundo.
  * @author Bruno Prado
  */
 public class Grafico2D extends JPanel implements Runnable{
@@ -119,7 +118,6 @@ public class Grafico2D extends JPanel implements Runnable{
                     break;
             }
         }
-  
     }
     
     public void desenhaCamadaQuimica(Graphics2D g){    
