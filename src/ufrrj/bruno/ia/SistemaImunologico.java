@@ -20,6 +20,7 @@ import org.xml.sax.SAXException;
 import ufrrj.bruno.ia.log.Log;
 import ufrrj.bruno.ia.celulas.Celula;
 import ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA;
+import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.*;
 import ufrrj.bruno.ia.celulas.Linfocito;
 import ufrrj.bruno.ia.celulas.Macrofago;
 import ufrrj.bruno.ia.celulas.Neutrofilo;
@@ -35,18 +36,18 @@ import ufrrj.bruno.ia.log.Virus;
  * @param celulas ArrayList de todas as celulas exibidas
  */
 public class SistemaImunologico implements Runnable{
-    private static SistemaImunologico instancia = new SistemaImunologico();
+    private static final SistemaImunologico instancia = new SistemaImunologico();
     //======| Variaveis |=======//
     private final int nInicial;
     private final ConcurrentLinkedQueue<Celula> celulas = new ConcurrentLinkedQueue<>();
     private final ConcurrentLinkedQueue<Virus> virus = new ConcurrentLinkedQueue<>();
     private final CamadaSobreposta camada;
-    private Log log = new Log();;
-    private Map<String,Integer> parametros = new HashMap<>();
+    private final Log log = new Log();
+    private final Map<String,Integer> parametros = new HashMap<>();
     //======|  RUNTIME  |======//
-    private final long inicio = System.currentTimeMillis();
+    private long inicio = System.currentTimeMillis();
     private boolean mostraCamada = true;
-    public boolean pausada = false;
+    public  boolean pausada = false;
     private boolean debug = false;
     //======| DISPLAY |======//
     public Map<TIPO_CELULA,Boolean> exibir = new HashMap<>();
@@ -54,24 +55,11 @@ public class SistemaImunologico implements Runnable{
     private SistemaImunologico(){
         carregaParametros();
         camada = new CamadaSobreposta(this);
-        nInicial = new Random().nextInt(parametros.get("TAM_MEDIO_SUPERIOR") - parametros.get("TAM_MEDIO_INFERIOR")) + parametros.get("TAM_MEDIO_INFERIOR");
-        
-        exibir.put(TIPO_CELULA.Macrofago, true);
-        exibir.put(TIPO_CELULA.Linfocito, true);
-        exibir.put(TIPO_CELULA.Neutrofilo, true);
-        exibir.put(TIPO_CELULA.Patogeno, true);
-        
-    }
-    
-    public SistemaImunologico(int nInicial){
-        camada = new CamadaSobreposta(this);
-        this.nInicial = nInicial;
-        geraPrimeiraGeracao();    
-        exibir.put(TIPO_CELULA.Macrofago, true);
-        exibir.put(TIPO_CELULA.Linfocito, true);
-        exibir.put(TIPO_CELULA.Neutrofilo, true);
-        exibir.put(TIPO_CELULA.Patogeno, true);
-        iniciaThread();
+        nInicial = new Random().nextInt(parametros.get("TAM_MEDIO_SUPERIOR") - parametros.get("TAM_MEDIO_INFERIOR")) + parametros.get("TAM_MEDIO_INFERIOR");      
+        exibir.put(Macrofago, true);
+        exibir.put(Linfocito, true);
+        exibir.put(Neutrofilo, true);
+        exibir.put(Patogeno, true);       
     }
     
     public static synchronized SistemaImunologico getInstancia(){
@@ -137,6 +125,7 @@ public class SistemaImunologico implements Runnable{
     public void run() {     
         while(true){
             while(pausada){
+                inicio += 2;
                 pausa(2);
             }
             
@@ -184,9 +173,9 @@ public class SistemaImunologico implements Runnable{
                 tmp = propriedades.item(i);
                 if(tmp.getNodeType() != tmp.ELEMENT_NODE) continue;
                 parametros.put(tmp.getNodeName(), Integer.parseInt(tmp.getTextContent()));
+                System.out.println("[ " + tmp.getNodeName() + " ] = " + tmp.getTextContent());
                 log.imprime("[ " + tmp.getNodeName() + " ] = " + tmp.getTextContent(), "#ffffff");
             }    
-            System.out.println(parametros);
         } catch (IOException ex) {
             Logger.getLogger(Patogeno.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParserConfigurationException | SAXException ex) {

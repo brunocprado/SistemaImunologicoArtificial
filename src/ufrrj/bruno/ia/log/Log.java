@@ -21,7 +21,6 @@ import ufrrj.bruno.ia.SistemaImunologico;
  */
 public class Log extends JFrame{
     
-    private SistemaImunologico sistema = SistemaImunologico.getInstancia();
     private JLabel txt;
     private String log = "<html>";
     JScrollPane scroll;
@@ -83,7 +82,7 @@ public class Log extends JFrame{
     public void executaComando(String comando){     
         String[] tmp = comando.split(" ");
         if(tmp.length < 2) return;
-        sistema.mudaParametro(tmp[0], Integer.parseInt(tmp[1]));
+        SistemaImunologico.getInstancia().mudaParametro(tmp[0], Integer.parseInt(tmp[1]));
         imprime("[ " + tmp[0] + " ] alterado para " + tmp[1],"#ffffff");
     }
     

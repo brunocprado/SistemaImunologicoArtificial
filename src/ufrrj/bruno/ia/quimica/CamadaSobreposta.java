@@ -15,8 +15,6 @@ public class CamadaSobreposta implements Runnable{
     
     private final SistemaImunologico sistema;
     public ConcurrentLinkedQueue<CompostoQuimico> compostos = new ConcurrentLinkedQueue<>();
-//    private static final int tamX = Parametros.TAMX/8;
-//    private static final int tamY = Parametros.TAMY/8;
     
     public CamadaSobreposta(SistemaImunologico sistema){
         this.sistema = sistema;
@@ -36,7 +34,7 @@ public class CamadaSobreposta implements Runnable{
     public void run() {
         while(true) {
             while(sistema.pausada){
-                pausa(5);
+                pausa(2);
             }            
             for (Iterator<CompostoQuimico> i = compostos.iterator(); i.hasNext();) {
                 CompostoQuimico composto = i.next();

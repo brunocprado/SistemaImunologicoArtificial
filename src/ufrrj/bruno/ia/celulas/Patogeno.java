@@ -12,7 +12,7 @@ public class Patogeno extends Celula{
     
     private final long entrada = System.currentTimeMillis();
     private final Virus tipo;
-    private Poligono forma;
+    private final Poligono forma;
     
     //====| RUNTIME |=====//
     private long inicio = System.currentTimeMillis();
@@ -38,22 +38,22 @@ public class Patogeno extends Celula{
         emiteQuimica();
     }
     
-//    public Patogeno(SistemaImunologico sistema,Virus tipo,Posicao pos) {
-//        super(sistema,TIPO_CELULA.Patogeno,pos);
-//        forma = new Poligono(tipo.getnLados(),getPosicao());
-//        this.tipo = tipo;
-//        tipo.setQuantidade(tipo.getQuantidade()+1);
-//        emiteQuimica();
-//    }
+    public Patogeno(Virus tipo,Posicao pos) {
+        super(TIPO_CELULA.Patogeno,pos);
+        forma = new Poligono(tipo.getnLados(),getPosicao());
+        this.tipo = tipo;
+        tipo.setQuantidade(tipo.getQuantidade()+1);
+        emiteQuimica();
+    }
     
     private void emiteQuimica(){
         Posicao tmp = new Posicao(getPosicao().getX(), getPosicao().getY());
         getSistema().getCamada().compostos.add(new CompostoQuimico(TIPO_COMPOSTO.PAMP, 40,tmp,this));
     }
     
-//    public void clona(){
-//        getSistema().adicionaCelula(new Patogeno(getSistema(),tipo,getPosicao()));
-//    }
+    public void clona(){
+        getSistema().adicionaCelula(new Patogeno(tipo,getPosicao()));
+    }
 
     @Override
     public void loop() {             
