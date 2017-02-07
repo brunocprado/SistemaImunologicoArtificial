@@ -57,6 +57,7 @@ public class Patogeno extends Celula{
     
     public void clona(Posicao p){
         getSistema().adicionaCelula(new Patogeno(tipo,p));
+        tipo.add();
         System.out.println(getSistema().getCelulas().size());
     }
     

@@ -126,7 +126,11 @@ public class SistemaImunologico implements Runnable{
         while(true){
             while(pausada){
                 inicio += 2;
-                pausa(2);
+                try {
+                    Thread.sleep(1,900);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(SistemaImunologico.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             
             Iterator<Celula> i = celulas.iterator();

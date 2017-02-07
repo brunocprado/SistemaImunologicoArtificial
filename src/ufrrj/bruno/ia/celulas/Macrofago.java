@@ -63,6 +63,7 @@ public class Macrofago extends Celula{
             } catch (InterruptedException ex) {}
             if(alvo.getEmissor() != null){
                 Patogeno tmp = (Patogeno) alvo.getEmissor();
+                tmp.getVirus().setQuantidade(tmp.getVirus().getQuantidade() - 1);
                 getSistema().eliminaCelula(tmp); 
                 getSistema().imprime("Patogeno " + tmp.getId() 
                         + " [<span style='color:red;'>" + tmp.getVirus().getIdentificador()+ "</span>] eliminado. {Tempo de detecção : " + (tempoDetectado - tmp.getEntrada()) 

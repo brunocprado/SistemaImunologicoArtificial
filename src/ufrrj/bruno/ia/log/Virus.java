@@ -44,6 +44,10 @@ public class Virus {
         return quantidade;
     }
 
+    public void add(){
+        this.quantidade++;
+    }
+    
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
