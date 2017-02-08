@@ -127,7 +127,7 @@ public class SistemaImunologico implements Runnable{
             while(pausada){
                 inicio += 2;
                 try {
-                    Thread.sleep(1,900);
+                    Thread.sleep(2);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(SistemaImunologico.class.getName()).log(Level.SEVERE, null, ex);
                 }

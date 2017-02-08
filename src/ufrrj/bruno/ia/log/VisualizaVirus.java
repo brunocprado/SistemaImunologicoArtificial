@@ -43,7 +43,7 @@ public class VisualizaVirus extends JInternalFrame implements Runnable{
         dados = new XYSeriesCollection(antigenos);
         dados.addSeries(anticorpos);
          
-        JFreeChart chart = ChartFactory.createXYLineChart(
+        JFreeChart grafico = ChartFactory.createXYLineChart(
             virus.getIdentificador(),           
             "Tempo",
             "Volume", 
@@ -54,10 +54,10 @@ public class VisualizaVirus extends JInternalFrame implements Runnable{
             false
         );
 
-        ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(370, 220));
+        ChartPanel painelGrafico = new ChartPanel(grafico);
+        painelGrafico.setPreferredSize(new Dimension(370, 220));
         
-        add(chartPanel,BorderLayout.CENTER);  
+        add(painelGrafico,BorderLayout.CENTER);  
         
         JPanel painel = new JPanel(new BorderLayout());
         JButton btn = new JButton("Nova entrada");   
@@ -70,7 +70,7 @@ public class VisualizaVirus extends JInternalFrame implements Runnable{
             SistemaImunologico.getInstancia().adicionaCelula(new Patogeno(virus));
         });
         
-        Thread t = new Thread(this);
+        Thread t = new Thread(this,"Estatisticas " + virus.getIdentificador());
         t.start();
     }
 
@@ -84,6 +84,5 @@ public class VisualizaVirus extends JInternalFrame implements Runnable{
                 Logger.getLogger(VisualizaVirus.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
-    
+    }   
 }

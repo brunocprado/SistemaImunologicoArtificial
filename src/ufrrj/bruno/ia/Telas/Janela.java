@@ -8,14 +8,13 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import ufrrj.bruno.ia.SistemaImunologico;
+import ufrrj.bruno.ia.log.Estatisticas;
 import ufrrj.bruno.ia.log.Virus;
 import ufrrj.bruno.ia.log.VisualizaVirus;
 import ufrrj.bruno.ia.renderizacao.Grafico2D;
@@ -71,7 +70,8 @@ public class Janela extends JFrame{
             JMenuItem submenu1 = new JMenuItem("Patogeno");
         JMenu menu2 = new JMenu("Pausar");
         JMenu menu3 = new JMenu("Opções");
-        JMenu menu4 = new JMenu("Sobre");
+        JMenu menu4 = new JMenu("Estatisticas");
+        JMenu menu5 = new JMenu("Sobre");
         
         submenu1.addActionListener(e -> {
             NovoVirus novoVirus = new NovoVirus(sistema,this);
@@ -106,12 +106,21 @@ public class Janela extends JFrame{
         menu4.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Estatisticas estatisticas = new Estatisticas();
+                estatisticas.setVisible(true);
+            }
+        });
+        menu.add(menu4);
+        
+        menu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sobre sobre = new Sobre();
                 sobre.setLocationRelativeTo(null);
                 sobre.setVisible(true);
             }
         });
-        menu.add(menu4);
+        menu.add(menu5);
 
         setJMenuBar(menu);
     }

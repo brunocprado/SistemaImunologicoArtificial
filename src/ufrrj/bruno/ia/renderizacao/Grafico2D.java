@@ -165,7 +165,7 @@ public class Grafico2D extends JPanel implements Runnable{
     public void run(){
         while(true){
             repaint();      
-            pausa(16);
+            pausa(106);
         }
     }
 }
