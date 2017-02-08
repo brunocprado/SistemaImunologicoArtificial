@@ -1,11 +1,12 @@
 package ufrrj.bruno.ia.log;
 
-import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
+import javax.swing.JPanel;
 import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -36,7 +37,8 @@ public class VisualizaVirus extends JInternalFrame implements Runnable{
         setSize(400,320);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setFocusable(false);
-        setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        setLayout(new BorderLayout(0,0));
+        setResizable(true);
         
         dados = new XYSeriesCollection(antigenos);
         dados.addSeries(anticorpos);
@@ -53,16 +55,20 @@ public class VisualizaVirus extends JInternalFrame implements Runnable{
         );
 
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(370, 220));
+        chartPanel.setPreferredSize(new Dimension(370, 220));
         
-        add(chartPanel);
+        add(chartPanel,BorderLayout.CENTER);  
         
-        JButton btn = new JButton("Nova entrada");
+        JPanel painel = new JPanel(new BorderLayout());
+        JButton btn = new JButton("Nova entrada");   
+                
+        painel.add(btn,BorderLayout.CENTER);
+                
+        add(painel,BorderLayout.SOUTH);
+         
         btn.addActionListener(e -> {
             SistemaImunologico.getInstancia().adicionaCelula(new Patogeno(virus));
         });
-        
-        add(btn);
         
         Thread t = new Thread(this);
         t.start();

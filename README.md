@@ -1,4 +1,4 @@
-# SistemaImunologicoArtificial
+# Sistema Imunologico Artificial
 ![alt tag](http://i.imgur.com/uWPHVj9.jpg)
 
 # TODO
@@ -14,3 +14,5 @@ Resto 0%...
 * Log avançado
 * Estatisticas
 
+# Dependencias
+* JFreeChart
