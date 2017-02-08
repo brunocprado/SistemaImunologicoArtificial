@@ -3,6 +3,8 @@ package ufrrj.bruno.ia.log;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -40,6 +42,14 @@ public class Estatisticas extends JFrame implements Runnable {
         setLayout(new GridLayout(2,2));
         setResizable(true);
         
+        Thread t = new Thread(this,"Estatisticas");
+        
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                t.interrupt();
+            }
+        });
+
         dados = new XYSeriesCollection(macrofagos);
         dados.addSeries(patogenos); 
         dados.addSeries(neutrofilos);
@@ -66,18 +76,16 @@ public class Estatisticas extends JFrame implements Runnable {
 //        add(painelGrafico2);  
 //        add(painelGrafico);  
 //        add(painelGrafico);  
-             
-        Thread t = new Thread(this,"Estatisticas");
+
         t.start();
     }
     
     private void atualizaGraficos(){
-        int qtMacrofagos = 0,qtPatogenos = 0,qtNeutrofilos = 0,qtLinfocitos = 0;
-        
+        int qtMacrofagos = 0,qtPatogenos = 0,qtNeutrofilos = 0,qtLinfocitos = 0;   
         
         //REMOVER ISSO DEPOIS
         for(Celula celula : sistema.getCelulas()){
-            if(null != celula.getTipo())switch (celula.getTipo()) {
+            if(null != celula.getTipo()) switch (celula.getTipo()) {
                 case Macrofago:
                     qtMacrofagos++;
                     break;
@@ -90,10 +98,7 @@ public class Estatisticas extends JFrame implements Runnable {
                 case Linfocito:
                     qtLinfocitos++;
                     break;
-                default:
-                    break;
             }
-        
         }
         
         macrofagos.add(tick,qtMacrofagos);
@@ -106,14 +111,13 @@ public class Estatisticas extends JFrame implements Runnable {
     
     @Override
     public void run() {
-        while(true){
-            atualizaGraficos();
-            try {
+        try{
+           while(!Thread.interrupted()){
+                atualizaGraficos();
                 Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Estatisticas.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           }
+        } catch (InterruptedException consumed){
+            
         }
-    }
-    
+   }
 }
