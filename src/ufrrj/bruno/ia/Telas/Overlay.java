@@ -8,6 +8,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import ufrrj.bruno.ia.SistemaImunologico;
 import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.*;
 
@@ -19,7 +22,7 @@ public class Overlay extends JInternalFrame{
     
     public Overlay(SistemaImunologico sistema){
         super("Opções",false,true);
-        setSize(180,280);
+        setSize(180,300);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setFocusable(false);
         setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
@@ -77,6 +80,19 @@ public class Overlay extends JInternalFrame{
         c4.addChangeListener(l -> {
             sistema.exibir.put(Patogeno,c4.isSelected());
         });
+        
+        JSlider slider = new JSlider(5, 100, 80);
+        slider.setMajorTickSpacing(5);
+        slider.setSnapToTicks(true);
+        slider.setPreferredSize(new Dimension(155,20));
+        
+        slider.addChangeListener((ChangeEvent e) -> {
+            if (!slider.getValueIsAdjusting()) {
+                sistema.setVelocidade(slider.getValue());
+            }
+        });
+        
+        add(slider);
     }
     
 }

@@ -7,8 +7,6 @@ import ufrrj.bruno.ia.quimica.CamadaSobreposta;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,6 +45,7 @@ public class SistemaImunologico implements Runnable{
     private final Log log = new Log();
     private final Map<String,Integer> parametros = new HashMap<>();
     //======|  RUNTIME  |======//
+    private int velocidade = 90;
     private long inicio = System.currentTimeMillis();
     private boolean mostraCamada = true;
     public  boolean pausada = false;
@@ -101,6 +100,10 @@ public class SistemaImunologico implements Runnable{
         }
     }  
     
+    public void setVelocidade(int velocidade){
+        this.velocidade = velocidade;
+    }
+    
     public ConcurrentLinkedQueue<Celula> getCelulas() {
        return celulas;
     }
@@ -143,7 +146,7 @@ public class SistemaImunologico implements Runnable{
                 i.next().loop();
             }
 
-            pausa(20);
+            pausa(110 - velocidade);
         }     
     }
     
