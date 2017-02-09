@@ -12,7 +12,7 @@ abstract public class Celula implements Comportamento{
     private final TIPO_CELULA tipo;
     //=====| CARACTERISTICAS |=====//
     public int tamanhoX,tamanhoY;
-    private double velMovimento = 2;
+    private double velMovimento = 2.5;
     //========|  RUNTIME  |=======//
     private Posicao posicao;    
     private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
@@ -38,6 +38,8 @@ abstract public class Celula implements Comportamento{
         double angulo = Math.atan2(deltaY,deltaX);    
         int movX = (int) (posicao.getX() + (getVelMovimento() * Math.cos(angulo)));
         int movY = (int) (posicao.getY() + (getVelMovimento() * Math.sin(angulo)));
+//        double movX = posicao.getX() + (getVelMovimento() * Math.cos(angulo));
+//        double movY = posicao.getY() + (getVelMovimento() * Math.sin(angulo));
         if(deltaX == 0){ movX = posicao.getX(); }
         if(deltaY == 0){ movY = posicao.getY(); }
         setPosicao(movX,movY);
@@ -63,6 +65,11 @@ abstract public class Celula implements Comportamento{
         posicao.setX(x);
         posicao.setY(y);
     }
+    
+//    public void setPosicao(double x,double y) {
+//        posicao.setX(x);
+//        posicao.setY(y);
+//    }
 
     public TIPO_CELULA getTipo() {
         return tipo;

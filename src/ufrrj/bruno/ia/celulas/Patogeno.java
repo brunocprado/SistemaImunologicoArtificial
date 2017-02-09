@@ -22,7 +22,7 @@ public class Patogeno extends Celula{
         
         SistemaImunologico sistema = SistemaImunologico.getInstancia();
 
-        setVelMovimento(1);
+        setVelMovimento(0.4);
         tipo = new Virus();
         forma = new Poligono(tipo.getnLados(),getPosicao());
         

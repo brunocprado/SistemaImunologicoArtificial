@@ -8,42 +8,78 @@ public class Macrofago extends Celula{
     
     Posicao pos = getPosicao();
     //=====| Fagocitacao |======//
-    private CompostoQuimico alvo = null;
+    private Patogeno alvo = null;
     private long tempoDetectado;
     private boolean fagocitando = false;
     
     public Macrofago(){
         super(TIPO_CELULA.Macrofago);
     }
-    
+//    
+//    @Override
+//    public void loop(){
+//        
+//        if(fagocitando) return;
+//        
+//        if(alvo != null){
+//            if(calculaDistancia(alvo.getPos()) <= 4){
+//                fagocitando = true;
+//                Fagocitacao fagocitacao = new Fagocitacao();
+//                fagocitacao.iniciaFagocitacao();
+//            }
+//            move(alvo.getPos());
+//            return;
+//        }
+//        
+//        for (Iterator<CompostoQuimico> i = getSistema().getCamada().compostos.iterator(); i.hasNext();) {
+//            CompostoQuimico composto = i.next();
+//            
+//            double dist = calculaDistancia(composto.getPos());      
+//            if(dist <= composto.getDiametro()/2 + 6){
+//                alvo = composto;
+//                tempoDetectado = System.currentTimeMillis();
+//                if(alvo.getEmissor() != null) getSistema().addTemporizacao((int) (System.currentTimeMillis() - ((Patogeno)alvo.getEmissor()).getEntrada()));
+//                if(dist <= 4){
+//                    fagocitando = true;
+//                    Fagocitacao fagocitacao = new Fagocitacao();
+//                    fagocitacao.iniciaFagocitacao();
+//                }
+//                move(alvo.getPos());
+//                break;
+//            }
+//        }
+//    }
+//    
     @Override
     public void loop(){
         
         if(fagocitando) return;
         
         if(alvo != null){
-            if(calculaDistancia(alvo.getPos()) <= 4){
+            if(calculaDistancia(alvo.getPosicao()) <= 4){
                 fagocitando = true;
                 Fagocitacao fagocitacao = new Fagocitacao();
                 fagocitacao.iniciaFagocitacao();
             }
-            move(alvo.getPos());
+            move(alvo.getPosicao());
             return;
         }
         
+        CompostoQuimico composto;
         for (Iterator<CompostoQuimico> i = getSistema().getCamada().compostos.iterator(); i.hasNext();) {
-            CompostoQuimico composto = i.next();
+            composto = i.next();
             
             double dist = calculaDistancia(composto.getPos());      
             if(dist <= composto.getDiametro()/2 + 6){
-                alvo = composto;
+                alvo = (Patogeno) composto.getEmissor();
                 tempoDetectado = System.currentTimeMillis();
+                if(alvo != null) getSistema().addTemporizacao((int) (System.currentTimeMillis() - alvo.getEntrada()));
                 if(dist <= 4){
                     fagocitando = true;
                     Fagocitacao fagocitacao = new Fagocitacao();
                     fagocitacao.iniciaFagocitacao();
                 }
-                move(alvo.getPos());
+                move(alvo.getPosicao());
                 break;
             }
         }
@@ -61,20 +97,18 @@ public class Macrofago extends Celula{
             try {
                 Thread.sleep(getSistema().getParametro("TEMPO_FAGOCITACAO"));
             } catch (InterruptedException ex) {}
-            if(alvo.getEmissor() != null){
-                Patogeno tmp = (Patogeno) alvo.getEmissor();
-                tmp.getVirus().setQuantidade(tmp.getVirus().getQuantidade() - 1);
-                getSistema().eliminaCelula(tmp); 
-                getSistema().imprime("Patogeno " + tmp.getId() 
-                        + " [<span style='color:red;'>" + tmp.getVirus().getIdentificador()+ "</span>] eliminado. {Tempo de detecção : " + (tempoDetectado - tmp.getEntrada()) 
-                        + "ms, Tempo até ser eliminado: " + (System.currentTimeMillis() - tmp.getEntrada()) + "ms}");
-                alvo.setEmissor(null);                 
+            if(alvo != null){
+                alvo.getVirus().setQuantidade(alvo.getVirus().getQuantidade() - 1);
+                getSistema().eliminaCelula(alvo); 
+                getSistema().imprime("Patogeno " + alvo.getId() 
+                        + " [<span style='color:red;'>" + alvo.getVirus().getIdentificador()+ "</span>] eliminado. {Tempo de detecção : " + (tempoDetectado - alvo.getEntrada()) 
+                        + "ms, Tempo até ser eliminado: " + (System.currentTimeMillis() - alvo.getEntrada()) + "ms}");
+                fagocitando = false;
+                alvo = null;                 
             } else {
                 fagocitando = false;
                 alvo = null;
-            } 
-        }
-        
+            }
+        }   
     }
-    
 }

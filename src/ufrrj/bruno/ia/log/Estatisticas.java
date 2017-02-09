@@ -24,7 +24,7 @@ import ufrrj.bruno.ia.celulas.Celula;
  */
 public class Estatisticas extends JFrame implements Runnable {
 
-    private SistemaImunologico sistema = SistemaImunologico.getInstancia();
+    private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
     private int tick = 0;
 
     //====| GRAFICO |====//
@@ -32,14 +32,18 @@ public class Estatisticas extends JFrame implements Runnable {
     private final XYSeries neutrofilos = new XYSeries("Neutrófilos");
     private final XYSeries linfocitos = new XYSeries("Linfocitos");
     private final XYSeries patogenos = new XYSeries("Patogenos");
+    
+    private final XYSeries temporizacoes = new XYSeries("Temporizacoes");
+    
     private final XYSeriesCollection dados;
+    private final XYSeriesCollection dados2 = new XYSeriesCollection(temporizacoes);
     
     public Estatisticas(){
         super("Estatisticas");
         setSize(800,600);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setFocusable(false);
-        setLayout(new GridLayout(2,2));
+        setLayout(new GridLayout(2,1));
         setResizable(true);
         
         Thread t = new Thread(this,"Estatisticas");
@@ -67,16 +71,23 @@ public class Estatisticas extends JFrame implements Runnable {
         );
 
         ChartPanel painelGrafico = new ChartPanel(grafico);
-        //painelGrafico.setPreferredSize(new Dimension(380, 280));
-        
-//        ChartPanel painelGrafico2 = new ChartPanel(grafico);
-        //painelGrafico.setPreferredSize(new Dimension(380, 280));
+
+        JFreeChart grafico2 = ChartFactory.createXYLineChart(
+            "Tempo médio detecçao",           
+            "Tempo",
+            "Tempo", 
+            dados2,
+            PlotOrientation.VERTICAL,
+            true,
+            true,
+            false
+        );
+
+        ChartPanel painelGrafico2 = new ChartPanel(grafico2);      
         
         add(painelGrafico);  
-//        add(painelGrafico2);  
-//        add(painelGrafico);  
-//        add(painelGrafico);  
-
+        add(painelGrafico2);
+        
         t.start();
     }
     
@@ -105,6 +116,8 @@ public class Estatisticas extends JFrame implements Runnable {
         patogenos.add(tick,qtPatogenos);
         neutrofilos.add(tick,qtNeutrofilos);
         linfocitos.add(tick,qtLinfocitos);
+        
+        temporizacoes.add(tick,sistema.getTemporizacao());
         
         tick++;
     }

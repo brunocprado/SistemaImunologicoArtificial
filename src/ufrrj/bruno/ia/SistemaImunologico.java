@@ -7,6 +7,8 @@ import ufrrj.bruno.ia.quimica.CamadaSobreposta;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,8 +51,11 @@ public class SistemaImunologico implements Runnable{
     private boolean mostraCamada = true;
     public  boolean pausada = false;
     private boolean debug = false;
+    private int tempoMedio = 0;
+    private int qtTempo = 0;
     //======| DISPLAY |======//
     public Map<TIPO_CELULA,Boolean> exibir = new HashMap<>();
+    
     
     private SistemaImunologico(){
         carregaParametros();
@@ -175,7 +180,7 @@ public class SistemaImunologico implements Runnable{
             Node tmp;  
             for (int i = 0; i < propriedades.getLength(); i++) {
                 tmp = propriedades.item(i);
-                if(tmp.getNodeType() != tmp.ELEMENT_NODE) continue;
+                if(tmp.getNodeType() != Node.ELEMENT_NODE) continue;
                 parametros.put(tmp.getNodeName(), Integer.parseInt(tmp.getTextContent()));
                 System.out.println("[ " + tmp.getNodeName() + " ] = " + tmp.getTextContent());
                 log.imprime("[ " + tmp.getNodeName() + " ] = " + tmp.getTextContent(), "#ffffff");
@@ -198,6 +203,15 @@ public class SistemaImunologico implements Runnable{
     
     public void mudaParametro(String nome,int valor){
         parametros.put(nome.toUpperCase(), valor);
+    }
+    
+    public void addTemporizacao(int tempo){
+        tempoMedio = (tempoMedio * qtTempo + tempo)/(qtTempo + 1);
+        qtTempo++;
+    }
+    
+    public int getTemporizacao(){
+        return tempoMedio;
     }
     
     @Override

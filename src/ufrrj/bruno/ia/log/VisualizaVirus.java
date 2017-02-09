@@ -1,6 +1,7 @@
 package ufrrj.bruno.ia.log;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,6 +38,7 @@ public class VisualizaVirus extends JInternalFrame implements Runnable{
         setSize(400,320);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setFocusable(false);
+        setBackground(Color.WHITE);
         setLayout(new BorderLayout(0,0));
         setResizable(true);
         
@@ -84,5 +86,5 @@ public class VisualizaVirus extends JInternalFrame implements Runnable{
                 Logger.getLogger(VisualizaVirus.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }   
+    }
 }
