@@ -12,7 +12,7 @@ abstract public class Celula implements Comportamento{
     private final TIPO_CELULA tipo;
     //=====| CARACTERISTICAS |=====//
     public int tamanhoX,tamanhoY;
-    private double velMovimento = 2.5;
+    private double velMovimento = 2;
     //========|  RUNTIME  |=======//
     private Posicao posicao;    
     private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
@@ -49,8 +49,8 @@ abstract public class Celula implements Comportamento{
         return velMovimento;
     }
 
-    public void setVelMovimento(double velMovimento) {
-        this.velMovimento = velMovimento;
+    public void setVelMovimento(double velocidade) {
+        this.velMovimento = velocidade;
     }
 
     public Posicao getPosicao() {

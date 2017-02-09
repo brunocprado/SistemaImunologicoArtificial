@@ -2,6 +2,10 @@ package ufrrj.bruno.ia.celulas;
 
 import ufrrj.bruno.ia.atributos.Posicao;
 import java.util.Iterator;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.quimica.CompostoQuimico;
 
 public class Macrofago extends Celula{
@@ -11,52 +15,21 @@ public class Macrofago extends Celula{
     private Patogeno alvo = null;
     private long tempoDetectado;
     private boolean fagocitando = false;
+    private final ConcurrentLinkedQueue<Celula> celulas = SistemaImunologico.getInstancia().getCelulas();
     
     public Macrofago(){
         super(TIPO_CELULA.Macrofago);
+        setVelMovimento(2);
     }
-//    
-//    @Override
-//    public void loop(){
-//        
-//        if(fagocitando) return;
-//        
-//        if(alvo != null){
-//            if(calculaDistancia(alvo.getPos()) <= 4){
-//                fagocitando = true;
-//                Fagocitacao fagocitacao = new Fagocitacao();
-//                fagocitacao.iniciaFagocitacao();
-//            }
-//            move(alvo.getPos());
-//            return;
-//        }
-//        
-//        for (Iterator<CompostoQuimico> i = getSistema().getCamada().compostos.iterator(); i.hasNext();) {
-//            CompostoQuimico composto = i.next();
-//            
-//            double dist = calculaDistancia(composto.getPos());      
-//            if(dist <= composto.getDiametro()/2 + 6){
-//                alvo = composto;
-//                tempoDetectado = System.currentTimeMillis();
-//                if(alvo.getEmissor() != null) getSistema().addTemporizacao((int) (System.currentTimeMillis() - ((Patogeno)alvo.getEmissor()).getEntrada()));
-//                if(dist <= 4){
-//                    fagocitando = true;
-//                    Fagocitacao fagocitacao = new Fagocitacao();
-//                    fagocitacao.iniciaFagocitacao();
-//                }
-//                move(alvo.getPos());
-//                break;
-//            }
-//        }
-//    }
-//    
+
     @Override
     public void loop(){
         
+        if(!celulas.contains(alvo) || alvo == null) { fagocitando = false; alvo = null; }
         if(fagocitando) return;
         
-        if(alvo != null){
-            if(calculaDistancia(alvo.getPosicao()) <= 4){
+        if(alvo != null && celulas.contains(alvo)){
+            if(calculaDistancia(alvo.getPosicao()) <= 4 && celulas.contains(alvo)){
                 fagocitando = true;
                 Fagocitacao fagocitacao = new Fagocitacao();
                 fagocitacao.iniciaFagocitacao();
@@ -70,6 +43,7 @@ public class Macrofago extends Celula{
             composto = i.next();
             
             double dist = calculaDistancia(composto.getPos());      
+            //if(dist <= composto.getDiametro()/2 + 6 && celulas.contains(composto.getEmissor())){
             if(dist <= composto.getDiametro()/2 + 6){
                 alvo = (Patogeno) composto.getEmissor();
                 tempoDetectado = System.currentTimeMillis();
@@ -93,11 +67,14 @@ public class Macrofago extends Celula{
         }
         
         @Override
-        public void run() {
+        public void run() { 
+            if(!celulas.contains(alvo) || alvo == null) { fagocitando = false; alvo = null; return; }
             try {
                 Thread.sleep(getSistema().getParametro("TEMPO_FAGOCITACAO"));
-            } catch (InterruptedException ex) {}
-            if(alvo != null){
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Macrofago.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(alvo != null && celulas.contains(alvo)){
                 alvo.getVirus().setQuantidade(alvo.getVirus().getQuantidade() - 1);
                 getSistema().eliminaCelula(alvo); 
                 getSistema().imprime("Patogeno " + alvo.getId() 
@@ -109,6 +86,6 @@ public class Macrofago extends Celula{
                 fagocitando = false;
                 alvo = null;
             }
-        }   
+        }
     }
 }

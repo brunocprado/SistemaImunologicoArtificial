@@ -19,7 +19,7 @@ import ufrrj.bruno.ia.SistemaImunologico;
  * 
  * @author Bruno Prado
  */
-public class Log extends JFrame{
+public class Log extends JFrame {
     
     private JLabel txt;
     private String log = "<html>";
@@ -87,7 +87,7 @@ public class Log extends JFrame{
     }
     
     public void imprime(String texto){
-        log += "<br>" + texto;
+        log += "<br>" + texto;     
         txt.setText(log + "</html>");
         scroll.getVerticalScrollBar().setValue(scroll.getVerticalScrollBar().getMaximum());
     }

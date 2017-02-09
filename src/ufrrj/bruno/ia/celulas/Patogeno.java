@@ -22,7 +22,7 @@ public class Patogeno extends Celula{
         
         SistemaImunologico sistema = SistemaImunologico.getInstancia();
 
-        setVelMovimento(0.4);
+        setVelMovimento(2);
         tipo = new Virus();
         forma = new Poligono(tipo.getnLados(),getPosicao());
         
@@ -83,7 +83,7 @@ public class Patogeno extends Celula{
         }
         
 	if(prox != null && maisProx < 6){
-            clona(prox.getPosicao());
+            //clona(prox.getPosicao());
             getSistema().eliminaCelula(prox);
             
         }
