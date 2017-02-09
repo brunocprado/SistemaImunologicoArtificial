@@ -83,9 +83,8 @@ public class Patogeno extends Celula{
         }
         
 	if(prox != null && maisProx < 6){
-            //clona(prox.getPosicao());
-            getSistema().eliminaCelula(prox);
-            
+            clona(prox.getPosicao());
+            getSistema().eliminaCelula(prox);  
         }
         if(prox != null) move(prox.getPosicao());
     }

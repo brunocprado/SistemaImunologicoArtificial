@@ -1,12 +1,8 @@
 package ufrrj.bruno.ia.log;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
 import org.jfree.chart.ChartFactory;
@@ -49,8 +45,10 @@ public class Estatisticas extends JFrame implements Runnable {
         Thread t = new Thread(this,"Estatisticas");
         
         addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 t.interrupt();
+                dispose();
             }
         });
 
