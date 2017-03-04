@@ -1,5 +1,6 @@
 package ufrrj.bruno.ia.quimica;
 
+import java.awt.Color;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
@@ -15,6 +16,9 @@ public class CamadaSobreposta implements Runnable{
     
     private final SistemaImunologico sistema;
     public ConcurrentLinkedQueue<CompostoQuimico> compostos = new ConcurrentLinkedQueue<>();
+    
+    //=====| STATIC |=====//
+    public static final Color corPAMP = new Color(255,150,150);
     
     public CamadaSobreposta(SistemaImunologico sistema){
         this.sistema = sistema;
@@ -45,7 +49,7 @@ public class CamadaSobreposta implements Runnable{
                     i.remove();
                 }
             }
-            pausa(sistema.getParametro("TEMPO_PROPAGACAO_QUIMICOS"));
+            pausa((int) (sistema.getParametro("TEMPO_PROPAGACAO_QUIMICOS") * sistema.getVelocidade()));
         }
     }   
 }

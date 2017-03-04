@@ -1,6 +1,7 @@
 package ufrrj.bruno.ia.telas;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -24,7 +25,7 @@ public class Janela extends JFrame{
     private final Overlay overlay;
     private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
     private final JDesktopPane fundo = new JDesktopPane();
-    private Map<Virus,VisualizaVirus> estatisticas = new HashMap<>();
+    private final Map<Virus,VisualizaVirus> estatisticas = new HashMap<>();
     
     public Janela(){
         super("SIA");
@@ -33,6 +34,7 @@ public class Janela extends JFrame{
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setFocusable(true);
+        setMinimumSize(new Dimension(1024,576));
         
         Grafico2D grafico = new Grafico2D();
         overlay = new Overlay(sistema);

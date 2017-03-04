@@ -61,9 +61,10 @@ public class Patogeno extends Celula{
     }
     
     @Override
-    public void loop() {             
-        if((System.currentTimeMillis() - inicio) > getSistema().getParametro("DELAY_PROPAGACAO")){
-            inicio += getSistema().getParametro("DELAY_PROPAGACAO");
+    public void loop() {   
+        System.out.println((getSistema().getParametro("DELAY_PROPAGACAO") * getSistema().getVelocidade()));
+        if((System.currentTimeMillis() - inicio) >= (getSistema().getParametro("DELAY_PROPAGACAO") * getSistema().getVelocidade())){
+            inicio += getSistema().getParametro("DELAY_PROPAGACAO") * getSistema().getVelocidade();
             emiteQuimica();
         }
         

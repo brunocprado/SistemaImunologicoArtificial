@@ -17,6 +17,7 @@ import ufrrj.bruno.ia.celulas.Celula;
 import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.Linfocito;
 import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.Neutrofilo;
 import ufrrj.bruno.ia.celulas.Patogeno;
+import ufrrj.bruno.ia.quimica.CamadaSobreposta;
 import ufrrj.bruno.ia.quimica.CompostoQuimico;
 
 /**
@@ -122,8 +123,15 @@ public class Grafico2D extends JPanel implements Runnable{
     
     public void desenhaCamadaQuimica(Graphics2D g){    
         CompostoQuimico composto;
-        for (Iterator<CompostoQuimico> i = sistema.getCamada().compostos.iterator(); i.hasNext();) {
+        Iterator<CompostoQuimico> i = sistema.getCamada().compostos.iterator();
+        while(i.hasNext()){
             composto = i.next();
+//            int rgba = 0;
+//            if(composto.getTipo() == CompostoQuimico.TIPO_COMPOSTO.PAMP){
+//                rgba = CamadaSobreposta.corPAMP.getRGB();
+//                rgba |= ((composto.getQuantidade() * 4)/255 & 0xff);
+//            }
+//            g.setColor(new Color(rgba,true));
             g.setColor(new Color(255,150,150,composto.getQuantidade() * 4));
             int diametro = composto.getDiametro();
             g.fillOval(composto.getPos().getX() - diametro/2, composto.getPos().getY() - diametro/2, diametro, diametro);

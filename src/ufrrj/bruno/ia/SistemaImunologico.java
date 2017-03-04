@@ -45,8 +45,8 @@ public class SistemaImunologico implements Runnable{
     private final Log log = new Log();
     private final Map<String,Integer> parametros = new HashMap<>();
     //======|  RUNTIME  |======//
-    private int velocidade = 90;
-    private long inicio = System.currentTimeMillis();
+    private double velocidade = 1.0;
+    private static long inicio = System.currentTimeMillis();
     private boolean mostraCamada = true;
     public  boolean pausada = false;
     private boolean debug = false;
@@ -100,8 +100,9 @@ public class SistemaImunologico implements Runnable{
         }
     }  
     
-    public void setVelocidade(int velocidade){
-        this.velocidade = velocidade;
+    public void setVelocidade(int velo){
+        double vel = velo/25;
+        velocidade = (velo == 0) ? 2 : 2/vel;
     }
     
     public ConcurrentLinkedQueue<Celula> getCelulas() {
@@ -145,18 +146,25 @@ public class SistemaImunologico implements Runnable{
             while(i.hasNext()){
                 i.next().loop();
             }
+            
+            pausa((int) (velocidade * 20));
 
-            pausa(110 - velocidade);
         }     
     }
     
-    public long getInicio() {
+    public static long getInicio() {
         return inicio;
     }
 
     public CamadaSobreposta getCamada() {
         return camada;
     }
+
+    public double getVelocidade() {
+        return velocidade;
+    }
+    
+    
     
     public boolean getMostraCamada() {
         return mostraCamada;

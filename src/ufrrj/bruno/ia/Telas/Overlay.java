@@ -81,8 +81,8 @@ public class Overlay extends JInternalFrame{
             sistema.exibir.put(Patogeno,c4.isSelected());
         });
         
-        JSlider slider = new JSlider(5, 100, 80);
-        slider.setMajorTickSpacing(5);
+        JSlider slider = new JSlider(0, 100, 50);
+        slider.setMajorTickSpacing(25);
         slider.setSnapToTicks(true);
         slider.setPreferredSize(new Dimension(155,20));
         

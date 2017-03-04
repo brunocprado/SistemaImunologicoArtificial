@@ -39,7 +39,7 @@ public class VisualizaVirus extends JInternalFrame implements Runnable{
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setFocusable(false);
         setBackground(Color.WHITE);
-        setLayout(new BorderLayout(0,0));
+        setLayout(new BorderLayout(0,10));
         setResizable(true);
         
         dados = new XYSeriesCollection(antigenos);
