@@ -104,9 +104,9 @@ public class Sobre extends javax.swing.JFrame {
                         .addComponent(jLabel5)))
                 .addGap(21, 21, 21)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(9, 9, 9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(14, 14, 14))
         );
 
         jLabel1.getAccessibleContext().setAccessibleName("lblTitulo");

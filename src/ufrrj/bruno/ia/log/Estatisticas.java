@@ -10,9 +10,9 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.jfree.ui.RectangleInsets;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.celulas.Celula;
 
@@ -38,7 +38,7 @@ public class Estatisticas extends JFrame implements Runnable {
     
     public Estatisticas(){
         super("Estatisticas");
-        setSize(720,600);
+        setSize(650,600);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setFocusable(false);
         setResizable(true);
@@ -65,12 +65,12 @@ public class Estatisticas extends JFrame implements Runnable {
             true,
             false
         );
-        grafico.setPadding(new RectangleInsets(10, 10, 10, 10));
-        
+        grafico.setPadding(new RectangleInsets(10,10,10,10));
+
         ChartPanel painelGrafico = new ChartPanel(grafico);
 
         JFreeChart grafico2 = ChartFactory.createXYLineChart(
-            "Tempo médio detecçao",           
+            "Tempo médio detecção",           
             "",
             "", 
             dados2,
@@ -79,7 +79,7 @@ public class Estatisticas extends JFrame implements Runnable {
             true,
             false
         );
-        grafico2.setPadding(new RectangleInsets(10, 10, 10, 10));
+        grafico2.setPadding(new RectangleInsets(10,10,10,10));
 
         ChartPanel painelGrafico2 = new ChartPanel(grafico2);      
         
