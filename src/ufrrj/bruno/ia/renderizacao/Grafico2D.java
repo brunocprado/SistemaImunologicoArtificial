@@ -17,7 +17,6 @@ import ufrrj.bruno.ia.celulas.Celula;
 import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.Linfocito;
 import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.Neutrofilo;
 import ufrrj.bruno.ia.celulas.Patogeno;
-import ufrrj.bruno.ia.quimica.CamadaSobreposta;
 import ufrrj.bruno.ia.quimica.CompostoQuimico;
 
 /**

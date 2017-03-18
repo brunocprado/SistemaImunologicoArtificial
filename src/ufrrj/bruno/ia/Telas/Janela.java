@@ -105,11 +105,16 @@ public class Janela extends JFrame{
         });
         menu.add(menu3);
         
+        Estatisticas estatisticas = new Estatisticas();
         menu4.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Estatisticas estatisticas = new Estatisticas();
-                estatisticas.setVisible(true);
+                if(estatisticas.isVisible()){
+                    estatisticas.setVisible(false);
+                } else {
+                    estatisticas.setLocationRelativeTo(getContentPane());
+                    estatisticas.setVisible(true);
+                }   
             }
         });
         menu.add(menu4);

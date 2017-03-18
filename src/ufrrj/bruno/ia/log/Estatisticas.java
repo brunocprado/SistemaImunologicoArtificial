@@ -1,9 +1,10 @@
 package ufrrj.bruno.ia.log;
 
+import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -11,6 +12,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.ui.RectangleInsets;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.celulas.Celula;
 
@@ -36,21 +38,17 @@ public class Estatisticas extends JFrame implements Runnable {
     
     public Estatisticas(){
         super("Estatisticas");
-        setSize(800,600);
+        setSize(720,600);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setFocusable(false);
-        setLayout(new GridLayout(2,1));
         setResizable(true);
         
+        JPanel contentPanel = new JPanel(new GridLayout(2,1,10,10));
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        contentPanel.setBackground(new Color(150,100,100));
+        setContentPane(contentPanel);
+
         Thread t = new Thread(this,"Estatisticas");
-        
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                t.interrupt();
-                dispose();
-            }
-        });
 
         dados = new XYSeriesCollection(macrofagos);
         dados.addSeries(patogenos); 
@@ -67,19 +65,21 @@ public class Estatisticas extends JFrame implements Runnable {
             true,
             false
         );
-
+        grafico.setPadding(new RectangleInsets(10, 10, 10, 10));
+        
         ChartPanel painelGrafico = new ChartPanel(grafico);
 
         JFreeChart grafico2 = ChartFactory.createXYLineChart(
             "Tempo médio detecçao",           
-            "Tempo",
-            "Tempo", 
+            "",
+            "", 
             dados2,
             PlotOrientation.VERTICAL,
-            true,
+            false,
             true,
             false
         );
+        grafico2.setPadding(new RectangleInsets(10, 10, 10, 10));
 
         ChartPanel painelGrafico2 = new ChartPanel(grafico2);      
         

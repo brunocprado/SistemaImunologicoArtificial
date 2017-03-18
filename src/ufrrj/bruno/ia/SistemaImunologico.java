@@ -92,14 +92,6 @@ public class SistemaImunologico implements Runnable{
         }
     }
     
-    public void pausa(int tempo){
-        try {
-            Thread.sleep(tempo);
-        } catch (InterruptedException ex) {
-            System.out.println("Erro ao pausar a Thread principal");
-        }
-    }  
-    
     public void setVelocidade(int velo){
         double vel = velo/25;
         velocidade = (velo == 0) ? 2 : 2/vel;
@@ -147,8 +139,11 @@ public class SistemaImunologico implements Runnable{
                 i.next().loop();
             }
             
-            pausa((int) (velocidade * 20));
-
+            try {
+                Thread.sleep(((int) (velocidade * 20)));
+            } catch (InterruptedException ex) {
+                System.out.println("Erro ao pausar a Thread principal");
+            };
         }     
     }
     

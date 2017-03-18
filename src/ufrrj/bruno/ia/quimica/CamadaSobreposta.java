@@ -49,6 +49,7 @@ public class CamadaSobreposta implements Runnable{
                     i.remove();
                 }
             }
+            
             pausa((int) (sistema.getParametro("TEMPO_PROPAGACAO_QUIMICOS") * sistema.getVelocidade()));
         }
     }   

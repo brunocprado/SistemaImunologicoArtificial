@@ -11,8 +11,8 @@ public class Virus {
     
     private int quantidade = 0;
     private final String identificador;
-    private Color cor;
-    private int nLados;
+    private final Color cor;
+    private final int nLados;
     
     public Virus(){ 
         Random r = new Random();

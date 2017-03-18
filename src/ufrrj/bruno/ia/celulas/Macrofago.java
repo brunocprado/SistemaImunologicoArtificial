@@ -77,9 +77,12 @@ public class Macrofago extends Celula{
             if(alvo != null && celulas.contains(alvo)){
                 alvo.getVirus().setQuantidade(alvo.getVirus().getQuantidade() - 1);
                 getSistema().eliminaCelula(alvo); 
-                getSistema().imprime("Patogeno " + alvo.getId() 
+                
+                if(getSistema().isDebug()){
+                    getSistema().imprime("Patogeno " + alvo.getId() 
                         + " [<span style='color:red;'>" + alvo.getVirus().getIdentificador()+ "</span>] eliminado. {Tempo de detecção : " + (tempoDetectado - alvo.getEntrada()) 
                         + "ms, Tempo até ser eliminado: " + (System.currentTimeMillis() - alvo.getEntrada()) + "ms}");
+                }
                 fagocitando = false;
                 alvo = null;                 
             } else {

@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import ufrrj.bruno.ia.SistemaImunologico;
 import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.*;
 
