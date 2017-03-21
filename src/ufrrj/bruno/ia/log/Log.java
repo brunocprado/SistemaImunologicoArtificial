@@ -75,7 +75,7 @@ public class Log extends JFrame {
                 String ultimo = "";
                 Set<String> chaves = SistemaImunologico.getInstancia().getParametros().keySet();
                 for(String tmp : chaves){
-                    if(tmp.toLowerCase().contains(comando.getText())){
+                    if(tmp.toLowerCase().startsWith(comando.getText())){
                         qt++; ultimo = tmp;
                     }
                 }
