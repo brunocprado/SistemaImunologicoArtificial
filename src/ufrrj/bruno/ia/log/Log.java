@@ -2,6 +2,7 @@ package ufrrj.bruno.ia.log;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -29,6 +30,7 @@ public class Log extends JFrame {
     public Log(){
         super("Log");
         setSize(650,480);
+        setMinimumSize(new Dimension(500,400));
         setResizable(true);
         setLocation(2, 10);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

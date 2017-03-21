@@ -123,12 +123,10 @@ public class Estatisticas extends JFrame implements Runnable {
     @Override
     public void run() {
         try{
-           while(!Thread.interrupted()){
+            while(true){
                 atualizaGraficos();
                 Thread.sleep(1000);
-           }
-        } catch (InterruptedException consumed){
-            
-        }
+            }
+        } catch (InterruptedException consumed){} 
    }
 }
