@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
@@ -66,6 +67,19 @@ public class Log extends JFrame {
                     executaComando(comando.getText());
                     comando.setText("");
                 }
+            }
+            
+            @Override
+            public void keyReleased(KeyEvent e){
+                int qt = 0;
+                String ultimo = "";
+                Set<String> chaves = SistemaImunologico.getInstancia().getParametros().keySet();
+                for(String tmp : chaves){
+                    if(tmp.toLowerCase().contains(comando.getText())){
+                        qt++; ultimo = tmp;
+                    }
+                }
+                if(qt == 1) comando.setText(ultimo + " ");       
             }
         }); 
            
