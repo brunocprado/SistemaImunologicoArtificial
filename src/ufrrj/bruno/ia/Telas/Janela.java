@@ -139,8 +139,8 @@ public class Janela extends JFrame{
     
     public void novoVirus(Virus virus){
         VisualizaVirus tmp = new VisualizaVirus(virus);   
+        tmp.setLocationRelativeTo(getContentPane());
         estatisticas.put(virus, tmp);
-        fundo.add(tmp,0);
     }
     
     private final class Monitor implements Runnable{
@@ -153,7 +153,7 @@ public class Janela extends JFrame{
         @Override
         public void run() {
             while(true){
-                String tmp = "SIA";
+                String tmp = "Sistema Imunológico Artificial";
 
                 if(sistema.pausada){
                     tmp += "  -  Pausado";

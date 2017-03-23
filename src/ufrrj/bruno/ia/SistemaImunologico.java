@@ -159,8 +159,6 @@ public class SistemaImunologico implements Runnable{
         return velocidade;
     }
     
-    
-    
     public boolean getMostraCamada() {
         return mostraCamada;
     }

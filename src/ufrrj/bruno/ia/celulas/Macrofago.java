@@ -43,17 +43,18 @@ public class Macrofago extends Celula{
             composto = i.next();
             
             double dist = calculaDistancia(composto.getPos());      
-            //if(dist <= composto.getDiametro()/2 + 6 && celulas.contains(composto.getEmissor())){
             if(dist <= composto.getDiametro()/2 + 6){
                 alvo = (Patogeno) composto.getEmissor();
                 tempoDetectado = System.currentTimeMillis();
-                if(alvo != null) getSistema().addTemporizacao((int) (System.currentTimeMillis() - alvo.getEntrada()));
                 if(dist <= 4){
                     fagocitando = true;
                     Fagocitacao fagocitacao = new Fagocitacao();
                     fagocitacao.iniciaFagocitacao();
                 }
-                move(alvo.getPosicao());
+                if(alvo != null) {
+                    getSistema().addTemporizacao((int) (System.currentTimeMillis() - alvo.getEntrada()));
+                    move(alvo.getPosicao());
+                }
                 break;
             }
         }

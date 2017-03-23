@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
@@ -22,7 +23,7 @@ import ufrrj.bruno.ia.celulas.Patogeno;
  *
  * @author bruno
  */
-public class VisualizaVirus extends JInternalFrame implements Runnable{
+public class VisualizaVirus extends JFrame implements Runnable{
     
     private final Virus virus;
     private int tick = 0;
@@ -33,7 +34,7 @@ public class VisualizaVirus extends JInternalFrame implements Runnable{
     private final XYSeriesCollection dados;
     
     public VisualizaVirus(Virus virus){
-        super("Estatísticas : " + virus.getIdentificador(),false,true);
+        super("Estatísticas : " + virus.getIdentificador());
         this.virus = virus;
         setSize(400,320);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
