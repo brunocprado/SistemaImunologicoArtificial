@@ -15,20 +15,15 @@ import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.*;
 
 public class Overlay extends JInternalFrame{
     
-    private final SistemaImunologico sistema;
-    
-    //INSERIR SELEÇÃO DE WBCs
-    
-    public Overlay(SistemaImunologico sistema){
+    private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
+        
+    public Overlay(){
         super("Opções",false,true);
         setSize(180,300);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setFocusable(false);
         setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        this.sistema = sistema;
-        
-        //putClientProperty("JInternalFrame.isPalette", Boolean.TRUE);
- 
+         
         //CONSTROI TELA
         
         JRadioButton camadaQuimica = new JRadioButton("Camada Química",true);
@@ -81,7 +76,7 @@ public class Overlay extends JInternalFrame{
         });
         
         JSlider slider = new JSlider(0, 100, 50);
-        slider.setMajorTickSpacing(25);
+        slider.setMajorTickSpacing(50);
         slider.setSnapToTicks(true);
         slider.setPreferredSize(new Dimension(155,20));
         

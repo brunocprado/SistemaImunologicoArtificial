@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
 import org.jfree.chart.ChartFactory;

@@ -22,7 +22,7 @@ import ufrrj.bruno.ia.renderizacao.Grafico2D;
 
 public class Janela extends JFrame{
         
-    private final Overlay overlay;
+    private final Overlay overlay = new Overlay();;
     private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
     private final JDesktopPane fundo = new JDesktopPane();
     private final Map<Virus,VisualizaVirus> estatisticas = new HashMap<>();
@@ -37,7 +37,6 @@ public class Janela extends JFrame{
         setMinimumSize(new Dimension(1024,576));
         
         Grafico2D grafico = new Grafico2D();
-        overlay = new Overlay(sistema);
         
         add(fundo,BorderLayout.CENTER);      
         
