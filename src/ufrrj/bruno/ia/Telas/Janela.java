@@ -162,7 +162,7 @@ public class Janela extends JFrame{
                 setTitle(tmp);
 
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(50);
                 } catch (InterruptedException ex) {
 //                    Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
                 }

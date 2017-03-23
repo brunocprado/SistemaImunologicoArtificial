@@ -2,6 +2,7 @@ package ufrrj.bruno.ia.log;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -42,6 +43,8 @@ public class Estatisticas extends JFrame implements Runnable {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setFocusable(false);
         setResizable(true);
+        
+        setIconImage(Toolkit.getDefaultToolkit().createImage(getClass().getResource("/img/estatisticas.png"))); 
         
         JPanel contentPanel = new JPanel(new GridLayout(2,1,10,10));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
