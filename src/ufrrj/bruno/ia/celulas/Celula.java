@@ -14,7 +14,7 @@ abstract public class Celula implements Comportamento{
     public int tamanhoX,tamanhoY;
     private double velMovimento = 2;
     //========|  RUNTIME  |=======//
-    private Posicao posicao;    
+    protected Posicao posicao;    
     protected final SistemaImunologico sistema = SistemaImunologico.getInstancia();
 
     public Celula(TIPO_CELULA tipo){

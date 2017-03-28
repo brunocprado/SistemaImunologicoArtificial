@@ -1,6 +1,5 @@
 package ufrrj.bruno.ia.celulas;
 
-import ufrrj.bruno.ia.atributos.Posicao;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
@@ -10,7 +9,6 @@ import ufrrj.bruno.ia.quimica.CompostoQuimico;
 
 public class Macrofago extends Celula{
     
-    Posicao pos = getPosicao();
     //=====| Fagocitacao |======//
     private Patogeno alvo = null;
     private long tempoDetectado;

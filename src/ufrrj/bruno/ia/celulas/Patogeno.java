@@ -24,7 +24,7 @@ public class Patogeno extends Celula{
 
         setVelMovimento(2);
         tipo = new Virus();
-        forma = new Poligono(tipo.getnLados(),getPosicao());
+        forma = new Poligono(tipo.getnLados(),posicao);
         
         if(sistema.isDebug()) { sistema.imprime("Novo patogeno com identificador: "  + tipo.getIdentificador()); }
         emiteQuimica();
@@ -32,7 +32,7 @@ public class Patogeno extends Celula{
     
     public Patogeno(Virus tipo) {
         super(TIPO_CELULA.Patogeno);
-        forma = new Poligono(tipo.getnLados(),getPosicao());
+        forma = new Poligono(tipo.getnLados(),posicao);
         this.tipo = tipo;
         tipo.setQuantidade(tipo.getQuantidade()+1);
         emiteQuimica();
@@ -40,19 +40,19 @@ public class Patogeno extends Celula{
     
     public Patogeno(Virus tipo,Posicao pos) {
         super(TIPO_CELULA.Patogeno,pos);
-        forma = new Poligono(tipo.getnLados(),getPosicao());
+        forma = new Poligono(tipo.getnLados(),posicao);
         this.tipo = tipo;
         tipo.setQuantidade(tipo.getQuantidade()+1);
         emiteQuimica();
     }
     
     private void emiteQuimica(){
-        Posicao tmp = new Posicao(getPosicao().getX(), getPosicao().getY());
+        Posicao tmp = new Posicao(posicao.getX(), posicao.getY());
         sistema.getCamada().compostos.add(new CompostoQuimico(TIPO_COMPOSTO.PAMP, 40,tmp,this));
     }
     
     public void clona(){
-        sistema.adicionaCelula(new Patogeno(tipo,getPosicao()));
+        sistema.adicionaCelula(new Patogeno(tipo,posicao));
     }
     
     public void clona(Posicao p){
@@ -75,7 +75,7 @@ public class Patogeno extends Celula{
         for(Celula celula : sistema.getCelulas()){  
             if(celula.getTipo() != TIPO_CELULA.Linfocito) continue;
             
-            double dist = calculaDistancia(celula.getPosicao());
+            double dist = calculaDistancia(celula.posicao);
             if(maisProx > dist) {
                 maisProx = dist;
                 prox = celula;
@@ -83,10 +83,10 @@ public class Patogeno extends Celula{
         }
         
 	if(prox != null && maisProx < 6){
-            clona(prox.getPosicao());
+            clona(prox.posicao);
             sistema.eliminaCelula(prox);  
         }
-        if(prox != null) move(prox.getPosicao());
+        if(prox != null) move(prox.posicao);
     }
 
     public Polygon getForma() {
