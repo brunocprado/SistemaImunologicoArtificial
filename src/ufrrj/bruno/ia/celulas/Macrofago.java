@@ -39,7 +39,7 @@ public class Macrofago extends Celula{
         }
         
         CompostoQuimico composto;
-        for (Iterator<CompostoQuimico> i = getSistema().getCamada().compostos.iterator(); i.hasNext();) {
+        for (Iterator<CompostoQuimico> i = sistema.getCamada().compostos.iterator(); i.hasNext();) {
             composto = i.next();
             
             double dist = calculaDistancia(composto.getPos());      
@@ -52,7 +52,7 @@ public class Macrofago extends Celula{
                     fagocitacao.iniciaFagocitacao();
                 }
                 if(alvo != null) {
-                    getSistema().addTemporizacao((int) (System.currentTimeMillis() - alvo.getEntrada()));
+                    sistema.addTemporizacao((int) (System.currentTimeMillis() - alvo.getEntrada()));
                     move(alvo.getPosicao());
                 }
                 break;
@@ -71,16 +71,16 @@ public class Macrofago extends Celula{
         public void run() { 
             if(!celulas.contains(alvo) || alvo == null) { fagocitando = false; alvo = null; return; }
             try {
-                Thread.sleep(getSistema().getParametro("TEMPO_FAGOCITACAO"));
+                Thread.sleep(sistema.getParametro("TEMPO_FAGOCITACAO"));
             } catch (InterruptedException ex) {
                 Logger.getLogger(Macrofago.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(alvo != null && celulas.contains(alvo)){
                 alvo.getVirus().setQuantidade(alvo.getVirus().getQuantidade() - 1);
-                getSistema().eliminaCelula(alvo); 
+                sistema.eliminaCelula(alvo); 
                 
-                if(getSistema().isDebug()){
-                    getSistema().imprime("Patogeno " + alvo.getId() 
+                if(sistema.isDebug()){
+                    sistema.imprime("Patogeno " + alvo.getId() 
                         + " [<span style='color:red;'>" + alvo.getVirus().getIdentificador()+ "</span>] eliminado. {Tempo de detecção : " + (tempoDetectado - alvo.getEntrada()) 
                         + "ms, Tempo até ser eliminado: " + (System.currentTimeMillis() - alvo.getEntrada()) + "ms}");
                 }

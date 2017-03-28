@@ -48,22 +48,22 @@ public class Patogeno extends Celula{
     
     private void emiteQuimica(){
         Posicao tmp = new Posicao(getPosicao().getX(), getPosicao().getY());
-        getSistema().getCamada().compostos.add(new CompostoQuimico(TIPO_COMPOSTO.PAMP, 40,tmp,this));
+        sistema.getCamada().compostos.add(new CompostoQuimico(TIPO_COMPOSTO.PAMP, 40,tmp,this));
     }
     
     public void clona(){
-        getSistema().adicionaCelula(new Patogeno(tipo,getPosicao()));
+        sistema.adicionaCelula(new Patogeno(tipo,getPosicao()));
     }
     
     public void clona(Posicao p){
-        getSistema().adicionaCelula(new Patogeno(tipo,p));
+        sistema.adicionaCelula(new Patogeno(tipo,p));
         tipo.add();
     }
     
     @Override
     public void loop() {   
-        if((System.currentTimeMillis() - inicio) >= (getSistema().getParametro("DELAY_PROPAGACAO") * getSistema().getVelocidade())){
-            inicio += getSistema().getParametro("DELAY_PROPAGACAO") * getSistema().getVelocidade();
+        if((System.currentTimeMillis() - inicio) >= (sistema.getParametro("DELAY_PROPAGACAO") * sistema.getVelocidade())){
+            inicio += sistema.getParametro("DELAY_PROPAGACAO") * sistema.getVelocidade();
             emiteQuimica();
         }
         
@@ -72,7 +72,7 @@ public class Patogeno extends Celula{
         double maisProx = Double.MAX_VALUE;
         Celula prox = null;
         
-        for(Celula celula : getSistema().getCelulas()){  
+        for(Celula celula : sistema.getCelulas()){  
             if(celula.getTipo() != TIPO_CELULA.Linfocito) continue;
             
             double dist = calculaDistancia(celula.getPosicao());
@@ -84,7 +84,7 @@ public class Patogeno extends Celula{
         
 	if(prox != null && maisProx < 6){
             clona(prox.getPosicao());
-            getSistema().eliminaCelula(prox);  
+            sistema.eliminaCelula(prox);  
         }
         if(prox != null) move(prox.getPosicao());
     }

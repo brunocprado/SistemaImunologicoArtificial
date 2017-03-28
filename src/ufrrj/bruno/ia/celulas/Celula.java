@@ -15,7 +15,7 @@ abstract public class Celula implements Comportamento{
     private double velMovimento = 2;
     //========|  RUNTIME  |=======//
     private Posicao posicao;    
-    private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
+    protected final SistemaImunologico sistema = SistemaImunologico.getInstancia();
 
     public Celula(TIPO_CELULA tipo){
         qt++; id = qt; 
@@ -65,20 +65,11 @@ abstract public class Celula implements Comportamento{
         posicao.setX(x);
         posicao.setY(y);
     }
-    
-//    public void setPosicao(double x,double y) {
-//        posicao.setX(x);
-//        posicao.setY(y);
-//    }
 
     public TIPO_CELULA getTipo() {
         return tipo;
     }
-
-    public SistemaImunologico getSistema() {
-        return sistema;
-    }
-
+    
     public int getId() {
         return id;
     }
