@@ -10,7 +10,7 @@ import ufrrj.bruno.ia.quimica.CompostoQuimico;
 
 public class Macrofago extends Celula{
     
-    public enum ESTADO {REPOUSO,ATIVO} 
+    public static enum ESTADO {REPOUSO,FAGOCITANDO,ATIVO} 
     
     //======| Fagocitacao |======//
     private ESTADO estado = REPOUSO;
@@ -31,11 +31,11 @@ public class Macrofago extends Celula{
     public void loop(){
         
         if(!celulas.contains(alvo) || alvo == null) { estado = REPOUSO; alvo = null; }
-        if(estado == ATIVO) return;
+        if(estado == FAGOCITANDO) return;
         
         if(alvo != null && celulas.contains(alvo)){
             if(calculaDistancia(alvo.getPosicao()) <= 4 && celulas.contains(alvo)){
-                estado = ATIVO;
+                estado = FAGOCITANDO;
                 Fagocitacao fagocitacao = new Fagocitacao();
                 fagocitacao.iniciaFagocitacao();
             }
@@ -52,11 +52,12 @@ public class Macrofago extends Celula{
                 alvo = (Patogeno) composto.getEmissor();
                 tempoDetectado = System.currentTimeMillis();
                 if(dist <= 4){
-                    estado = ATIVO;
+                    estado = FAGOCITANDO;
                     Fagocitacao fagocitacao = new Fagocitacao();
                     fagocitacao.iniciaFagocitacao();
                 }
                 if(alvo != null) {
+                    estado = ATIVO;
                     sistema.addTemporizacao((int) (System.currentTimeMillis() - alvo.getInicio()));
                     move(alvo.getPosicao());
                 }
@@ -66,7 +67,7 @@ public class Macrofago extends Celula{
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "Macrofago{estado = " + estado + ",posicao = " + posicao + "}";
     }
     

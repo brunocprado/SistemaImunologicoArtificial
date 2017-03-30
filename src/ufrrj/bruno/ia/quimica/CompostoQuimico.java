@@ -7,8 +7,9 @@ public class CompostoQuimico {
     
     /**
      * PAMP - Padrões moleculares associados a patógenos
+     * TNFA - Factor de necrose tumoral
     */
-    public static enum TIPO_COMPOSTO {PAMP,HISTAMINA,PROSTAGLANDINA};
+    public static enum TIPO_COMPOSTO {PAMP,HISTAMINA,PROSTAGLANDINA,INTERLEUCINA1,TNFA};
     
     private final TIPO_COMPOSTO tipo;
     private Celula emissor;

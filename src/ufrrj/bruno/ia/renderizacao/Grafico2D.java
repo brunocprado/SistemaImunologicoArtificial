@@ -15,7 +15,10 @@ import javax.swing.JPanel;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.celulas.Celula;
 import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.Linfocito;
+import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.Macrofago;
 import static ufrrj.bruno.ia.celulas.Celula.TIPO_CELULA.Neutrofilo;
+import ufrrj.bruno.ia.celulas.Macrofago;
+import ufrrj.bruno.ia.celulas.Macrofago.ESTADO;
 import ufrrj.bruno.ia.celulas.Patogeno;
 import ufrrj.bruno.ia.quimica.CompostoQuimico;
 
@@ -99,7 +102,11 @@ public class Grafico2D extends JPanel implements Runnable{
             }
             switch(celula.getTipo()){
                 case Macrofago:
-                    g.drawImage(macrofago, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8, this);
+                    if(((Macrofago)celula).getEstado() == ESTADO.ATIVO || ((Macrofago)celula).getEstado() == ESTADO.FAGOCITANDO) {
+                        g.drawImage(macrofago, celula.getPosicao().getX(), celula.getPosicao().getY(),12,12, this);
+                    } else {
+                        g.drawImage(macrofago, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8, this);
+                    }
                     break;
                 case Neutrofilo:
                     g.drawImage(neutrofilo, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8, this);
