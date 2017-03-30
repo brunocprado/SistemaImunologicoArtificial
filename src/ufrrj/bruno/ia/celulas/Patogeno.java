@@ -69,10 +69,13 @@ public class Patogeno extends Celula{
             emiteQuimica();
         }
         
+        if(prox != null && (!sistema.getCelulas().contains(prox))) {
+            processando = false;
+            prox = null;
+        }
+        
         if(processando){
-            if((System.currentTimeMillis() - inicioProc) >= 300){
-//                System.out.println(System.currentTimeMillis() - inicioProc);
-//                System.out.println(prox);
+            if((System.currentTimeMillis() - inicioProc) >= 1000){
                 sistema.eliminaCelula(prox);  
                 clona(prox.posicao);
                 
