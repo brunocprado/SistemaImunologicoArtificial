@@ -16,6 +16,10 @@ public class Patogeno extends Celula{
     
     //====| RUNTIME |=====//
     private long inicio = System.currentTimeMillis();
+    private Celula prox = null;
+    private boolean processando = false;
+    private long inicioProc = Long.MAX_VALUE;
+    
     
     public Patogeno() {
         super(TIPO_CELULA.Patogeno);
@@ -67,10 +71,30 @@ public class Patogeno extends Celula{
             emiteQuimica();
         }
         
-        //IMPLEMENTACAO BASICA MULTIPLICACAO (EXEMPLO)
+        if(processando){
+            System.out.println("PROCESSANDO");
+            System.out.println(System.currentTimeMillis());
+            System.out.println(inicioProc);
+            System.out.println(prox);
+            if((System.currentTimeMillis() - inicioProc) >= 300){
+                clona(prox.posicao);
+                sistema.eliminaCelula(prox);  
+                processando = false;
+                prox = null;
+                inicioProc = Long.MAX_VALUE;
+            } else {  return; }
+        }              
+        
+        if(prox != null){
+            if(calculaDistancia(prox.posicao) < 6){
+                processando = true;
+                inicioProc = System.currentTimeMillis();
+            } else {
+                move(prox.posicao);
+            }
+        }
         
         double maisProx = Double.MAX_VALUE;
-        Celula prox = null;
         
         for(Celula celula : sistema.getCelulas()){  
             if(celula.getTipo() != TIPO_CELULA.Linfocito) continue;
@@ -81,12 +105,7 @@ public class Patogeno extends Celula{
                 prox = celula;
             }
         }
-        
-	if(prox != null && maisProx < 6){
-            clona(prox.posicao);
-            sistema.eliminaCelula(prox);  
-        }
-        if(prox != null) move(prox.posicao);
+	
     }
 
     public Polygon getForma() {

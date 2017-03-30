@@ -9,7 +9,7 @@ abstract public class Celula implements Comportamento{
             
     private static int qt = 0;
     private final int id;
-    private final TIPO_CELULA tipo;
+    protected final TIPO_CELULA tipo;
     //=====| CARACTERISTICAS |=====//
     public int tamanhoX,tamanhoY;
     private double velMovimento = 2;
