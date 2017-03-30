@@ -3,7 +3,7 @@ package ufrrj.bruno.ia.celulas;
 public class Neutrofilo extends Celula{
     
     public Neutrofilo(){
-        super(TIPO_CELULA.Neutrofilo);
+        super(TIPO_CELULA.NEUTROFILO);
     }
 
     @Override

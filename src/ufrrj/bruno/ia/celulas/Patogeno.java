@@ -18,9 +18,8 @@ public class Patogeno extends Celula{
     private boolean processando = false;
     private long inicioProc = Long.MAX_VALUE;
     
-    
     public Patogeno() {
-        super(TIPO_CELULA.Patogeno);
+        super(TIPO_CELULA.PATOGENO);
         
         setVelMovimento(2);
         tipo = new Virus();
@@ -31,7 +30,7 @@ public class Patogeno extends Celula{
     }
     
     public Patogeno(Virus tipo) {
-        super(TIPO_CELULA.Patogeno);
+        super(TIPO_CELULA.PATOGENO);
         forma = new Poligono(tipo.getnLados(),posicao);
         this.tipo = tipo;
         tipo.setQuantidade(tipo.getQuantidade()+1);
@@ -39,7 +38,7 @@ public class Patogeno extends Celula{
     }
     
     public Patogeno(Virus tipo,Posicao pos) {
-        super(TIPO_CELULA.Patogeno,pos);
+        super(TIPO_CELULA.PATOGENO,pos);
         forma = new Poligono(tipo.getnLados(),posicao);
         this.tipo = tipo;
         tipo.setQuantidade(tipo.getQuantidade()+1);
@@ -95,7 +94,7 @@ public class Patogeno extends Celula{
         double maisProx = Double.MAX_VALUE;
         
         for(Celula celula : sistema.getCelulas()){  
-            if(celula.getTipo() != TIPO_CELULA.Linfocito) continue;
+            if(celula.getTipo() != TIPO_CELULA.LINFOCITO) continue;
             
             double dist = calculaDistancia(celula.posicao);
             if(maisProx > dist) {

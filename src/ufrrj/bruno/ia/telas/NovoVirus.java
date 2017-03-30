@@ -148,6 +148,7 @@ public class NovoVirus extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Opções"));
 
+        txtNome.setText("Teste");
         txtNome.setToolTipText("");
         txtNome.setName(""); // NOI18N
 

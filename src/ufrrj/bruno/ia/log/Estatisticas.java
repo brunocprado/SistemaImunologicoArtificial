@@ -98,16 +98,16 @@ public class Estatisticas extends JFrame implements Runnable {
         //REMOVER ISSO DEPOIS
         for(Celula celula : sistema.getCelulas()){
             if(null != celula.getTipo()) switch (celula.getTipo()) {
-                case Macrofago:
+                case MACROFAGO:
                     qtMacrofagos++;
                     break;
-                case Patogeno:
+                case PATOGENO:
                     qtPatogenos++;
                     break;
-                case Neutrofilo:
+                case NEUTROFILO:
                     qtNeutrofilos++;
                     break;
-                case Linfocito:
+                case LINFOCITO:
                     qtLinfocitos++;
                     break;
             }

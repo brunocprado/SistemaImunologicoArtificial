@@ -60,19 +60,19 @@ public class Overlay extends JInternalFrame{
         add(painelExibir);
         
         c1.addChangeListener(l -> {
-            sistema.exibir.put(Macrofago,c1.isSelected());
+            sistema.exibir.put(MACROFAGO,c1.isSelected());
         });
         
         c2.addChangeListener(l -> {
-            sistema.exibir.put(Linfocito,c2.isSelected());
+            sistema.exibir.put(LINFOCITO,c2.isSelected());
         });
         
         c3.addChangeListener(l -> {
-            sistema.exibir.put(Neutrofilo,c3.isSelected());
+            sistema.exibir.put(NEUTROFILO,c3.isSelected());
         });
         
         c4.addChangeListener(l -> {
-            sistema.exibir.put(Patogeno,c4.isSelected());
+            sistema.exibir.put(PATOGENO,c4.isSelected());
         });
         
         JSlider slider = new JSlider(0, 100, 50);

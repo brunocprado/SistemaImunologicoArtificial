@@ -1,14 +1,13 @@
 package ufrrj.bruno.ia.celulas;
 
 import java.util.Random;
-import ufrrj.bruno.ia.SistemaImunologico;
 
 public class Linfocito extends Celula{
     
     private final int receptor;
     
     public Linfocito() {
-        super(TIPO_CELULA.Linfocito);
+        super(TIPO_CELULA.LINFOCITO);
         receptor = new Random().nextInt(Integer.MAX_VALUE);
     }
 

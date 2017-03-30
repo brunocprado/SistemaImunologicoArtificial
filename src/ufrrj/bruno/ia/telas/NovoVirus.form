@@ -249,6 +249,7 @@
       <SubComponents>
         <Component class="javax.swing.JTextField" name="txtNome">
           <Properties>
+            <Property name="text" type="java.lang.String" value="Teste"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
           </Properties>

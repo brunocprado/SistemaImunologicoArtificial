@@ -5,8 +5,9 @@ import java.util.Random;
 import ufrrj.bruno.ia.SistemaImunologico;
 
 abstract public class Celula{
-    public static enum TIPO_CELULA {Comum,Linfocito,Neutrofilo,Patogeno,Macrofago};
-            
+    
+    public static enum TIPO_CELULA {COMUM,LINFOCITO,NEUTROFILO,PATOGENO,MACROFAGO};
+    
     private static int qt = 0;
     private final int id;
     protected final TIPO_CELULA tipo;
@@ -14,7 +15,7 @@ abstract public class Celula{
     public int tamanhoX,tamanhoY;
     private double velMovimento = 2;
     //========|  RUNTIME  |=======//
-    protected Posicao posicao;    
+    protected final Posicao posicao;    
     protected final SistemaImunologico sistema = SistemaImunologico.getInstancia();
 
     public Celula(TIPO_CELULA tipo){
@@ -55,10 +56,6 @@ abstract public class Celula{
 
     public Posicao getPosicao() {
         return posicao;
-    }
-
-    public void setPosicao(Posicao posicao) {
-        this.posicao = posicao;
     }
 
     public void setPosicao(int x,int y) {

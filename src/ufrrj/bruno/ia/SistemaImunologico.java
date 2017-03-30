@@ -60,10 +60,10 @@ public class SistemaImunologico implements Runnable{
         carregaParametros();
         camada = new CamadaSobreposta(this);
         nInicial = new Random().nextInt(parametros.get("TAM_MEDIO_SUPERIOR") - parametros.get("TAM_MEDIO_INFERIOR")) + parametros.get("TAM_MEDIO_INFERIOR");      
-        exibir.put(Macrofago, true);
-        exibir.put(Linfocito, true);
-        exibir.put(Neutrofilo, true);
-        exibir.put(Patogeno, true);       
+        exibir.put(MACROFAGO, true);
+        exibir.put(LINFOCITO, true);
+        exibir.put(NEUTROFILO, true);
+        exibir.put(PATOGENO, true);       
     }
     
     public static synchronized SistemaImunologico getInstancia(){

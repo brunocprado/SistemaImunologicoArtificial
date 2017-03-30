@@ -10,7 +10,7 @@ import ufrrj.bruno.ia.quimica.CompostoQuimico;
 
 public class Macrofago extends Celula{
     
-    public static enum ESTADO {REPOUSO,FAGOCITANDO,ATIVO} 
+    public static enum ESTADO {REPOUSO,FAGOCITANDO,ATIVO};
     
     //======| Fagocitacao |======//
     private ESTADO estado = REPOUSO;
@@ -19,7 +19,7 @@ public class Macrofago extends Celula{
     private final ConcurrentLinkedQueue<Celula> celulas = SistemaImunologico.getInstancia().getCelulas();
     
     public Macrofago(){
-        super(TIPO_CELULA.Macrofago);
+        super(TIPO_CELULA.MACROFAGO);
         setVelMovimento(2);
     }
 
