@@ -9,7 +9,7 @@ import ufrrj.bruno.ia.quimica.CompostoQuimico.TIPO_COMPOSTO;
 
 public class Patogeno extends Celula{
     
-    private final Virus tipo;
+    private final Virus patogeno;
     private final Poligono forma;
     
     //====| RUNTIME |=====//
@@ -22,17 +22,17 @@ public class Patogeno extends Celula{
         super(TIPO_CELULA.PATOGENO);
         
         setVelMovimento(2);
-        tipo = new Virus();
-        forma = new Poligono(tipo.getnLados(),posicao);
+        patogeno = new Virus();
+        forma = new Poligono(patogeno.getnLados(),posicao);
         
-        if(sistema.isDebug()) { sistema.imprime("Novo patogeno com identificador: "  + tipo.getIdentificador()); }
+        if(sistema.isDebug()) { sistema.imprime("Novo patogeno com identificador: "  + patogeno.getIdentificador()); }
         emiteQuimica();
     }
     
     public Patogeno(Virus tipo) {
         super(TIPO_CELULA.PATOGENO);
         forma = new Poligono(tipo.getnLados(),posicao);
-        this.tipo = tipo;
+        this.patogeno = tipo;
         tipo.setQuantidade(tipo.getQuantidade()+1);
         emiteQuimica();
     }
@@ -40,7 +40,7 @@ public class Patogeno extends Celula{
     public Patogeno(Virus tipo,Posicao pos) {
         super(TIPO_CELULA.PATOGENO,pos);
         forma = new Poligono(tipo.getnLados(),posicao);
-        this.tipo = tipo;
+        this.patogeno = tipo;
         tipo.setQuantidade(tipo.getQuantidade()+1);
         emiteQuimica();
     }
@@ -51,12 +51,12 @@ public class Patogeno extends Celula{
     }
     
     public void clona(){
-        sistema.adicionaCelula(new Patogeno(tipo,posicao));
+        sistema.adicionaCelula(new Patogeno(patogeno,posicao));
     }
     
     public void clona(Posicao p){
-        sistema.adicionaCelula(new Patogeno(tipo,p));
-        tipo.add();
+        sistema.adicionaCelula(new Patogeno(patogeno,p));
+        patogeno.add();
     }
     
     @Override
@@ -109,7 +109,7 @@ public class Patogeno extends Celula{
     }
 
     public Virus getVirus() {
-        return tipo;
+        return patogeno;
     }
 
     public long getInicio() {

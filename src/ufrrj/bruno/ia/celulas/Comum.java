@@ -1,13 +1,11 @@
 
 package ufrrj.bruno.ia.celulas;
 
-import ufrrj.bruno.ia.SistemaImunologico;
-
 
 public class Comum extends Celula {
     
     public Comum(){
-        super(TIPO_CELULA.Comum);
+        super(TIPO_CELULA.COMUM);
     }
 
     @Override
