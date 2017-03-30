@@ -24,8 +24,6 @@ public class Patogeno extends Celula{
     public Patogeno() {
         super(TIPO_CELULA.Patogeno);
         
-        SistemaImunologico sistema = SistemaImunologico.getInstancia();
-
         setVelMovimento(2);
         tipo = new Virus();
         forma = new Poligono(tipo.getnLados(),posicao);
@@ -72,13 +70,12 @@ public class Patogeno extends Celula{
         }
         
         if(processando){
-            System.out.println("PROCESSANDO");
-            System.out.println(System.currentTimeMillis());
-            System.out.println(inicioProc);
-            System.out.println(prox);
             if((System.currentTimeMillis() - inicioProc) >= 300){
-                clona(prox.posicao);
+//                System.out.println(System.currentTimeMillis() - inicioProc);
+//                System.out.println(prox);
                 sistema.eliminaCelula(prox);  
+                clona(prox.posicao);
+                
                 processando = false;
                 prox = null;
                 inicioProc = Long.MAX_VALUE;

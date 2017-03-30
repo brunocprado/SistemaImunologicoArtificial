@@ -15,7 +15,7 @@ import ufrrj.bruno.ia.SistemaImunologico;
 public class CamadaSobreposta implements Runnable{
     
     private final SistemaImunologico sistema;
-    public ConcurrentLinkedQueue<CompostoQuimico> compostos = new ConcurrentLinkedQueue<>();
+    public final ConcurrentLinkedQueue<CompostoQuimico> compostos = new ConcurrentLinkedQueue<>();
     
     //=====| STATIC |=====//
     public static final Color corPAMP = new Color(255,150,150);
