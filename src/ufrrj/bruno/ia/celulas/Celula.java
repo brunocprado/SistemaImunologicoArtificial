@@ -4,8 +4,8 @@ import ufrrj.bruno.ia.atributos.Posicao;
 import java.util.Random;
 import ufrrj.bruno.ia.SistemaImunologico;
 
-abstract public class Celula implements Comportamento{
-    public enum TIPO_CELULA {Comum,Linfocito,Neutrofilo,Patogeno,Macrofago};
+abstract public class Celula{
+    public static enum TIPO_CELULA {Comum,Linfocito,Neutrofilo,Patogeno,Macrofago};
             
     private static int qt = 0;
     private final int id;
@@ -74,15 +74,17 @@ abstract public class Celula implements Comportamento{
         return id;
     }
     
-    @Override
-    public String toString() {
-        return "Celula{" + "tipo=" + tipo + ", tamanhoX=" + tamanhoX + ", tamanhoY=" + tamanhoY + ", velMovimento=" + velMovimento + ", posicao=" + posicao + '}';
-    }
-    
     public double calculaDistancia(Posicao posicaoAlvo){
         double deltaX = posicao.getX() - posicaoAlvo.getX();
         double deltaY = posicao.getY() - posicaoAlvo.getY();
         return Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
     }
     
+    public abstract void loop();
+            
+    @Override
+    public String toString() {
+        return "Celula{" + "tipo=" + tipo + ", tamanhoX=" + tamanhoX + ", tamanhoY=" + tamanhoY + ", velMovimento=" + velMovimento + ", posicao=" + posicao + '}';
+    }
+   
 }

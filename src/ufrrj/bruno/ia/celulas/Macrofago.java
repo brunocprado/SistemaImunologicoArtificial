@@ -12,7 +12,7 @@ public class Macrofago extends Celula{
     
     public enum ESTADO {REPOUSO,ATIVO} 
     
-    //=====| Fagocitacao |======//
+    //======| Fagocitacao |======//
     private ESTADO estado = REPOUSO;
     private Patogeno alvo = null;
     private long tempoDetectado;
@@ -57,7 +57,7 @@ public class Macrofago extends Celula{
                     fagocitacao.iniciaFagocitacao();
                 }
                 if(alvo != null) {
-                    sistema.addTemporizacao((int) (System.currentTimeMillis() - alvo.getEntrada()));
+                    sistema.addTemporizacao((int) (System.currentTimeMillis() - alvo.getInicio()));
                     move(alvo.getPosicao());
                 }
                 break;
@@ -67,8 +67,8 @@ public class Macrofago extends Celula{
 
     @Override
     public String toString() {
-        return "Macrofago{" + "estado=" + estado + ",posicao=" + posicao + "}";
-    } 
+        return "Macrofago{estado = " + estado + ",posicao = " + posicao + "}";
+    }
     
     public class Fagocitacao implements Runnable{
         
@@ -91,8 +91,8 @@ public class Macrofago extends Celula{
                 
                 if(sistema.isDebug()){
                     sistema.imprime("Patogeno " + alvo.getId() 
-                        + " [<span style='color:red;'>" + alvo.getVirus().getIdentificador()+ "</span>] eliminado. {Tempo de detecção : " + (tempoDetectado - alvo.getEntrada()) 
-                        + "ms, Tempo até ser eliminado: " + (System.currentTimeMillis() - alvo.getEntrada()) + "ms}");
+                        + " [<span style='color:red;'>" + alvo.getVirus().getIdentificador()+ "</span>] eliminado. {Tempo de detecção : " + (tempoDetectado - alvo.getInicio()) 
+                        + "ms, Tempo até ser eliminado: " + (System.currentTimeMillis() - alvo.getInicio()) + "ms}");
                 }             
             }
             estado = REPOUSO;

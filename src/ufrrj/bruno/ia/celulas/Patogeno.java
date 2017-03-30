@@ -9,7 +9,6 @@ import ufrrj.bruno.ia.quimica.CompostoQuimico.TIPO_COMPOSTO;
 
 public class Patogeno extends Celula{
     
-    private final long entrada = System.currentTimeMillis();
     private final Virus tipo;
     private final Poligono forma;
     
@@ -110,12 +109,12 @@ public class Patogeno extends Celula{
         return forma.getPoligono();
     }
 
-    public long getEntrada() {
-        return entrada;
-    }
-
     public Virus getVirus() {
         return tipo;
+    }
+
+    public long getInicio() {
+        return inicio;
     }
     
 }
