@@ -5,14 +5,17 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ufrrj.bruno.ia.SistemaImunologico;
+import static ufrrj.bruno.ia.celulas.Macrofago.ESTADO.*;
 import ufrrj.bruno.ia.quimica.CompostoQuimico;
 
 public class Macrofago extends Celula{
     
+    public enum ESTADO {REPOUSO,ATIVO} 
+    
     //=====| Fagocitacao |======//
+    private ESTADO estado = REPOUSO;
     private Patogeno alvo = null;
     private long tempoDetectado;
-    private boolean fagocitando = false;
     private final ConcurrentLinkedQueue<Celula> celulas = SistemaImunologico.getInstancia().getCelulas();
     
     public Macrofago(){
@@ -20,15 +23,19 @@ public class Macrofago extends Celula{
         setVelMovimento(2);
     }
 
+    public ESTADO getEstado() {
+        return estado;
+    }
+
     @Override
     public void loop(){
         
-        if(!celulas.contains(alvo) || alvo == null) { fagocitando = false; alvo = null; }
-        if(fagocitando) return;
+        if(!celulas.contains(alvo) || alvo == null) { estado = REPOUSO; alvo = null; }
+        if(estado == ATIVO) return;
         
         if(alvo != null && celulas.contains(alvo)){
             if(calculaDistancia(alvo.getPosicao()) <= 4 && celulas.contains(alvo)){
-                fagocitando = true;
+                estado = ATIVO;
                 Fagocitacao fagocitacao = new Fagocitacao();
                 fagocitacao.iniciaFagocitacao();
             }
@@ -45,7 +52,7 @@ public class Macrofago extends Celula{
                 alvo = (Patogeno) composto.getEmissor();
                 tempoDetectado = System.currentTimeMillis();
                 if(dist <= 4){
-                    fagocitando = true;
+                    estado = ATIVO;
                     Fagocitacao fagocitacao = new Fagocitacao();
                     fagocitacao.iniciaFagocitacao();
                 }
@@ -57,6 +64,11 @@ public class Macrofago extends Celula{
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "Macrofago{" + "estado=" + estado + ",posicao=" + posicao + "}";
+    } 
     
     public class Fagocitacao implements Runnable{
         
@@ -67,7 +79,7 @@ public class Macrofago extends Celula{
         
         @Override
         public void run() { 
-            if(!celulas.contains(alvo) || alvo == null) { fagocitando = false; alvo = null; return; }
+            if(!celulas.contains(alvo) || alvo == null) { estado = REPOUSO; alvo = null; return; }
             try {
                 Thread.sleep(sistema.getParametro("TEMPO_FAGOCITACAO"));
             } catch (InterruptedException ex) {
@@ -81,13 +93,10 @@ public class Macrofago extends Celula{
                     sistema.imprime("Patogeno " + alvo.getId() 
                         + " [<span style='color:red;'>" + alvo.getVirus().getIdentificador()+ "</span>] eliminado. {Tempo de detecção : " + (tempoDetectado - alvo.getEntrada()) 
                         + "ms, Tempo até ser eliminado: " + (System.currentTimeMillis() - alvo.getEntrada()) + "ms}");
-                }
-                fagocitando = false;
-                alvo = null;                 
-            } else {
-                fagocitando = false;
-                alvo = null;
+                }             
             }
+            estado = REPOUSO;
+            alvo = null;
         }
     }
 }

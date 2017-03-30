@@ -1,7 +1,6 @@
 package ufrrj.bruno.ia.celulas;
 
 import java.awt.Polygon;
-import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.atributos.Poligono;
 import ufrrj.bruno.ia.atributos.Posicao;
 import ufrrj.bruno.ia.log.Virus;
@@ -65,7 +64,7 @@ public class Patogeno extends Celula{
     @Override
     public void loop() {   
         if((System.currentTimeMillis() - inicio) >= (sistema.getParametro("DELAY_PROPAGACAO") * sistema.getVelocidade())){
-            inicio += sistema.getParametro("DELAY_PROPAGACAO") * sistema.getVelocidade();
+            inicio += sistema.getParametro("DELAY_PROPAGACAO")  * sistema.getVelocidade();
             emiteQuimica();
         }
         
@@ -105,7 +104,6 @@ public class Patogeno extends Celula{
                 prox = celula;
             }
         }
-	
     }
 
     public Polygon getForma() {
