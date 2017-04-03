@@ -3,6 +3,7 @@ package ufrrj.bruno.ia.celulas;
 import ufrrj.bruno.ia.atributos.Posicao;
 import java.util.Random;
 import ufrrj.bruno.ia.SistemaImunologico;
+import ufrrj.bruno.ia.quimica.CompostoQuimico;
 
 abstract public class Celula{
     
@@ -77,6 +78,10 @@ abstract public class Celula{
         return Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
     }
     
+    protected void emiteQuimica(CompostoQuimico.TIPO_COMPOSTO tipo){
+        Posicao tmp = new Posicao(posicao.getX(), posicao.getY());
+        sistema.getCamada().compostos.add(new CompostoQuimico(tipo, 40,tmp,this));
+    }
     public abstract void loop();
             
     @Override

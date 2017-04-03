@@ -47,10 +47,14 @@ public class Macrofago extends Celula{
         for (Iterator<CompostoQuimico> i = sistema.getCamada().compostos.iterator(); i.hasNext();) {
             composto = i.next();
             
+            if(composto.getEmissor().getTipo() != TIPO_CELULA.PATOGENO) continue;
+            
             double dist = calculaDistancia(composto.getPos());      
             if(dist <= composto.getDiametro()/2 + 6){
                 alvo = (Patogeno) composto.getEmissor();
                 tempoDetectado = System.currentTimeMillis();
+                //EMITE CITOCINAS (v1)
+                emiteQuimica(CompostoQuimico.TIPO_COMPOSTO.CITOCINA);
                 if(dist <= 4){
                     estado = FAGOCITANDO;
                     Fagocitacao fagocitacao = new Fagocitacao();

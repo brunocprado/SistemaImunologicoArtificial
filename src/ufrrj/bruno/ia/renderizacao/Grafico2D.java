@@ -10,7 +10,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import javax.swing.JPanel;
 import ufrrj.bruno.ia.SistemaImunologico;
 import ufrrj.bruno.ia.celulas.Celula;
@@ -19,6 +21,7 @@ import ufrrj.bruno.ia.celulas.Macrofago;
 import ufrrj.bruno.ia.celulas.Macrofago.ESTADO;
 import ufrrj.bruno.ia.celulas.Patogeno;
 import ufrrj.bruno.ia.quimica.CompostoQuimico;
+import ufrrj.bruno.ia.quimica.CompostoQuimico.TIPO_COMPOSTO;
 
 /**
  * Renderiza sistema usando awt.Graphics2D. <br>
@@ -26,7 +29,11 @@ import ufrrj.bruno.ia.quimica.CompostoQuimico;
  * @author Bruno Prado
  */
 public class Grafico2D extends JPanel implements Runnable{
+    
     private final SistemaImunologico sistema = SistemaImunologico.getInstancia(); 
+    
+    private final Map<TIPO_COMPOSTO,int[]> cor = new HashMap<>();
+
     final Toolkit tool = Toolkit.getDefaultToolkit();
     //=========| IMAGENS |==========//
     final Image sangue = tool.createImage(getClass().getResource("/img/blood.jpg"));
@@ -41,7 +48,10 @@ public class Grafico2D extends JPanel implements Runnable{
     
     public Grafico2D(){
         setFocusable(true);
-
+        
+        cor.put(TIPO_COMPOSTO.PAMP,new int[] {255,150,150});
+        cor.put(TIPO_COMPOSTO.CITOCINA,new int[] {150,255,150});
+        
         addMouseMotionListener(new MouseAdapter() {
             int antX = getX();
             int antY = getY();
@@ -125,18 +135,19 @@ public class Grafico2D extends JPanel implements Runnable{
         }
     }
     
+    int[] a = {1,1,1};
+    
+    int[] corPAMP = {255,150,150};
+    
+    
     public void desenhaCamadaQuimica(Graphics2D g){    
         CompostoQuimico composto;
         Iterator<CompostoQuimico> i = sistema.getCamada().compostos.iterator();
         while(i.hasNext()){
             composto = i.next();
-//            int rgba = 0;
-//            if(composto.getTipo() == CompostoQuimico.TIPO_COMPOSTO.PAMP){
-//                rgba = CamadaSobreposta.corPAMP.getRGB();
-//                rgba |= ((composto.getQuantidade() * 4)/255 & 0xff);
-//            }
-//            g.setColor(new Color(rgba,true));
-            g.setColor(new Color(255,150,150,composto.getQuantidade() * 4));
+            int[] tmp = cor.get(composto.getTipo());
+            g.setColor(new Color(tmp[0],tmp[1],tmp[2],composto.getQuantidade() * 4));
+//            g.setColor(new Color(255,150,150,composto.getQuantidade() * 4));
             int diametro = composto.getDiametro();
             g.fillOval(composto.getPos().getX() - diametro/2, composto.getPos().getY() - diametro/2, diametro, diametro);
         }

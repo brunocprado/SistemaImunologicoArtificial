@@ -26,7 +26,7 @@ public class Patogeno extends Celula{
         forma = new Poligono(patogeno.getnLados(),posicao);
         
         if(sistema.isDebug()) { sistema.imprime("Novo patogeno com identificador: "  + patogeno.getIdentificador()); }
-        emiteQuimica();
+        emiteQuimica(TIPO_COMPOSTO.PAMP);
     }
     
     public Patogeno(Virus tipo) {
@@ -34,7 +34,7 @@ public class Patogeno extends Celula{
         forma = new Poligono(tipo.getnLados(),posicao);
         this.patogeno = tipo;
         tipo.setQuantidade(tipo.getQuantidade()+1);
-        emiteQuimica();
+        emiteQuimica(TIPO_COMPOSTO.PAMP);
     }
     
     public Patogeno(Virus tipo,Posicao pos) {
@@ -42,12 +42,7 @@ public class Patogeno extends Celula{
         forma = new Poligono(tipo.getnLados(),posicao);
         this.patogeno = tipo;
         tipo.setQuantidade(tipo.getQuantidade()+1);
-        emiteQuimica();
-    }
-    
-    private void emiteQuimica(){
-        Posicao tmp = new Posicao(posicao.getX(), posicao.getY());
-        sistema.getCamada().compostos.add(new CompostoQuimico(TIPO_COMPOSTO.PAMP, 40,tmp,this));
+        emiteQuimica(TIPO_COMPOSTO.PAMP);
     }
     
     public void clona(){
@@ -63,7 +58,7 @@ public class Patogeno extends Celula{
     public void loop() {   
         if((System.currentTimeMillis() - inicio) >= (sistema.getParametro("DELAY_PROPAGACAO") * sistema.getVelocidade())){
             inicio += sistema.getParametro("DELAY_PROPAGACAO")  * sistema.getVelocidade();
-            emiteQuimica();
+            emiteQuimica(TIPO_COMPOSTO.PAMP);
         }
         
         if(prox != null && (!sistema.getCelulas().contains(prox))) {
