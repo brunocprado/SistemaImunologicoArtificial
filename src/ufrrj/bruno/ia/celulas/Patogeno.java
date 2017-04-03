@@ -110,5 +110,10 @@ public class Patogeno extends Celula{
     public long getInicio() {
         return inicio;
     }
+
+    @Override
+    public String toString() {
+        return "Patogeno{id = " + getId() + ", posicao = " + posicao + ", inicio=" + inicio + '}';
+    }
     
 }

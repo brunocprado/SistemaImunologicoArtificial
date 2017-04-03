@@ -32,7 +32,7 @@ public class Macrofago extends Celula{
         
         if(!celulas.contains(alvo) || alvo == null) { estado = REPOUSO; alvo = null; }
         if(estado == FAGOCITANDO) return;
-        
+                
         if(alvo != null && celulas.contains(alvo)){
             if(calculaDistancia(alvo.getPosicao()) <= 4 && celulas.contains(alvo)){
                 estado = FAGOCITANDO;
@@ -51,10 +51,10 @@ public class Macrofago extends Celula{
             
             double dist = calculaDistancia(composto.getPos());      
             if(dist <= composto.getDiametro()/2 + 6){
+                if(composto.getEmissor() != null && !celulas.contains(composto.getEmissor())) continue;
                 alvo = (Patogeno) composto.getEmissor();
                 tempoDetectado = System.currentTimeMillis();
                 //EMITE CITOCINAS (v1)
-                emiteQuimica(CompostoQuimico.TIPO_COMPOSTO.CITOCINA);
                 if(dist <= 4){
                     estado = FAGOCITANDO;
                     Fagocitacao fagocitacao = new Fagocitacao();
@@ -62,6 +62,8 @@ public class Macrofago extends Celula{
                 }
                 if(alvo != null) {
                     estado = ATIVO;
+                    System.out.println(getId() + " Detectou " + alvo + " " + System.currentTimeMillis());
+                    emiteQuimica(CompostoQuimico.TIPO_COMPOSTO.CITOCINA);
                     sistema.addTemporizacao((int) (System.currentTimeMillis() - alvo.getInicio()));
                     move(alvo.getPosicao());
                 }

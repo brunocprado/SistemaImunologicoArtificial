@@ -135,11 +135,6 @@ public class Grafico2D extends JPanel implements Runnable{
         }
     }
     
-    int[] a = {1,1,1};
-    
-    int[] corPAMP = {255,150,150};
-    
-    
     public void desenhaCamadaQuimica(Graphics2D g){    
         CompostoQuimico composto;
         Iterator<CompostoQuimico> i = sistema.getCamada().compostos.iterator();
@@ -147,7 +142,6 @@ public class Grafico2D extends JPanel implements Runnable{
             composto = i.next();
             int[] tmp = cor.get(composto.getTipo());
             g.setColor(new Color(tmp[0],tmp[1],tmp[2],composto.getQuantidade() * 4));
-//            g.setColor(new Color(255,150,150,composto.getQuantidade() * 4));
             int diametro = composto.getDiametro();
             g.fillOval(composto.getPos().getX() - diametro/2, composto.getPos().getY() - diametro/2, diametro, diametro);
         }
