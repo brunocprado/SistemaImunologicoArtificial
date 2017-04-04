@@ -33,7 +33,7 @@ public class Patogeno extends Celula{
         super(TIPO_CELULA.PATOGENO);
         forma = new Poligono(tipo.getnLados(),posicao);
         this.patogeno = tipo;
-        tipo.setQuantidade(tipo.getQuantidade()+1);
+        tipo.add();
         emiteQuimica(TIPO_COMPOSTO.PAMP);
     }
     
@@ -41,7 +41,7 @@ public class Patogeno extends Celula{
         super(TIPO_CELULA.PATOGENO,pos);
         forma = new Poligono(tipo.getnLados(),posicao);
         this.patogeno = tipo;
-        tipo.setQuantidade(tipo.getQuantidade()+1);
+        tipo.add();
         emiteQuimica(TIPO_COMPOSTO.PAMP);
     }
     
@@ -51,7 +51,6 @@ public class Patogeno extends Celula{
     
     public void clona(Posicao p){
         sistema.adicionaCelula(new Patogeno(patogeno,p));
-        patogeno.add();
     }
     
     @Override
@@ -70,7 +69,6 @@ public class Patogeno extends Celula{
             if((System.currentTimeMillis() - inicioProc) >= 1000){
                 sistema.eliminaCelula(prox);  
                 clona(prox.posicao);
-                
                 processando = false;
                 prox = null;
                 inicioProc = Long.MAX_VALUE;
