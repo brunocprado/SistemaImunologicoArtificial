@@ -2,8 +2,9 @@ package ufrrj.bruno.ia.celulas;
 
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import ufrrj.bruno.ia.SistemaImunologico;
 import static ufrrj.bruno.ia.celulas.Macrofago.ESTADO.*;
 import ufrrj.bruno.ia.quimica.CompostoQuimico;
@@ -35,9 +36,7 @@ public class Macrofago extends Celula{
                 
         if(alvo != null && celulas.contains(alvo)){
             if(calculaDistancia(alvo.getPosicao()) <= 4 && celulas.contains(alvo)){
-                estado = FAGOCITANDO;
-                Fagocitacao fagocitacao = new Fagocitacao();
-                fagocitacao.iniciaFagocitacao();
+                fagocita();
             }
             move(alvo.getPosicao());
             return;
@@ -54,15 +53,12 @@ public class Macrofago extends Celula{
                 if(composto.getEmissor() != null && !celulas.contains(composto.getEmissor())) continue;
                 alvo = (Patogeno) composto.getEmissor();
                 tempoDetectado = System.currentTimeMillis();
-                //EMITE CITOCINAS (v1)
                 if(dist <= 4){
-                    estado = FAGOCITANDO;
-                    Fagocitacao fagocitacao = new Fagocitacao();
-                    fagocitacao.iniciaFagocitacao();
+                    fagocita();
                 }
                 if(alvo != null) {
                     estado = ATIVO;
-                    System.out.println(getId() + " Detectou " + alvo + " " + System.currentTimeMillis());
+//                    System.out.println(getId() + " Detectou " + alvo + " " + System.currentTimeMillis());
                     emiteQuimica(CompostoQuimico.TIPO_COMPOSTO.CITOCINA);
                     sistema.addTemporizacao((int) (System.currentTimeMillis() - alvo.getInicio()));
                     move(alvo.getPosicao());
@@ -72,38 +68,36 @@ public class Macrofago extends Celula{
         }
     }
 
-    @Override
-    public String toString(){
-        return "Macrofago{estado = " + estado + ",posicao = " + posicao + "}";
-    }
-    
-    public class Fagocitacao implements Runnable{
+    private void fagocita(){
+        estado = FAGOCITANDO;
         
-        public void iniciaFagocitacao(){
-            Thread t = new Thread(this,"Fagocitando");
-            t.start();
-        }
-        
-        @Override
-        public void run() { 
-            if(!celulas.contains(alvo) || alvo == null) { estado = REPOUSO; alvo = null; return; }
-            try {
-                Thread.sleep(sistema.getParametro("TEMPO_FAGOCITACAO"));
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Macrofago.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        ScheduledExecutorService thread = Executors.newScheduledThreadPool(1);
+ 
+        thread.schedule(() -> {
+            if(!celulas.contains(alvo) || alvo == null) { estado = REPOUSO; alvo = null; return false; }
             if(alvo != null && celulas.contains(alvo)){
                 alvo.getVirus().setQuantidade(alvo.getVirus().getQuantidade() - 1);
                 sistema.eliminaCelula(alvo); 
                 
                 if(sistema.isDebug()){
-                    sistema.imprime("Patogeno " + alvo.getId() 
-                        + " [<span style='color:red;'>" + alvo.getVirus().getIdentificador()+ "</span>] eliminado. {Tempo de detecção : " + (tempoDetectado - alvo.getInicio()) 
-                        + "ms, Tempo até ser eliminado: " + (System.currentTimeMillis() - alvo.getInicio()) + "ms}");
+                    sistema.imprime("Patogeno " + alvo.getId()
+                            + " [<span style='color:red;'>" + alvo.getVirus().getIdentificador()+ "</span>] eliminado. {Tempo de detecção : " + (tempoDetectado - alvo.getInicio())
+                            + "ms, Tempo até ser eliminado: " + (System.currentTimeMillis() - alvo.getInicio()) + "ms}");
                 }             
             }
             estado = REPOUSO;
             alvo = null;
-        }
+            return true;
+        },
+        sistema.getParametro("TEMPO_FAGOCITACAO"),
+        TimeUnit.MILLISECONDS);
+        
+        thread.shutdown();
     }
+    
+    @Override
+    public String toString(){
+        return "Macrofago{estado = " + estado + ",posicao = " + posicao + "}";
+    }
+
 }

@@ -4,7 +4,6 @@ import java.awt.Polygon;
 import ufrrj.bruno.ia.atributos.Poligono;
 import ufrrj.bruno.ia.atributos.Posicao;
 import ufrrj.bruno.ia.log.Virus;
-import ufrrj.bruno.ia.quimica.CompostoQuimico;
 import ufrrj.bruno.ia.quimica.CompostoQuimico.TIPO_COMPOSTO;
 
 public class Patogeno extends Celula{

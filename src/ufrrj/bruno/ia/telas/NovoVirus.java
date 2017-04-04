@@ -240,7 +240,6 @@ public class NovoVirus extends javax.swing.JFrame {
             for(int i=0;i<10;i++){
                 sistema.adicionaCelula(new Patogeno(virus));
             }
-            virus.setQuantidade(10);
         }
         this.setVisible(false);
     }//GEN-LAST:event_insere
