@@ -10,7 +10,7 @@ abstract public class Celula{
     public static enum TIPO_CELULA {COMUM,LINFOCITO,NEUTROFILO,PATOGENO,MACROFAGO};
     
     private static int qt = 0;
-    private final int id;
+    protected final int id;
     protected final TIPO_CELULA tipo;
     //=====| CARACTERISTICAS |=====//
     public int tamanhoX,tamanhoY;
@@ -86,7 +86,7 @@ abstract public class Celula{
             
     @Override
     public String toString() {
-        return "Celula{" + "tipo=" + tipo + ", tamanhoX=" + tamanhoX + ", tamanhoY=" + tamanhoY + ", velMovimento=" + velMovimento + ", posicao=" + posicao + '}';
+        return "\nCelula{" + "tipo=" + tipo + ", tamanhoX=" + tamanhoX + ", tamanhoY=" + tamanhoY + ", velMovimento=" + velMovimento + ", posicao=" + posicao + "}";
     }
    
 }

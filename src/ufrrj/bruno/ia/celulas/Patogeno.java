@@ -110,7 +110,7 @@ public class Patogeno extends Celula{
 
     @Override
     public String toString() {
-        return "Patogeno{id = " + getId() + ", posicao = " + posicao + ", inicio=" + inicio + '}';
+        return "\nPatogeno{id = " + getId() + ", posicao = " + posicao + ", inicio=" + inicio + '}';
     }
     
 }

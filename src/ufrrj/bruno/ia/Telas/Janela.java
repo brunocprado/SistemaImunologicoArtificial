@@ -72,7 +72,8 @@ public class Janela extends JFrame{
         JMenu menu2 = new JMenu("Pausar");
         JMenu menu3 = new JMenu("Opções");
         JMenu menu4 = new JMenu("Estatisticas");
-        JMenu menu5 = new JMenu("Sobre");
+        JMenu menu5 = new JMenu("Debug");
+        JMenu menu6 = new JMenu("Sobre");
         
         submenu1.addActionListener(e -> {
             NovoVirus novoVirus = new NovoVirus(sistema,this);
@@ -121,12 +122,20 @@ public class Janela extends JFrame{
         menu5.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
+                System.out.println(sistema);
+            }
+        });
+        menu.add(menu5);
+        
+        menu6.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Sobre sobre = new Sobre();
                 sobre.setLocationRelativeTo(null);
                 sobre.setVisible(true);
             }
         });
-        menu.add(menu5);
+        menu.add(menu6);
 
         setJMenuBar(menu);
     }

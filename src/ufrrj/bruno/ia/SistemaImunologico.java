@@ -220,7 +220,7 @@ public class SistemaImunologico implements Runnable{
     
     @Override
     public String toString() {
-        return "SistemaImunologico{" + "nInicial=" + nInicial + ", celulas=" + celulas + ", pausada=" + pausada + '}';
+        return "SistemaImunologico\n{" + "nInicial=" + nInicial + ", celulas=\n" + celulas + ", pausada=" + pausada + '}';
     }
     
 }

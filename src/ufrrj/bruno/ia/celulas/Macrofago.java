@@ -57,9 +57,10 @@ public class Macrofago extends Celula{
                     fagocita();
                 }
                 if(alvo != null) {
+                    if(estado == REPOUSO) emiteQuimica(CompostoQuimico.TIPO_COMPOSTO.CITOCINA);
                     estado = ATIVO;
 //                    System.out.println(getId() + " Detectou " + alvo + " " + System.currentTimeMillis());
-                    emiteQuimica(CompostoQuimico.TIPO_COMPOSTO.CITOCINA);
+//                    emiteQuimica(CompostoQuimico.TIPO_COMPOSTO.CITOCINA);
                     sistema.addTemporizacao((int) (System.currentTimeMillis() - alvo.getInicio()));
                     move(alvo.getPosicao());
                 }
@@ -85,7 +86,8 @@ public class Macrofago extends Celula{
                             + "ms, Tempo até ser eliminado: " + (System.currentTimeMillis() - alvo.getInicio()) + "ms}");
                 }             
             }
-            estado = REPOUSO;
+            estado = ATIVO; //MUDAR ISSO
+//            loop();
             alvo = null;
             return true;
         },
@@ -97,7 +99,7 @@ public class Macrofago extends Celula{
     
     @Override
     public String toString(){
-        return "Macrofago{estado = " + estado + ",posicao = " + posicao + "}";
+        return "\nMacrofago{estado = " + estado + ",posicao = " + posicao + "}";
     }
 
 }
