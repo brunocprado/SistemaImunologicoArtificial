@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="461.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ufrrj.bruno.telas.NovoVirusController">
+   <children>
+      <VBox prefHeight="515.0" prefWidth="461.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+            <TitledPane animated="false" collapsible="false" prefWidth="421.0" text="Opções">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="74.0" prefWidth="419.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Identificador" />
+                        <TextField fx:id="txtNome" layoutX="14.0" layoutY="36.0" prefHeight="27.0" prefWidth="230.0" text="Teste" />
+                        <RadioButton layoutX="262.0" layoutY="41.0" mnemonicParsing="false" text="Início automático" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </TitledPane>
+            <TitledPane animated="false" collapsible="false" text="Visual">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="73.0" prefWidth="419.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Número de lados" />
+                        <TextField fx:id="txtNLados" layoutX="14.0" layoutY="37.0" text="3" />
+                        <ColorPicker fx:id="cor" layoutX="184.0" layoutY="37.0" prefHeight="25.0" prefWidth="196.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </TitledPane>
+            <TitledPane animated="false" collapsible="false" text="Avançado">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="419.0" />
+              </content>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TitledPane>
+            <HBox alignment="TOP_RIGHT" prefHeight="44.0" prefWidth="421.0" spacing="20.0">
+               <children>
+                  <Button defaultButton="true" mnemonicParsing="false" onAction="#insere" prefHeight="42.0" prefWidth="123.0" text="Novo" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

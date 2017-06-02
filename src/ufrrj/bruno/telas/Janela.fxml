@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" minHeight="640.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ufrrj.bruno.telas.Janela">
+    <children>
+      <BorderPane fx:id="painel" layoutX="3.0" layoutY="1.0" prefHeight="403.0" prefWidth="721.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <MenuBar fx:id="menu" prefHeight="0.0" prefWidth="720.0" BorderPane.alignment="TOP_CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="Novo">
+                  <items>
+                    <MenuItem fx:id="menuNovoPatogeno" mnemonicParsing="false" onAction="#novoPatogeno" text="Patogeno" />
+                  </items>
+                </Menu>
+                <Menu fx:id="menuPausar" mnemonicParsing="false" />
+                <Menu fx:id="menuOpcoes" mnemonicParsing="false" />
+                <Menu fx:id="menuEstatisticas" mnemonicParsing="false" />
+                <Menu fx:id="menuSobre" mnemonicParsing="false" />
+              </menus>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MenuBar>
+         </top>
+         <center>
+            <Pane fx:id="painelTeste" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Canvas fx:id="canvas" height="374.0" width="721.0" />
+               </children>
+            </Pane>
+         </center>
+         <right>
+            <VBox fx:id="opcoes" prefHeight="695.0" prefWidth="186.0" spacing="30.0" style="-fx-background-color: rgb(150,100,100);" BorderPane.alignment="CENTER">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="178.0" text="Opções" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI Bold" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                     <effect>
+                        <DropShadow />
+                     </effect></Label>
+                  <RadioButton mnemonicParsing="false" selected="true" text="Camada Quimica" textFill="WHITE" />
+                  <RadioButton mnemonicParsing="false" text="Temperatura" textFill="WHITE" />
+                  <RadioButton mnemonicParsing="false" text="Debug" textFill="WHITE" />
+                  <TitledPane animated="false" collapsible="false" prefHeight="200.0" prefWidth="146.0" text="Exibir" textAlignment="CENTER">
+                     <content>
+                        <VBox prefHeight="156.0" prefWidth="144.0" spacing="16.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" selected="true" text="Macrofago" />
+                              <RadioButton mnemonicParsing="false" selected="true" text="Linfocito" />
+                              <RadioButton mnemonicParsing="false" selected="true" text="Neutrofilo" />
+                              <RadioButton mnemonicParsing="false" selected="true" text="Patogenos" />
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="149.0" text="Velocidade" textAlignment="CENTER" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="-22.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Slider blockIncrement="50.0" showTickMarks="true" snapToTicks="true" value="50.0" />
+                  <VBox alignment="BOTTOM_CENTER" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="Sistema Imunológico Artificial" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <effect>
+                              <DropShadow height="22.0" radius="10.5" width="22.0" />
+                           </effect>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </right>
+      </BorderPane>
+    </children>
+</AnchorPane>
