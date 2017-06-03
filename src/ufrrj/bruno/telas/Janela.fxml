@@ -11,6 +11,7 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
@@ -30,7 +31,14 @@
                 </Menu>
                 <Menu fx:id="menuPausar" mnemonicParsing="false" />
                 <Menu fx:id="menuOpcoes" mnemonicParsing="false" />
-                <Menu fx:id="menuEstatisticas" mnemonicParsing="false" />
+                <Menu fx:id="menuEstatisticas" mnemonicParsing="false" text="Estatísticas">
+                     <items>
+                        <MenuItem fx:id="menuEstatisticasSistema" mnemonicParsing="false" text="Sistema">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                     </items></Menu>
                 <Menu fx:id="menuSobre" mnemonicParsing="false" />
               </menus>
                <cursor>

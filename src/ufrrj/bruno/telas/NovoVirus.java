@@ -1,21 +1,25 @@
 package ufrrj.bruno.telas;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javax.swing.JMenu;
 import ufrrj.bruno.Main;
 import ufrrj.bruno.SistemaImunologico;
 import ufrrj.bruno.celulas.Patogeno;
 import ufrrj.bruno.log.Virus;
 
-public class NovoVirusController implements Initializable {
+public class NovoVirus implements Initializable {
 
     private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
     
@@ -29,35 +33,40 @@ public class NovoVirusController implements Initializable {
             Alert dialogoErro = new Alert(Alert.AlertType.ERROR);
             dialogoErro.setTitle("Erro");
             dialogoErro.setHeaderText("Nenhum Identificador");
-            dialogoErro.showAndWait();
+            dialogoErro.show();
             return;
         }
         int nLados = 3;
         if(!txtNLados.getText().equals("")){ nLados = Integer.parseInt(txtNLados.getText()); }
         Virus virus = new Virus(cor.getValue(),nLados,txtNome.getText());
         sistema.getVirus().add(virus);
-//        janela.novoVirus(virus);
-//        janela.getJMenuBar().add(new JMenu("|"));
-        JMenu menu = new JMenu(txtNome.getText());
-//        menu.addMouseListener(new java.awt.event.MouseAdapter() {
-//            @Override
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                janela.visualizaVirus(virus);
-//            }
-//        });
-//        janela.getJMenuBar().add(menu);
-//        janela.getJMenuBar().updateUI();
-//        if(radioInicio.isSelected()){
+
+        Map<Virus,VisualizaVirus> estatisticas = (HashMap) cor.getScene().getWindow().getProperties().get("estatisticas");
+        Menu mEstatisticas = (Menu) cor.getScene().getWindow().getProperties().get("menu");
+        
+        VisualizaVirus visualizaVirus = new VisualizaVirus(virus);   
+        estatisticas.put(virus, visualizaVirus);
+        
+        visualizaVirus.show();
+           
+        MenuItem a = new MenuItem(txtNome.getText());
+        a.setOnAction(((event) -> {
+            VisualizaVirus t = estatisticas.get(virus);
+            if(t.isShowing()) t.hide(); else t.show();
+        }));
+        mEstatisticas.getItems().add(a);
+        
         for(int i=0;i<10;i++){
             sistema.adicionaCelula(new Patogeno(virus));
         }
-        Main.timeline.playFromStart();
+        
+        if(Main.timeline.getStatus() == Timeline.Status.STOPPED) Main.timeline.playFromStart();
         Stage stage = (Stage) txtNome.getScene().getWindow();
         stage.close();
     }
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) {       
         cor.setValue(new Color(0d, 0.8, 0d, 1d));
     }    
     

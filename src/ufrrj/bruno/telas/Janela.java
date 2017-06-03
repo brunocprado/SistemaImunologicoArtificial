@@ -2,6 +2,8 @@ package ufrrj.bruno.telas;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.animation.Animation;
 import javafx.fxml.FXML;
@@ -13,7 +15,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -23,7 +25,7 @@ import javafx.stage.Stage;
 import ufrrj.bruno.Main;
 import static ufrrj.bruno.Main.timeline;
 import ufrrj.bruno.SistemaImunologico;
-import ufrrj.bruno.log.Estatisticas;
+import ufrrj.bruno.log.Virus;
 import ufrrj.bruno.renderizacao.Grafico2D;
 
 public class Janela implements Initializable {
@@ -32,12 +34,15 @@ public class Janela implements Initializable {
     @FXML private Pane painelTeste;
     @FXML private VBox opcoes;  
     @FXML private BorderPane painel;  
+//    @FXML private MenuBar menu;
     @FXML private Menu menuPausar;
     @FXML private Menu menuOpcoes;
     @FXML private Menu menuEstatisticas;
+    @FXML private MenuItem menuEstatisticasSistema;
     @FXML private Menu menuSobre;
-    
+     
     private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
+    private final Map<Virus,VisualizaVirus> estatisticas = new HashMap<>();
     
     @FXML
     public void novoPatogeno(){
@@ -49,11 +54,13 @@ public class Janela implements Initializable {
             stage.setScene(new Scene(root1));  
             stage.setResizable(false);
             stage.setWidth(442);
+//            stage.setAlwaysOnTop(true);
+            stage.getProperties().put("estatisticas", estatisticas);
+            stage.getProperties().put("menu", menuEstatisticas);
             stage.show();
-        } catch(IOException e) {
-        }
+        } catch(IOException e){}
     }
-   
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {   
         painel.setRight(null);
@@ -94,18 +101,13 @@ public class Janela implements Initializable {
         });
         menuOpcoes.setGraphic(lblOpcoes);
         
-        Label lblEstatisticas = new Label("Estatísticas");
-        lblEstatisticas.setOnMouseClicked((MouseEvent evt) -> {
-            if(tmp.isVisible()){
-                tmp.setVisible(false);
+        menuEstatisticasSistema.setOnAction(((event) -> {
+            if(tmp.isShowing()){
+                tmp.hide();
             } else {
-                tmp.setLocationRelativeTo(null);
-                tmp.setVisible(true);
+                tmp.show();
             }
-            
-//            Novo teste = new Novo();
-        });
-        menuEstatisticas.setGraphic(lblEstatisticas);
+        }));
         
         Label lblSobre = new Label("Sobre");
         lblSobre.setOnMouseClicked((MouseEvent evt) -> {
