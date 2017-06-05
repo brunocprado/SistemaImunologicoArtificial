@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -34,7 +33,7 @@ public class Estatisticas extends Stage{
         container.setPadding(new Insets(10,10,10,10));
         container.setSpacing(10);
         
-        setScene(new Scene(container, 600, 500));
+        setScene(new Scene(container, 800, 600));
         criaGraficos();
     }
     
@@ -73,7 +72,7 @@ public class Estatisticas extends Stage{
         timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.getKeyFrames().add(
-            new KeyFrame(Duration.seconds(1),(evt) -> {
+            new KeyFrame(Duration.seconds(2),(evt) -> {
                 atualizaGraficos();
             }
         ));

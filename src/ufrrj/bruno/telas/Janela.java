@@ -34,7 +34,6 @@ public class Janela implements Initializable {
     @FXML private Pane painelTeste;
     @FXML private VBox opcoes;  
     @FXML private BorderPane painel;  
-//    @FXML private MenuBar menu;
     @FXML private Menu menuPausar;
     @FXML private Menu menuOpcoes;
     @FXML private Menu menuEstatisticas;

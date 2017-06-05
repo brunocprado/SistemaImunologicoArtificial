@@ -26,7 +26,10 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Novo">
                   <items>
-                    <MenuItem fx:id="menuNovoPatogeno" mnemonicParsing="false" onAction="#novoPatogeno" text="Patogeno" />
+                    <MenuItem fx:id="menuNovoPatogeno" mnemonicParsing="false" onAction="#novoPatogeno" text="Patogeno">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
                   </items>
                 </Menu>
                 <Menu fx:id="menuPausar" mnemonicParsing="false" />
@@ -69,17 +72,17 @@
                      <effect>
                         <DropShadow />
                      </effect></Label>
-                  <RadioButton mnemonicParsing="false" selected="true" text="Camada Quimica" textFill="WHITE" />
+                  <RadioButton fx:id="radioQuimica" mnemonicParsing="false" selected="true" text="Camada Quimica" textFill="WHITE" />
                   <RadioButton mnemonicParsing="false" text="Temperatura" textFill="WHITE" />
                   <RadioButton mnemonicParsing="false" text="Debug" textFill="WHITE" />
                   <TitledPane animated="false" collapsible="false" prefHeight="200.0" prefWidth="146.0" text="Exibir" textAlignment="CENTER">
                      <content>
                         <VBox prefHeight="156.0" prefWidth="144.0" spacing="16.0">
                            <children>
-                              <RadioButton mnemonicParsing="false" selected="true" text="Macrofago" />
-                              <RadioButton mnemonicParsing="false" selected="true" text="Linfocito" />
-                              <RadioButton mnemonicParsing="false" selected="true" text="Neutrofilo" />
-                              <RadioButton mnemonicParsing="false" selected="true" text="Patogenos" />
+                              <RadioButton fx:id="radioMacrofago" mnemonicParsing="false" selected="true" text="Macrofagos" />
+                              <RadioButton fx:id="radioLinfocito" mnemonicParsing="false" selected="true" text="Linfocitos" />
+                              <RadioButton fx:id="radioNeutrofilo" mnemonicParsing="false" selected="true" text="Neutrofilos" />
+                              <RadioButton fx:id="radioPatogeno" mnemonicParsing="false" selected="true" text="Patogenos" />
                            </children>
                         </VBox>
                      </content>
@@ -89,7 +92,7 @@
                         <Insets bottom="-22.0" />
                      </VBox.margin>
                   </Label>
-                  <Slider blockIncrement="50.0" showTickMarks="true" snapToTicks="true" value="50.0" />
+                  <Slider fx:id="sliderVelocidade" blockIncrement="50.0" showTickMarks="true" snapToTicks="true" value="50.0" />
                   <VBox alignment="BOTTOM_CENTER" prefWidth="100.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" text="Sistema Imunológico Artificial" textAlignment="CENTER" textFill="WHITE" wrapText="true">

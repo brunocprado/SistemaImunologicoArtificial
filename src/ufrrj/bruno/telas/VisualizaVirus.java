@@ -16,13 +16,14 @@ import ufrrj.bruno.SistemaImunologico;
 import ufrrj.bruno.celulas.Patogeno;
 import ufrrj.bruno.log.Virus;
 
-
 public class VisualizaVirus extends Stage{
     
     private final Virus virus;
     
     public VisualizaVirus(Virus virus){
         this.virus = virus;
+        
+        setTitle("Estatísticas : " + virus.getIdentificador());
         
         VBox container = new VBox();
         container.setPadding(new Insets(10,10,10,10));
@@ -55,8 +56,8 @@ public class VisualizaVirus extends Stage{
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.getKeyFrames().add(
-            new KeyFrame(Duration.millis(500),(rvt) -> {
-                series.getData().add(new XYChart.Data<>(series.getData().size()/2d,virus.getQuantidade()));
+            new KeyFrame(Duration.millis(1000),(rvt) -> {
+                series.getData().add(new XYChart.Data<>(series.getData().size(),virus.getQuantidade()));
                 if(virus.getQuantidade() == 0) timeline.stop();
             }
         ));
