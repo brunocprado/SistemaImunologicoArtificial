@@ -16,6 +16,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
 import ufrrj.bruno.Main;
 import static ufrrj.bruno.Main.timeline;
 import ufrrj.bruno.SistemaImunologico;
+import static ufrrj.bruno.celulas.Celula.TIPO_CELULA.*;
 import ufrrj.bruno.log.Virus;
 import ufrrj.bruno.renderizacao.Grafico2D;
 
@@ -39,6 +41,13 @@ public class Janela implements Initializable {
     @FXML private Menu menuEstatisticas;
     @FXML private MenuItem menuEstatisticasSistema;
     @FXML private Menu menuSobre;
+    
+    // OPCOES //
+    @FXML private RadioButton radioQuimica;
+    @FXML private RadioButton radioMacrofago;
+    @FXML private RadioButton radioLinfocito;
+    @FXML private RadioButton radioNeutrofilo;
+    @FXML private RadioButton radioPatogeno;
      
     private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
     private final Map<Virus,VisualizaVirus> estatisticas = new HashMap<>();
@@ -71,7 +80,7 @@ public class Janela implements Initializable {
 
         Grafico2D grafico = new Grafico2D(gc);
         grafico.iniciaRenderizacao();
-                
+        
         Estatisticas tmp = new Estatisticas();
           
         Label lblPausar = new Label("Pausar");
@@ -100,13 +109,13 @@ public class Janela implements Initializable {
         });
         menuOpcoes.setGraphic(lblOpcoes);
         
-        menuEstatisticasSistema.setOnAction(((event) -> {
+        menuEstatisticasSistema.setOnAction((event) -> {
             if(tmp.isShowing()){
                 tmp.hide();
             } else {
                 tmp.show();
             }
-        }));
+        });
         
         Label lblSobre = new Label("Sobre");
         lblSobre.setOnMouseClicked((MouseEvent evt) -> {
@@ -117,6 +126,26 @@ public class Janela implements Initializable {
         });
         menuSobre.setGraphic(lblSobre);
         
+        //OPCOES
+        
+        radioQuimica.setOnAction((evt) -> {
+            sistema.setMostraCamada(radioQuimica.isSelected());
+        });
+        
+        radioMacrofago.setOnAction((evt) -> {
+            sistema.exibir.put(MACROFAGO,radioMacrofago.isSelected());
+        });
+        
+        radioLinfocito.setOnAction((evt) -> {
+            sistema.exibir.put(LINFOCITO,radioLinfocito.isSelected());
+        });
+        
+        radioNeutrofilo.setOnAction((evt) -> {
+            sistema.exibir.put(NEUTROFILO,radioNeutrofilo.isSelected());
+        });
+        
+        radioPatogeno.setOnAction((evt) -> {
+            sistema.exibir.put(PATOGENO,radioPatogeno.isSelected());
+        });
     }    
-    
 }
