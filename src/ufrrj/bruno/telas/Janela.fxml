@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.canvas.Canvas?>
@@ -18,7 +27,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="640.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ufrrj.bruno.telas.Janela">
+<AnchorPane id="AnchorPane" minHeight="640.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ufrrj.bruno.telas.Janela">
     <children>
       <BorderPane fx:id="painel" layoutX="3.0" layoutY="1.0" prefHeight="403.0" prefWidth="721.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -92,7 +101,7 @@
                         <Insets bottom="-22.0" />
                      </VBox.margin>
                   </Label>
-                  <Slider fx:id="sliderVelocidade" blockIncrement="50.0" showTickMarks="true" snapToTicks="true" value="50.0" />
+                  <Slider fx:id="sliderVelocidade" blockIncrement="50.0" majorTickUnit="50.0" minorTickCount="1" showTickMarks="true" snapToTicks="true" value="50.0" />
                   <VBox alignment="BOTTOM_CENTER" prefWidth="100.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" text="Sistema Imunológico Artificial" textAlignment="CENTER" textFill="WHITE" wrapText="true">

@@ -21,7 +21,7 @@ import javafx.util.Duration;
  */
 public class Main extends Application {
     
-    private static long INICIO = System.currentTimeMillis();
+//    private static final long INICIO = System.currentTimeMillis();
     private int runtime = 0;
     StringProperty titulo = new SimpleStringProperty("Sistema Imunológico Artificial");
 

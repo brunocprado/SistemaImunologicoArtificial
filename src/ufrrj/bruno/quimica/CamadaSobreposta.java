@@ -42,7 +42,7 @@ public class CamadaSobreposta{
                     }
                 }
             }
-        }, 0,100); //(int) (sistema.getParametro("TEMPO_PROPAGACAO_QUIMICOS") * sistema.getVelocidade())
+        }, 0,(int) (sistema.getParametro("TEMPO_PROPAGACAO_QUIMICOS") * sistema.getVelocidade())); //(int) (sistema.getParametro("TEMPO_PROPAGACAO_QUIMICOS") * sistema.getVelocidade())
     }
     
     public void pausaThread() {

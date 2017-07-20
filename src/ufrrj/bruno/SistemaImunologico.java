@@ -51,7 +51,7 @@ public class SistemaImunologico{
     private static long inicio = System.currentTimeMillis();
     private boolean mostraCamada = true;
     private boolean pausado = false;
-    private boolean debug = false;
+    private boolean debug = true;
     private int tempoMedio = 0;
     private int qtTempo = 0;
     //======| DISPLAY |======//
@@ -92,6 +92,7 @@ public class SistemaImunologico{
     public void setVelocidade(int velo){
         double vel = velo/25;
         velocidade = (velo == 0) ? 2 : 2/vel;
+        pausaThread(); iniciaThread();
     }
     
     public ConcurrentLinkedQueue<Celula> getCelulas() {
@@ -207,7 +208,7 @@ public class SistemaImunologico{
                 }
 //                    Thread.sleep(((int) (velocidade * 30)));
             }
-        }, 0,20);
+        }, 0,(int) (velocidade * 30));
         pausado = false;
     }
     

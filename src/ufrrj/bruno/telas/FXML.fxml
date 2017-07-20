@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="382.0" prefWidth="661.0" style="-fx-background-color: #ddf;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="ufrrj.bruno.telas.FXMLController">
+   <children>
+      <Label layoutX="102.0" layoutY="46.0" text="Sistema imunológico artificial">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ImageView layoutX="20.0" layoutY="25.0">
+         <image>
+            <Image url="@../../../../res/img/icone.png" />
+         </image>
+      </ImageView>
+      <TitledPane animated="false" layoutX="20.0" layoutY="108.0" prefHeight="208.0" prefWidth="625.0" text="Configurações">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField layoutX="14.0" layoutY="33.0" prefHeight="27.0" prefWidth="97.0" />
+                  <Label layoutX="14.0" layoutY="14.0" text="Label" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <Button layoutX="565.0" layoutY="330.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="82.0" style="-fx-background-color: #bbf;" text="Iniciar" />
+   </children>
+</AnchorPane>

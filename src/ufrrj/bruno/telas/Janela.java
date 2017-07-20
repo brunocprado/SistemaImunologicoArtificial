@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -48,6 +49,8 @@ public class Janela implements Initializable {
     @FXML private RadioButton radioLinfocito;
     @FXML private RadioButton radioNeutrofilo;
     @FXML private RadioButton radioPatogeno;
+    
+    @FXML private Slider sliderVelocidade;
      
     private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
     private final Map<Virus,VisualizaVirus> estatisticas = new HashMap<>();
@@ -71,6 +74,7 @@ public class Janela implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {   
+        sliderVelocidade.setSnapToTicks(true);
         painel.setRight(null);
 
         canvas.widthProperty().bind(painelTeste.widthProperty());
@@ -146,6 +150,10 @@ public class Janela implements Initializable {
         
         radioPatogeno.setOnAction((evt) -> {
             sistema.exibir.put(PATOGENO,radioPatogeno.isSelected());
+        });    
+        
+        sliderVelocidade.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sistema.setVelocidade((int) sliderVelocidade.getValue());
         });
     }    
 }
