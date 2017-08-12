@@ -6,6 +6,11 @@ public class Poligono {
     public double[] y;    
     private int nLados;
     
+    
+    public Poligono(){
+        nLados = 3;
+    }
+    
     public Poligono(int nLados){
         this.nLados = nLados;
         x = new double[nLados];
@@ -25,6 +30,10 @@ public class Poligono {
 
     public int getnLados() {
         return nLados;
+    }
+
+    public void setnLados(int nLados) {
+        this.nLados = nLados;
     }
     
 }

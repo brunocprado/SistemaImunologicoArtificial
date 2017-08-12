@@ -1,10 +1,14 @@
 package ufrrj.bruno.telas;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,9 +23,11 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import ufrrj.bruno.ia.telas.Sobre;
 import javafx.stage.Stage;
 import ufrrj.bruno.Main;
@@ -37,6 +43,8 @@ public class Janela implements Initializable {
     @FXML private Pane painelTeste;
     @FXML private VBox opcoes;  
     @FXML private BorderPane painel;  
+    @FXML private MenuItem menuSalvar;
+    @FXML private MenuItem menuCarregar;
     @FXML private Menu menuPausar;
     @FXML private Menu menuOpcoes;
     @FXML private Menu menuEstatisticas;
@@ -52,7 +60,7 @@ public class Janela implements Initializable {
     
     @FXML private Slider sliderVelocidade;
      
-    private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
+    private SistemaImunologico sistema = SistemaImunologico.getInstancia();
     private final Map<Virus,VisualizaVirus> estatisticas = new HashMap<>();
     
     @FXML
@@ -65,7 +73,6 @@ public class Janela implements Initializable {
             stage.setScene(new Scene(root1));  
             stage.setResizable(false);
             stage.setWidth(442);
-//            stage.setAlwaysOnTop(true);
             stage.getProperties().put("estatisticas", estatisticas);
             stage.getProperties().put("menu", menuEstatisticas);
             stage.show();
@@ -80,13 +87,44 @@ public class Janela implements Initializable {
         canvas.widthProperty().bind(painelTeste.widthProperty());
         canvas.heightProperty().bind(painelTeste.heightProperty());
         
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        final GraphicsContext gc = canvas.getGraphicsContext2D();
 
         Grafico2D grafico = new Grafico2D(gc);
         grafico.iniciaRenderizacao();
         
         Estatisticas tmp = new Estatisticas();
-          
+        FileChooser janelaArq = new FileChooser();
+        
+        janelaArq.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JSON", "*.json")
+        );
+        
+        menuSalvar.setOnAction((event) -> {
+            File file = janelaArq.showSaveDialog(null);
+            if (file != null) {
+                ObjectMapper mapper = new ObjectMapper();
+                try {
+                    mapper.writeValue(file, sistema);
+                } catch (IOException ex) {
+                    Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
+        menuCarregar.setOnAction((event) -> {
+            File file = janelaArq.showOpenDialog(null);
+            if (file != null) {
+                ObjectMapper mapper = new ObjectMapper();
+                try {
+                    SistemaImunologico sis = mapper.readValue(file, SistemaImunologico.class);     
+                    Console.getInstancia().apaga();
+                    sistema.carrega(sis);
+                } catch (IOException ex) {
+                    Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
         Label lblPausar = new Label("Pausar");
         lblPausar.setOnMouseClicked((MouseEvent evt) -> {
             if(sistema.isPausado()) {

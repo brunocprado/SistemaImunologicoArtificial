@@ -8,8 +8,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
@@ -21,7 +24,6 @@ import javafx.util.Duration;
  */
 public class Main extends Application {
     
-//    private static final long INICIO = System.currentTimeMillis();
     private int runtime = 0;
     StringProperty titulo = new SimpleStringProperty("Sistema Imunológico Artificial");
 
@@ -32,8 +34,8 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         SistemaImunologico sistema = SistemaImunologico.getInstancia();
         sistema.geraPrimeiraGeracao();
-        sistema.iniciaThread(); 
-        
+        sistema.iniciaThread();
+
         Parent root = FXMLLoader.load(getClass().getResource("telas/Janela.fxml"));
         Main.stage = stage;
         Scene scene = new Scene(root);

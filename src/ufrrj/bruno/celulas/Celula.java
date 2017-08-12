@@ -9,6 +9,8 @@ abstract public class Celula{
     
     public static enum TIPO_CELULA {COMUM,LINFOCITO,NEUTROFILO,PATOGENO,MACROFAGO};
     
+    protected long inicio = System.currentTimeMillis();
+    
     private static int qt = 0;
     protected final int id;
     protected final TIPO_CELULA tipo;
@@ -84,6 +86,10 @@ abstract public class Celula{
     }
     public abstract void loop();
             
+    public long getInicio() {
+        return inicio;
+    }
+    
     @Override
     public String toString() {
         return "\nCelula{" + "tipo=" + tipo + ", tamanhoX=" + tamanhoX + ", tamanhoY=" + tamanhoY + ", velMovimento=" + velMovimento + ", posicao=" + posicao + "}";

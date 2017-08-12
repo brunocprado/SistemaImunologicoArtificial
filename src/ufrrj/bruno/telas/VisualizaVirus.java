@@ -8,7 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -39,26 +40,39 @@ public class VisualizaVirus extends Stage{
         
         LineChart<Number,Number> grafico = new LineChart<>(x,y);     
         grafico.setTitle(virus.getIdentificador());
-        XYChart.Series series = new XYChart.Series();
+        XYChart.Series<Number,Number> series = new XYChart.Series();
         series.setName("Antigenos");
         grafico.getData().add(series);
       
-//        container.getChildren().add(grafico);
+        //container.getChildren().add(grafico);
         
         setScene(new Scene(grafico,600,400));
+        getScene().getStylesheets().add(getClass().getResource("chart.css").toExternalForm());
         
-        Button btn = new Button("Nova entrada");
-        btn.setOnAction((evt)->{
-            SistemaImunologico.getInstancia().adicionaCelula(new Patogeno(virus));
-        });
-        container.getChildren().add(btn);
+//        Button btn = new Button("Nova entrada");
+//        btn.setOnAction((evt)->{
+//            SistemaImunologico.getInstancia().getPatogenos().add(new Patogeno(virus));
+//        });
+//        container.getChildren().add(btn);
         
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.getKeyFrames().add(
             new KeyFrame(Duration.millis(1000),(rvt) -> {
-                series.getData().add(new XYChart.Data<>(series.getData().size(),virus.getQuantidade()));
-                if(virus.getQuantidade() == 0) timeline.stop();
+                XYChart.Data<Number, Number> d = new XYChart.Data<>(series.getData().size(),virus.getQuantidade());
+                series.getData().add(d);
+                d.getNode().setCursor(javafx.scene.Cursor.HAND);          
+                
+                Tooltip tp = new Tooltip();
+                tp.setGraphic(new EstatisticaSimulacao(series.getData().size()));
+                tp.setShowDelay(javafx.util.Duration.ZERO);   
+                tp.setHideDelay(javafx.util.Duration.ONE);
+                Tooltip.install(d.getNode(), tp);
+
+                d.getNode().setOnMouseEntered(event -> d.getNode().getStyleClass().add("onHover"));
+                d.getNode().setOnMouseExited(event -> d.getNode().getStyleClass().remove("onHover"));
+
+                if(virus.getQuantidade() <= 0) timeline.stop();
             }
         ));
         timeline.playFromStart();

@@ -1,5 +1,6 @@
 package ufrrj.bruno.quimica;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.awt.Color;
 import java.util.Iterator;
 import java.util.Timer;
@@ -14,17 +15,18 @@ import ufrrj.bruno.SistemaImunologico;
  */
 public class CamadaSobreposta{
     
-    private final SistemaImunologico sistema;
+    private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
+    @JsonIgnore
     public final ConcurrentLinkedQueue<CompostoQuimico> compostos = new ConcurrentLinkedQueue<>();
     
     //=====| STATIC |=====//
     public static final Color corPAMP = new Color(255,150,150);
     
-    public CamadaSobreposta(SistemaImunologico sis){
-        sistema = sis;
+    public CamadaSobreposta(){
         iniciaThread();
     }
     
+    @JsonIgnore
     private Timer timer;
     
     public void iniciaThread(){

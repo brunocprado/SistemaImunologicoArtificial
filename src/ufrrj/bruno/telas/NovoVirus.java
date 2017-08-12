@@ -57,7 +57,7 @@ public class NovoVirus implements Initializable {
         mEstatisticas.getItems().add(a);
         
         for(int i=0;i<10;i++){
-            sistema.adicionaCelula(new Patogeno(virus));
+            sistema.getPatogenos().add(new Patogeno(virus));
         }
         
         if(Main.timeline.getStatus() == Timeline.Status.STOPPED) Main.timeline.playFromStart();

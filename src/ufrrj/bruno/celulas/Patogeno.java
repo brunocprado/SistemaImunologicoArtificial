@@ -1,25 +1,19 @@
 package ufrrj.bruno.celulas;
 
-import java.util.Iterator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Timer;
 import java.util.TimerTask;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.scene.shape.Polygon;
-import javafx.util.Duration;
-import static ufrrj.bruno.Main.timeline;
 import ufrrj.bruno.atributos.Poligono;
 import ufrrj.bruno.atributos.Posicao;
 import ufrrj.bruno.log.Virus;
 import ufrrj.bruno.quimica.CompostoQuimico.TIPO_COMPOSTO;
 
 public class Patogeno extends Celula{
-    
-    private final Virus patogeno;
+
+    public final Virus virus;
     private final Poligono forma;
     
     //====| RUNTIME |=====//
-    private long inicio = System.currentTimeMillis();
     private Celula prox = null;
     private boolean processando = false;
     private long inicioProc = Long.MAX_VALUE;
@@ -28,10 +22,10 @@ public class Patogeno extends Celula{
         super(TIPO_CELULA.PATOGENO);
         
         setVelMovimento(2);
-        patogeno = new Virus();
-        forma = new Poligono(patogeno.getnLados());
+        virus = new Virus();
+        forma = new Poligono(virus.getnLados());
         
-        if(sistema.isDebug()) { sistema.imprime("Novo patogeno com identificador: "  + patogeno.getIdentificador()); }
+        if(sistema.isDebug()) { sistema.imprime("Novo patogeno com identificador: "  + virus.getIdentificador()); }
         emiteQuimica(TIPO_COMPOSTO.PAMP);
         inicia();
     }
@@ -39,7 +33,7 @@ public class Patogeno extends Celula{
     public Patogeno(Virus tipo) {
         super(TIPO_CELULA.PATOGENO);
         forma = new Poligono(tipo.getnLados());
-        this.patogeno = tipo;
+        this.virus = tipo;
         tipo.add();
         emiteQuimica(TIPO_COMPOSTO.PAMP);
         inicia();
@@ -48,12 +42,13 @@ public class Patogeno extends Celula{
     public Patogeno(Virus tipo,Posicao pos) {
         super(TIPO_CELULA.PATOGENO,pos);
         forma = new Poligono(tipo.getnLados());
-        this.patogeno = tipo;
+        this.virus = tipo;
         tipo.add();
         emiteQuimica(TIPO_COMPOSTO.PAMP);
         inicia();
     }
     
+    @JsonIgnore
     public Timer quimica = new Timer("QUIM");
     private void inicia(){
         quimica.schedule(new TimerTask() {
@@ -63,24 +58,24 @@ public class Patogeno extends Celula{
     }
     
     public void clona(){
-        sistema.adicionaCelula(new Patogeno(patogeno,posicao));
+        sistema.getPatogenos().add(new Patogeno(virus,posicao));
     }
     
     public void clona(Posicao p){
-        sistema.adicionaCelula(new Patogeno(patogeno,p));
+        sistema.getPatogenos().add(new Patogeno(virus,p));
     }
     
     @Override
     public void loop() {   
         
-        if(prox != null && (!sistema.getCelulas().contains(prox))) {
+        if(prox != null && (!sistema.getLinfocitos().contains(prox))) {
             processando = false;
             prox = null;
         }
         
         if(processando){
             if((System.currentTimeMillis() - inicioProc) >= 1000){
-                sistema.eliminaCelula(prox);  
+                sistema.getLinfocitos().remove(prox);  
                 clona(prox.posicao);
                 processando = false;
                 prox = null;
@@ -99,9 +94,7 @@ public class Patogeno extends Celula{
         
         double maisProx = Double.MAX_VALUE;
         
-        for(Celula celula : sistema.getCelulas()){  
-            if(celula.getTipo() != TIPO_CELULA.LINFOCITO) continue;
-            
+        for(Celula celula : sistema.getLinfocitos()){              
             double dist = calculaDistancia(celula.posicao);
             if(maisProx > dist) {
                 maisProx = dist;
@@ -115,11 +108,7 @@ public class Patogeno extends Celula{
     }
 
     public Virus getVirus() {
-        return patogeno;
-    }
-
-    public long getInicio() {
-        return inicio;
+        return virus;
     }
 
     @Override

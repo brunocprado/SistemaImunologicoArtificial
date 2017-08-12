@@ -11,14 +11,16 @@ public class CompostoQuimico {
     */
     public static enum TIPO_COMPOSTO {PAMP,HISTAMINA,CITOCINA,INTERLEUCINA1,TNFA};
     
-    private final TIPO_COMPOSTO tipo;
+    private TIPO_COMPOSTO tipo;
     private Celula emissor;
     private double temperatura = 30.0; // ?????
-    private final Posicao pos;
+    private Posicao pos;
     private int diametro = 8;
     private int quantidade = 0;
     public double opacidade = 1.0;
 
+    public CompostoQuimico(){ } //SÓ PRA SER POSSÍVEL (DE)SERIALIZAR
+    
     public CompostoQuimico(TIPO_COMPOSTO tipo,int quantidade,Posicao pos,Celula emissor){
         this.tipo = tipo;
         this.quantidade = quantidade;

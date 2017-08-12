@@ -11,7 +11,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ufrrj.bruno.SistemaImunologico;
-import ufrrj.bruno.celulas.Celula;
 
 public class Estatisticas extends Stage{
 
@@ -79,32 +78,12 @@ public class Estatisticas extends Stage{
         timeline.playFromStart();
     }
     
-    private void atualizaGraficos(){
-        int qtMacrofagos = 0,qtPatogenos = 0,qtNeutrofilos = 0,qtLinfocitos = 0;   
-        
-        for(Celula celula : sistema.getCelulas()){
-            if(null != celula.getTipo()) switch (celula.getTipo()) {
-                case MACROFAGO:
-                    qtMacrofagos++;
-                    break;
-                case PATOGENO:
-                    qtPatogenos++;
-                    break;
-                case NEUTROFILO:
-                    qtNeutrofilos++;
-                    break;
-                case LINFOCITO:
-                    qtLinfocitos++;
-                    break;
-            }
-        }
-        
+    private void atualizaGraficos(){        
         int tick = macrofagos.getData().size();
-        macrofagos.getData().add(new XYChart.Data<>(tick,qtMacrofagos));
-        patogenos.getData().add(new XYChart.Data<>(tick,qtPatogenos));
-        neutrofilos.getData().add(new XYChart.Data<>(tick,qtNeutrofilos));
-        linfocitos.getData().add(new XYChart.Data<>(tick,qtLinfocitos));
-        
+        macrofagos.getData().add(new XYChart.Data<>(tick,sistema.getMacrofagos().size()));
+        patogenos.getData().add(new XYChart.Data<>(tick,sistema.getPatogenos().size()));
+        neutrofilos.getData().add(new XYChart.Data<>(tick,sistema.getNeutrofilos().size()));
+        linfocitos.getData().add(new XYChart.Data<>(tick,sistema.getLinfocitos().size()));     
         temporizacoes.getData().add(new XYChart.Data<>(tick,sistema.getTemporizacao()));
     }
     

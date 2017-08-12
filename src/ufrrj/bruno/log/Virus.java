@@ -1,5 +1,6 @@
 package ufrrj.bruno.log;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Random;
 import javafx.scene.paint.Color;
 
@@ -9,8 +10,11 @@ import javafx.scene.paint.Color;
  */
 public class Virus {
     
+    private long INICIO = System.currentTimeMillis();
+    
     private int quantidade = 0;
     private final String identificador;
+    @JsonIgnore
     private  Color cor;
     private final int nLados;
     
@@ -46,6 +50,14 @@ public class Virus {
 
     public void add(){
         this.quantidade++;
+    }
+
+    public long getINICIO() {
+        return INICIO;
+    }
+
+    public void setINICIO(long INICIO) {
+        this.INICIO = INICIO;
     }
     
     public void setQuantidade(int quantidade) {

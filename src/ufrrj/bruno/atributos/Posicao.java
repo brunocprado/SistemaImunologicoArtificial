@@ -1,7 +1,14 @@
 package ufrrj.bruno.atributos;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 public class Posicao {
     private int x,y;
+    
+    public Posicao(){
+        x = 0;
+        y = 0;
+    }
     
     public Posicao(int x,int y){
         this.x = x; this.y = y;     

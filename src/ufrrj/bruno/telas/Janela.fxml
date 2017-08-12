@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.input.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.canvas.Canvas?>
@@ -27,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="640.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ufrrj.bruno.telas.Janela">
+<AnchorPane id="AnchorPane" minHeight="640.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ufrrj.bruno.telas.Janela">
     <children>
       <BorderPane fx:id="painel" layoutX="3.0" layoutY="1.0" prefHeight="403.0" prefWidth="721.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -41,6 +32,12 @@
                            </accelerator></MenuItem>
                   </items>
                 </Menu>
+                  <Menu mnemonicParsing="false" text="Arquivo">
+                    <items>
+                      <MenuItem fx:id="menuSalvar" mnemonicParsing="false" text="Salvar" />
+                        <MenuItem fx:id="menuCarregar" mnemonicParsing="false" text="Carregar" />
+                    </items>
+                  </Menu>
                 <Menu fx:id="menuPausar" mnemonicParsing="false" />
                 <Menu fx:id="menuOpcoes" mnemonicParsing="false" />
                 <Menu fx:id="menuEstatisticas" mnemonicParsing="false" text="Estatísticas">
@@ -83,7 +80,7 @@
                      </effect></Label>
                   <RadioButton fx:id="radioQuimica" mnemonicParsing="false" selected="true" text="Camada Quimica" textFill="WHITE" />
                   <RadioButton mnemonicParsing="false" text="Temperatura" textFill="WHITE" />
-                  <RadioButton mnemonicParsing="false" text="Debug" textFill="WHITE" />
+                  <RadioButton mnemonicParsing="false" selected="true" text="Debug" textFill="WHITE" />
                   <TitledPane animated="false" collapsible="false" prefHeight="200.0" prefWidth="146.0" text="Exibir" textAlignment="CENTER">
                      <content>
                         <VBox prefHeight="156.0" prefWidth="144.0" spacing="16.0">
