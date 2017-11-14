@@ -39,8 +39,7 @@ public class Grafico2D{
     private int cameraX,cameraY;   
     private double zoom = 1;
     
-    private int gambiarra = 0;
-    private double sx,sy;
+    private double sx=0,sy=0;
     
     public Grafico2D(GraphicsContext gc){
         this.g = gc;
@@ -51,12 +50,16 @@ public class Grafico2D{
         
         canvas.widthProperty().addListener(observable -> redimensiona());
         canvas.heightProperty().addListener(observable -> redimensiona());
+        
+        zoom = 1.5;
+        
     }
     
     public void redimensiona(){
-        if(gambiarra < 3) ++gambiarra; if(gambiarra == 2) return;
-        if(gambiarra > 2) g.scale(1/sx,1/sy);
-        
+        if(sx != 0 || sy != 0) {
+            g.scale(1/sx,1/sy);
+        }
+   
         double a = (double) ((canvas.getWidth())/1600d);
         double b = (double) ((canvas.getHeight())/900d);
         
