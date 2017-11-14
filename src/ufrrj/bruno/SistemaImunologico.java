@@ -18,6 +18,7 @@ import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javax.xml.parsers.DocumentBuilder;
@@ -60,6 +61,7 @@ public class SistemaImunologico{
     public final Console log = Console.getInstancia();
     private final Map<String,Integer> parametros = new HashMap<>();
     //======|  RUNTIME  |======//
+    @JsonIgnore public Scene cena;
     @JsonIgnore private double velocidade = 1.0;
     @JsonIgnore private static final long inicio = System.currentTimeMillis();
     @JsonIgnore private boolean mostraCamada = true;

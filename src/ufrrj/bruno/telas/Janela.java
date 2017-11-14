@@ -22,6 +22,8 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
@@ -79,6 +81,14 @@ public class Janela implements Initializable {
         } catch(IOException e){}
     }
     
+    Grafico2D grafico;
+    public void handlerTeclado(KeyCode tecla){
+        switch (tecla) {
+            case A: grafico.setZoom(grafico.getZoom() + 0.2);  break;
+            case S: grafico.setZoom(grafico.getZoom() - 0.2);  break;
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {   
         sliderVelocidade.setSnapToTicks(true);
@@ -89,7 +99,7 @@ public class Janela implements Initializable {
         
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        Grafico2D grafico = new Grafico2D(gc);
+        grafico = new Grafico2D(gc);
         grafico.iniciaRenderizacao();
         
         Estatisticas tmp = new Estatisticas();

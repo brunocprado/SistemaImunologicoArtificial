@@ -12,10 +12,12 @@ import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
+import ufrrj.bruno.telas.Janela;
 
 /**
  * Sistema Imunológico Artificial <br>
@@ -36,9 +38,14 @@ public class Main extends Application {
         sistema.geraPrimeiraGeracao();
         sistema.iniciaThread();
 
-        Parent root = FXMLLoader.load(getClass().getResource("telas/Janela.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("telas/Janela.fxml"));
+        Janela tmp = new Janela();
+        fxmlLoader.setController(tmp);
+        Parent root = (Parent) fxmlLoader.load();
+        
         Main.stage = stage;
         Scene scene = new Scene(root);
+        scene.setOnKeyPressed((KeyEvent event) -> {tmp.handlerTeclado(event.getCode());});     
         stage.setScene(scene);
         stage.setTitle("Sistema Imunológico Artificial");
         stage.getIcons().add(new Image("img/icone.png"));

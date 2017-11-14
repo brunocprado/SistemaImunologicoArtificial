@@ -51,11 +51,10 @@ public class Console {
             stage.show();
             stage.getIcons().add(new Image("img/terminal.png"));
             stage.setOnCloseRequest((WindowEvent t) -> {
-            Platform.exit();
+                Platform.exit();
                 System.exit(0);
             });
         } catch(IOException e){}
-        
         
         txtComando.setOnKeyReleased(e -> {
             if(e.getCode() == ENTER && !txtComando.getText().trim().equals("")){;

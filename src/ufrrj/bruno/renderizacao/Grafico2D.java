@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import ufrrj.bruno.SistemaImunologico;
 import ufrrj.bruno.celulas.Celula;
@@ -37,8 +39,7 @@ public class Grafico2D{
     final Image neutrofilo = new Image("/img/neutrofilo.png");
     //=========| RUNTIME |=========//
     private int cameraX,cameraY;   
-    private double zoom = 1;
-    
+    public double zoom = 1;
     private double sx=0,sy=0;
     
     public Grafico2D(GraphicsContext gc){
@@ -49,19 +50,22 @@ public class Grafico2D{
         cor.put(TIPO_COMPOSTO.CITOCINA,new double[] {0.6,1,0.6});
         
         canvas.widthProperty().addListener(observable -> redimensiona());
-        canvas.heightProperty().addListener(observable -> redimensiona());
-        
-        zoom = 1.5;
-        
+        canvas.heightProperty().addListener(observable -> redimensiona());  
     }
     
+    public void setZoom(Double zoom){
+        if(zoom < 1) return;
+        this.zoom = zoom;
+        redimensiona();
+    }
+    
+    public Double getZoom() { return zoom; }
+    
     public void redimensiona(){
-        if(sx != 0 || sy != 0) {
-            g.scale(1/sx,1/sy);
-        }
+        if(sx != 0 || sy != 0) g.scale(1/sx,1/sy);
    
-        double a = (double) ((canvas.getWidth())/1600d);
-        double b = (double) ((canvas.getHeight())/900d);
+        double a = (double) ((canvas.getWidth()*zoom)/1600d);
+        double b = (double) ((canvas.getHeight()*zoom)/900d);
         
         if(canvas.getHeight() == 0) b = (double) ((695)/900d);
         
