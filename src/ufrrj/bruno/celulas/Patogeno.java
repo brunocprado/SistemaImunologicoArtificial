@@ -14,6 +14,7 @@ public class Patogeno extends Celula{
     private final Poligono forma;
     
     //====| RUNTIME |=====//
+    
     private Celula prox = null;
     private boolean processando = false;
     private long inicioProc = Long.MAX_VALUE;

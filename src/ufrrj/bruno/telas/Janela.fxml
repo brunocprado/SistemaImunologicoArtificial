@@ -14,11 +14,11 @@
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="640.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane id="AnchorPane" minHeight="640.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
       <BorderPane fx:id="painel" layoutX="3.0" layoutY="1.0" prefHeight="403.0" prefWidth="721.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -55,13 +55,6 @@
                </cursor>
             </MenuBar>
          </top>
-         <center>
-            <Pane fx:id="painelTeste" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Canvas fx:id="canvas" height="374.0" width="721.0" />
-               </children>
-            </Pane>
-         </center>
          <right>
             <VBox fx:id="opcoes" prefHeight="695.0" prefWidth="186.0" spacing="30.0" style="-fx-background-color: rgb(150,100,100);" BorderPane.alignment="CENTER">
                <padding>
@@ -114,6 +107,13 @@
                </children>
             </VBox>
          </right>
+         <center>
+            <StackPane fx:id="painelTeste" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Canvas fx:id="canvas" height="374.0" width="721.0" />
+               </children>
+            </StackPane>
+         </center>
       </BorderPane>
     </children>
 </AnchorPane>

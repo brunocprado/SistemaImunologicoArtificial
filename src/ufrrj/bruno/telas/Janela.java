@@ -1,6 +1,9 @@
 package ufrrj.bruno.telas;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDrawer;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -23,11 +26,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import ufrrj.bruno.ia.telas.Sobre;
@@ -42,7 +43,7 @@ import ufrrj.bruno.renderizacao.Grafico2D;
 public class Janela implements Initializable {
     
     @FXML private Canvas canvas;
-    @FXML private Pane painelTeste;
+    @FXML private StackPane painelTeste;
     @FXML private VBox opcoes;  
     @FXML private BorderPane painel;  
     @FXML private MenuItem menuSalvar;
@@ -86,9 +87,27 @@ public class Janela implements Initializable {
         switch (tecla) {
             case A: grafico.setZoom(grafico.getZoom() + 0.2);  break;
             case S: grafico.setZoom(grafico.getZoom() - 0.2);  break;
+            case RIGHT: grafico.moveX(grafico.getX() + 20);  break;
+            case LEFT: grafico.moveX(grafico.getX() - 20);  break;
+            case UP: grafico.moveY(grafico.getY() - 20);  break;
+            case DOWN: grafico.moveY(grafico.getY() + 20);  break;
         }
     }
-    
+//    public void teste(Scene scene){
+//        PannableCanvas canvass = new PannableCanvas();
+//        painel.setCenter(canvass);
+//        SceneGestures sceneGestures = new SceneGestures(canvass);
+//        scene.addEventFilter( MouseEvent.MOUSE_PRESSED, sceneGestures.getOnMousePressedEventHandler());
+//        scene.addEventFilter( MouseEvent.MOUSE_DRAGGED, sceneGestures.getOnMouseDraggedEventHandler());
+//        scene.addEventFilter( ScrollEvent.ANY, sceneGestures.getOnScrollEventHandler());
+//        
+//        canvass.getChildren().add(canvas);
+//        
+//        final GraphicsContext gc = canvas.getGraphicsContext2D();
+//
+//        grafico = new Grafico2D(gc);
+//        grafico.iniciaRenderizacao();
+//    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {   
         sliderVelocidade.setSnapToTicks(true);
@@ -97,6 +116,9 @@ public class Janela implements Initializable {
         canvas.widthProperty().bind(painelTeste.widthProperty());
         canvas.heightProperty().bind(painelTeste.heightProperty());
         
+//        JFXDialog dialog = new JFXDialog();
+//dialog.setContent(new Label("Content"));
+//dialog.show(painelTeste);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 
         grafico = new Grafico2D(gc);
@@ -106,7 +128,7 @@ public class Janela implements Initializable {
         FileChooser janelaArq = new FileChooser();
         
         janelaArq.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("JSON", "*.json")
+            new FileChooser.ExtensionFilter("JSON", "*.json")
         );
         
         menuSalvar.setOnAction((event) -> {

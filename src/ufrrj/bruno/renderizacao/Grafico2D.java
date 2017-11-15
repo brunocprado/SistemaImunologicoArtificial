@@ -10,6 +10,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Affine;
+import javafx.scene.transform.Scale;
+import javafx.scene.transform.Translate;
 import ufrrj.bruno.SistemaImunologico;
 import ufrrj.bruno.celulas.Celula;
 import static ufrrj.bruno.celulas.Celula.TIPO_CELULA.LINFOCITO;
@@ -38,7 +41,7 @@ public class Grafico2D{
     final Image macrofago = new Image("/img/macro.png");
     final Image neutrofilo = new Image("/img/neutrofilo.png");
     //=========| RUNTIME |=========//
-    private int cameraX,cameraY;   
+    public int cameraX = 0,cameraY = 0;   
     public double zoom = 1;
     private double sx=0,sy=0;
     
@@ -47,19 +50,11 @@ public class Grafico2D{
         canvas = gc.getCanvas();
         
         cor.put(TIPO_COMPOSTO.PAMP,new double[] {1,0.6,0.6});
-        cor.put(TIPO_COMPOSTO.CITOCINA,new double[] {0.6,1,0.6});
-        
+        cor.put(TIPO_COMPOSTO.CITOCINA,new double[] {0.6,1,0.6});      
+
         canvas.widthProperty().addListener(observable -> redimensiona());
         canvas.heightProperty().addListener(observable -> redimensiona());  
     }
-    
-    public void setZoom(Double zoom){
-        if(zoom < 1) return;
-        this.zoom = zoom;
-        redimensiona();
-    }
-    
-    public Double getZoom() { return zoom; }
     
     public void redimensiona(){
         if(sx != 0 || sy != 0) g.scale(1/sx,1/sy);
@@ -70,6 +65,7 @@ public class Grafico2D{
         if(canvas.getHeight() == 0) b = (double) ((695)/900d);
         
         sx = a; sy = b;
+        
         g.scale(a, b);
         
         renderiza();
@@ -90,34 +86,29 @@ public class Grafico2D{
         g.clearRect(0,0,largura,altura);
         g.setFill(new Color(245/255,146/255,146/255,1));
          
-        g.drawImage(sangue,0,0,1604,904);
-        
-////
-//        if(zoom > 1){
-//            g.translate(cameraX,cameraY);
-//        }
-//           
+        g.drawImage(sangue,0,0,1604/zoom,904/zoom);
+
         if(sistema.getMostraCamada()){ desenhaCamadaQuimica(); }
         
         if(sistema.exibir.get(MACROFAGO)){
             for(Celula celula : sistema.getMacrofagos()){
                 if(((Macrofago)celula).getEstado() == ESTADO.ATIVO || ((Macrofago)celula).getEstado() == ESTADO.FAGOCITANDO) {
-                    g.drawImage(macrofago, celula.getPosicao().getX(), celula.getPosicao().getY(),12,12);
+                    g.drawImage(macrofago, celula.getPosicao().getX() - cameraX, celula.getPosicao().getY() - cameraY,12,12);
                 } else {
-                    g.drawImage(macrofago, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8);
+                    g.drawImage(macrofago, celula.getPosicao().getX() - cameraX, celula.getPosicao().getY() - cameraY,8,8);
                 } 
             }
         }
         
         if(sistema.exibir.get(NEUTROFILO)){
             for(Celula celula : sistema.getNeutrofilos()){
-                g.drawImage(neutrofilo, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8);
+                g.drawImage(neutrofilo, celula.getPosicao().getX() - cameraX, celula.getPosicao().getY() - cameraY,8,8);
             }
         }
         
         if(sistema.exibir.get(LINFOCITO)){
             for(Celula celula : sistema.getLinfocitos()){
-                g.drawImage(linfocito, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8);
+                g.drawImage(linfocito, celula.getPosicao().getX() - cameraX, celula.getPosicao().getY() - cameraY,8,8);
             }
         }
         
@@ -127,52 +118,14 @@ public class Grafico2D{
                 double[] x = new double[tmp.getForma().x.length];
                 double[] y = new double[tmp.getForma().y.length];;  
                 for(int i=0;i<tmp.getForma().x.length;i++){
-                    x[i] += tmp.getForma().x[i] + tmp.getPosicao().getX();
-                    y[i] += tmp.getForma().y[i] + tmp.getPosicao().getY();
+                    x[i] += tmp.getForma().x[i] + tmp.getPosicao().getX() - cameraX;
+                    y[i] += tmp.getForma().y[i] + tmp.getPosicao().getY() - cameraY;
                 }
                 g.fillPolygon(x,y,tmp.getForma().x.length);
                 tmp = null;
             }
         }
-        
-//        for(Celula celula : sistema.getCelulas()){  
-//            if(!sistema.exibir.get(celula.getTipo())){
-//                continue;
-//            }
-//            switch(celula.getTipo()){
-//                case MACROFAGO:
-//                    if(((Macrofago)celula).getEstado() == ESTADO.ATIVO || ((Macrofago)celula).getEstado() == ESTADO.FAGOCITANDO) {
-//                        g.drawImage(macrofago, celula.getPosicao().getX(), celula.getPosicao().getY(),12,12);
-//                    } else {
-//                        g.drawImage(macrofago, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8);
-//                    }
-//                    break;
-//                case NEUTROFILO:
-//                    g.drawImage(neutrofilo, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8);
-//                    break;
-//                case LINFOCITO:
-//                    g.drawImage(linfocito, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8);
-//                    break;
-//                case PATOGENO:
-//                    Patogeno tmp = (Patogeno)celula;
-//                    g.setFill(tmp.getVirus().getCor());
-//                    double[] x = new double[tmp.getForma().x.length];
-//                    double[] y = new double[tmp.getForma().y.length];;  
-//                    for(int i=0;i<tmp.getForma().x.length;i++){
-//                        x[i] += tmp.getForma().x[i] + tmp.getPosicao().getX();
-//                        y[i] += tmp.getForma().y[i] + tmp.getPosicao().getY();
-//                    }
-//                    g.fillPolygon(x,y,tmp.getForma().x.length);
-//             
-////                    g.drawImage(comum, celula.getPosicao().getX(), celula.getPosicao().getY(),18,18);
-////                    g.fillRect(celula.getPosicao().getX(), celula.getPosicao().getY(),18,18);
-//                    tmp = null;
-//                    break;
-//                default:
-////                    g.drawImage(comum, celula.getPosicao().getX(), celula.getPosicao().getY(),8,8);
-//                    break;
-//            }
-//        }
+      
     }
     
     public void desenhaCamadaQuimica(){    
@@ -183,7 +136,33 @@ public class Grafico2D{
             double[] tmp = cor.get(composto.getTipo());
             g.setFill(new Color(tmp[0],tmp[1],tmp[2],composto.opacidade)); //(composto.getQuantidade() * 4)/255)
             int diametro = composto.getDiametro();
-            g.fillOval(composto.getPos().getX() - diametro/2, composto.getPos().getY() - diametro/2, diametro, diametro);
+            g.fillOval(composto.getPos().getX() - diametro/2 - cameraX, composto.getPos().getY() - diametro/2 - cameraY, diametro, diametro);
         }
     }
+    
+    public void moveX(Integer x){
+        if(x<0) return;
+        cameraX = x;
+    }
+    
+    public void moveY(Integer y){
+        if(y<0) return;
+        cameraY = y;
+    }
+
+    public int getX() {
+        return cameraX;
+    }
+
+    public int getY() {
+        return cameraY;
+    }
+    
+    public void setZoom(Double zoom){
+        if(zoom < 1) return;
+        this.zoom = zoom;
+        redimensiona();
+    }
+    
+    public Double getZoom() { return zoom; }
 }

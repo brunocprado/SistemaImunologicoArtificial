@@ -43,6 +43,8 @@ public class Main extends Application {
         fxmlLoader.setController(tmp);
         Parent root = (Parent) fxmlLoader.load();
         
+        
+        
         Main.stage = stage;
         Scene scene = new Scene(root);
         scene.setOnKeyPressed((KeyEvent event) -> {tmp.handlerTeclado(event.getCode());});     
@@ -51,6 +53,8 @@ public class Main extends Application {
         stage.getIcons().add(new Image("img/icone.png"));
         stage.show();
                 
+//        tmp.teste(scene);
+        
         stage.setOnCloseRequest((WindowEvent t) -> {
             Platform.exit();
             System.exit(0);
