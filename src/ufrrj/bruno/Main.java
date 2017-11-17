@@ -42,7 +42,7 @@ public class Main extends Application {
            
         Main.stage = stage;
         Scene scene = new Scene(root);
-        scene.setOnKeyPressed((KeyEvent event) -> {System.out.println(event.getCode()); tmp.handlerTeclado(event.getCode());});     
+        scene.setOnKeyPressed((KeyEvent event) -> {tmp.handlerTeclado(event.getCode());});     
         stage.setScene(scene);
         stage.setTitle("Sistema Imunológico Artificial");
         stage.getIcons().add(new Image("img/icone.png"));

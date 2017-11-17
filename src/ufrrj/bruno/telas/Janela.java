@@ -83,6 +83,10 @@ public class Janela implements Initializable {
             case LEFT:  grafico.moveX(grafico.getX() - 10);  break;
             case UP:    grafico.moveY(grafico.getY() - 10);  break;
             case DOWN:  grafico.moveY(grafico.getY() + 10);  break;
+            case L: grafico.moveX(grafico.getX() + 10);  break;
+            case J:  grafico.moveX(grafico.getX() - 10);  break;
+            case I:    grafico.moveY(grafico.getY() - 10);  break;
+            case K:  grafico.moveY(grafico.getY() + 10);  break;
         }
     }
 

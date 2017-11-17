@@ -42,6 +42,10 @@ public class Opcoes implements Initializable {
             sistema.setMostraCamada(radioQuimica.isSelected());
         });
         
+        radioDebug.setOnAction((evt) -> {
+            sistema.setDebug(radioDebug.isSelected());
+        });
+        
         radioMacrofago.setOnAction((evt) -> {
             sistema.exibir.put(MACROFAGO,radioMacrofago.isSelected());
         });

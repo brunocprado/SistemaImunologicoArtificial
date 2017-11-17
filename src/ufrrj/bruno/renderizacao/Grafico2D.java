@@ -136,12 +136,13 @@ public class Grafico2D{
     }
     
     public void moveX(Integer x){
-        if(x<0) return;
+        if(x<0 || zoom == 1) return;
+//        if(x >= 1600/zoom) return;
         cameraX = x;
     }
     
     public void moveY(Integer y){
-        if(y<0) return;
+        if(y<0 || zoom == 1) return;
         cameraY = y;
     }
 
@@ -154,7 +155,8 @@ public class Grafico2D{
     }
     
     public void setZoom(Double zoom){
-        if(zoom < 1) return;
+        if(zoom < 1) { setZoom(1d); return; }
+        if(zoom == 1) { cameraX = 0; cameraY = 0; }
         this.zoom = zoom;
         redimensiona();
     }
