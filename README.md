@@ -1,4 +1,4 @@
-# Sistema Imunologico Artificial
+# Sistema Imunológico Artificial
 ![alt tag](https://raw.githubusercontent.com/brunocprado/SistemaImunologicoArtificial/master/SIA.jpg)
 
 # TODO
@@ -14,5 +14,6 @@ Resto 0%...
 * Log avançado
 * Estatisticas
 
-# Dependencias
-* JFreeChart
+# Dependências
+* JFoenix
+* Jackson
