@@ -5,14 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.transform.Affine;
-import javafx.scene.transform.Scale;
-import javafx.scene.transform.Translate;
 import ufrrj.bruno.SistemaImunologico;
 import ufrrj.bruno.celulas.Celula;
 import static ufrrj.bruno.celulas.Celula.TIPO_CELULA.LINFOCITO;
@@ -41,7 +36,7 @@ public class Grafico2D{
     final Image macrofago = new Image("/img/macro.png");
     final Image neutrofilo = new Image("/img/neutrofilo.png");
     //=========| RUNTIME |=========//
-    public int cameraX = 0,cameraY = 0;   
+    private int cameraX = 0,cameraY = 0;   
     public double zoom = 1;
     private double sx=0,sy=0;
     

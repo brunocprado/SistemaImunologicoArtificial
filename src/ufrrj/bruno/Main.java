@@ -8,12 +8,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
@@ -42,18 +39,14 @@ public class Main extends Application {
         Janela tmp = new Janela();
         fxmlLoader.setController(tmp);
         Parent root = (Parent) fxmlLoader.load();
-        
-        
-        
+           
         Main.stage = stage;
         Scene scene = new Scene(root);
-        scene.setOnKeyPressed((KeyEvent event) -> {tmp.handlerTeclado(event.getCode());});     
+        scene.setOnKeyPressed((KeyEvent event) -> {System.out.println(event.getCode()); tmp.handlerTeclado(event.getCode());});     
         stage.setScene(scene);
         stage.setTitle("Sistema Imunológico Artificial");
         stage.getIcons().add(new Image("img/icone.png"));
-        stage.show();
-                
-//        tmp.teste(scene);
+        stage.show();          
         
         stage.setOnCloseRequest((WindowEvent t) -> {
             Platform.exit();
