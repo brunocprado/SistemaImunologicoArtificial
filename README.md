@@ -1,5 +1,5 @@
 # Sistema Imunologico Artificial
-![alt tag](http://i.imgur.com/uWPHVj9.jpg)
+![alt tag](https://raw.githubusercontent.com/brunocprado/SistemaImunologicoArtificial/master/SIA.jpg)
 
 # TODO
 * Sistema Adaptativo
