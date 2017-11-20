@@ -1,4 +1,3 @@
-
 package ufrrj.bruno.telas;
 
 import com.jfoenix.controls.JFXSlider;
@@ -12,26 +11,13 @@ import static ufrrj.bruno.celulas.Celula.TIPO_CELULA.*;
 
 public class Opcoes implements Initializable {
 
-    @FXML
-    private JFXToggleButton radioQuimica;
-
-    @FXML
-    private JFXToggleButton radioDebug;
-
-    @FXML
-    private JFXToggleButton radioMacrofago;
-
-    @FXML
-    private JFXToggleButton radioLinfocito;
-
-    @FXML
-    private JFXToggleButton radioNeutrofilo;
-
-    @FXML
-    private JFXToggleButton radioPatogeno;
-
-    @FXML
-    private JFXSlider sliderVelocidade;
+    @FXML private JFXToggleButton radioQuimica;
+    @FXML private JFXToggleButton radioDebug;
+    @FXML private JFXToggleButton radioMacrofago;
+    @FXML private JFXToggleButton radioLinfocito;
+    @FXML private JFXToggleButton radioNeutrofilo;
+    @FXML private JFXToggleButton radioPatogeno;
+    @FXML private JFXSlider sliderVelocidade;
 
     private final SistemaImunologico sistema = SistemaImunologico.getInstancia();
     

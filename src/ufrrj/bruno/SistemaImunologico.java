@@ -100,19 +100,22 @@ public class SistemaImunologico{
         for(i=0;i<(nInicial*parametros.get("LINFOCITOS"))/1000;i++){
             linfocitos.add(new Linfocito());
         }
-        
-        
-        
-        
-        
-        
-        
+
+    }
+    
+    public void reiniciaTimers(){
+        pausaThread(); iniciaThread();
+        camada.pausaThread(); camada.iniciaThread();
+        Iterator<Patogeno> t = patogenos.iterator();
+        while(t.hasNext()){
+            t.next().reinicia();
+        }
     }
     
     public void setVelocidade(int velo){
         double vel = velo/25;
         velocidade = (velo == 0) ? 2 : 2/vel;
-        pausaThread(); iniciaThread();
+        reiniciaTimers();
     }
     
     public ConcurrentLinkedQueue<Macrofago> getMacrofagos() {

@@ -12,24 +12,13 @@ public class Patogeno extends Celula{
 
     public final Virus virus;
     private final Poligono forma;
+    private int epitopo;
     
     //====| RUNTIME |=====//
     
     private Celula prox = null;
     private boolean processando = false;
     private long inicioProc = Long.MAX_VALUE;
-    
-    public Patogeno() {
-        super(TIPO_CELULA.PATOGENO);
-        
-        setVelMovimento(2);
-        virus = new Virus();
-        forma = new Poligono(virus.getnLados());
-        
-        if(sistema.isDebug()) { sistema.imprime("Novo patogeno com identificador: "  + virus.getIdentificador()); }
-        emiteQuimica(TIPO_COMPOSTO.PAMP);
-        inicia();
-    }
     
     public Patogeno(Virus tipo) {
         super(TIPO_CELULA.PATOGENO);
@@ -49,13 +38,29 @@ public class Patogeno extends Celula{
         inicia();
     }
     
+    public Patogeno(Virus tipo,Posicao pos,Integer epitopo) {
+        super(TIPO_CELULA.PATOGENO,pos);
+        forma = new Poligono(tipo.getnLados());
+        this.virus = tipo;
+        this.epitopo = epitopo;
+        tipo.add();
+        emiteQuimica(TIPO_COMPOSTO.PAMP);
+        inicia();
+    }
+    
     @JsonIgnore
-    public Timer quimica = new Timer("QUIM");
+    public Timer quimica;
     private void inicia(){
+        quimica = new Timer("QUIM");
         quimica.schedule(new TimerTask() {
             @Override
             public void run() { emiteQuimica(TIPO_COMPOSTO.PAMP); }
         }, 0,sistema.getParametro("DELAY_PROPAGACAO"));
+    }
+    
+    public void reinicia(){
+        quimica.cancel();
+        inicia();
     }
     
     public void clona(){

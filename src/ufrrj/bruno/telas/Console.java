@@ -95,6 +95,7 @@ public class Console {
         if(tmp.length < 2) return;
         SistemaImunologico.getInstancia().mudaParametro(tmp[0], Integer.parseInt(tmp[1]));
         imprime("[ " + tmp[0] + " ] alterado para " + tmp[1],Color.WHITE);
+        SistemaImunologico.getInstancia().reiniciaTimers();
     }
     
     public void imprime(String t){
