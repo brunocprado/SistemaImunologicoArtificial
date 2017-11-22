@@ -7,7 +7,7 @@ import ufrrj.bruno.quimica.CompostoQuimico;
 
 abstract public class Celula{
     
-    public static enum TIPO_CELULA {COMUM,LINFOCITO,NEUTROFILO,PATOGENO,MACROFAGO};
+    public static enum TIPO_CELULA {COMUM,LINFOCITO,NEUTROFILO,PATOGENO,MACROFAGO,CELULAB,ANTICORPO};
     
     protected long inicio = System.currentTimeMillis();
     

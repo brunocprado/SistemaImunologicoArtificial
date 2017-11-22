@@ -14,15 +14,14 @@ public class Virus {
     
     private int quantidade = 0;
     private final String identificador;
-    @JsonIgnore
-    private  Color cor;
+    private final int epitopo;
+    @JsonIgnore private Color cor;
     private final int nLados;
     
     public Virus(){ 
         Random r = new Random();
         nLados = r.nextInt(10) + 3;
-//        cor = new Color(r.nextDouble(),r.nextDouble(),r.nextDouble());
-        //nome = "Só pra teste";
+        epitopo = r.nextInt(Integer.MAX_VALUE);
         identificador = "Teste";
     }
     
@@ -30,6 +29,7 @@ public class Virus {
         this.cor = cor;
         this.nLados = nLados;
         this.identificador = identificador;
+        epitopo = new Random().nextInt(Integer.MAX_VALUE);
     }
  
     public String getIdentificador() {
@@ -46,6 +46,10 @@ public class Virus {
 
     public int getQuantidade() {
         return quantidade;
+    }
+
+    public int getEpitopo() {
+        return epitopo;
     }
 
     public void add(){

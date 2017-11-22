@@ -12,7 +12,6 @@ public class Patogeno extends Celula{
 
     public final Virus virus;
     private final Poligono forma;
-    private int epitopo;
     
     //====| RUNTIME |=====//
     
@@ -33,16 +32,6 @@ public class Patogeno extends Celula{
         super(TIPO_CELULA.PATOGENO,pos);
         forma = new Poligono(tipo.getnLados());
         this.virus = tipo;
-        tipo.add();
-        emiteQuimica(TIPO_COMPOSTO.PAMP);
-        inicia();
-    }
-    
-    public Patogeno(Virus tipo,Posicao pos,Integer epitopo) {
-        super(TIPO_CELULA.PATOGENO,pos);
-        forma = new Poligono(tipo.getnLados());
-        this.virus = tipo;
-        this.epitopo = epitopo;
         tipo.add();
         emiteQuimica(TIPO_COMPOSTO.PAMP);
         inicia();

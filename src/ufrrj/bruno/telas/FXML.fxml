@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="382.0" prefWidth="661.0" style="-fx-background-color: #ddf;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="ufrrj.bruno.telas.FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="382.0" prefWidth="661.0" style="-fx-background-color: #ddf;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ufrrj.bruno.telas.FXMLController">
    <children>
       <Label layoutX="102.0" layoutY="46.0" text="Sistema imunológico artificial">
          <font>
@@ -31,6 +31,6 @@
             </AnchorPane>
         </content>
       </TitledPane>
-      <Button layoutX="565.0" layoutY="330.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="82.0" style="-fx-background-color: #bbf;" text="Iniciar" />
+      <JFXButton layoutX="575.0" layoutY="331.0" prefHeight="37.0" prefWidth="70.0" style="-fx-border-radius: 5em; -fx-background-color: #5c5; -fx-background-radius: 5em;" />
    </children>
 </AnchorPane>
