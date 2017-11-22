@@ -3,9 +3,6 @@ package ufrrj.bruno;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.javafx.geom.ConcentricShapePair;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -28,9 +24,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import ufrrj.bruno.celulas.Celula;
 import ufrrj.bruno.celulas.Celula.TIPO_CELULA;
 import static ufrrj.bruno.celulas.Celula.TIPO_CELULA.*;
+import ufrrj.bruno.celulas.CelulaB;
 import ufrrj.bruno.celulas.Linfocito;
 import ufrrj.bruno.celulas.Macrofago;
 import ufrrj.bruno.celulas.Neutrofilo;
@@ -55,7 +51,8 @@ public class SistemaImunologico{
     private ConcurrentLinkedQueue<Linfocito> linfocitos = new ConcurrentLinkedQueue<>(); //TODO: UNIR CELULAS DO SI HUMORAL
     private ConcurrentLinkedQueue<Neutrofilo> neutrofilos = new ConcurrentLinkedQueue<>(); //UNIR A MACROFAGOS
     private ConcurrentLinkedQueue<Patogeno> patogenos = new ConcurrentLinkedQueue<>();
-    private ConcurrentLinkedQueue<Virus> virus = new ConcurrentLinkedQueue<>();
+    private ConcurrentLinkedQueue<CelulaB> celulasB = new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<Virus> virus = new ConcurrentLinkedQueue<>();
     private CamadaSobreposta camada;
     @JsonIgnore 
     public final Console log = Console.getInstancia();
@@ -99,6 +96,10 @@ public class SistemaImunologico{
         }
         for(i=0;i<(nInicial*parametros.get("LINFOCITOS"))/1000;i++){
             linfocitos.add(new Linfocito());
+        }
+        
+        for(i=0;i<10;i++){
+            celulasB.add(new CelulaB(TIPO_CELULA.CELULAB));
         }
 
     }
@@ -154,6 +155,7 @@ public class SistemaImunologico{
         log.imprime(texto,c);
     }
 
+    
     public boolean isDebug() {
         return debug;
     }
@@ -263,6 +265,11 @@ public class SistemaImunologico{
                 while(t.hasNext()){
                     t.next().loop();
                 }
+//                
+//                Iterator<CelulaB> b = celulasB.iterator();
+//                while(b.hasNext()){
+//                    b.next().loop();
+//                }
             }
         }, 0,(int) (velocidade * 30));
         pausado = false;

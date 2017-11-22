@@ -19,6 +19,11 @@ public class CelulaB extends Celula{
     //========| RUNTIME |========//
     private ESTADO estado = REPOUSO;
     
+    public CelulaB(TIPO_CELULA tipo) {
+        super(tipo);
+        
+    }
+    
     public CelulaB(TIPO_CELULA tipo, Posicao pos) {
         super(tipo, pos);
     }

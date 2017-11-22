@@ -51,3 +51,4 @@ dist
 build
 libs
 #nbproject
+/nbproject/private/
