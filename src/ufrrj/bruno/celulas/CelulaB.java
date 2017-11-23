@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import ufrrj.bruno.atributos.Posicao;
 import static ufrrj.bruno.celulas.Celula.TIPO_CELULA.ANTICORPO;
 import static ufrrj.bruno.celulas.CelulaB.ESTADO.REPOUSO;
+import ufrrj.bruno.log.Virus;
 import ufrrj.bruno.quimica.CompostoQuimico;
 
 /**
@@ -16,6 +17,7 @@ public class CelulaB extends Celula{
 
     public static enum ESTADO {REPOUSO,ATIVO};
     private int anticorpo;
+    private Virus virus;
     //========| RUNTIME |========//
     private ESTADO estado = REPOUSO;
     
@@ -28,8 +30,9 @@ public class CelulaB extends Celula{
         super(tipo, pos);
     }
 
-    public void ativa(int peptideo){
-        anticorpo = peptideo;
+    public void ativa(Virus virus){
+        this.virus = virus;
+        anticorpo = virus.getEpitopo();
         //INICIA TIMER PRA PRODUZIR ANTICORPOS XYZ
         inicia();
     }
@@ -40,7 +43,7 @@ public class CelulaB extends Celula{
         prodAnticorpos.schedule(new TimerTask() {
             @Override
             public void run() { 
-                new Anticorpo(TIPO_CELULA.ANTICORPO, getPosicao(), anticorpo); 
+                virus.anticorpos.add(new Anticorpo(getPosicao(), anticorpo)); 
             }
         }, 0,sistema.getParametro("DELAY_PROPAGACAO"));
     }

@@ -41,6 +41,7 @@ public class Macrofago extends Celula{
         if(alvo != null && celulas.contains(alvo)){
             if(calculaDistancia(alvo.getPosicao()) <= 4 && celulas.contains(alvo)){
                 fagocita();
+                if(sistema.celulasB.size() > 0) sistema.celulasB.poll().ativa(((Patogeno)alvo).getVirus());
             }
             move(alvo.getPosicao());
             return;

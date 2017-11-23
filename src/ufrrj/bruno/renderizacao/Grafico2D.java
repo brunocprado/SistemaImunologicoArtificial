@@ -35,6 +35,7 @@ public class Grafico2D{
     final Image linfocito = new Image("/img/Linfocito.png");
     final Image macrofago = new Image("/img/macro.png");
     final Image neutrofilo = new Image("/img/neutrofilo.png");
+    final Image anticorpo = new Image("/img/anti.png");
     //=========| RUNTIME |=========//
     private int cameraX = 0,cameraY = 0;   
     public double zoom = 1;
@@ -101,10 +102,23 @@ public class Grafico2D{
             }
         }
         
+//        if(sistema.exibir.get(LINFOCITO)){
+//            for(Celula celula : sistema.getLinfocitos()){
+//                g.drawImage(linfocito, celula.getPosicao().getX() - cameraX, celula.getPosicao().getY() - cameraY,8,8);
+//            }
+//        }
+        
         if(sistema.exibir.get(LINFOCITO)){
-            for(Celula celula : sistema.getLinfocitos()){
+            for(Celula celula : sistema.celulasB){
                 g.drawImage(linfocito, celula.getPosicao().getX() - cameraX, celula.getPosicao().getY() - cameraY,8,8);
             }
+            
+            if(sistema.getVirus().size() > 0){
+                for(Celula celula : sistema.getVirus().peek().anticorpos){
+                    g.drawImage(anticorpo, celula.getPosicao().getX() - cameraX, celula.getPosicao().getY() - cameraY,8,8);
+                }
+            }
+            
         }
         
         if(sistema.exibir.get(PATOGENO)){

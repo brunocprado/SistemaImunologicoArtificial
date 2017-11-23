@@ -51,7 +51,7 @@ public class SistemaImunologico{
     private ConcurrentLinkedQueue<Linfocito> linfocitos = new ConcurrentLinkedQueue<>(); //TODO: UNIR CELULAS DO SI HUMORAL
     private ConcurrentLinkedQueue<Neutrofilo> neutrofilos = new ConcurrentLinkedQueue<>(); //UNIR A MACROFAGOS
     private ConcurrentLinkedQueue<Patogeno> patogenos = new ConcurrentLinkedQueue<>();
-    private ConcurrentLinkedQueue<CelulaB> celulasB = new ConcurrentLinkedQueue<>();
+    public ConcurrentLinkedQueue<CelulaB> celulasB = new ConcurrentLinkedQueue<>();
     private final ConcurrentLinkedQueue<Virus> virus = new ConcurrentLinkedQueue<>();
     private CamadaSobreposta camada;
     @JsonIgnore 

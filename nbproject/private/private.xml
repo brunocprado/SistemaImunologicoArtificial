@@ -5,12 +5,13 @@
         <group>
             <file>file:/P:/SistemaImunologicoArtificial/src/ufrrj/bruno/telas/Janela.java</file>
             <file>file:/P:/SistemaImunologicoArtificial/src/ufrrj/bruno/quimica/CompostoQuimico.java</file>
+            <file>file:/P:/SistemaImunologicoArtificial/src/ufrrj/bruno/telas/VisualizaVirus.java</file>
             <file>file:/P:/SistemaImunologicoArtificial/src/ufrrj/bruno/celulas/Anticorpo.java</file>
             <file>file:/P:/SistemaImunologicoArtificial/src/ufrrj/bruno/telas/EstatisticaSimulacao.java</file>
-            <file>file:/P:/SistemaImunologicoArtificial/src/ufrrj/bruno/quimica/CamadaSobreposta.java</file>
             <file>file:/P:/SistemaImunologicoArtificial/src/ufrrj/bruno/celulas/CelulaB.java</file>
             <file>file:/P:/SistemaImunologicoArtificial/src/ufrrj/bruno/telas/Console.java</file>
             <file>file:/P:/SistemaImunologicoArtificial/src/ufrrj/bruno/celulas/Macrofago.java</file>
+            <file>file:/P:/SistemaImunologicoArtificial/src/ufrrj/bruno/log/Virus.java</file>
             <file>file:/P:/SistemaImunologicoArtificial/src/ufrrj/bruno/celulas/Patogeno.java</file>
             <file>file:/P:/SistemaImunologicoArtificial/src/ufrrj/bruno/telas/Opcoes.java</file>
             <file>file:/P:/SistemaImunologicoArtificial/src/ufrrj/bruno/SistemaImunologico.java</file>

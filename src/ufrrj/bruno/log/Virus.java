@@ -2,7 +2,10 @@ package ufrrj.bruno.log;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Random;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import javafx.scene.paint.Color;
+import ufrrj.bruno.celulas.Anticorpo;
+import ufrrj.bruno.celulas.CelulaB;
 
 /**
  * Classe para fins de Histórico e estatisticas sobre determinada classe de Patogenos.
@@ -17,6 +20,8 @@ public class Virus {
     private final int epitopo;
     @JsonIgnore private Color cor;
     private final int nLados;
+    
+    public ConcurrentLinkedQueue<Anticorpo> anticorpos = new ConcurrentLinkedQueue<>();
     
     public Virus(){ 
         Random r = new Random();

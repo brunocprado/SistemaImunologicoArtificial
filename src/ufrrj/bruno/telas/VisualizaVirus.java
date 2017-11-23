@@ -42,8 +42,10 @@ public class VisualizaVirus extends Stage{
         grafico.setTitle(virus.getIdentificador());
         XYChart.Series<Number,Number> series = new XYChart.Series();
         series.setName("Antigenos");
+        XYChart.Series<Number,Number> anticorpos = new XYChart.Series();
+        anticorpos.setName("Anticorpos");
         grafico.getData().add(series);
-      
+        grafico.getData().add(anticorpos);
         //container.getChildren().add(grafico);
         
         setScene(new Scene(grafico,600,400));
@@ -61,6 +63,10 @@ public class VisualizaVirus extends Stage{
             new KeyFrame(Duration.millis(1000),(rvt) -> {
                 XYChart.Data<Number, Number> d = new XYChart.Data<>(series.getData().size(),virus.getQuantidade());
                 series.getData().add(d);
+                
+                XYChart.Data<Number, Number> tmp = new XYChart.Data<>(anticorpos.getData().size(),virus.anticorpos.size());
+                anticorpos.getData().add(tmp);
+                
                 d.getNode().setCursor(javafx.scene.Cursor.HAND);          
                 
                 Tooltip tp = new Tooltip();
