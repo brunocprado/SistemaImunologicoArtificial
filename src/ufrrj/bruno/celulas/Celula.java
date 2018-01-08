@@ -25,7 +25,7 @@ abstract public class Celula extends ImageView{
     private double velMovimento = 2;
     //========|  RUNTIME  |=======//
     protected final SistemaImunologico sistema = SistemaImunologico.getInstancia();
-    protected final Tooltip tp = new Tooltip();
+    protected Tooltip tp;
     
     public Celula(TIPO_CELULA tipo){
         qt++; id = qt; 
@@ -43,14 +43,20 @@ abstract public class Celula extends ImageView{
         }
         
 //        setCache(true);
-        setFitHeight(12); setFitWidth(12);
+        setFitHeight(10); setFitWidth(10);
         
         if(tipo == TIPO_CELULA.NEUTROFILO) return;
+        
         setCursor(Cursor.HAND);
-        tp.setGraphic(new InfoCelula(this));
-        tp.setShowDelay(javafx.util.Duration.millis(500));   
-        tp.setHideDelay(javafx.util.Duration.millis(500));
-        Tooltip.install(this, tp);
+        
+        setOnMouseEntered((e)->{        
+            tp = new Tooltip();
+            tp.setGraphic(new InfoCelula(this));
+            tp.setShowDelay(javafx.util.Duration.millis(500));   
+            tp.setHideDelay(javafx.util.Duration.millis(500));
+            Tooltip.install(this, tp);
+        });
+        
     }
 
     public Celula(TIPO_CELULA tipo,double x,double y){
@@ -68,12 +74,18 @@ abstract public class Celula extends ImageView{
             case PATOGENO: setImage(sistema.comum); break;
         }
         
-        setFitHeight(12); setFitWidth(12);
+        setFitHeight(10); setFitWidth(10);
+        
         setCursor(Cursor.HAND);
-//        tp.setGraphic(new InfoCelula(this));
-//        tp.setShowDelay(javafx.util.Duration.ZERO);   
-//        tp.setHideDelay(javafx.util.Duration.ONE);
-//        Tooltip.install(this, tp);
+        
+        setOnMouseEntered((e)->{
+            tp = new Tooltip();
+            tp.setGraphic(new InfoCelula(this));
+            tp.setShowDelay(javafx.util.Duration.millis(500));   
+            tp.setHideDelay(javafx.util.Duration.millis(500));
+            Tooltip.install(this, tp);
+        });
+        
     }
     
     public void move(Celula dest){
