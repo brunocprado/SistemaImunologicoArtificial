@@ -27,7 +27,7 @@ public class CelulaB extends Celula{
     }
     
     public CelulaB(TIPO_CELULA tipo, Posicao pos) {
-        super(tipo, pos);
+        super(tipo);
     }
 
     public void ativa(Virus virus){
@@ -43,7 +43,7 @@ public class CelulaB extends Celula{
         prodAnticorpos.schedule(new TimerTask() {
             @Override
             public void run() { 
-                virus.anticorpos.add(new Anticorpo(getPosicao(), anticorpo)); 
+//                virus.anticorpos.add(new Anticorpo( anticorpo)); 
             }
         }, 0,sistema.getParametro("DELAY_PROPAGACAO"));
     }

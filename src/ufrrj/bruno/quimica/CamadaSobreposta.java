@@ -7,6 +7,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import ufrrj.bruno.SistemaImunologico;
+import ufrrj.bruno.renderizacao.GraficoAvancado;
 
 /**
  * Conjunto de compostos quimicos. <br>
@@ -29,6 +30,8 @@ public class CamadaSobreposta{
     @JsonIgnore
     private Timer timer;
     
+    private final GraficoAvancado grafico = GraficoAvancado.getInstancia();
+    
     public void iniciaThread(){
         timer = new Timer("Camada Quimica");
         timer.schedule(new TimerTask() {
@@ -39,8 +42,10 @@ public class CamadaSobreposta{
                     composto.aumentaDiametro(6);
                     if(composto.getQuantidade() > 1){
                         composto.diminuiQuantidade(1);
-                    } else {
+                    } else {         
                         i.remove();
+//                        composto.setVisible(false);;
+//                        grafico.remove(composto);
                     }
                 }
             }

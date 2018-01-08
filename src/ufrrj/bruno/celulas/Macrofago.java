@@ -11,6 +11,7 @@ import static ufrrj.bruno.celulas.Macrofago.ESTADO.*;
 import ufrrj.bruno.log.Virus;
 import ufrrj.bruno.quimica.CompostoQuimico;
 import ufrrj.bruno.quimica.CompostoQuimico.TIPO_COMPOSTO;
+import ufrrj.bruno.renderizacao.GraficoAvancado;
 
 public class Macrofago extends Celula{
 
@@ -30,7 +31,7 @@ public class Macrofago extends Celula{
     }
 
     public ESTADO getEstado() {
-        return estado;
+        return this.estado;
     }
 
     @Override
@@ -39,11 +40,11 @@ public class Macrofago extends Celula{
         if(estado == FAGOCITANDO) return;
                 
         if(alvo != null && celulas.contains(alvo)){
-            if(calculaDistancia(alvo.getPosicao()) <= 4 && celulas.contains(alvo)){
+            if(calculaDistancia((int)alvo.getX(),(int)alvo.getY()) <= 4 && celulas.contains(alvo)){
                 fagocita();
                 if(sistema.celulasB.size() > 0) sistema.celulasB.poll().ativa(((Patogeno)alvo).getVirus());
             }
-            move(alvo.getPosicao());
+            move(alvo);
             return;
         }
         
@@ -53,8 +54,8 @@ public class Macrofago extends Celula{
             
             if(composto.getTipo() != TIPO_COMPOSTO.PAMP && composto.getTipo() != TIPO_COMPOSTO.CITOCINA) continue;
             
-            double dist = calculaDistancia(composto.getPos());      
-            if(dist <= composto.getDiametro()/2 + 6){
+            double dist = calculaDistancia(composto.getX(),composto.getY());      
+            if(dist <= composto.getRaio() + 6){
                 if(composto.getEmissor() != null && !celulas.contains(composto.getEmissor())) continue;
                 alvo = composto.getEmissor();
                 tempoDetectado = System.currentTimeMillis();
@@ -66,7 +67,7 @@ public class Macrofago extends Celula{
                     estado = ATIVO;
 //                    System.out.println(getId() + " Detectou " + alvo + " " + System.currentTimeMillis());
                     sistema.addTemporizacao((int) (System.currentTimeMillis() - alvo.getInicio()));
-                    move(alvo.getPosicao());
+                    move(alvo);
                 }
                 break;
             }
@@ -92,10 +93,12 @@ public class Macrofago extends Celula{
                     tmp.getVirus().setQuantidade(tmp.getVirus().getQuantidade() - 1);
                     tmp.quimica.cancel();
                 }
-                sistema.getPatogenos().remove(alvo); 
+                sistema.getPatogenos().remove(alvo);
+                alvo.setVisible(false);
+//                GraficoAvancado.getInstancia().remove(alvo);
 
                 if(sistema.isDebug() && alvo.getTipo() == TIPO_CELULA.PATOGENO){
-                    sistema.imprime("Patogeno " + alvo.getId()
+                    sistema.imprime("Patogeno " + alvo.getID()
                             + " [" + ((Patogeno) alvo).getVirus().getIdentificador()+ "] eliminado. {Tempo de detecção : " + (tempoDetectado - alvo.getInicio())
                             + "ms, Tempo até ser eliminado: " + (System.currentTimeMillis() - alvo.getInicio()) + "ms}",Color.YELLOW);
                 }      
@@ -117,10 +120,14 @@ public class Macrofago extends Celula{
         
         thread.shutdown();
     }
+
+    public Celula getAlvo() {
+        return alvo;
+    }  
     
     @Override
     public String toString(){
-        return "\nMacrofago{estado = " + estado + ",posicao = " + posicao + "}";
+        return "\nMacrofago{estado = " + estado + ",posicao = " + "}";
     }
 
 }

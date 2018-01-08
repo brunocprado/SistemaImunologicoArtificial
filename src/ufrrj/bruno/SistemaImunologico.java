@@ -16,6 +16,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -50,12 +51,11 @@ public class SistemaImunologico{
     private ConcurrentLinkedQueue<Macrofago> macrofagos = new ConcurrentLinkedQueue<>(); //TROCAR PRA FAGOCITARIAS
     private ConcurrentLinkedQueue<Linfocito> linfocitos = new ConcurrentLinkedQueue<>(); //TODO: UNIR CELULAS DO SI HUMORAL
     private ConcurrentLinkedQueue<Neutrofilo> neutrofilos = new ConcurrentLinkedQueue<>(); //UNIR A MACROFAGOS
-    private ConcurrentLinkedQueue<Patogeno> patogenos = new ConcurrentLinkedQueue<>();
-    public ConcurrentLinkedQueue<CelulaB> celulasB = new ConcurrentLinkedQueue<>();
-    private final ConcurrentLinkedQueue<Virus> virus = new ConcurrentLinkedQueue<>();
+    @JsonIgnore private ConcurrentLinkedQueue<Patogeno> patogenos = new ConcurrentLinkedQueue<>();
+    @JsonIgnore public ConcurrentLinkedQueue<CelulaB> celulasB = new ConcurrentLinkedQueue<>();
+    @JsonIgnore private final ConcurrentLinkedQueue<Virus> virus = new ConcurrentLinkedQueue<>();
     private CamadaSobreposta camada;
-    @JsonIgnore 
-    public final Console log = Console.getInstancia();
+    @JsonIgnore public final Console log = Console.getInstancia();
     private final Map<String,Integer> parametros = new HashMap<>();
     //======|  RUNTIME  |======//
     @JsonIgnore public Scene cena;
@@ -68,8 +68,17 @@ public class SistemaImunologico{
     private int qtTempo = 0;
     //======| DISPLAY |======//
     public Map<TIPO_CELULA,Boolean> exibir = new HashMap<>();   
-
-    private SistemaImunologico(){
+    
+    //====================STATIC
+    public final Image comum = new Image("/img/opcoes.png");
+    public final Image linfocito = new Image("/img/Linfocito.png");
+    public final Image macrofago = new Image("/img/macro.png");
+    public final Image neutrofilo = new Image("/img/neutrofilo.png");
+    public final Image anticorpo = new Image("/img/anti.png");
+    //=============================
+    
+    
+    public SistemaImunologico(){
         carregaParametros();
         
         nInicial = new Random().nextInt(parametros.get("TAM_MEDIO_SUPERIOR") - parametros.get("TAM_MEDIO_INFERIOR")) + parametros.get("TAM_MEDIO_INFERIOR");      

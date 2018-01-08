@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Timer;
 import java.util.TimerTask;
 import ufrrj.bruno.atributos.Poligono;
-import ufrrj.bruno.atributos.Posicao;
 import ufrrj.bruno.log.Virus;
 import ufrrj.bruno.quimica.CompostoQuimico.TIPO_COMPOSTO;
 
@@ -24,12 +23,13 @@ public class Patogeno extends Celula{
         forma = new Poligono(tipo.getnLados());
         this.virus = tipo;
         tipo.add();
+        setImage(sistema.comum);
         emiteQuimica(TIPO_COMPOSTO.PAMP);
         inicia();
     }
     
-    public Patogeno(Virus tipo,Posicao pos) {
-        super(TIPO_CELULA.PATOGENO,pos);
+    public Patogeno(Virus tipo,double x,double y) {
+        super(TIPO_CELULA.PATOGENO,x,y);
         forma = new Poligono(tipo.getnLados());
         this.virus = tipo;
         tipo.add();
@@ -53,11 +53,11 @@ public class Patogeno extends Celula{
     }
     
     public void clona(){
-        sistema.getPatogenos().add(new Patogeno(virus,posicao));
+        sistema.getPatogenos().add(new Patogeno(virus,getX(),getY()));
     }
     
-    public void clona(Posicao p){
-        sistema.getPatogenos().add(new Patogeno(virus,p));
+    public void clona(double x,double y){
+        sistema.getPatogenos().add(new Patogeno(virus,getX(),getY()));
     }
     
     @Override
@@ -71,7 +71,7 @@ public class Patogeno extends Celula{
         if(processando){
             if((System.currentTimeMillis() - inicioProc) >= 1000){
                 sistema.getLinfocitos().remove(prox);  
-                clona(prox.posicao);
+                clona(prox.getX(),prox.getY());
                 processando = false;
                 prox = null;
                 inicioProc = Long.MAX_VALUE;
@@ -79,18 +79,18 @@ public class Patogeno extends Celula{
         }              
         
         if(prox != null){
-            if(calculaDistancia(prox.posicao) < 6){
+            if(calculaDistancia(prox.getX(),prox.getY()) < 6){
                 processando = true;
                 inicioProc = System.currentTimeMillis();
             } else {
-                move(prox.posicao);
+                move(prox);
             }
         }
         
         double maisProx = Double.MAX_VALUE;
         
         for(Celula celula : sistema.getLinfocitos()){              
-            double dist = calculaDistancia(celula.posicao);
+            double dist = calculaDistancia(celula.getX(),celula.getY());
             if(maisProx > dist) {
                 maisProx = dist;
                 prox = celula;
@@ -108,7 +108,7 @@ public class Patogeno extends Celula{
 
     @Override
     public String toString() {
-        return "\nPatogeno{id = " + getId() + ", posicao = " + posicao + ", inicio=" + inicio + '}';
+        return "\nPatogeno{id = " + getId() + ", posicao = " +  ", inicio=" + inicio + '}';
     }
     
 }

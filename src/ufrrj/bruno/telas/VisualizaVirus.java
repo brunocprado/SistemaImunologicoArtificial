@@ -71,8 +71,8 @@ public class VisualizaVirus extends Stage{
                 
                 Tooltip tp = new Tooltip();
                 tp.setGraphic(new EstatisticaSimulacao(series.getData().size()));
-//                tp.setShowDelay(javafx.util.Duration.ZERO);   
-//                tp.setHideDelay(javafx.util.Duration.ONE);
+                tp.setShowDelay(javafx.util.Duration.ZERO);   
+                tp.setHideDelay(javafx.util.Duration.ONE);
                 Tooltip.install(d.getNode(), tp);
 
                 d.getNode().setOnMouseEntered(event -> d.getNode().getStyleClass().add("onHover"));
@@ -82,6 +82,9 @@ public class VisualizaVirus extends Stage{
             }
         ));
         timeline.playFromStart();
+               
+        grafico.setAnimated(false);
+
     }
     
 }

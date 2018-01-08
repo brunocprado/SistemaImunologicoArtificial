@@ -1,6 +1,7 @@
 package ufrrj.bruno.celulas;
 
 import java.util.Random;
+import javafx.scene.image.Image;
 
 public class Linfocito extends Celula{
     

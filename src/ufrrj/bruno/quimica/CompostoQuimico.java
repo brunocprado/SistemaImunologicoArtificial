@@ -1,9 +1,11 @@
 package ufrrj.bruno.quimica;
 
-import ufrrj.bruno.atributos.Posicao;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import ufrrj.bruno.celulas.Celula;
+import ufrrj.bruno.renderizacao.GraficoAvancado;
 
-public class CompostoQuimico {   
+public class CompostoQuimico{   
     
     /**
      * PAMP - Padrões moleculares associados a patógenos
@@ -11,21 +13,35 @@ public class CompostoQuimico {
     */
     public static enum TIPO_COMPOSTO {PAMP,HISTAMINA,CITOCINA,IL2,INTERLEUCINA1,TNFA};
     
+    private static int contador = 0;
+    private int ID;
     private TIPO_COMPOSTO tipo;
     private Celula emissor;
     private double temperatura = 30.0; // ?????
-    private Posicao pos;
-    private int diametro = 8;
+    private int raio = 8;
     private int quantidade = 0;
     public double opacidade = 1.0;
 
+    double x,y;
+    
     public CompostoQuimico(){ } //SÓ PRA SER POSSÍVEL (DE)SERIALIZAR
     
-    public CompostoQuimico(TIPO_COMPOSTO tipo,int quantidade,Posicao pos,Celula emissor){
+    public CompostoQuimico(TIPO_COMPOSTO tipo,int quantidade,double x,double y,Celula emissor){
+        contador ++; ID = contador;
         this.tipo = tipo;
         this.quantidade = quantidade;
-        this.pos = pos;
         this.emissor = emissor;
+        
+        
+        this.x = x; this.y = y;
+//        setCenterX(x);
+//        setCenterY(y);
+        
+//        setRadius(raio);
+        
+//        if(tipo == TIPO_COMPOSTO.PAMP) setFill(Color.FIREBRICK); else setFill(Color.LIGHTGREEN);
+        
+//        GraficoAvancado.getInstancia().renderiza(this); //setClip(GraficoAvancado.getInstancia().p);
     }
     
     public TIPO_COMPOSTO getTipo() {
@@ -39,18 +55,24 @@ public class CompostoQuimico {
     void diminuiQuantidade(int qt) {
         quantidade -= qt;
         opacidade -= 0.025 * qt;
+//        setOpacity(opacidade/2);
     }
 
-    public Posicao getPos() {
-        return pos;
+    public double getX(){
+        return x;
+    }
+    
+    public double getY(){
+        return y;
     }
 
-    public int getDiametro() {
-        return diametro;
+    public int getRaio() {
+        return raio;
     }
 
     public void setRaio(int raio) {
-        this.diametro = raio;
+        this.raio = raio;
+//        setRadius(raio/2);
     }
 
     public Celula getEmissor() {
@@ -66,7 +88,8 @@ public class CompostoQuimico {
     }
     
     public void aumentaDiametro(int tam){
-        diametro += tam;
+        raio += tam;
+//        setRadius(raio);
     }
     
 }

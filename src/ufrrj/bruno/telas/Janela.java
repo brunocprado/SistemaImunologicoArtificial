@@ -8,6 +8,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.Animation;
@@ -20,7 +22,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -32,14 +36,16 @@ import ufrrj.bruno.Main;
 import static ufrrj.bruno.Main.timeline;
 import ufrrj.bruno.SistemaImunologico;
 import ufrrj.bruno.log.Virus;
-import ufrrj.bruno.renderizacao.Grafico2D;
+import ufrrj.bruno.renderizacao.GraficoAvancado;
 
 public class Janela implements Initializable {
     
-    @FXML private Canvas canvas;
-    @FXML private Pane painelTeste;
+//    @FXML private Pane painelTeste;
     @FXML private Pane overlay;  
+    @FXML private Canvas quimica;
+    @FXML private Pane celulas;  
     
+    @FXML private MenuBar menu;
     @FXML private MenuItem menuSalvar;
     @FXML private MenuItem menuCarregar;
     @FXML private Menu menuPausar;
@@ -69,7 +75,7 @@ public class Janela implements Initializable {
         } catch(IOException e){}
     }
     
-    Grafico2D grafico;
+    GraficoAvancado grafico;
     public void handlerTeclado(KeyCode tecla){
         switch (tecla) {
             case A:     grafico.setZoom(grafico.getZoom() + 0.2);  break;
@@ -90,6 +96,7 @@ public class Janela implements Initializable {
     }
 
     public void mostraOpcoes(){
+        opcoes.setVisible(true);
         overlay.setVisible(true);
         opcoes.open();
     }
@@ -97,25 +104,28 @@ public class Janela implements Initializable {
     public void escondeOpcoes(){
         overlay.setVisible(false);
         opcoes.close();
+        opcoes.setVisible(false);
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {   
-        canvas.widthProperty().bind(painelTeste.widthProperty());
-        canvas.heightProperty().bind(painelTeste.heightProperty());
-        canvas.heightProperty().addListener(observable -> {
-            opcoes.setPrefHeight(canvas.getHeight());
-            overlay.setPrefHeight(canvas.getHeight());         
-        });  
-        canvas.widthProperty().addListener(observable -> {
-            overlay.setPrefWidth(canvas.getWidth());         
-        });  
-         
-        final GraphicsContext gc = canvas.getGraphicsContext2D();
-
-        grafico = new Grafico2D(gc);
-        grafico.iniciaRenderizacao();
+//        painelTeste.heightProperty().addListener(observable -> {
+//            opcoes.setPrefHeight(painelTeste.getHeight());
+//            overlay.setPrefHeight(painelTeste.getHeight());    
+//            quimica.setHeight(painelTeste.getHeight() - 26);
+//            celulas.setPrefHeight(painelTeste.getHeight() - 26);
+//        });  
+//        painelTeste.widthProperty().addListener(observable -> {
+//            menu.setPrefWidth(painelTeste.getWidth());
+//            overlay.setPrefWidth(painelTeste.getWidth());   
+//            quimica.setWidth(painelTeste.getWidth());   
+//            celulas.setPrefWidth(painelTeste.getWidth());
+//        });  
         
+        grafico = GraficoAvancado.getInstancia();
+        grafico.setPane(celulas);
+        grafico.setQuimica(quimica);
+                
         Estatisticas tmp = new Estatisticas();
         FileChooser janelaArq = new FileChooser();
         

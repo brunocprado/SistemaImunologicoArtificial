@@ -1,7 +1,6 @@
 package ufrrj.bruno.atributos;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
+@Deprecated
 public class Posicao {
     private int x,y;
     

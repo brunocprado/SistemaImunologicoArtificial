@@ -1,11 +1,17 @@
 package ufrrj.bruno.celulas;
 
-import ufrrj.bruno.atributos.Posicao;
 import java.util.Random;
+import javafx.scene.Cursor;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.ImageView;
+import javafx.scene.Node;
 import ufrrj.bruno.SistemaImunologico;
+import static ufrrj.bruno.celulas.Celula.TIPO_CELULA.MACROFAGO;
 import ufrrj.bruno.quimica.CompostoQuimico;
+import ufrrj.bruno.renderizacao.GraficoAvancado;
+import ufrrj.bruno.telas.InfoCelula;
 
-abstract public class Celula{
+abstract public class Celula extends ImageView{
     
     public static enum TIPO_CELULA {COMUM,LINFOCITO,NEUTROFILO,PATOGENO,MACROFAGO,CELULAB,ANTICORPO};
     
@@ -18,34 +24,68 @@ abstract public class Celula{
     public int tamanhoX,tamanhoY;
     private double velMovimento = 2;
     //========|  RUNTIME  |=======//
-    protected final Posicao posicao;    
     protected final SistemaImunologico sistema = SistemaImunologico.getInstancia();
-
+    protected final Tooltip tp = new Tooltip();
+    
     public Celula(TIPO_CELULA tipo){
         qt++; id = qt; 
         this.tipo = tipo;
         Random gerador = new Random();
-        posicao = new Posicao(
-                gerador.nextInt(sistema.getParametro("TAMX")),
-                gerador.nextInt(sistema.getParametro("TAMY")));
+        
+        setX(gerador.nextInt(sistema.getParametro("TAMX")));
+        setY(gerador.nextInt(sistema.getParametro("TAMY")));
+
+        switch(tipo){
+            case MACROFAGO: setImage(sistema.macrofago); break;
+            case NEUTROFILO: setImage(sistema.neutrofilo); break;
+            case LINFOCITO: setImage(sistema.linfocito); break;
+            case PATOGENO: setImage(sistema.comum); break;
+        }
+        
+//        setCache(true);
+        setFitHeight(12); setFitWidth(12);
+        
+        if(tipo == TIPO_CELULA.NEUTROFILO) return;
+        setCursor(Cursor.HAND);
+        tp.setGraphic(new InfoCelula(this));
+        tp.setShowDelay(javafx.util.Duration.millis(500));   
+        tp.setHideDelay(javafx.util.Duration.millis(500));
+        Tooltip.install(this, tp);
     }
-    
-    public Celula(TIPO_CELULA tipo,Posicao pos){
+
+    public Celula(TIPO_CELULA tipo,double x,double y){
         qt++; id = qt; this.tipo = tipo;
-        posicao = pos;
+        
+        GraficoAvancado.getInstancia().renderiza(this);
+        
+        setX(x);
+        setY(y);
+        
+        switch(tipo){
+            case MACROFAGO: setImage(sistema.macrofago); break;
+            case NEUTROFILO: setImage(sistema.neutrofilo); break;
+            case LINFOCITO: setImage(sistema.linfocito); break;
+            case PATOGENO: setImage(sistema.comum); break;
+        }
+        
+        setFitHeight(12); setFitWidth(12);
+        setCursor(Cursor.HAND);
+//        tp.setGraphic(new InfoCelula(this));
+//        tp.setShowDelay(javafx.util.Duration.ZERO);   
+//        tp.setHideDelay(javafx.util.Duration.ONE);
+//        Tooltip.install(this, tp);
     }
     
-    public void move(Posicao dest){
-        double deltaX = dest.getX() - getPosicao().getX();
-        double deltaY = dest.getY() - posicao.getY();
+    public void move(Celula dest){
+        double deltaX = dest.getX() - getX();
+        double deltaY = dest.getY() - getY();
 
         double angulo = Math.atan2(deltaY,deltaX);    
-        int movX = (int) (posicao.getX() + (getVelMovimento() * Math.cos(angulo)));
-        int movY = (int) (posicao.getY() + (getVelMovimento() * Math.sin(angulo)));
-//        double movX = posicao.getX() + (getVelMovimento() * Math.cos(angulo));
-//        double movY = posicao.getY() + (getVelMovimento() * Math.sin(angulo));
-        if(deltaX == 0){ movX = posicao.getX(); }
-        if(deltaY == 0){ movY = posicao.getY(); }
+        double movX = getX() + (getVelMovimento() * Math.cos(angulo));
+        double movY = getY() + (getVelMovimento() * Math.sin(angulo));
+
+        if(deltaX == 0){ movX = getX(); }
+        if(deltaY == 0){ movY =  getY(); }
         setPosicao(movX,movY);
     }
     
@@ -57,32 +97,29 @@ abstract public class Celula{
         this.velMovimento = velocidade;
     }
 
-    public Posicao getPosicao() {
-        return posicao;
-    }
-
-    public void setPosicao(int x,int y) {
-        posicao.setX(x);
-        posicao.setY(y);
+    public void setPosicao(double x,double y) {
+//        posicao.setX(x);
+        setX(x); setY(y);
+//        posicao.setY(y);
     }
 
     public TIPO_CELULA getTipo() {
         return tipo;
     }
     
-    public int getId() {
+    public int getID() {
         return id;
     }
     
-    public double calculaDistancia(Posicao posicaoAlvo){
-        double deltaX = posicao.getX() - posicaoAlvo.getX();
-        double deltaY = posicao.getY() - posicaoAlvo.getY();
+    public double calculaDistancia(double x, double y){
+        double deltaX = getX() - x;
+        double deltaY = getY() - y;
         return Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
     }
     
     protected void emiteQuimica(CompostoQuimico.TIPO_COMPOSTO tipo){
-        Posicao tmp = new Posicao(posicao.getX(), posicao.getY());
-        sistema.getCamada().compostos.add(new CompostoQuimico(tipo, 40,tmp,this));
+//        Posicao tmp = new Posicao((int)getX(), (int)getY());
+        sistema.getCamada().compostos.add(new CompostoQuimico(tipo, 40,getX(),getY(),this));
     }
     public abstract void loop();
             
@@ -92,7 +129,7 @@ abstract public class Celula{
     
     @Override
     public String toString() {
-        return "\nCelula{" + "tipo=" + tipo + ", tamanhoX=" + tamanhoX + ", tamanhoY=" + tamanhoY + ", velMovimento=" + velMovimento + ", posicao=" + posicao + "}";
+        return "\nCelula{" + "tipo=" + tipo + ", tamanhoX=" + tamanhoX + ", tamanhoY=" + tamanhoY + ", velMovimento=" + velMovimento + ", posicao="  + "}";
     }
    
 }

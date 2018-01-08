@@ -10,8 +10,8 @@ public class Anticorpo extends Celula{
 
     private final int formato;
     
-    public Anticorpo( Posicao pos,int formato) {
-        super(TIPO_CELULA.ANTICORPO, pos);
+    public Anticorpo(Posicao pos,int formato) {
+        super(TIPO_CELULA.ANTICORPO);
         this.formato = formato;
     }
     
