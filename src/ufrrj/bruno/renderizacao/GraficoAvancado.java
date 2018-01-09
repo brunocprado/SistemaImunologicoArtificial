@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import ufrrj.bruno.SistemaImunologico;
@@ -34,7 +35,7 @@ public class GraficoAvancado {
     private static final SistemaImunologico sistema = SistemaImunologico.getInstancia();
     private final Map<CompostoQuimico.TIPO_COMPOSTO,double[]> cor = new HashMap<>();
     public Pane p;
-    public GraphicsContext quimica;
+    public Pane quimica;
     
     //==========| RUNTIME |============//
     public double zoom = 1.0;
@@ -69,8 +70,8 @@ public class GraficoAvancado {
         renderiza();
     }
     
-    public void setQuimica(Canvas p){
-        this.quimica = p.getGraphicsContext2D();
+    public void setQuimica(Pane p){
+        this.quimica = p;
         
 //        Timer t = new Timer("Render Quimica");
 //        t.schedule(new TimerTask() {
@@ -80,14 +81,14 @@ public class GraficoAvancado {
     }
     
     private void redimensiona(){
-        if(sx != 0 || sy != 0) quimica.scale(1/sx,1/sy);
+        //if(sx != 0 || sy != 0) p.scale(1/sx,1/sy);
         sx = (double) ((p.getWidth()*zoom)/1600d);        
         p.setScaleX(sx);
         p.setTranslateX(0 - (((1-sx)/2)* p.getWidth()) - cameraX);
         sy = (double) ((p.getHeight()*zoom)/900d);
         p.setScaleY(sy);
         p.setTranslateY(0 - (((1-sy)/2)* p.getHeight()) - cameraY);
-        quimica.scale(sx, sy);
+//        quimica.scale(sx, sy);
     }
     
     public void renderiza(){
@@ -96,6 +97,10 @@ public class GraficoAvancado {
         }
         
         for(Celula celula : sistema.getNeutrofilos()){          
+            p.getChildren().add(celula);
+        }
+        
+        for(Celula celula : sistema.getLinfocitos()){          
             p.getChildren().add(celula);
         }
         
@@ -117,27 +122,27 @@ public class GraficoAvancado {
     }
     
     public void renderizaQuimica(){
-        quimica.clearRect(0,0,p.getWidth(),p.getHeight());
-        
-        if(!sistema.getMostraCamada()) return;
-        
-        CompostoQuimico composto;;
-        Iterator<CompostoQuimico> i = sistema.getCamada().compostos.iterator();
-        while(i.hasNext()){
-            composto = i.next();
-            double[] tmp = cor.get(composto.getTipo());
-            quimica.setFill(new Color(tmp[0],tmp[1],tmp[2],composto.opacidade)); //(composto.getQuantidade() * 4)/255)
-            int diametro = composto.getRaio()*2;
-            quimica.fillOval(sx, sy, sx, sx);
-            quimica.fillOval(composto.getX() - diametro/2 - cameraX, composto.getY() - diametro/2 - cameraY, diametro, diametro);
-        }
+//        quimica.clearRect(0,0,p.getWidth(),p.getHeight());
+//        
+//        if(!sistema.getMostraCamada()) return;
+//        
+//        CompostoQuimico composto;;
+//        Iterator<CompostoQuimico> i = sistema.getCamada().compostos.iterator();
+//        while(i.hasNext()){
+//            composto = i.next();
+//            double[] tmp = cor.get(composto.getTipo());
+//            quimica.setFill(new Color(tmp[0],tmp[1],tmp[2],composto.opacidade)); //(composto.getQuantidade() * 4)/255)
+//            int diametro = composto.getRaio()*2;
+//            quimica.fillOval(sx, sy, sx, sx);
+//            quimica.fillOval(composto.getX() - diametro/2 - cameraX, composto.getY() - diametro/2 - cameraY, diametro, diametro);
+//        }
     }
     
-//    public void renderizaQuimica(Node n){
-//        Platform.runLater(() -> {
-//            quimica.getChildren().add(n);
-//        }); 
-//    }
+    public void renderizaQuimica(Node n){
+        Platform.runLater(() -> {
+            quimica.getChildren().add(n);
+        }); 
+    }
 //    
 //    public void removeQuimica(Node n){
 //        Platform.runLater(() -> {

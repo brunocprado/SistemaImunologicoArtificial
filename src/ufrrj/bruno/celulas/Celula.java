@@ -38,7 +38,7 @@ abstract public class Celula extends ImageView{
             case MACROFAGO: setImage(sistema.macrofago); break;
             case NEUTROFILO: setImage(sistema.neutrofilo); break;
             case LINFOCITO: setImage(sistema.linfocito); break;
-            case PATOGENO: setImage(sistema.comum); break;
+            case PATOGENO: setImage(sistema.linfocito); break;
         }
         
 //        setCache(true);
@@ -70,7 +70,7 @@ abstract public class Celula extends ImageView{
             case MACROFAGO: setImage(sistema.macrofago); break;
             case NEUTROFILO: setImage(sistema.neutrofilo); break;
             case LINFOCITO: setImage(sistema.linfocito); break;
-            case PATOGENO: setImage(sistema.comum); break;
+            case PATOGENO: setImage(sistema.linfocito); break;
         }
         
         setFitHeight(10); setFitWidth(10);

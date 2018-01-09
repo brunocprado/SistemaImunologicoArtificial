@@ -136,16 +136,16 @@ public class Grafico2D{
     }
     
     public void desenhaCamadaQuimica(){    
-//        CompostoQuimico composto;;
-//        Iterator<CompostoQuimico> i = sistema.getCamada().compostos.iterator();
-//        while(i.hasNext()){
-//            composto = i.next();
-//            double[] tmp = cor.get(composto.getTipo());
-//            g.setFill(new Color(tmp[0],tmp[1],tmp[2],composto.opacidade)); //(composto.getQuantidade() * 4)/255)
-//            int diametro = composto.getDiametro();
-//            g.fillOval(sx, sy, sx, sx);
-//            g.fillOval(composto.getPos().getX() - diametro/2 - cameraX, composto.getPos().getY() - diametro/2 - cameraY, diametro, diametro);
-//        }
+        CompostoQuimico composto;;
+        Iterator<CompostoQuimico> i = sistema.getCamada().compostos.iterator();
+        while(i.hasNext()){
+            composto = i.next();
+            double[] tmp = cor.get(composto.getTipo());
+            g.setFill(new Color(tmp[0],tmp[1],tmp[2],composto.opacidade)); //(composto.getQuantidade() * 4)/255)
+            int diametro = composto.getRaio()*2;
+            g.fillOval(sx, sy, sx, sx);
+            g.fillOval(composto.getX() - diametro/2 - cameraX, composto.getY() - diametro/2 - cameraY, diametro, diametro);
+        }
     }
     
     public void moveX(Integer x){

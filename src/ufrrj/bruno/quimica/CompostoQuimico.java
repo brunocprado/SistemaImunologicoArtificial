@@ -39,7 +39,7 @@ public class CompostoQuimico extends Circle{
         
         if(tipo == TIPO_COMPOSTO.PAMP) setFill(Color.FIREBRICK); else setFill(Color.LIGHTGREEN);
         
-//        GraficoAvancado.getInstancia().renderiza(this,0); //setClip(GraficoAvancado.getInstancia().p);
+        GraficoAvancado.getInstancia().renderiza(this,0); //setClip(GraficoAvancado.getInstancia().p);
     }
     
     public TIPO_COMPOSTO getTipo() {

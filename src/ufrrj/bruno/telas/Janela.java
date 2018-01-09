@@ -16,6 +16,7 @@ import javafx.animation.Animation;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -36,16 +37,16 @@ import ufrrj.bruno.Main;
 import static ufrrj.bruno.Main.timeline;
 import ufrrj.bruno.SistemaImunologico;
 import ufrrj.bruno.log.Virus;
+import ufrrj.bruno.renderizacao.Grafico2D;
 import ufrrj.bruno.renderizacao.GraficoAvancado;
 
 public class Janela implements Initializable {
     
-//    @FXML private Pane painelTeste;
     @FXML private Pane overlay;  
     @FXML private Canvas quimica;
+    @FXML private Pane quim;
     @FXML private Pane celulas;  
     
-    @FXML private MenuBar menu;
     @FXML private MenuItem menuSalvar;
     @FXML private MenuItem menuCarregar;
     @FXML private Menu menuPausar;
@@ -84,10 +85,10 @@ public class Janela implements Initializable {
             case LEFT:  grafico.moveX(grafico.getX() - 10);  break;
             case UP:    grafico.moveY(grafico.getY() - 10);  break;
             case DOWN:  grafico.moveY(grafico.getY() + 10);  break;
-            case L: grafico.moveX(grafico.getX() + 10);  break;
-            case J:  grafico.moveX(grafico.getX() - 10);  break;
-            case I:    grafico.moveY(grafico.getY() - 10);  break;
-            case K:  grafico.moveY(grafico.getY() + 10);  break;
+            case L:     grafico.moveX(grafico.getX() + 10);  break;
+            case J:     grafico.moveX(grafico.getX() - 10);  break;
+            case I:     grafico.moveY(grafico.getY() - 10);  break;
+            case K:     grafico.moveY(grafico.getY() + 10);  break;
         }
     }
 
@@ -111,8 +112,11 @@ public class Janela implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {    
         grafico = GraficoAvancado.getInstancia();
         grafico.setPane(celulas);
-        grafico.setQuimica(quimica);
+        grafico.setQuimica(quim);
                 
+//        Grafico2D gr = new Grafico2D(quimica.getGraphicsContext2D());
+//        gr.iniciaRenderizacao();
+        
         Estatisticas tmp = new Estatisticas();
         FileChooser janelaArq = new FileChooser();
         
@@ -193,7 +197,6 @@ public class Janela implements Initializable {
             sobre.setVisible(true);     
         });
         menuSobre.setGraphic(lblSobre);
-       
-        
+               
     }    
 }
