@@ -2,6 +2,7 @@ package ufrrj.bruno.quimica;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import ufrrj.bruno.SistemaImunologico;
 import ufrrj.bruno.celulas.Celula;
 import ufrrj.bruno.renderizacao.GraficoAvancado;
 
@@ -17,6 +18,7 @@ public class CompostoQuimico extends Circle{
     private Celula emissor;
     private double temperatura = 30.0; // ?????
     private int raio = 8;
+    private int aumentoRaioPorTick = 42; //TODO
     private int quantidade = 0;
     public double opacidade = 1.0;
 
@@ -37,7 +39,7 @@ public class CompostoQuimico extends Circle{
         
         if(tipo == TIPO_COMPOSTO.PAMP) setFill(Color.FIREBRICK); else setFill(Color.LIGHTGREEN);
         
-        GraficoAvancado.getInstancia().renderiza(this,0); //setClip(GraficoAvancado.getInstancia().p);
+//        GraficoAvancado.getInstancia().renderiza(this,0); //setClip(GraficoAvancado.getInstancia().p);
     }
     
     public TIPO_COMPOSTO getTipo() {
@@ -83,9 +85,11 @@ public class CompostoQuimico extends Circle{
         return temperatura;
     }
     
-    public void aumentaDiametro(int tam){
+    public void aumentaRaio(int tam){
         raio += tam;
         setRadius(raio);
+        diminuiQuantidade(1);
+        if(quantidade == 1) { setVisible(false); SistemaImunologico.getInstancia().getCamada().compostos.remove(this); }
     }
     
 }
