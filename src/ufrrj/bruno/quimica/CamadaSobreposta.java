@@ -46,11 +46,17 @@ public class CamadaSobreposta{
                     } else {         
                         i.remove();
 //                        composto.setOpacity(0);
-                        Platform.runLater(() -> {
-                            grafico.remove(composto);
-                            
-                        });
-                           
+//                        Platform.runLater(() -> {
+//                            grafico.remove(composto);
+//                            
+//                        });
+//                        composto.setOpacity(0.001);
+//                        Timer t = new Timer("Render Quimica");
+//                        t.schedule(new TimerTask() {
+//                            @Override
+//                            public void run() { composto.setVisible(false); }
+//                        }, 0,20);
+
 //                        grafico.remove(composto);
                     }
                 }

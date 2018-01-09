@@ -13,8 +13,6 @@ public class CompostoQuimico extends Circle{
     */
     public static enum TIPO_COMPOSTO {PAMP,HISTAMINA,CITOCINA,IL2,INTERLEUCINA1,TNFA};
     
-    private static int contador = 0;
-    private int ID;
     private TIPO_COMPOSTO tipo;
     private Celula emissor;
     private double temperatura = 30.0; // ?????
@@ -27,17 +25,13 @@ public class CompostoQuimico extends Circle{
     public CompostoQuimico(){ } //SÓ PRA SER POSSÍVEL (DE)SERIALIZAR
     
     public CompostoQuimico(TIPO_COMPOSTO tipo,int quantidade,double x,double y,Celula emissor){
-        contador ++; ID = contador;
         this.tipo = tipo;
         this.quantidade = quantidade;
         this.emissor = emissor;
         
-        
         this.x = x; this.y = y;
         setCenterX(x);
         setCenterY(y);
-        
-        
         
         setRadius(raio);
         

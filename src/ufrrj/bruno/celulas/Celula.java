@@ -4,7 +4,6 @@ import java.util.Random;
 import javafx.scene.Cursor;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
-import javafx.scene.Node;
 import ufrrj.bruno.SistemaImunologico;
 import static ufrrj.bruno.celulas.Celula.TIPO_CELULA.MACROFAGO;
 import ufrrj.bruno.quimica.CompostoQuimico;

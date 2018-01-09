@@ -66,7 +66,11 @@ public class Macrofago extends Celula{
                     if(estado == REPOUSO && !flag) emiteQuimica(TIPO_COMPOSTO.CITOCINA);
                     estado = ATIVO;
 //                    System.out.println(getId() + " Detectou " + alvo + " " + System.currentTimeMillis());
-                    sistema.addTemporizacao((int) (System.currentTimeMillis() - alvo.getInicio()));
+                    try {
+                        sistema.addTemporizacao((int) (System.currentTimeMillis() - alvo.getInicio()));
+                    } catch (Exception e) {
+                    }
+
                     move(alvo);
                 }
                 break;

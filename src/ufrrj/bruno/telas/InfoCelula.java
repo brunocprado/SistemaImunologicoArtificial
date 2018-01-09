@@ -55,7 +55,7 @@ public class InfoCelula extends Pane{
             if(tmp.getAlvo() != null) conteudo.getChildren().add(geraTxt("Alvo : " + tmp.getAlvo().getID()));
         }
         
-        conteudo.getChildren().add(geraTxt("Posicao : " + cel.getX()  + " x " + cel.getY()));
+        conteudo.getChildren().add(geraTxt("Posicao : " + Math.floor(cel.getX()*100) / 100  + " x " + Math.floor(cel.getY()*100) / 100));
         
     }
     
