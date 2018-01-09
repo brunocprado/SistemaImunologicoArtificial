@@ -39,7 +39,7 @@ public class CompostoQuimico extends Circle{
         
         if(tipo == TIPO_COMPOSTO.PAMP) setFill(Color.FIREBRICK); else setFill(Color.LIGHTGREEN);
         
-        GraficoAvancado.getInstancia().renderiza(this,0); //setClip(GraficoAvancado.getInstancia().p);
+//        GraficoAvancado.getInstancia().renderiza(this,0); //setClip(GraficoAvancado.getInstancia().p);
     }
     
     public TIPO_COMPOSTO getTipo() {
@@ -89,7 +89,12 @@ public class CompostoQuimico extends Circle{
         raio += tam;
         setRadius(raio);
         diminuiQuantidade(1);
-        if(quantidade == 1) { setVisible(false); SistemaImunologico.getInstancia().getCamada().compostos.remove(this); }
+        if(quantidade == 1) { 
+            //setVisible(false); 
+            SistemaImunologico.getInstancia().getCamada().compostos.remove(this); 
+//            GraficoAvancado.getInstancia().teste.add(this);
+//            GraficoAvancado.getInstancia().remove(this);
+        }
     }
     
 }

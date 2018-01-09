@@ -97,7 +97,8 @@ public class Macrofago extends Celula{
                     tmp.quimica.cancel();
                 }
                 sistema.getPatogenos().remove(alvo);
-                alvo.setVisible(false);
+//                alvo.setVisible(false);
+                GraficoAvancado.getInstancia().remove(alvo);
 //                GraficoAvancado.getInstancia().remove(alvo);
 
                 if(sistema.isDebug() && alvo.getTipo() == TIPO_CELULA.PATOGENO){

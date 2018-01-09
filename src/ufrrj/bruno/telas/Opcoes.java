@@ -33,19 +33,19 @@ public class Opcoes implements Initializable {
         });
         
         radioMacrofago.setOnAction((evt) -> {
-            sistema.exibir.put(MACROFAGO,radioMacrofago.isSelected());
+            sistema.setVisivel(MACROFAGO,radioMacrofago.isSelected());
         });
         
         radioLinfocito.setOnAction((evt) -> {
-            sistema.exibir.put(LINFOCITO,radioLinfocito.isSelected());
+            sistema.setVisivel(LINFOCITO,radioLinfocito.isSelected());
         });
         
         radioNeutrofilo.setOnAction((evt) -> {
-            sistema.exibir.put(NEUTROFILO,radioNeutrofilo.isSelected());
+            sistema.setVisivel(NEUTROFILO,radioNeutrofilo.isSelected());
         });
         
         radioPatogeno.setOnAction((evt) -> {
-            sistema.exibir.put(PATOGENO,radioPatogeno.isSelected());
+            sistema.setVisivel(PATOGENO,radioPatogeno.isSelected());
         });    
         
         sliderVelocidade.valueProperty().addListener((observable, oldValue, newValue) -> {

@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import ufrrj.bruno.atributos.Poligono;
 import ufrrj.bruno.log.Virus;
 import ufrrj.bruno.quimica.CompostoQuimico.TIPO_COMPOSTO;
+import ufrrj.bruno.renderizacao.GraficoAvancado;
 
 public class Patogeno extends Celula{
 
@@ -71,6 +72,7 @@ public class Patogeno extends Celula{
         if(processando){
             if((System.currentTimeMillis() - inicioProc) >= 1000){
                 sistema.getLinfocitos().remove(prox);  
+                GraficoAvancado.getInstancia().remove(prox);
                 clona(prox.getX(),prox.getY());
                 processando = false;
                 prox = null;

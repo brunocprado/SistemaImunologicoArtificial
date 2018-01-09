@@ -112,7 +112,7 @@ public class Janela implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {    
         grafico = GraficoAvancado.getInstancia();
         grafico.setPane(celulas);
-        grafico.setQuimica(quim);
+//        grafico.setQuimica(quim);
                 
 //        Grafico2D gr = new Grafico2D(quimica.getGraphicsContext2D());
 //        gr.iniciaRenderizacao();

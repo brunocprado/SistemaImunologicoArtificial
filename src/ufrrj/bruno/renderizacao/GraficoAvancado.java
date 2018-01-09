@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
@@ -18,6 +19,7 @@ import ufrrj.bruno.quimica.CompostoQuimico;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import ufrrj.bruno.log.Virus;
 
 /**
  * Grafico 2D 2.0 <br>
@@ -36,6 +38,8 @@ public class GraficoAvancado {
     private final Map<CompostoQuimico.TIPO_COMPOSTO,double[]> cor = new HashMap<>();
     public Pane p;
     public Pane quimica;
+    
+    public final ConcurrentLinkedQueue<CompostoQuimico> teste = new ConcurrentLinkedQueue<>();
     
     //==========| RUNTIME |============//
     public double zoom = 1.0;
@@ -73,11 +77,15 @@ public class GraficoAvancado {
     public void setQuimica(Pane p){
         this.quimica = p;
         
-//        Timer t = new Timer("Render Quimica");
-//        t.schedule(new TimerTask() {
-//            @Override
-//            public void run() { renderizaQuimica(); }
-//        }, 0,20);
+        Timer t = new Timer("Render Quimica");
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() { 
+                for(CompostoQuimico composto : teste){
+//                    teste.remove(composto);
+                }
+            }
+        }, 0,30);
     }
     
     private void redimensiona(){
@@ -154,9 +162,9 @@ public class GraficoAvancado {
     
     public void remove(Node n){
         Platform.runLater(() -> {
-            if(p.getChildren().contains(n) && p.getChildren().indexOf(n) != -1) {
+//            if(p.getChildren().contains(n) && p.getChildren().indexOf(n) != -1) {
                 p.getChildren().remove(n);
-            }
+//            }
         }); 
     }
     

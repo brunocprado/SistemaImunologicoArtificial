@@ -67,7 +67,7 @@ public class SistemaImunologico{
     private int temporizacao = 0;
     private int qtTempo = 0;
     //======| DISPLAY |======//
-    public Map<TIPO_CELULA,Boolean> exibir = new HashMap<>();   
+    private Map<TIPO_CELULA,Boolean> exibir = new HashMap<>();   
     
     //====================STATIC
     public final Image comum = new Image("/img/opcoes.png");
@@ -287,6 +287,28 @@ public class SistemaImunologico{
     public void pausaThread() {
         pausado = true;
         timer.cancel();
+    }
+    
+    public void setVisivel(TIPO_CELULA tipo,boolean visivel){
+        exibir.put(tipo, visivel);
+        switch(tipo){
+            case MACROFAGO: 
+                for(Macrofago cel : macrofagos){
+                    cel.setVisible(visivel);
+                } break;
+            case LINFOCITO: 
+                for(Linfocito cel : linfocitos){
+                    cel.setVisible(visivel);
+                } break;
+            case PATOGENO: 
+                for(Patogeno cel : patogenos){
+                    cel.setVisible(visivel);
+                } break; 
+            case NEUTROFILO: 
+                for(Neutrofilo cel : neutrofilos){
+                    cel.setVisible(visivel);
+                } break;     
+        }
     }
     
     @Override
