@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import javafx.application.Platform;
 import ufrrj.bruno.SistemaImunologico;
 import ufrrj.bruno.renderizacao.GraficoAvancado;
 
@@ -44,7 +45,12 @@ public class CamadaSobreposta{
                         composto.diminuiQuantidade(1);
                     } else {         
                         i.remove();
-//                        composto.setVisible(false);;
+//                        composto.setOpacity(0);
+                        Platform.runLater(() -> {
+                            grafico.remove(composto);
+                            
+                        });
+                           
 //                        grafico.remove(composto);
                     }
                 }

@@ -5,7 +5,7 @@ import javafx.scene.shape.Circle;
 import ufrrj.bruno.celulas.Celula;
 import ufrrj.bruno.renderizacao.GraficoAvancado;
 
-public class CompostoQuimico{   
+public class CompostoQuimico extends Circle{   
     
     /**
      * PAMP - Padrões moleculares associados a patógenos
@@ -34,14 +34,16 @@ public class CompostoQuimico{
         
         
         this.x = x; this.y = y;
-//        setCenterX(x);
-//        setCenterY(y);
+        setCenterX(x);
+        setCenterY(y);
         
-//        setRadius(raio);
         
-//        if(tipo == TIPO_COMPOSTO.PAMP) setFill(Color.FIREBRICK); else setFill(Color.LIGHTGREEN);
         
-//        GraficoAvancado.getInstancia().renderiza(this); //setClip(GraficoAvancado.getInstancia().p);
+        setRadius(raio);
+        
+        if(tipo == TIPO_COMPOSTO.PAMP) setFill(Color.FIREBRICK); else setFill(Color.LIGHTGREEN);
+        
+        GraficoAvancado.getInstancia().renderiza(this,0); //setClip(GraficoAvancado.getInstancia().p);
     }
     
     public TIPO_COMPOSTO getTipo() {
@@ -55,7 +57,7 @@ public class CompostoQuimico{
     void diminuiQuantidade(int qt) {
         quantidade -= qt;
         opacidade -= 0.025 * qt;
-//        setOpacity(opacidade/2);
+        setOpacity(opacidade/2);
     }
 
     public double getX(){
@@ -72,7 +74,7 @@ public class CompostoQuimico{
 
     public void setRaio(int raio) {
         this.raio = raio;
-//        setRadius(raio/2);
+        setRadius(raio/2);
     }
 
     public Celula getEmissor() {
@@ -89,7 +91,7 @@ public class CompostoQuimico{
     
     public void aumentaDiametro(int tam){
         raio += tam;
-//        setRadius(raio);
+        setRadius(raio);
     }
     
 }

@@ -106,7 +106,13 @@ public class GraficoAvancado {
     
     public void renderiza(Node n){
         Platform.runLater(() -> {
-            p.getChildren().add(n); //(0,n)
+            p.getChildren().add(n);
+        }); 
+    }
+    
+    public void renderiza(Node n,int index){
+        Platform.runLater(() -> {
+            p.getChildren().add(index,n);
         }); 
     }
     
@@ -143,7 +149,7 @@ public class GraficoAvancado {
     
     public void remove(Node n){
         Platform.runLater(() -> {
-            if(p.getChildren().contains(n)) {
+            if(p.getChildren().contains(n) && p.getChildren().indexOf(n) != -1) {
                 p.getChildren().remove(n);
             }
         }); 
