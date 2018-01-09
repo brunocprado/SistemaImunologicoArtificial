@@ -32,16 +32,15 @@ public class InfoCelula extends Pane{
         getChildren().add(container);
         
         Text nome = new Text(cel.getTipo().toString());
-        nome.setFont(new Font(16d));
+        nome.setFont(new Font(18d));
         nome.setFill(Color.WHITESMOKE);
         nome.setTextAlignment(TextAlignment.CENTER);
         container.getChildren().add(nome);
         container.getChildren().add(divisor);
-        ///
         
         ImageView a = new ImageView(cel.getImage());
-        a.setFitHeight(48);
-        a.setFitWidth(48);
+        a.setFitHeight(50);
+        a.setFitWidth(50);
         divisor.getChildren().add(a);
         
         VBox conteudo = new VBox(5);
@@ -57,10 +56,14 @@ public class InfoCelula extends Pane{
         
         conteudo.getChildren().add(geraTxt("Posicao : " + Math.floor(cel.getX()*100) / 100  + " x " + Math.floor(cel.getY()*100) / 100));
         
+        
+        
     }
     
+    Font fonte = new Font(12d);
     private Text geraTxt(String txt){
         Text tmp = new Text(txt);
+        tmp.setFont(fonte);
         tmp.setFill(Color.WHITE);
         
         return tmp;

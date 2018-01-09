@@ -20,7 +20,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <JFXDrawer fx:id="opcoes" defaultDrawerSize="280.0" depthTest="ENABLE" prefHeight="720.0" prefWidth="280.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <JFXDrawer fx:id="opcoes" defaultDrawerSize="280.0" depthTest="ENABLE" prefHeight="720.0" prefWidth="280.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="26.0">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="0.0" radius="4.75" />
          </effect>

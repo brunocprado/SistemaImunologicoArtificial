@@ -83,10 +83,10 @@ public class GraficoAvancado {
         if(sx != 0 || sy != 0) quimica.scale(1/sx,1/sy);
         sx = (double) ((p.getWidth()*zoom)/1600d);        
         p.setScaleX(sx);
-        p.setTranslateX(0 - (((1-sx)/2)* p.getWidth()) - 2);
+        p.setTranslateX(0 - (((1-sx)/2)* p.getWidth()) - cameraX);
         sy = (double) ((p.getHeight()*zoom)/900d);
         p.setScaleY(sy);
-        p.setTranslateY(0 - (((1-sy)/2)* p.getHeight()));
+        p.setTranslateY(0 - (((1-sy)/2)* p.getHeight()) - cameraY);
         quimica.scale(sx, sy);
     }
     
@@ -159,11 +159,13 @@ public class GraficoAvancado {
         if(x<0 || zoom == 1) return;
 //        if(x >= 1600/zoom) return;
         cameraX = x;
+        redimensiona();
     }
     
     public void moveY(Integer y){
         if(y<0 || zoom == 1) return;
         cameraY = y;
+        redimensiona();
     }
 
     public int getX() {

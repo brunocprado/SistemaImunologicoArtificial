@@ -68,8 +68,7 @@ public class Macrofago extends Celula{
 //                    System.out.println(getId() + " Detectou " + alvo + " " + System.currentTimeMillis());
                     try {
                         sistema.addTemporizacao((int) (System.currentTimeMillis() - alvo.getInicio()));
-                    } catch (Exception e) {
-                    }
+                    } catch (Exception e) { }
 
                     move(alvo);
                 }
