@@ -108,20 +108,7 @@ public class Janela implements Initializable {
     }
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {   
-//        painelTeste.heightProperty().addListener(observable -> {
-//            opcoes.setPrefHeight(painelTeste.getHeight());
-//            overlay.setPrefHeight(painelTeste.getHeight());    
-//            quimica.setHeight(painelTeste.getHeight() - 26);
-//            celulas.setPrefHeight(painelTeste.getHeight() - 26);
-//        });  
-//        painelTeste.widthProperty().addListener(observable -> {
-//            menu.setPrefWidth(painelTeste.getWidth());
-//            overlay.setPrefWidth(painelTeste.getWidth());   
-//            quimica.setWidth(painelTeste.getWidth());   
-//            celulas.setPrefWidth(painelTeste.getWidth());
-//        });  
-        
+    public void initialize(URL url, ResourceBundle rb) {    
         grafico = GraficoAvancado.getInstancia();
         grafico.setPane(celulas);
         grafico.setQuimica(quimica);
